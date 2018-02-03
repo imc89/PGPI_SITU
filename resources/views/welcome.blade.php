@@ -1,24 +1,28 @@
-  
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="{{ app()->getLocale() }}">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>SITU</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SITU</title>
 
-  <!-- BOOTSTRAP LINKS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-  <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
-  <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
+    <!-- BOOTSTRAP LINKS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
+    <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
+
 
 </head>
 
-<body>
 
+<body>
   <nav class="navbar navbar-inverse  navbar-fixed-top"  role="navigation" >
 
     <div id="navbar" class="navbar-collapse collapse">
@@ -28,12 +32,12 @@
         <!-- IMAGEN HOME CON ICONO DE LA UFV -->
         <li class=" li_resize navbar-brand-logo active">
             <a href="/" align="center" style="padding: 0 0 0 0 "> 
-             <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-         </a>
-     </li>
+               <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+           </a>
+       </li>
 
-<!-- BOTON "ABOUT" -->
-     <li>
+       <!-- BOTON "ABOUT" -->
+       <li>
         <a href="about">
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
         </a>
@@ -51,7 +55,7 @@
       </ul>
   </li> -->
 
-<!-- BOTON CONTACT -->
+  <!-- BOTON CONTACT -->
   <li><a href="contact_us">
       <span class="glyphicon glyphicon-user" aria-hidden="true"></span> ContactUs</a>
   </li>
@@ -59,8 +63,54 @@
 </ul>
 
 <!-- BOTÓN DE LOGIN -->
-<ul class="nav navbar-nav navbar-right" style="margin-right: 1%;">
-   <li><a data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span> login</a></li>
+<ul class="nav navbar-nav navbar-right" style="margin-right: 13%;">
+ <li>
+
+    <div>
+
+        @if (Route::has('login'))
+        <div class="top-right links"
+        style="color:#8B8B8B; background-color:transparent; border-radius: 8px"
+        onmouseover="this.style.backgroundColor='#344A6C'" 
+        onmouseout=" this.style.backgroundColor='transparent'">
+        @auth
+        <a style="color:#8B8B8B;"  
+        onmouseover="this.style.color='white'" 
+        onmouseout="this.style.color='#8B8B8B'" href="{{ url('/home') }}">Home</a>
+        @else
+         <a style="color:#8B8B8B;"  
+         onmouseover="this.style.color='white'" 
+         onmouseout="this.style.color='#8B8B8B'" href="{{ route('login') }}">Login</a>
+        @endauth
+    </div>
+    @endif
+</div>
+</li>
+</ul>
+
+<!-- BOTÓN DE REGISTER -->
+<ul class="nav navbar-nav navbar-right" style="margin-right: 1%; ">
+
+ <li>
+    <div>
+        @if (Route::has('login'))
+        <div class="top-right links"
+        style="color:#8B8B8B; background-color:transparent; border-radius: 8px"
+        onmouseover="this.style.backgroundColor='#344A6C'" 
+        onmouseout=" this.style.backgroundColor='transparent'">
+        @auth
+        <a style="color:#8B8B8B;"  
+        onmouseover="this.style.color='white'" 
+        onmouseout="this.style.color='#8B8B8B'" href="{{ url('/home') }}">Home</a>
+        @else
+        <a style="color:#8B8B8B;"  
+        onmouseover="this.style.color='white'" 
+        onmouseout="this.style.color='#8B8B8B'" href="{{ route('register') }}">Registrarse</a>
+        @endauth
+    </div>
+    @endif
+</div>
+</li>
 </ul>
 
 
@@ -68,44 +118,6 @@
 </div>
 </nav>
 
-<!-- VENTANA EMERGENTE DE LOGIN  -->
-<div id="loginModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"> &times;</button>
-          <h4><span class="glyphicon glyphicon-user"></span>Login</h4>
-
-      </div>
-      <div class="modal-body">
-         <form class="form-inline">
-           <div class="form-group">
-             <label class="sr-only" for="email">Email</label><input type="text" class="form-control input-sm" placeholder="Email" id="email" name="email">
-         </div>
-         <div class="form-group">  
-
-             <label class="sr-only" for="password">Password</label>
-             <input type="password" class="form-control input-sm" placeholder="Password" id="password" name="password"></div>
-             <div class="checkbox">
-               <label>
-                 <input type="checkbox"> Remember me
-             </label>
-         </div>
-
-
-
-         <button type="submit" class="btn btn-info btn-xs">Sign in</button>
-         <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Cancel</button> 
-
-
-
-
-     </form>
- </div>
-</div>
-</div>
-</div>
-<!-- FIN DE LA VENTANA EMERGENTE DE LOGIN -->
 
 <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
 <div id="footer" align="center">
@@ -156,7 +168,7 @@
 </tbody>
 </table>
 </div>
-<div>
+
 
 </body>
 </html>
