@@ -147,7 +147,7 @@
 
 		<div class="form-group">
 			<label for="message">Mensaje: </label>
-			<textarea type="text" class="form-control luna-message" id="message" placeholder="Escribe aquí tu mensaje" name="message" required></textarea>
+			<textarea type="text" class="form-control luna-message" id="message" placeholder="Escribe aquí tu mensaje" name="message" ></textarea>
 		</div>
 
 			<div class="form-group">
