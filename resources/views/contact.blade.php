@@ -1,3 +1,7 @@
+@extends('layout')
+
+@section('content')
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -21,8 +25,9 @@
 
 </head>
 
+  
 
-<body>
+  <!-- INICIO BARRA MENÚ DE NAVEGACIÓN -->
   <nav class="navbar navbar-inverse  navbar-fixed-top"  role="navigation" >
 
     <div id="navbar" class="navbar-collapse collapse">
@@ -115,57 +120,50 @@
 </div>
 </div>
 </nav>
+<!-- FIN DE BARRA MENU NAVEGACIÓN -->
+<br>
+<br>
+<div class="container">
+	<h1 class="mb-2 text-center">Contact Us</h1>
+	
+	@if(session('message'))
+	<div class='alert alert-success'>
+		{{ session('message') }}
+	</div>
+	@endif
+	
+	<div class="col-12 col-md-6">
+		<form class="form-horizontal" method="POST" action="/contact">
+			{{ csrf_field() }} 
+			<div class="form-group">
+			<label for="Name">Nombre: </label>
+			<input type="text" class="form-control" id="name" placeholder="Tu nombre" name="name" required>
+		</div>
+
+		<div class="form-group">
+			<label for="email">Email: </label>
+			<input type="text" class="form-control" id="email" placeholder="john@example.com" name="email" required>
+		</div>
+
+		<div class="form-group">
+			<label for="message">Mensaje: </label>
+			<textarea type="text" class="form-control luna-message" id="message" placeholder="Escribe aquí tu mensaje" name="message" required></textarea>
+		</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" value="Send">ENVIAR</button>
+			</div>
+		</form>
+	</div>
+ </div> <!-- /container -->
 
 
-<!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-<div id="footer" align="center">
-    <table>
-      <tbody>
 
-       <tr> 
-        <td class="foot_izdo">&nbsp;</td> 
-        <td class="foot_cent"> 
-          <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-            <br> 
-            Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
-        </p> 
+ <div class="alert alert-warning">
+    <strong>Warning!</strong> Debido a no utilizar un servidor de correo de pago, el correo es probable que llegue a la carpeta SPAM.
+  </div>
 
-        <!-- REDES SOCIALES -->
-        <div id="social"> 
-            <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
-          </a> 
-          <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
-          </a>
-          <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
-          </a>
-          <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
-          </a> 
-          <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
-          </a>
-          <br><br>
-      </div>
-      <!-- FIN REDES SOCIALES -->
 
-      <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
-      / Sponsored by the
-      <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
-      and 
-      <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
-      Copyright 2013,
-      <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
-      . All rights reserved. 
-  </td>
-  <td class="foot_dcho">&nbsp;</td> 
-</tr>
-
-</tbody>
-</table>
-</div>
 
 <!--  BANNER MODAL ABOUT -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -177,7 +175,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">ABOUT US</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -194,5 +192,4 @@
   </div>
   <!-- FIN BANNER MODAL -->
 
-</body>
-</html>
+@endsection

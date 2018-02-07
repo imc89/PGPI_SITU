@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Route::get('send','mailController@send');
+Route::get('contact', 'ContactController@show');
+Route::post('contact',  'ContactController@mailToAdmin'); 
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
