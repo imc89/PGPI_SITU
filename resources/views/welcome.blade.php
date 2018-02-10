@@ -186,7 +186,7 @@
           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+          <button  onclick="location.href='send' type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
         </div>
       </div>
       
