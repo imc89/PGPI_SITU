@@ -55,8 +55,8 @@
       </ul>
   </li> -->
 
-  <!-- BOTON CONTACT poner en href "send" para probar a enviar mensajes password "contact" para formulario-->
-  <li><a href="contact">
+  <!-- BOTON CONTACT ENVIO DE PASSWORDS-->
+  <li><a href="mailpassword">
       <span class="glyphicon glyphicon-user" aria-hidden="true"></span> ContactUs</a>
   </li>
 

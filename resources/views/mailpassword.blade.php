@@ -49,19 +49,9 @@
     </li>
 
 
-  <!--   <li class="dropdown">
-      <a href="index.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
-        <span class="glyphicon glyphicon-education" aria-hidden="true"></span> USUARIOS <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">ADMINISTRADOR</a></li>
-          <li><a href="#">ALUMNO</a></li>
-          <li><a href="#">PROFESOR</a></li>
-          <li><a href="#">INVITADO</a></li>
-      </ul>
-  </li> -->
 
-  <!-- BOTON CONTACT -->
-  <li><a href="contact">
+  <!-- BOTON CONTACT ENVIAR PASSWORDS-->
+  <li><a href="mailpassword">
       <span class="glyphicon glyphicon-user" aria-hidden="true"></span> ContactUs</a>
   </li>
 
@@ -124,16 +114,15 @@
 <br>
 <br>
 <div class="container">
-	<h1 class="mb-2 text-center">Contact Us</h1>
+	<h1 class="mb-2 text-center">PRUEBA INFO MAIL</h1>
 	
 	@if(session('message'))
 	<div class='alert alert-success'>
 		{{ session('message') }}
 	</div>
 	@endif
-	
 	<div class="col-12 col-md-6">
-		<form class="form-horizontal" method="POST" action="/contact">
+		<form action="send" class="form-horizontal" method="POST" ">
 			{{ csrf_field() }} 
 			<div class="form-group">
 			<label for="Name">Nombre: </label>
@@ -145,18 +134,12 @@
 			<input type="text" class="form-control" id="email" placeholder="john@example.com" name="email" required>
 		</div>
 
-		<div class="form-group">
-			<label for="message">Mensaje: </label>
-			<textarea type="text" class="form-control luna-message" id="message" placeholder="Escribe aquí tu mensaje" name="message" ></textarea>
-		</div>
-
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary" value="Send">ENVIAR</button>
 			</div>
 		</form>
 	</div>
  </div> <!-- /container -->
-
 
 
  <div class="alert alert-warning">

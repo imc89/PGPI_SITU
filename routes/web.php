@@ -15,9 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('send','mailController@send');
-Route::get('contact', 'ContactController@show');
-Route::post('contact',  'ContactController@mailToAdmin'); 
+Route::post('send','mailController@send');
+
+Route::get('mailpassword', function () {
+    return view('mailpassword');
+});
+
 
 
 Auth::routes();
