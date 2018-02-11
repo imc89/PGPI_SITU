@@ -1,6 +1,17 @@
 Bienvenido a la plataforma SITU.
 En este correo se te proporcionará una contraseña y usuario para ingresar en la plataforma.
-Tu contraseña es: <?php echo randomPassword(); ?>
+Tu usuario es: <?php echo getUsuario(); ?>  
+Tu contraseña es: <?php echo randomPassword(); ?> 
+
+<?php
+function getUsuario() {
+$request = request();
+$usuario = request('name', $default = null);
+return $usuario;
+}
+
+
+?>
 
       <?php //GENERADOR DE CONTRASEÑAS
       function randomPassword() {
@@ -16,3 +27,14 @@ Tu contraseña es: <?php echo randomPassword(); ?>
       }
 
       ?>
+
+      <?php 
+       protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+    }
+    ?>
