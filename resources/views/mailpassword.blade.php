@@ -58,7 +58,7 @@
 </ul>
 
 <!-- BOTÓN DE LOGIN -->
-<ul class="nav navbar-nav navbar-right" style="margin-right: 13%;">
+<ul class="nav navbar-nav navbar-right" style="margin-right: 1%;">
  <li>
 
     <div>
@@ -81,30 +81,6 @@
 </li>
 </ul>
 
-<!-- BOTÓN DE REGISTER -->
-<ul class="nav navbar-nav navbar-right" style="margin-right: 1%; ">
-
- <li>
-    <div>
-        @if (Route::has('login'))
-        <div class="top-right links"
-        style="color:#8B8B8B; background-color:transparent; border-radius: 8px"
-        onmouseover="this.style.backgroundColor='#344A6C'" 
-        onmouseout=" this.style.backgroundColor='transparent'">
-        @auth
-        <a style="color:#8B8B8B;"  
-        onmouseover="this.style.color='white'" 
-        onmouseout="this.style.color='#8B8B8B'" href="{{ url('/home') }}">Home</a>
-        @else
-        <a style="color:#8B8B8B;"  
-        onmouseover="this.style.color='white'" 
-        onmouseout="this.style.color='#8B8B8B'" href="{{ route('register') }}">Registrarse</a>
-        @endauth
-    </div>
-    @endif
-</div>
-</li>
-</ul>
 
 
 </div>
@@ -114,7 +90,7 @@
 <br>
 <br>
 <div class="container">
-	<h1 class="mb-2 text-center">PRUEBA INFO MAIL</h1>
+	<h1 class="mb-2 text-center">ENVIO DE PASSWORDS A USUARIOS</h1>
 	
 	@if(session('message'))
 	<div class='alert alert-success'>

@@ -23,55 +23,88 @@
 
 
 <body>
-
-
   <!-- INICIO NAVEGADOR -->
-<div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
- <a href="/" align="center" style="padding: 0 0 0 0 "> 
-   <img width="50px" src="{{ asset('images/icono.jpg') }}" >
- </a>
- <a  data-toggle="modal" data-target="#myModal">
-  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-</a>
-<a href="mailpassword">
-  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> ContactUs
-</a>
-<!-- BOTÓN DE LOGIN -->
-
-@guest
-<a  class="nav navbar-nav navbar-right" style="margin-right: 1%;" href="{{ route('login') }}">Login</a>
-@else
-<span class="dropdown">
-  <a href="#" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-    {{ Auth::user()->name }} <span class="caret"></span>
+  <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
+   <a href="/" align="center" style="padding: 0 0 0 0 "> 
+     <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+   </a>
+   <a  data-toggle="modal" data-target="#myModal">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
   </a>
-  <ul class="dropdown-menu">
-    <li>
-      <a href="{{ route('logout') }}"
-      onclick="event.preventDefault();
-      document.getElementById('logout-form').submit();">
-      Logout
+  <a href="mailpassword">
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> ContactUs
+  </a>
+  <!-- BOTÓN DE LOGIN -->
+
+<ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
+  <!-- Authentication Links -->
+  @guest
+  <li><a href="{{ route('login') }}">Login</a></li>
+  @else
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+      {{ Auth::user()->name }} <span class="caret"></span>
     </a>
 
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-      {{ csrf_field() }}
-    </form>
-  </li>
-</ul>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="{{ route('logout') }}"
+        onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">
+        Logout
+      </a>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+      </form>
+    </li>
+  </ul>
+</li>
 @endguest
+</ul>
+<!-- 
+  @guest
+  <a  href="{{ route('login') }}">Login</a>
+  @else
+  <span class="dropdown">
+    <a href="#" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+      {{ Auth::user()->name }} <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="{{ route('logout') }}"
+        onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">
+        Logout
+      </a>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+      </form>
+    </li>
+  </ul>
+  @endguest
 
 </ul>
 
-</span>
+</span> -->
 
-<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+
+<a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
+" class="icon" onclick="myFunction()">&#9776;</a>
+
 </div> 
+
+
+
+
 <!-- FIN DE NAVEGADOR -->
 
 
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
-<div style="margin-top: 7%" class="container">
-  <h2>SITU</h2>
+
+<div class="container">
+  <h2>Carousel Example</h2>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -81,45 +114,46 @@
     </ol>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner">
+    <div style="margin-top: 7%" class="carousel-inner">
 
       <div align="center" class="item active">
-        <img src="{{ asset('images/carrousel/a2.jpg') }}" alt="New York" style="height:400px;">
+        <img  src="https://pbs.twimg.com/profile_images/438696546591186944/Vms1aFmW_400x400.png" alt="UFVmadrid" ">
         <div class="carousel-caption">
-          <h3>UFV 1</h3>
-          <p>UFV 1 ES LA PRIMERA IMAGEN</p>
+          <h3 style="background: #A7B4C6">UFVmadrid</h3>
+          <p style="background: #A7B4C6">Thank you, UFVmadrid</p>
         </div>
       </div>
 
-      <div align="center" class="item">
-        <img src="{{ asset('images/carrousel/a3.jpg') }}" alt="New York" style="height:400px;">
-        <div class="carousel-caption">
-          <h3>UFV 2</h3>
-          <p>ES LA SEGUNDA IMAGEN</p>
-        </div>
+      <div align="center"class="item">
+       <img  src="https://pbs.twimg.com/profile_images/438696546591186944/Vms1aFmW_400x400.png" alt="UFVmadrid" ">
+       <div class="carousel-caption">
+        <h3 style="background: #A7B4C6">UFVmadrid</h3>
+        <p style="background: #A7B4C6">Thank you, UFVmadrid</p>
       </div>
-    
-      <div align="center" class="item">
-        <img src="{{ asset('images/carrousel/a1.jpg') }}" alt="New York" style="height:400px;">
-        <div class="carousel-caption">
-          <h3>UFV 3</h3>
-          <p>UFV 3 ES LA TERCERA Y ÚLTIMA IMAGEN</p>
-        </div>
-      </div>
-  
     </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span class="sr-only">Next</span>
-    </a>
+    
+    <div align="center"class="item">
+     <img  src="https://pbs.twimg.com/profile_images/438696546591186944/Vms1aFmW_400x400.png" alt="UFVmadrid" ">
+     <div class="carousel-caption">
+      <h3 style="background: #A7B4C6">UFVmadrid</h3>
+      <p style="background: #A7B4C6">Thank you, UFVmadrid</p>
+    </div>
   </div>
+
 </div>
+
+<!-- Left and right controls -->
+<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+  <span class="glyphicon glyphicon-chevron-left"></span>
+  <span class="sr-only">Previous</span>
+</a>
+<a class="right carousel-control" href="#myCarousel" data-slide="next">
+  <span class="glyphicon glyphicon-chevron-right"></span>
+  <span class="sr-only">Next</span>
+</a>
+</div>
+</div>
+
 
 <!-- FINAL CARRUSEL -->
 
@@ -178,35 +212,34 @@
 </div>
 
 <!--  BANNER MODAL ABOUT -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- CONTENIDO DE ABOUT EN BANNER-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">ABOUT US</h4>
-      </div>
-      <div class="modal-body">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- CONTENIDO DE ABOUT EN BANNER-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">ABOUT US</h4>
+        </div>
+        <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button  onclick="location.href='send' type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
-      </div>
+      
     </div>
-
   </div>
-</div>
-<!-- FIN BANNER MODAL -->
+  <!-- FIN BANNER MODAL -->
 
 </body>
 </html>
-
 
 
 <script>
