@@ -1,198 +1,221 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SITU</title>
+  <title>SITU</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-    <!-- BOOTSTRAP LINKS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- BOOTSTRAP LINKS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
-    <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
+  <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
+  <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
 
 
 </head>
 
 
 <body>
-  <nav class="navbar navbar-inverse  navbar-fixed-top"  role="navigation" >
-
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
 
 
-        <!-- IMAGEN HOME CON ICONO DE LA UFV -->
-        <li class=" li_resize navbar-brand-logo active">
-            <a href="/" align="center" style="padding: 0 0 0 0 "> 
-               <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-           </a>
-       </li>
-
-       <!-- BOTON "ABOUT" -->
-       <li>
-        <a  data-toggle="modal" data-target="#myModal">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-        </a>
-    </li>
-
-
-  <!--   <li class="dropdown">
-      <a href="index.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
-        <span class="glyphicon glyphicon-education" aria-hidden="true"></span> USUARIOS <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">ADMINISTRADOR</a></li>
-          <li><a href="#">ALUMNO</a></li>
-          <li><a href="#">PROFESOR</a></li>
-          <li><a href="#">INVITADO</a></li>
-      </ul>
-  </li> -->
-
-  <!-- BOTON CONTACT ENVIO DE PASSWORDS-->
-  <li><a href="mailpassword">
-      <span class="glyphicon glyphicon-user" aria-hidden="true"></span> ContactUs</a>
-  </li>
-
-</ul>
-
+  <!-- INICIO NAVEGADOR -->
+<div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
+ <a href="/" align="center" style="padding: 0 0 0 0 "> 
+   <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+ </a>
+ <a  data-toggle="modal" data-target="#myModal">
+  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
+</a>
+<a href="mailpassword">
+  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> ContactUs
+</a>
 <!-- BOTÓN DE LOGIN -->
-<ul class="nav navbar-nav navbar-right" style="margin-right: 13%;">
- <li>
 
-    <div>
+@guest
+<a  class="nav navbar-nav navbar-right" style="margin-right: 1%;" href="{{ route('login') }}">Login</a>
+@else
+<span class="dropdown">
+  <a href="#" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+    {{ Auth::user()->name }} <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li>
+      <a href="{{ route('logout') }}"
+      onclick="event.preventDefault();
+      document.getElementById('logout-form').submit();">
+      Logout
+    </a>
 
-        @if (Route::has('login'))
-        <div class="top-right links"
-        style="color:#8B8B8B; background-color:transparent; border-radius: 8px"
-        onmouseover="this.style.backgroundColor='#344A6C'" 
-        onmouseout=" this.style.backgroundColor='transparent'">
-        @auth
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      {{ csrf_field() }}
+    </form>
+  </li>
+</ul>
+@endguest
+
+</ul>
+
+</span>
+
+<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div> 
+<!-- FIN DE NAVEGADOR -->
+
+
+<!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
+<div style="margin-top: 7%" class="container">
+  <h2>SITU</h2>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div align="center" class="item active">
+        <img src="{{ asset('images/carrousel/a2.jpg') }}" alt="New York" style="height:400px;">
+        <div class="carousel-caption">
+          <h3>UFV 1</h3>
+          <p>UFV 1 ES LA PRIMERA IMAGEN</p>
+        </div>
+      </div>
+
+      <div align="center" class="item">
+        <img src="{{ asset('images/carrousel/a3.jpg') }}" alt="New York" style="height:400px;">
+        <div class="carousel-caption">
+          <h3>UFV 2</h3>
+          <p>ES LA SEGUNDA IMAGEN</p>
+        </div>
+      </div>
     
-        @else
-         <a style="color:#8B8B8B;"  
-         onmouseover="this.style.color='white'" 
-         onmouseout="this.style.color='#8B8B8B'" href="{{ route('login') }}">Login</a>
-        @endauth
+      <div align="center" class="item">
+        <img src="{{ asset('images/carrousel/a1.jpg') }}" alt="New York" style="height:400px;">
+        <div class="carousel-caption">
+          <h3>UFV 3</h3>
+          <p>UFV 3 ES LA TERCERA Y ÚLTIMA IMAGEN</p>
+        </div>
+      </div>
+  
     </div>
-    @endif
-</div>
-</li>
-</ul>
 
-<!-- BOTÓN DE REGISTER -->
-<ul class="nav navbar-nav navbar-right" style="margin-right: 1%; ">
-
- <li>
-    <div>
-        @if (Route::has('login'))
-        <div class="top-right links"
-        style="color:#8B8B8B; background-color:transparent; border-radius: 8px"
-        onmouseover="this.style.backgroundColor='#344A6C'" 
-        onmouseout=" this.style.backgroundColor='transparent'">
-        @auth
-        <a style="color:#8B8B8B;"  
-        onmouseover="this.style.color='white'" 
-        onmouseout="this.style.color='#8B8B8B'" href="{{ url('/home') }}">Home</a>
-        @else
-        <a style="color:#8B8B8B;"  
-        onmouseover="this.style.color='white'" 
-        onmouseout="this.style.color='#8B8B8B'" href="{{ route('register') }}">Registrarse</a>
-        @endauth
-    </div>
-    @endif
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 </div>
-</li>
-</ul>
+
+<!-- FINAL CARRUSEL -->
 
 
-</div>
-</div>
-</nav>
+
 
 
 <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
 <div id="footer" align="center">
-    <table>
-      <tbody>
+  <table>
+    <tbody>
 
-       <tr> 
-        <td class="foot_izdo">&nbsp;</td> 
-        <td class="foot_cent"> 
-          <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-            <br> 
-            Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
+     <tr> 
+      <td class="foot_izdo">&nbsp;</td> 
+      <td class="foot_cent"> 
+        <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
+          <br> 
+          Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
         </p> 
 
         <!-- REDES SOCIALES -->
         <div id="social"> 
-            <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
+          <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
           </a> 
           <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
+            <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
           </a>
           <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
+            <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
           </a>
           <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
+            <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
           </a> 
           <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
+            <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
           </a>
           <br><br>
-      </div>
-      <!-- FIN REDES SOCIALES -->
+        </div>
+        <!-- FIN REDES SOCIALES -->
 
-      <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
-      / Sponsored by the
-      <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
-      and 
-      <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
-      Copyright 2013,
-      <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
-      . All rights reserved. 
-  </td>
-  <td class="foot_dcho">&nbsp;</td> 
-</tr>
+        <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
+        / Sponsored by the
+        <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
+        and 
+        <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
+        Copyright 2013,
+        <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
+        . All rights reserved. 
+      </td>
+      <td class="foot_dcho">&nbsp;</td> 
+    </tr>
 
-</tbody>
+  </tbody>
 </table>
 </div>
 
 <!--  BANNER MODAL ABOUT -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- CONTENIDO DE ABOUT EN BANNER-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">ABOUT US</h4>
-        </div>
-        <div class="modal-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">ABOUT US</h4>
+      </div>
+      <div class="modal-body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="modal-footer">
-          <button  onclick="location.href='send' type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
-        </div>
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
-      
+      <div class="modal-footer">
+        <button  onclick="location.href='send' type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+      </div>
     </div>
+
   </div>
-  <!-- FIN BANNER MODAL -->
+</div>
+<!-- FIN BANNER MODAL -->
 
 </body>
 </html>
+
+
+
+<script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+</script>
