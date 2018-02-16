@@ -22,6 +22,15 @@ Route::get('mailpassword', function () {
 });
 
 
+Route::get('admin', function () {
+    return view('admin');
+});
+Route::get('alumno', function () {
+    return view('alumno');
+});
+Route::get('profesor', function () {
+    return view('profesor');
+});
 
 Auth::routes();
 

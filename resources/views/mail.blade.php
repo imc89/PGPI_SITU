@@ -2,6 +2,7 @@
 Bienvenido a la plataforma SITU.
 En este correo se te proporcionará una contraseña y usuario para ingresar en la plataforma.
 Tu usuario es: <?php echo getUsuario(); ?>  
+Tu rol es: <?php $rol=getRol(); if($rol==1){echo "ALUMNO";}else{echo "PROFESOR";}?> 
 Tu contraseña es: <?php  save(); ?> 
 
 
@@ -15,7 +16,16 @@ function getUsuario() {
       $usuario = request('name', $default = null);
       return $usuario;
 }
-//RECOGER DATO NOMBRE EMAIL
+
+//RECOGER DATO  ROL
+function getRol() {
+      $request = request();
+      $rol = request('rol', $default = null);
+      return $rol;
+}
+
+
+//RECOGER DATO  EMAIL
 function getEmail() {
       $request = request();
       $email = request('email', $default = null);
@@ -44,7 +54,7 @@ function save(){
       echo $passw;
 
       DB::table('users')->insert(
-        ['name' => getUsuario(), 'email' => getEmail(), 'password' => bcrypt($passw)]
+        ['name' => getUsuario(),'rol' => getRol(), 'email' => getEmail(), 'password' => bcrypt($passw)]
   );
 }
 
