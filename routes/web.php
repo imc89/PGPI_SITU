@@ -21,6 +21,9 @@ Route::get('mailpassword', function () {
     return view('mailpassword');
 });
 
+Route::get('etiquetas', function () {
+    return view('etiquetas');
+});
 
 Route::get('admin', function () {
     return view('admin');

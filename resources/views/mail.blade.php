@@ -48,14 +48,14 @@ function randomPassword() {
 
 
 function save(){
-
-
       $passw=randomPassword();
       echo $passw;
 
+
+
       DB::table('users')->insert(
-        ['name' => getUsuario(),'rol' => getRol(), 'email' => getEmail(), 'password' => bcrypt($passw)]
-  );
+        ['name' => getUsuario(),'rol' => getRol(), 'email' => getEmail(), 'password' => bcrypt($passw)]);
+
 }
 
 ?>

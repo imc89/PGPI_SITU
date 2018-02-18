@@ -12,4 +12,5 @@ class Admin extends Model
         $this->admin = config('admin.name');
         $this->email = config('admin.email');
     }
+
 }

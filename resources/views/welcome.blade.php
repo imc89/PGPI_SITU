@@ -31,9 +31,6 @@
    <a  data-toggle="modal" data-target="#myModal">
     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
   </a>
-  <a href="mailpassword">
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> ContactUs
-  </a>
   <!-- BOTÓN DE LOGIN -->
 
 <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">

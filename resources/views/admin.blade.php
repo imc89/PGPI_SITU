@@ -28,14 +28,17 @@
 <body>
   <!-- INICIO NAVEGADOR -->
   <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-   <a href="/" align="center" style="padding: 0 0 0 0 "> 
+   <a href="/admin" align="center" style="padding: 0 0 0 0 ">
      <img width="50px" src="{{ asset('images/icono.jpg') }}" >
    </a>
    <a  data-toggle="modal" data-target="#myModal">
     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
   </a>
   <a href="mailpassword">
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> ContactUs
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
+  </a>
+  <a href="etiquetas">
+    <span aria-hidden="true"></span> Etiquetas
   </a>
   <!-- BOTÓN DE LOGIN -->
 
@@ -50,6 +53,11 @@
     </a>
 
     <ul class="dropdown-menu">
+      <li>
+        <a href="\passwords\reset">
+          <span aria-hidden="true"></span> Cambiar Pass
+        </a>
+      </li>
       <li>
         <a href="{{ route('logout') }}"
         onclick="event.preventDefault();
@@ -104,62 +112,17 @@
 <!-- FIN DE NAVEGADOR -->
 
 
-<!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
+<!-- CUERPO PAGINA -->
 
 <div class="container">
-  <h2>Carousel Example</h2>
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
 
-    <!-- Wrapper for slides -->
-    <div style="margin-top: 7%" class="carousel-inner">
 
-      <div align="center" class="item active">
-        <img  src="https://pbs.twimg.com/profile_images/438696546591186944/Vms1aFmW_400x400.png" alt="UFVmadrid" ">
-        <div class="carousel-caption">
-          <h3 style="background: #A7B4C6">UFVmadrid</h3>
-          <p style="background: #A7B4C6">Thank you, UFVmadrid</p>
-        </div>
-      </div>
 
-      <div align="center"class="item">
-       <img  src="https://pbs.twimg.com/profile_images/438696546591186944/Vms1aFmW_400x400.png" alt="UFVmadrid" ">
-       <div class="carousel-caption">
-        <h3 style="background: #A7B4C6">UFVmadrid</h3>
-        <p style="background: #A7B4C6">Thank you, UFVmadrid</p>
-      </div>
-    </div>
-    
-    <div align="center"class="item">
-     <img  src="https://pbs.twimg.com/profile_images/438696546591186944/Vms1aFmW_400x400.png" alt="UFVmadrid" ">
-     <div class="carousel-caption">
-      <h3 style="background: #A7B4C6">UFVmadrid</h3>
-      <p style="background: #A7B4C6">Thank you, UFVmadrid</p>
-    </div>
-  </div>
+
+
+
 
 </div>
-
-<!-- Left and right controls -->
-<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-  <span class="glyphicon glyphicon-chevron-left"></span>
-  <span class="sr-only">Previous</span>
-</a>
-<a class="right carousel-control" href="#myCarousel" data-slide="next">
-  <span class="glyphicon glyphicon-chevron-right"></span>
-  <span class="sr-only">Next</span>
-</a>
-</div>
-</div>
-
-
-<!-- FINAL CARRUSEL -->
-
 
 
 
