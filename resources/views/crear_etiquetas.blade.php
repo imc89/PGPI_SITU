@@ -1,7 +1,3 @@
-@extends('layout')
-
-@section('content')
-
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -28,19 +24,22 @@
 
 
 <!-- INICIO NAVEGADOR -->
-<div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-    <a href="/admin" align="center" style="padding: 0 0 0 0 ">
-        <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-    </a>
-    <a  data-toggle="modal" data-target="#myModal">
-        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-    </a>
-    <a href="mailpassword">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
-    </a>
-    <a href="etiquetas">
-        <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Etiquetas
-    </a>
+ <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
+   <a href="/admin" align="center" style="padding: 0 0 0 0 ">
+     <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+   </a>
+   <a  data-toggle="modal" data-target="#myModal">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
+  </a>
+  <a href="mailpassword">
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
+  </a>
+  <a href="log_admin_login">
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Log Logins
+  </a>
+  <a href="etiquetas">
+    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Etiquetas
+  </a>
     <!-- BOTÓN DE LOGIN -->
 
     <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
@@ -132,8 +131,9 @@
 
    <div class="form-group">
     <button type="submit" class="btn btn-primary" value="send_etiqueta">ENVIAR</button>
-
-  </div>
+    <a href="etiquetas" class="btn btn-primary">
+          <span class="glyphicon glyphicon-refresh"></span> REFRESCAR ETIQUETAS
+   </a>  
 </form>
 </div>
 </div> <!-- /container -->
@@ -165,5 +165,3 @@
   </div>
 </div>
 <!-- FIN BANNER MODAL -->
-
-@endsection

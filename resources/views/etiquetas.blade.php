@@ -1,6 +1,3 @@
-@extends('layout')
-
-@section('content')
 {{$etiquetas = DB::table('tags')->get()}}
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
@@ -29,19 +26,22 @@
 
 <body>
 <!-- INICIO NAVEGADOR -->
-<div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-    <a href="/admin" align="center" style="padding: 0 0 0 0 ">
-        <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-    </a>
-    <a  data-toggle="modal" data-target="#myModal">
-        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-    </a>
-    <a href="mailpassword">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
-    </a>
-    <a href="etiquetas">
-        <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Etiquetas
-    </a>
+ <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
+   <a href="/admin" align="center" style="padding: 0 0 0 0 ">
+     <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+   </a>
+   <a  data-toggle="modal" data-target="#myModal">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
+  </a>
+  <a href="mailpassword">
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
+  </a>
+  <a href="log_admin_login">
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Log Logins
+  </a>
+  <a href="etiquetas">
+    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Etiquetas
+  </a>
     <!-- BOTÓN DE LOGIN -->
 
     <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
@@ -118,18 +118,34 @@
 <div class="container">
     <h1 class="mb-2 text-center">ETIQUETAS</h1>
 
-    <tr><a class="btn btn-primary btn-sm" href="crear_etiquetas">Nueva Etiqueta</a></tr>
+    <tr><a class="btn btn-primary btn-sm" href="crear_etiquetas">NUEVA ETIQUETA</a></tr>
     <br>
     <br>
-
-    <table class="table table-striped">
-        @foreach($etiquetas as $u)
-            <tr>{{ $u->nombre }}</tr>
-        @endforeach
-    </table>
-
+<table class="table table-striped table-dark">
+  <?php $contador=0 ?>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre Etiqueta</th>
+    </tr>
+  </thead>
+  <tbody>
+     @foreach($etiquetas as $u)
+    <tr>
+      <th scope="row"><?php $contador++; echo $contador ?></th>
+      <td> {{ $u->nombre }} </td>
+  
+    </tr>
+    @endforeach
+  </tbody>
+</table>
 
 </div>
+
+
+
+
+
 
 
 <!--  BANNER MODAL ABOUT -->
@@ -159,4 +175,3 @@
 </div>
 <!-- FIN BANNER MODAL -->
 
-@endsection

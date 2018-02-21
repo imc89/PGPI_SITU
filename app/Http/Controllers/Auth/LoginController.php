@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -29,15 +31,42 @@ class LoginController extends Controller
     // protected $redirectTo = '/home';
 
     public function authenticated($request , $user){
-    if($user->rol=='0'){
-        return redirect('admin');    }
-     elseif($user->rol=='1'){
-        return redirect('alumno');
-    }
-    elseif($user->rol=='2'){
-        return redirect('profesor');
-    }
-}
+
+        date_default_timezone_set('Europe/Madrid');
+        $date = date('Y-m-d H:i:s');
+
+            // TIEMPO DE REGISTRO DE ADMIN
+     
+            if($user->rol=='0'){
+                DB::table('users')
+                ->where('name', $user->name)
+                ->update(['tiempolog' => $date ]);
+
+                return redirect('admin');    
+            }
+
+            elseif($user->rol=='1'){
+
+            // TIEMPO DE REGISTRO DE ALUMNO
+                DB::table('users')
+                ->where('name', $user->name)
+                ->update(['tiempolog' => $date ]);
+
+
+                return redirect('alumno');
+            }
+
+            elseif($user->rol=='2'){
+
+            // TIEMPO DE REGISTRO DE PROFESOR
+                DB::table('users')
+                ->where('name', $user->name)
+                ->update(['tiempolog' => $date ]);
+
+                return redirect('profesor');
+
+            }
+        }
 
 
     /**

@@ -1,3 +1,4 @@
+{{$log = DB::table('users')->select('name','tiempolog') ->where('rol', '=', '1')->get()}}
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -23,6 +24,7 @@
 
 
 
+<body>
 <!-- INICIO NAVEGADOR -->
  <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
    <a href="/admin" align="center" style="padding: 0 0 0 0 ">
@@ -113,46 +115,32 @@
 <br>
 <br>
 <br>
-<br>
 <div class="container">
-	<h1 class="mb-2 text-center">ENVIO DE PASSWORDS A USUARIOS</h1>
-	
-	@if(session('message'))
-	<div class='alert alert-success'>
-		{{ session('message') }}
-	</div>
-	@endif
-	<div class="col-12 col-md-6">
-		<form action="send" class="form-horizontal" method="POST" ">
-			{{ csrf_field() }} 
-			<div class="form-group"> <!-- NOMBRE -->
-       <label for="Name">Nombre: </label>
-       <input type="text" class="form-control" id="name" placeholder="Tu nombre" name="name" required>
-     </div>
+    <h1 class="mb-2 text-center">LOG DE LOGINS</h1>
 
-     <div class="form-group" required><!-- ROL -->
-      <label for="Name">Rol: </label>
-      <br>
-      <label><input type="radio" name="rol" value="1" required>ALUMNO </label>
-      <br>
-      <label><input type="radio" name="rol" value="2">PROFESOR </label>
-    </div>
+    <br>
+    <br>
 
-    <div class="form-group"><!-- EMAIL -->
-     <label for="email">Email: </label>
-     <input type="text" class="form-control" id="email" placeholder="john@example.com" name="email" required>
-   </div>
+<table class="table table-striped table-dark">
+  <?php $contador=0 ?>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Fecha y Hora</th>
+    </tr>
+  </thead>
+  <tbody>
+     @foreach($log as $u)
+    <tr>
+      <th scope="row"><?php $contador++; echo $contador ?></th>
+      <td>{{ $u->name }}</td>
+      <td>{{ $u->tiempolog }}</td>
+    </tr>
+   @endforeach
+  </tbody>
+</table>
 
-   <div class="form-group">
-    <button type="submit" class="btn btn-primary" value="Send">ENVIAR</button>
-  </div>
-</form>
-</div>
-</div> <!-- /container -->
-
-
-<div class="alert alert-warning">
-  <strong>Warning!</strong> Debido a no utilizar un servidor de correo de pago, el correo es probable que llegue a la carpeta SPAM.
 </div>
 
 
@@ -183,3 +171,4 @@
   </div>
 </div>
 <!-- FIN BANNER MODAL -->
+

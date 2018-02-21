@@ -34,6 +34,9 @@
   <a href="mailpassword">
     <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
   </a>
+  <a href="log_admin_login">
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Log Logins
+  </a>
   <a href="etiquetas">
     <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Etiquetas
   </a>
@@ -51,8 +54,8 @@
 
     <ul class="dropdown-menu">
       <li>
-        <a href="\passwords\reset">
-          <span aria-hidden="true"></span> Cambiar Pass
+        <a href="reset">
+          <span aria-hidden="true"> Password</span>
         </a>
       </li>
       <li>
@@ -102,8 +105,6 @@
 " class="icon" onclick="myFunction()">&#9776;</a>
 
 </div> 
-
-
 
 
 <!-- FIN DE NAVEGADOR -->
