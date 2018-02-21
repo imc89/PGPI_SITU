@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-{{$etiquetas = DB::table('tags')->get()}}
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -27,7 +27,6 @@
 
 
 
-<body>
 <!-- INICIO NAVEGADOR -->
 <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
     <a href="/admin" align="center" style="padding: 0 0 0 0 ">
@@ -116,20 +115,28 @@
 <br>
 <br>
 <div class="container">
-    <h1 class="mb-2 text-center">ETIQUETAS</h1>
+	<h1 class="mb-2 text-center">Crear Nueva etiqueta</h1>
+	
+	@if(session('message'))
+	<div class='alert alert-success'>
+		{{ session('message') }}
+	</div>
+	@endif
+	<div class="col-12 col-md-6">
+		<form action="send_etiqueta" class="form-horizontal" method="POST" ">
+			{{ csrf_field() }}
+			<div class="form-group"> <!-- NOMBRE -->
+       <label for="Name">Nombre: </label>
+       <input type="text" class="form-control" id="name" placeholder="Nombre de la etiqueta" name="nombre" required>
+     </div>
 
-    <tr><a class="btn btn-primary btn-sm" href="crear_etiquetas">Nueva Etiqueta</a></tr>
-    <br>
-    <br>
+   <div class="form-group">
+    <button type="submit" class="btn btn-primary" value="send_etiqueta">ENVIAR</button>
 
-    <table class="table table-striped">
-        @foreach($etiquetas as $u)
-            <tr>{{ $u->nombre }}</tr>
-        @endforeach
-    </table>
-
-
+  </div>
+</form>
 </div>
+</div> <!-- /container -->
 
 
 <!--  BANNER MODAL ABOUT -->

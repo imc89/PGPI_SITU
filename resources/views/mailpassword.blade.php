@@ -27,66 +27,92 @@
 
 
 
-<!-- INICIO BARRA MENÚ DE NAVEGACIÓN -->
-<nav class="navbar navbar-inverse  navbar-fixed-top"  role="navigation" >
-
-  <div id="navbar" class="navbar-collapse collapse">
-    <ul class="nav navbar-nav">
-
-
-      <!-- IMAGEN HOME CON ICONO DE LA UFV -->
-      <li class=" li_resize navbar-brand-logo active">
-        <a href="/" align="center" style="padding: 0 0 0 0 "> 
-         <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-       </a>
-     </li>
-
-     <!-- BOTON "ABOUT" -->
-     <li>
-      <a  data-toggle="modal" data-target="#myModal">
+<!-- INICIO NAVEGADOR -->
+<div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
+    <a href="/admin" align="center" style="padding: 0 0 0 0 ">
+        <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+    </a>
+    <a  data-toggle="modal" data-target="#myModal">
         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
+    </a>
+    <a href="mailpassword">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
+    </a>
+    <a href="etiquetas">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>  Etiquetas
+    </a>
+    <!-- BOTÓN DE LOGIN -->
+
+    <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
+        <!-- Authentication Links -->
+        @guest
+        <li><a href="{{ route('login') }}">Login</a></li>
+        @else
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                    {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="\passwords\reset">
+                            <span aria-hidden="true"></span> Cambiar Pass
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+            </li>
+            @endguest
+    </ul>
+<!--
+  @guest
+        <a  href="{{ route('login') }}">Login</a>
+  @else
+    <span class="dropdown">
+      <a href="#" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+        {{ Auth::user()->name }} <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="{{ route('logout') }}"
+        onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">
+        Logout
       </a>
-    </li>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+            </form>
+          </li>
+        </ul>
+        @endguest
+
+            </ul>
+
+            </span> -->
 
 
-
-    <!-- BOTON CONTACT ENVIAR PASSWORDS-->
-    <li><a href="mailpassword">
-      <span class="glyphicon glyphicon-user" aria-hidden="true"></span> ContactUs</a>
-    </li>
-
-  </ul>
-
-  <!-- BOTÓN DE LOGIN -->
-  <ul class="nav navbar-nav navbar-right" style="margin-right: 1%;">
-   <li>
-
-    <div>
-
-      @if (Route::has('login'))
-      <div class="top-right links"
-      style="color:#8B8B8B; background-color:transparent; border-radius: 8px"
-      onmouseover="this.style.backgroundColor='#344A6C'" 
-      onmouseout=" this.style.backgroundColor='transparent'">
-      @auth
-
-      @else
-      <a style="color:#8B8B8B;"  
-      onmouseover="this.style.color='white'" 
-      onmouseout="this.style.color='#8B8B8B'" href="{{ route('login') }}">Login</a>
-      @endauth
-    </div>
-    @endif
-  </div>
-</li>
-</ul>
-
-
+        <a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
+" class="icon" onclick="myFunction()">&#9776;</a>
 
 </div>
-</div>
-</nav>
-<!-- FIN DE BARRA MENU NAVEGACIÓN -->
+
+
+
+
+<!-- FIN DE NAVEGADOR -->
+<br>
+<br>
 <br>
 <br>
 <div class="container">

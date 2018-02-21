@@ -25,6 +25,12 @@ Route::get('etiquetas', function () {
     return view('etiquetas');
 });
 
+Route::post('send_etiqueta','EtiquetasadminController@send_etiqueta');
+
+Route::get('crear_etiquetas', function () {
+    return view('crear_etiquetas');
+});
+
 Route::get('admin', function () {
     return view('admin');
 });

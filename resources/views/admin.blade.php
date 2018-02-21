@@ -1,6 +1,3 @@
-<h1>SOY EL ADMINISTRADOR</h1>
-<a href="welcome">VOLVER</a>
-
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -38,7 +35,7 @@
     <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
   </a>
   <a href="etiquetas">
-    <span aria-hidden="true"></span> Etiquetas
+    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Etiquetas
   </a>
   <!-- BOTÓN DE LOGIN -->
 
