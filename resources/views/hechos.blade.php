@@ -1,3 +1,6 @@
+{{$etiqueta = DB::table('tags')->select('nombre')->get()}}
+
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -32,7 +35,13 @@
     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
   </a>
   <a href="#">
-    <span class="glyphicon glyphicon-education" aria-hidden="true"></span> VER CALIFICACIONES 
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> INVITAR 
+  </a>
+  <a href="hechos">
+    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
+  </a>
+  <a href="lineaTiempo">
+    <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
   </a>
   <!-- BOTÓN DE LOGIN -->
 
@@ -62,32 +71,7 @@
 </li>
 @endguest
 </ul>
-<!-- 
-  @guest
-  <a  href="{{ route('login') }}">Login</a>
-  @else
-  <span class="dropdown">
-    <a href="#" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-      {{ Auth::user()->name }} <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <li>
-        <a href="{{ route('logout') }}"
-        onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();">
-        Logout
-      </a>
 
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        {{ csrf_field() }}
-      </form>
-    </li>
-  </ul>
-  @endguest
-
-</ul>
-
-</span> -->
 
 
 <a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
@@ -104,8 +88,24 @@
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
 <br><br><br><br><br>
 <div align="center">
-<h1>SOY UN PROFESOR</h1>
+<h1>HECHOS</h1>
+<br><br>
 </div>
+
+<div align="center" >
+<form>
+  <div  class="form-group">
+    <label style="margin-left: 90px: " for="exampleFormControlTextarea1">HECHO</label>
+	   <br>
+	    <select>
+		 @foreach($etiqueta as $u)
+		   <option> {{ $u->nombre }} </option>
+		 @endforeach
+		</select>
+  </div>
+</form>
+</div>
+
 <!-- FINAL CARRUSEL -->
 
 

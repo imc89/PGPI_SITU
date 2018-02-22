@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class DataUsuariosSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -53,36 +53,5 @@ class DatabaseSeeder extends Seeder
         'email' => 'u4@gmail.com',
         'password' => bcrypt('123'),
     ]);
-
-        // php artisan db:seed
-        // o
-        // php artisan migrate:refresh --seed
-        DB::table('tags')->insert([
-            'nombre' => 'Trabajo Académico',
-        ]);
-
-        DB::table('tags')->insert([
-            'nombre' => 'Calificaciones',
-        ]);
-
-        DB::table('tags')->insert([
-            'nombre' => 'Recuerdos',
-        ]);
-
-        DB::table('tags')->insert([
-            'nombre' => 'Frases Guía',
-        ]);   
-
-        DB::table('tags')->insert([
-            'nombre' => 'Reflexiones',
-        ]);   
-
-        DB::table('tags')->insert([
-            'nombre' => 'Portafolios Profesional',
-        ]);  
-
-        DB::table('tags')->insert([
-            'nombre' => 'Proyectos de investigación',
-        ]);
- }
+    }
 }

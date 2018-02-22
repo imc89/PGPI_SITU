@@ -1,4 +1,6 @@
-{{$log = DB::table('users')->select('name','tiempolog') ->where('rol', '=', '1')->get()}}
+{{$log_alumno = DB::table('users')->select('name','tiempolog') ->where('rol', '=', '1')->get()}}
+{{$log_profesor = DB::table('users')->select('name','tiempolog') ->where('rol', '=', '2')->get()}}
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -25,8 +27,8 @@
 
 
 <body>
-<!-- INICIO NAVEGADOR -->
- <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
+  <!-- INICIO NAVEGADOR -->
+  <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
    <a href="/admin" align="center" style="padding: 0 0 0 0 ">
      <img width="50px" src="{{ asset('images/icono.jpg') }}" >
    </a>
@@ -42,39 +44,39 @@
   <a href="etiquetas">
     <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Etiquetas
   </a>
-    <!-- BOTÓN DE LOGIN -->
+  <!-- BOTÓN DE LOGIN -->
 
-    <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
-        <!-- Authentication Links -->
-        @guest
-        <li><a href="{{ route('login') }}">Login</a></li>
-        @else
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                    {{ Auth::user()->name }} <span class="caret"></span>
-                </a>
+  <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
+    <!-- Authentication Links -->
+    @guest
+    <li><a href="{{ route('login') }}">Login</a></li>
+    @else
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+        {{ Auth::user()->name }} <span class="caret"></span>
+      </a>
 
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="\passwords\reset">
-                            <span aria-hidden="true"></span> Cambiar Pass
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();">
-                            Logout
-                        </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="\passwords\reset">
+            <span aria-hidden="true"></span> Cambiar Pass
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('logout') }}"
+          onclick="event.preventDefault();
+          document.getElementById('logout-form').submit();">
+          Logout
+        </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
-                </ul>
-            </li>
-            @endguest
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          {{ csrf_field() }}
+        </form>
+      </li>
     </ul>
+  </li>
+  @endguest
+</ul>
 <!--
   @guest
         <a  href="{{ route('login') }}">Login</a>
@@ -100,48 +102,89 @@
 
             </ul>
 
-            </span> -->
+          </span> -->
 
 
-        <a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
-" class="icon" onclick="myFunction()">&#9776;</a>
+          <a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
+          " class="icon" onclick="myFunction()">&#9776;</a>
 
-</div>
-
-
+        </div>
 
 
-<!-- FIN DE NAVEGADOR -->
-<br>
-<br>
-<br>
-<div class="container">
-    <h1 class="mb-2 text-center">LOG DE LOGINS</h1>
 
-    <br>
-    <br>
 
-<table class="table table-striped table-dark">
-  <?php $contador=0 ?>
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Fecha y Hora</th>
-    </tr>
-  </thead>
-  <tbody>
-     @foreach($log as $u)
-    <tr>
-      <th scope="row"><?php $contador++; echo $contador ?></th>
-      <td>{{ $u->name }}</td>
-      <td>{{ $u->tiempolog }}</td>
-    </tr>
-   @endforeach
-  </tbody>
-</table>
+        <!-- FIN DE NAVEGADOR -->
+        <br>
+        <br>
+        <br>
+        <div class="container">
+          <h1 class="mb-2 text-center">LOG DE LOGINS ALUMNO</h1>
 
-</div>
+          <br>
+          <br>
+
+          <table class="table table-striped table-dark">
+            <?php $contador=0 ?>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha y Hora</th>
+              </tr>
+            </thead>
+            <tbody>
+             @foreach($log_alumno as $u)
+             <tr>
+              <th scope="row"><?php $contador++; echo $contador ?></th>
+              <td>{{ $u->name }}</td>
+              <td> @if($u->tiempolog == "0001-01-01 00:00:00")
+              NO HA HABIDO CONEXIÓN RECIENTE
+              @else {{$u->tiempolog }}
+              @endif</td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="container">
+        <h1 class="mb-2 text-center">LOG DE LOGINS PROFESOR</h1>
+
+        <br>
+        <br>
+
+        <table class="table table-striped table-dark">
+          <?php $contador=0 ?>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Fecha y Hora</th>
+            </tr>
+          </thead>
+          <tbody>
+           @foreach($log_profesor as $u)
+           <tr>
+            <th scope="row"><?php $contador++; echo $contador ?></th>
+            <td>{{ $u->name }}</td>
+
+
+
+            <!--       <td>{{$u->tiempolog }}</td>
+            -->
+            <td>
+              @if($u->tiempolog == "0001-01-01 00:00:00")
+              NO HA HABIDO CONEXIÓN RECIENTE
+              @else {{$u->tiempolog }}
+              @endif
+            </td>
+            </tr>
+            @endforeach
+            </tbody>
+            </table>
+
+            </div>
 
 
 

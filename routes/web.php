@@ -42,6 +42,13 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('alumno', function () {
 		return view('alumno');
 	});
+	Route::get('hechos', function () {
+		return view('hechos');
+	});
+	Route::get('lineaTiempo', function () {
+		return view('lineaTiempo');
+	});
+
 	Route::get('profesor', function () {
 		return view('profesor');
 	});

@@ -34,6 +34,12 @@
   <a href="#">
     <span class="glyphicon glyphicon-user" aria-hidden="true"></span> INVITAR 
   </a>
+  <a href="hechos">
+    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
+  </a>
+  <a href="lineaTiempo">
+    <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
+  </a>
   <!-- BOTÓN DE LOGIN -->
 
 <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
