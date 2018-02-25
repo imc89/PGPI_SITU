@@ -18,7 +18,9 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
+
+            $table->increments('ID_usuario');
+            
             $table->string('name');
             $table->string('rol');// CAMPO ROL AÑADIDO POR MI
             $table->dateTime('tiempolog');// CAMPO ROL AÑADIDO POR MI

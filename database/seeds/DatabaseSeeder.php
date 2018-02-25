@@ -58,31 +58,31 @@ class DatabaseSeeder extends Seeder
         // o
         // php artisan migrate:refresh --seed
         DB::table('tags')->insert([
-            'nombre' => 'Trabajo Académico',
+            'name' => 'Trabajo Académico',
         ]);
 
         DB::table('tags')->insert([
-            'nombre' => 'Calificaciones',
+            'name' => 'Calificaciones',
         ]);
 
         DB::table('tags')->insert([
-            'nombre' => 'Recuerdos',
+            'name' => 'Recuerdos',
         ]);
 
         DB::table('tags')->insert([
-            'nombre' => 'Frases Guía',
+            'name' => 'Frases Guía',
         ]);   
 
         DB::table('tags')->insert([
-            'nombre' => 'Reflexiones',
+            'name' => 'Reflexiones',
         ]);   
 
         DB::table('tags')->insert([
-            'nombre' => 'Portafolios Profesional',
+            'name' => 'Portafolios Profesional',
         ]);  
 
         DB::table('tags')->insert([
-            'nombre' => 'Proyectos de investigación',
+            'name' => 'Proyectos de investigación',
         ]);
  }
 }

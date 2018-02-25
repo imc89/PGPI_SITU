@@ -1,4 +1,4 @@
-{{$etiquetas = DB::table('tags')->get()}}
+{{! $etiquetas = DB::table('tags')->get() }}
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>

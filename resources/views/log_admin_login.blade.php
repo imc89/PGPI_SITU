@@ -1,5 +1,5 @@
-{{$log_alumno = DB::table('users')->select('name','tiempolog') ->where('rol', '=', '1')->get()}}
-{{$log_profesor = DB::table('users')->select('name','tiempolog') ->where('rol', '=', '2')->get()}}
+{{! $log_alumno = DB::table('users')->select('name','tiempolog') ->where('rol', '=', '1')->get()}}
+{{! $log_profesor = DB::table('users')->select('name','tiempolog') ->where('rol', '=', '2')->get()}}
 
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
