@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagsTable extends Migration
+class CreateAdminTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
-            $table->increments('ID_etiqueta');
-            $table->string('name');
+        Schema::create('admin', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
@@ -28,6 +30,6 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('admin');
     }
 }

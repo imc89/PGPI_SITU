@@ -1,5 +1,5 @@
 body{
-  background: url('/images/fondo_body.jpg')fixed;
+	background-image: url('/images/fondo_body.jpg');
 }
 
 .navbar-header

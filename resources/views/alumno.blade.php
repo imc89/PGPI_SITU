@@ -34,10 +34,10 @@
   <a href="#">
     <span class="glyphicon glyphicon-user" aria-hidden="true"></span> INVITAR 
   </a>
-  <a href="hechos">
+  <a href="#">
     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
   </a>
-  <a href="lineaTiempo">
+  <a href="#">
     <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
   </a>
   <!-- BOTÓN DE LOGIN -->

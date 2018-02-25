@@ -117,10 +117,14 @@
 <div class="container">
 	<h1 class="mb-2 text-center">ENVIO DE PASSWORDS A USUARIOS</h1>
 	
-	@if(session('message'))
-	<div class='alert alert-success'>
+	@if(session('message')== "El usuario ya existe en el sistema")
+	<div class='alert alert-danger'>
 		{{ session('message') }}
 	</div>
+  @elseif(session('message'))
+    <div class='alert alert-success'>
+    {{ session('message') }}
+  </div>
 	@endif
 	<div class="col-12 col-md-6">
 		<form action="send" class="form-horizontal" method="POST" ">
@@ -131,7 +135,7 @@
      </div>
 
      <div class="form-group" required><!-- ROL -->
-      <label for="Name">Rol: </label>
+      <label for="Name">Rol: </label>alert alert-danger
       <br>
       <label><input type="radio" name="rol" value="1" required>ALUMNO </label>
       <br>

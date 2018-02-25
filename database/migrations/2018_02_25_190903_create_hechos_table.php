@@ -14,26 +14,23 @@ class CreateHechosTable extends Migration
     public function up()
     {
         Schema::create('hechos', function (Blueprint $table) {
+            $table->increments('id');
 
-            $table->increments('ID_hechos');
-
-            $table->integer('ID_alumno')->unsigned();
-            $table->foreign('ID_alumno')->references('ID_alumno')->on('alumno');
-
-
-            $table->integer('ID_etiqueta')->unsigned();
-            $table->foreign('ID_etiqueta')->references('ID_etiqueta')->on('tags');
+            $table->integer('alumno_id')->unsigned();
+            $table->foreign('alumno_id')->references('id')->on('alumno');
 
 
-            $table->integer('ID_keyword')->unsigned();
-            $table->foreign('ID_keyword')->references('ID_keyword')->on('keywords');
+            $table->integer('tags_id')->unsigned();
+            $table->foreign('tags_id')->references('id')->on('tags');
 
+
+            $table->integer('keyword_id')->unsigned();
+            $table->foreign('keyword_id')->references('id')->on('keywords');
 
 
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

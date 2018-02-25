@@ -133,7 +133,7 @@
      @foreach($etiquetas as $u)
     <tr>
       <th scope="row"><?php $contador++; echo $contador ?></th>
-      <td> {{ $u->nombre }} </td>
+      <td> {{ $u->name }} </td>
   
     </tr>
     @endforeach

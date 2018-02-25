@@ -4,27 +4,29 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateInvitadoTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     *IMPORTANTE PARA RESTABLECER AUTONUMERICO 
-     *________________________________________
-     *ALTER TABLE tablename AUTO_INCREMENT = 1
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('invitado', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('rol');// CAMPO ROL AÑADIDO POR MI
-            $table->dateTime('tiempolog');// CAMPO ROL AÑADIDO POR MI
+
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->integer('alumno_id')->unsigned();
+            $table->foreign('alumno_id')->references('id')->on('alumno');
+
+            $table->dateTime('Tpermiso');
             $table->string('email')->unique();
             $table->string('password');
-            $table->rememberToken();
+            $table->string('descripcion');
+            $table->string('acceso');
             $table->timestamps();
         });
     }
@@ -36,6 +38,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('invitado');
     }
 }
