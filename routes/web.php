@@ -12,27 +12,27 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
 Route::post('send','mailController@send');
 
 Route::get('mailpassword', function () {
-    return view('mailpassword');
+	return view('mailpassword');
 });
 
 Route::get('log_admin_login', function () {
-    return view('log_admin_login');
+	return view('log_admin_login');
 });
 
 Route::get('etiquetas', function () {
-    return view('etiquetas');
+	return view('etiquetas');
 });
 
 Route::post('send_etiqueta','EtiquetasadminController@send_etiqueta');
 
 Route::get('crear_etiquetas', function () {
-    return view('crear_etiquetas');
+	return view('crear_etiquetas');
 });
 
 Route::group(['middleware' => ['auth']], function() {
@@ -42,6 +42,24 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('alumno', function () {
 		return view('alumno');
 	});
+
+	Route::get('configPerfil', function () {
+		return view('configPerfil');
+	});
+	
+	Route::get('configPerfil', 'UserController@profile');
+	Route::post('configPerfil', 'UserController@update_avatar');
+
+	Route::get('perfilAlumno', function () {
+		return view('perfilAlumno');
+	});
+
+
+
+	Route::get('lineaTiempo', function () {
+		return view('lineaTiempo');
+	});
+
 	Route::get('profesor', function () {
 		return view('profesor');
 	});

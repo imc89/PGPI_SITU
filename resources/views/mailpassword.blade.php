@@ -24,55 +24,52 @@
 
 
 <!-- INICIO NAVEGADOR -->
- <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-   <a href="/admin" align="center" style="padding: 0 0 0 0 ">
-     <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-   </a>
-   <a  data-toggle="modal" data-target="#myModal">
-    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-  </a>
-  <a href="mailpassword">
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
-  </a>
-  <a href="log_admin_login">
-    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Log Logins
-  </a>
-  <a href="etiquetas">
-    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Etiquetas
-  </a>
-    <!-- BOTÓN DE LOGIN -->
+<div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
+ <a href="admin" align="center" style="padding: 0 0 0 0 ">
+   <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+ </a>
+ <a  data-toggle="modal" data-target="#myModal">
+  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
+</a>
+<a href="mailpassword">
+  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
+</a>
+<a href="log_admin_login">
+  <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Log Logins
+</a>
+<a href="etiquetas">
+  <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Etiquetas
+</a>
+<!-- BOTÓN DE LOGIN -->
 
-    <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
-        <!-- Authentication Links -->
-        @guest
-        <li><a href="{{ route('login') }}">Login</a></li>
-        @else
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                    {{ Auth::user()->name }} <span class="caret"></span>
-                </a>
+<ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
+  <!-- Authentication Links -->
+  @guest
+  <li><a href="{{ route('login') }}">Login</a></li>
+  @else
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+      {{ Auth::user()->name }} <span class="caret"></span>
+    </a>
 
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="\passwords\reset">
-                            <span aria-hidden="true"></span> Cambiar Pass
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
+    <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
+      <li>
+        <a style="font-weight: bold;" href="reset" class="  glyphicon glyphicon-lock"> Password </a>
+      </li>
+      <li>
+        <a style="font-weight: bold;" class="glyphicon glyphicon-log-out" href="{{ route('logout') }}"
+        onclick="event.preventDefault();
         document.getElementById('logout-form').submit();">
-                            Logout
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
-                </ul>
-            </li>
-            @endguest
-    </ul>
+        Logout
+      </a>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+      </form>
+    </li>
+  </ul>
+</li>
+@endguest
+</ul>
 <!--
   @guest
         <a  href="{{ route('login') }}">Login</a>
@@ -98,92 +95,92 @@
 
             </ul>
 
-            </span> -->
+          </span> -->
 
 
-        <a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
-" class="icon" onclick="myFunction()">&#9776;</a>
+          <a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
+          " class="icon" onclick="myFunction()">&#9776;</a>
 
-</div>
-
-
+        </div>
 
 
-<!-- FIN DE NAVEGADOR -->
-<br>
-<br>
-<br>
-<br>
-<div class="container">
-	<h1 class="mb-2 text-center">ENVIO DE PASSWORDS A USUARIOS</h1>
-	
-	@if(session('message')== "El usuario ya existe en el sistema")
-	<div class='alert alert-danger'>
-		{{ session('message') }}
-	</div>
-  @elseif(session('message'))
-    <div class='alert alert-success'>
-    {{ session('message') }}
-  </div>
-	@endif
-	<div class="col-12 col-md-6">
-		<form action="send" class="form-horizontal" method="POST" ">
-			{{ csrf_field() }} 
-			<div class="form-group"> <!-- NOMBRE -->
-       <label for="Name">Nombre: </label>
-       <input type="text" class="form-control" id="name" placeholder="Tu nombre" name="name" required>
-     </div>
 
-     <div class="form-group" required><!-- ROL -->
-      <label for="Name">Rol: </label>alert alert-danger
-      <br>
-      <label><input type="radio" name="rol" value="1" required>ALUMNO </label>
-      <br>
-      <label><input type="radio" name="rol" value="2">PROFESOR </label>
+
+        <!-- FIN DE NAVEGADOR -->
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="container">
+         <h1 class="mb-2 text-center">ENVIO DE PASSWORDS A USUARIOS</h1>
+         
+         @if(session('message')== "El usuario ya existe en el sistema")
+         <div class='alert alert-danger'>
+          {{ session('message') }}
+        </div>
+        @elseif(session('message'))
+        <div class='alert alert-success'>
+          {{ session('message') }}
+        </div>
+        @endif
+        <div class="col-12 col-md-6">
+          <form action="send" class="form-horizontal" method="POST" ">
+           {{ csrf_field() }} 
+           <div class="form-group"> <!-- NOMBRE -->
+             <label for="Name">Nombre: </label>
+             <input type="text" class="form-control" id="name" placeholder="Tu nombre" name="name" required>
+           </div>
+
+           <div class="form-group" required><!-- ROL -->
+            <label for="Name">Rol: </label>alert alert-danger
+            <br>
+            <label><input type="radio" name="rol" value="1" required>ALUMNO </label>
+            <br>
+            <label><input type="radio" name="rol" value="2">PROFESOR </label>
+          </div>
+
+          <div class="form-group"><!-- EMAIL -->
+           <label for="email">Email: </label>
+           <input type="text" class="form-control" id="email" placeholder="john@example.com" name="email" required>
+         </div>
+
+         <div class="form-group">
+          <button type="submit" class="btn btn-primary" value="Send">ENVIAR</button>
+        </div>
+      </form>
     </div>
+  </div> <!-- /container -->
 
-    <div class="form-group"><!-- EMAIL -->
-     <label for="email">Email: </label>
-     <input type="text" class="form-control" id="email" placeholder="john@example.com" name="email" required>
-   </div>
 
-   <div class="form-group">
-    <button type="submit" class="btn btn-primary" value="Send">ENVIAR</button>
+  <div class="alert alert-warning">
+    <strong>Warning!</strong> Debido a no utilizar un servidor de correo de pago, el correo es probable que llegue a la carpeta SPAM.
   </div>
-</form>
-</div>
-</div> <!-- /container -->
-
-
-<div class="alert alert-warning">
-  <strong>Warning!</strong> Debido a no utilizar un servidor de correo de pago, el correo es probable que llegue a la carpeta SPAM.
-</div>
 
 
 
-<!--  BANNER MODAL ABOUT -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
+  <!--  BANNER MODAL ABOUT -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
 
-    <!-- CONTENIDO DE ABOUT EN BANNER-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">ABOUT US</h4>
+      <!-- CONTENIDO DE ABOUT EN BANNER-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">ABOUT US</h4>
+        </div>
+        <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+        </div>
       </div>
-      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
-      </div>
+
     </div>
-
   </div>
-</div>
 <!-- FIN BANNER MODAL -->

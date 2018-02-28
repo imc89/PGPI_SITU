@@ -25,7 +25,7 @@
 <body>
   <!-- INICIO NAVEGADOR -->
   <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-   <a href="#" align="center" style="padding: 0 0 0 0 "> 
+   <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
      <img width="50px" src="{{ asset('images/icono.jpg') }}" >
    </a>
    <a  data-toggle="modal" data-target="#myModal">
@@ -55,41 +55,17 @@
 
       <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
 
-        <li>
-          <a style="font-weight: bold;" href="perfilAlumno" class="glyphicon glyphicon-user"> Perfil</a>
-        </li>
-
-        <li>
-          <a style="font-weight: bold;" href="configPerfil" class="glyphicon glyphicon-cog"> Configuración</a>
-        </li>
-
-
-        <li>
-          <a  style="font-weight: bold;" class="glyphicon glyphicon-log-out" href="{{ route('logout') }}"
-          onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();">
-          Logout
-        </a>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          {{ csrf_field() }}
-        </form>
+       <li>
+        <a style="font-weight: bold;" href="perfilAlumno" class="glyphicon glyphicon-user"> Perfil</a>
       </li>
-    </ul>
-  </li>
-  @endguest
-</ul>
-<!-- 
-  @guest
-  <a  href="{{ route('login') }}">Login</a>
-  @else
-  <span class="dropdown">
-    <a href="#" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-      {{ Auth::user()->name }} <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
+
       <li>
-        <a href="{{ route('logout') }}"
+        <a style="font-weight: bold;" href="configPerfil" class="glyphicon glyphicon-cog"> Configuración</a>
+      </li>
+
+
+      <li>
+        <a style="font-weight: bold;" href="{{ route('logout') }}" class="glyphicon glyphicon-log-out" 
         onclick="event.preventDefault();
         document.getElementById('logout-form').submit();">
         Logout
@@ -100,11 +76,10 @@
       </form>
     </li>
   </ul>
-  @endguest
-
+</li>
+@endguest
 </ul>
 
-</span> -->
 
 
 <a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
@@ -112,26 +87,58 @@
 
 </div> 
 
-
-
-
+<br><br><br>
 <!-- FIN DE NAVEGADOR -->
 
 
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
-<br><br><br><br><br>
-<div align="center">
-  <h1>BIENVENIDO ALUMNO</h1>
-  <h1>TABLÓN DE HECHOS DE {{Auth::user()->name}}</h1>
+<!-- <div class="container">
+  <div class="line time">
+    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
+    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
+    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
+    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
+    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
+
+  </div>
+</div> -->
+
+<div class="body">
+
+ <div align="center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <img src="/images/avatar/{{ $user->avatar }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
+        <h2>{{ $user->name }}'s Profile</h2>
+        <form enctype="multipart/form-data" action="configPerfil" method="POST">
+          <label>Update Profile Image</label>
+          <input type="file" name="avatar">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="submit" class="btn btn-sm btn-primary">
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+
+</div>
+<br>
+<br>
+<div class="alert alert-warning" align="center">
+  <strong>Warning!</strong> Los formatos admitidos son JPG, PNG, GIF
+  <p>
+  <strong>Warning!</strong> Para que la imagen se vea correctamente esta debe ser cuadrada.
+</div>
+
+
 <!-- FINAL CARRUSEL -->
 
 
 
-
-
 <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-<div id="footer" align="center">
+
+<div id="footer" style="position: relative; background: url('/images/fondo_body.jpg')fixed;" align="center">
   <table>
     <tbody>
 
@@ -144,7 +151,7 @@
         </p> 
 
         <!-- REDES SOCIALES -->
-        <div id="social"> 
+        <div align="center" id="social"> 
           <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
             <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
           </a> 
@@ -163,22 +170,23 @@
           <br><br>
         </div>
         <!-- FIN REDES SOCIALES -->
-
-        <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
-        / Sponsored by the
-        <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
-        and 
-        <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
-        Copyright 2013,
-        <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
-        . All rights reserved. 
-      </td>
-      <td class="foot_dcho">&nbsp;</td> 
-    </tr>
-
+        <div align="center">
+          <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
+          / Sponsored by the
+          <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
+          and 
+          <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
+          Copyright 2013,
+          <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
+          . All rights reserved. 
+        </td>
+        <td class="foot_dcho">&nbsp;</td> 
+      </tr>
+    </div>
   </tbody>
 </table>
-</div>
+</div> 
+<!-- FIN FOOTER -->
 
 <!--  BANNER MODAL ABOUT -->
 <div class="modal fade" id="myModal" role="dialog">
@@ -222,4 +230,15 @@
   }
 </script>
 
+
+
+<style type="text/css">
+
+.body{
+  background: url('/images/fondo_body.jpg')fixed;
+  padding: 0;
+  margin: 0;
+  font-family: arial;
+}
+</style>
 

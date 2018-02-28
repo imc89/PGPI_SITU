@@ -29,7 +29,7 @@
 <body>
   <!-- INICIO NAVEGADOR -->
   <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-   <a href="/admin" align="center" style="padding: 0 0 0 0 ">
+   <a href="admin" align="center" style="padding: 0 0 0 0 ">
      <img width="50px" src="{{ asset('images/icono.jpg') }}" >
    </a>
    <a  data-toggle="modal" data-target="#myModal">
@@ -56,18 +56,16 @@
         {{ Auth::user()->name }} <span class="caret"></span>
       </a>
 
-      <ul class="dropdown-menu">
-        <li>
-          <a href="\passwords\reset">
-            <span aria-hidden="true"></span> Cambiar Pass
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('logout') }}"
-          onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();">
-          Logout
-        </a>
+      <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
+      <li>
+        <a style="font-weight: bold;" href="reset" class="  glyphicon glyphicon-lock"> Password </a>
+      </li>
+      <li>
+        <a style="font-weight: bold;" class="glyphicon glyphicon-log-out" href="{{ route('logout') }}"
+        onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">
+        Logout
+      </a>
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
           {{ csrf_field() }}

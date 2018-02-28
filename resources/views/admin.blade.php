@@ -25,7 +25,7 @@
 <body>
   <!-- INICIO NAVEGADOR -->
   <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-   <a href="/admin" align="center" style="padding: 0 0 0 0 ">
+   <a href="#" align="center" style="padding: 0 0 0 0 ">
      <img width="50px" src="{{ asset('images/icono.jpg') }}" >
    </a>
    <a  data-toggle="modal" data-target="#myModal">
@@ -52,14 +52,12 @@
       {{ Auth::user()->name }} <span class="caret"></span>
     </a>
 
-    <ul class="dropdown-menu">
+      <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
       <li>
-        <a href="reset">
-          <span aria-hidden="true"> Password</span>
-        </a>
+        <a style="font-weight: bold;" href="#" class="  glyphicon glyphicon-lock"> Password </a>
       </li>
       <li>
-        <a href="{{ route('logout') }}"
+        <a style="font-weight: bold;" class="glyphicon glyphicon-log-out" href="{{ route('logout') }}"
         onclick="event.preventDefault();
         document.getElementById('logout-form').submit();">
         Logout

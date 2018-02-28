@@ -1,5 +1,5 @@
 body{
-	background-image: url('/images/fondo_body.jpg');
+  background: url('/images/fondo_body.jpg')fixed;
 }
 
 .navbar-header
@@ -20,10 +20,19 @@ body{
 	color: #FFFFFF;
 	background-color: #435E80;
 }
+
+.dropdown-menu{
+    background-color: rgba(38, 38, 38, 0.6);
+    
+}
+
 .dropdown-menu> li:hover >a:hover{
 	border-radius: 5px;
 	color: #FFFFFF;
 	background-color: #435E80;
+  align-items: center;
+  width: 10%;
+  text-align: left;
 }
 
 
@@ -39,7 +48,6 @@ div#footer {
 	bottom: 0;
 	width: 100%;
 	margin-bottom: 5px;
-
 }
 div#footer > table {
 	text-align: center;
