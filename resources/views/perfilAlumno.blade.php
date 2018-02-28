@@ -92,19 +92,9 @@
 
 
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
-<!-- <div class="container">
-  <div class="line time">
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-
-  </div>
-</div> -->
 
 <div class="body">
-
+<br><br>
  <div align="center">
   <div class="container">
     <div class="row">
@@ -116,64 +106,14 @@
   </div>
 </div>
 
-<h1>DATOS DE PERFIL</h1>
 </div>
+
+<h1>DATOS DE PERFIL</h1>
+
 
 <!-- FINAL CARRUSEL -->
 
 
-
-<!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-
-<div id="footer" style="position: relative; background: url('/images/fondo_body.jpg')fixed;" align="center">
-  <table>
-    <tbody>
-
-     <tr> 
-      <td class="foot_izdo">&nbsp;</td> 
-      <td class="foot_cent"> 
-        <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-          <br> 
-          Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
-        </p> 
-
-        <!-- REDES SOCIALES -->
-        <div align="center" id="social"> 
-          <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
-          </a> 
-          <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
-          </a>
-          <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
-          </a>
-          <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
-          </a> 
-          <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
-          </a>
-          <br><br>
-        </div>
-        <!-- FIN REDES SOCIALES -->
-        <div align="center">
-          <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
-          / Sponsored by the
-          <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
-          and 
-          <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
-          Copyright 2013,
-          <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
-          . All rights reserved. 
-        </td>
-        <td class="foot_dcho">&nbsp;</td> 
-      </tr>
-    </div>
-  </tbody>
-</table>
-</div> 
-<!-- FIN FOOTER -->
 
 <!--  BANNER MODAL ABOUT -->
 <div class="modal fade" id="myModal" role="dialog">

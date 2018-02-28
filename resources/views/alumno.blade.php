@@ -22,7 +22,7 @@
 </head>
 
 
-<body>
+<body onload="deshabilitaRetroceso()">
   <!-- INICIO NAVEGADOR -->
   <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
    <a href="#" align="center" style="padding: 0 0 0 0 "> 
@@ -131,7 +131,7 @@
 
 
 <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-<div id="footer" align="center">
+<div id="footer" style="position:absolute" align="center">
   <table>
     <tbody>
 
@@ -223,3 +223,12 @@
 </script>
 
 
+
+<!-- EVITAR IR HACIA ATRAS A NO SER QUE SE USE LOGOUT -->
+<script type="text/javascript">
+  function deshabilitaRetroceso(){
+    window.location.hash="no-back-button";
+    window.location.hash="Again-No-back-button" //chrome
+    window.onhashchange=function(){window.location.hash="no-back-button";}
+}
+</script>

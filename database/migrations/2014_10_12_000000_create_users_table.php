@@ -21,11 +21,9 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('rol');// CAMPO ROL AÑADIDO POR MI
-            $table->dateTime('tiempolog');// CAMPO ROL AÑADIDO POR MI
+            $table->dateTime('tiempolog')->default('0001-01-01 00:00:00');
             $table->string('email')->unique();
-            
             $table->string('avatar')->default('default.jpg');
-
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

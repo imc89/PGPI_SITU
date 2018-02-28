@@ -32,12 +32,6 @@ function getEmail() {
       return $email;
 }
 
-//RECOGER DATO PREDEFINIDO TIEMPO
-function getTiempolog() {
-      $tiempolog = '0001-01-01 00:00:00';
-      return $tiempolog;
-}
-
 
  //GENERADOR DE CONTRASEÑAS
 function randomPassword() {
@@ -60,7 +54,7 @@ function save(){
 
 
       DB::table('users')->insert(
-        ['name' => getUsuario(),'rol' => getRol(),'tiempolog' => getTiempolog(), 'email' => getEmail(), 'password' => bcrypt($passw)]);
+        ['name' => getUsuario(),'rol' => getRol(), 'email' => getEmail(), 'password' => bcrypt($passw)]);
 
 }
 
