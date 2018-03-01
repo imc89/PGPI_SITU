@@ -132,7 +132,7 @@
            </div>
 
            <div class="form-group" required><!-- ROL -->
-            <label for="Name">Rol: </label>alert alert-danger
+            <label for="Name">Rol: </label>
             <br>
             <label><input type="radio" name="rol" value="1" required>ALUMNO </label>
             <br>

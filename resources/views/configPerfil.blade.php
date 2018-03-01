@@ -21,7 +21,7 @@
 
 </head>
 
-
+<!-- NOTA IMPORTANTE-> INSERT .... WHERE USER:NAME == AUTH:USER-->
 <body>
   <!-- INICIO NAVEGADOR -->
   <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
@@ -115,12 +115,157 @@
           <label>Update Profile Image</label>
           <input type="file" name="avatar">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <input type="submit" class="btn btn-sm btn-primary">
+          <br>
+          <input type="submit" class="btn btn-sm btn-primary" value="CAMBIAR IMAGEN DE PERFIL" style="width: 400px">
         </form>
       </div>
     </div>
   </div>
 </div>
+
+<br><br>
+<div align="center">
+  <div  style="width: 780px; background: #B7C2D2; border-radius: 10px">
+
+    <div class="container">
+      <div class="row" align="left">
+        <div class="col-xs-12" id="demoContainer">
+          <form  class="form-horizontal fv-form fv-form-bootstrap" >
+
+            <br>
+            <div class="form-group">
+              <label class="col-xs-7">Nombre completo: </label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="Nombre" placeholder="Nombre" />
+              </div>
+
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="Apellidos" placeholder="Apellidos" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-xs-7">DNI: </label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" id="dni" />
+                <span id="dniOK"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-xs-7">Email: </label>
+              <div class="col-xs-8">
+                <input type="email" class="form-control" id="email" />
+                <span id="emailOK"></span>
+              </div>
+            </div>
+            
+
+            <div class="form-group">
+              <label class="col-xs-7 ">Dirección: </label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="direccion" />
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-xs-7 ">Carrera: </label>
+              <div class="col-xs-8">
+                <select class="form-control" name="carrera">
+                  <option>Administración y Dirección de Empresas</option>
+                  <option>Marketing</option>
+                  <option>Derecho</option>
+                  <option>Criminología</option>
+                  <option>Gastronomía</option>
+                  <option>Business Analytics</option>
+                  <option>Educación Infantil</option>
+                  <option>Educación Primaria</option>
+                  <option>Ciencias de la Actividad Física y del Deporte</option>
+                  <option>Medicina</option>
+                  <option>Enfermería</option>
+                  <option>Fisioterapia</option>
+                  <option>Psicología</option>
+                  <option>Biomedicina</option>
+                  <option>Biotecnología</option>
+                  <option>Farmacia</option>
+                  <option>Arquitectura</option>
+                  <option>Ingeniería Informática</option>
+                  <option>Ingeniería Industrial</option>
+                  <option>Periodismo</option>
+                  <option>Relaciones Internacionales</option>
+                  <option>Diseño</option>
+                  <option>Publicidad</option>
+                  <option>Bellas Artes</option>
+                  <option>Creación y Narración de Videojuegos</option>
+                  <option>Filosofía, Política y Economía</option>
+                  <option>Humanidades</option>
+
+                </select>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-xs-7 "><span class="glyphicon glyphicon-plus"></span> Opciones: </label>
+              <div class="col-xs-8">
+
+               <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="Linput1">
+                <label class="form-check-label">
+                  <input type="text" class="form-control" id="input1" />
+                </label>
+                <div class="form-group" id="sinput1">
+                  <input  class="col-xs-7 inputLikeLabel" id="Pinput1" disabled="disabled" ></input>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control"  />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="Linput2">
+                <label class="form-check-label">
+                  <input type="text" class="form-control" id="input2" />
+                </label>
+                <div class="form-group" id="sinput2">
+                  <input  class="col-xs-7 inputLikeLabel" id="Pinput2" disabled="disabled" ></input>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control"  />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="Linput3">
+                <label class="form-check-label">
+                  <input type="text" class="form-control" id="input3" />
+                </label>
+                <div class="form-group" id="sinput3">
+                  <input  class="col-xs-7 inputLikeLabel" id="Pinput3" disabled="disabled" ></input>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control"  />
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <div class="col-xs-9 col-xs-offset-3">
+              <button type="submit" class="btn btn-primary" name="signup" value="Sign up">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 
 <br>
@@ -128,8 +273,8 @@
 <div class="alert alert-warning" align="center">
   <strong>Warning!</strong> Los formatos admitidos son JPG, PNG, GIF
   <p>
-  <strong>Warning!</strong> Para que la imagen se vea correctamente esta debe ser cuadrada.
-</div>
+    <strong>Warning!</strong> Para que la imagen se vea correctamente esta debe ser cuadrada.
+  </div>
 
 </div>
 
@@ -180,6 +325,73 @@
       x.className = "topnav";
     }
   }
+
+// COPIAR VALOR DE BOTONES OPCIONES EN LAVELS
+  $('#input1').change(function() {
+    $('#Pinput1').val($(this).val());
+  });
+  $('#input2').change(function() {
+    $('#Pinput2').val($(this).val());
+  });
+  $('#input3').change(function() {
+    $('#Pinput3').val($(this).val());
+  });
+
+// IMPIDE PULSAR ENTER PARA ENVIAR FORMULARIO
+  $(document).on("keypress", "input", function (e) {
+    var code = e.keyCode || e.which;
+    if (code == 13) {
+      e.preventDefault();
+      return false;
+    }
+  });
+
+// AUTOMATA EMAIL VERIFICACION
+  document.getElementById('email').addEventListener('input', function() {
+    campo = event.target;
+    valido = document.getElementById('emailOK');
+
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+    if (emailRegex.test(campo.value)) {
+      valido.innerHTML = "<span style=\"color:green;font-weight:bold\">" + "Email válido" + "</span>"
+    } else {
+      valido.innerHTML = "<span style=\"color:red;font-weight:bold\">" + "Email inválido" + "</span>"
+    }
+  });
+</script>
+
+<!-- AUTOMATA DNI VERIFICACION -->
+<script>
+  document.getElementById('dni').addEventListener('input', function() {
+   var numero
+   var letra
+   var letr
+   dni = event.target;
+   dniValido = document.getElementById('dniOK');
+
+   dniRegex = /^\d{8}[a-zA-Z]$/;
+
+   if(dniRegex.test(dni.value) == true){
+     numero = dni.value.substr(0,dni.value.length-1);
+     letr = dni.value.substr(dni.value.length-1,1);
+     numero = numero % 23;
+     letra='TRWAGMYFPDXBNJZSQVHLCKET';
+     letra=letra.substring(numero,numero+1);
+     if (letra!=letr.toUpperCase()) {
+       dniValido.innerHTML = "<span style=\"color:yellow;font-weight:bold\">" + "Dni erroneo, la letra del NIF no se corresponde" + "</span>";
+
+     }else{
+      dniValido.innerHTML = "<span style=\"color:green;font-weight:bold\">" + "Dni correcto" + "</span>";
+    }
+  }else{
+    dniValido.innerHTML = "<span style=\"color:red;font-weight:bold\">" + "Dni erroneo, formato no válido" + "</span>";
+
+  }
+
+});
+  
+
 </script>
 
 
@@ -188,9 +400,34 @@
 
 .body{
   background: url('/images/fondo_body.jpg')fixed;
-  padding: 0;
-  margin: 0;
-  font-family: arial;
 }
+
+#sinput1 {
+  display:none;
+}
+#Linput1:checked ~ #sinput1 {
+  display:block;
+}
+
+#sinput2 {
+  display:none;
+}
+#Linput2:checked ~ #sinput2 {
+  display:block;
+}
+
+#sinput3 {
+  display:none;
+}
+#Linput3:checked ~ #sinput3 {
+  display:block;
+}
+
+.inputLikeLabel {
+  background:rgba(0,0,0,0);
+  border:none;
+  font-weight: bold;
+}
+
 </style>
 

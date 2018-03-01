@@ -100,7 +100,7 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:150px; height:150px; border-radius:50%; margin-right:25px;">
-        <h2>{{ Auth::user()->name }}'s Profile</h2>
+        <h2>Perfil de {{ Auth::user()->name }}</h2>
       </div>
     </div>
   </div>
@@ -108,8 +108,9 @@
 
 </div>
 
+<div align="center">
 <h1>DATOS DE PERFIL</h1>
-
+</div>
 
 <!-- FINAL CARRUSEL -->
 
