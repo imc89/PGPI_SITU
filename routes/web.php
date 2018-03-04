@@ -49,6 +49,8 @@ Route::group(['middleware' => ['auth']], function() {
 	
 	Route::get('configPerfil', 'UserController@profile');
 	Route::post('configPerfil', 'UserController@update_avatar');
+	
+	Route::get('actualizarPerfil', 'UserController@actualizar_perfil');
 
 	Route::get('perfilAlumno', function () {
 		return view('perfilAlumno');

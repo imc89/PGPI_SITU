@@ -17,10 +17,25 @@ class CreateAlumnoTable extends Migration
 
             $table->increments('id');
 
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unique()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->string('avatar')->default('default.jpg');
+            $table->string('nombre')->nullable();
+            $table->string('apellidos')->nullable();
+            $table->string('dni')->nullable();
+            $table->string('email')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('carrera')->nullable();
+
+            $table->string('dato_opcion1')->nullable();
+            $table->string('dato_opcion2')->nullable();
+            $table->string('dato_opcion3')->nullable();
+
+            $table->string('opcion1_valor')->nullable();
+            $table->string('opcion2_valor')->nullable();
+            $table->string('opcion3_valor')->nullable();
+            
+
             $table->timestamps();
         });
     }

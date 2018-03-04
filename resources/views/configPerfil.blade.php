@@ -92,16 +92,7 @@
 
 
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
-<!-- <div class="container">
-  <div class="line time">
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
 
-  </div>
-</div> -->
 
 <div class="body">
 
@@ -123,153 +114,15 @@
   </div>
 </div>
 
-<br><br>
-<div align="center">
-  <div  style="width: 780px; background: #B7C2D2; border-radius: 10px">
+<br>
+<br>
 
-    <div class="container">
-      <div class="row" align="left">
-        <div class="col-xs-12" id="demoContainer">
-          <form  class="form-horizontal fv-form fv-form-bootstrap" >
-
-            <br>
-            <div class="form-group">
-              <label class="col-xs-7">Nombre completo: </label>
-              <div class="col-xs-8">
-                <input type="text" class="form-control" name="Nombre" placeholder="Nombre" />
-              </div>
-
-              <div class="col-xs-8">
-                <input type="text" class="form-control" name="Apellidos" placeholder="Apellidos" />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-xs-7">DNI: </label>
-              <div class="col-xs-8">
-                <input type="text" class="form-control" id="dni" />
-                <span id="dniOK"></span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-xs-7">Email: </label>
-              <div class="col-xs-8">
-                <input type="email" class="form-control" id="email" />
-                <span id="emailOK"></span>
-              </div>
-            </div>
-            
-
-            <div class="form-group">
-              <label class="col-xs-7 ">Dirección: </label>
-              <div class="col-xs-8">
-                <input type="text" class="form-control" name="direccion" />
-              </div>
-            </div>
-
-
-            <div class="form-group">
-              <label class="col-xs-7 ">Carrera: </label>
-              <div class="col-xs-8">
-                <select class="form-control" name="carrera">
-                  <option>Administración y Dirección de Empresas</option>
-                  <option>Marketing</option>
-                  <option>Derecho</option>
-                  <option>Criminología</option>
-                  <option>Gastronomía</option>
-                  <option>Business Analytics</option>
-                  <option>Educación Infantil</option>
-                  <option>Educación Primaria</option>
-                  <option>Ciencias de la Actividad Física y del Deporte</option>
-                  <option>Medicina</option>
-                  <option>Enfermería</option>
-                  <option>Fisioterapia</option>
-                  <option>Psicología</option>
-                  <option>Biomedicina</option>
-                  <option>Biotecnología</option>
-                  <option>Farmacia</option>
-                  <option>Arquitectura</option>
-                  <option>Ingeniería Informática</option>
-                  <option>Ingeniería Industrial</option>
-                  <option>Periodismo</option>
-                  <option>Relaciones Internacionales</option>
-                  <option>Diseño</option>
-                  <option>Publicidad</option>
-                  <option>Bellas Artes</option>
-                  <option>Creación y Narración de Videojuegos</option>
-                  <option>Filosofía, Política y Economía</option>
-                  <option>Humanidades</option>
-
-                </select>
-              </div>
-            </div>
-
-
-            <div class="form-group">
-              <label class="col-xs-7 "><span class="glyphicon glyphicon-plus"></span> Opciones: </label>
-              <div class="col-xs-8">
-
-               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="Linput1">
-                <label class="form-check-label">
-                  <input type="text" class="form-control" id="input1" />
-                </label>
-                <div class="form-group" id="sinput1">
-                  <input  class="col-xs-7 inputLikeLabel" id="Pinput1" disabled="disabled" ></input>
-                  <div class="col-xs-8">
-                    <input type="text" class="form-control"  />
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="Linput2">
-                <label class="form-check-label">
-                  <input type="text" class="form-control" id="input2" />
-                </label>
-                <div class="form-group" id="sinput2">
-                  <input  class="col-xs-7 inputLikeLabel" id="Pinput2" disabled="disabled" ></input>
-                  <div class="col-xs-8">
-                    <input type="text" class="form-control"  />
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="Linput3">
-                <label class="form-check-label">
-                  <input type="text" class="form-control" id="input3" />
-                </label>
-                <div class="form-group" id="sinput3">
-                  <input  class="col-xs-7 inputLikeLabel" id="Pinput3" disabled="disabled" ></input>
-                  <div class="col-xs-8">
-                    <input type="text" class="form-control"  />
-                  </div>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-
-
-          <div class="form-group">
-            <div class="col-xs-9 col-xs-offset-3">
-              <button type="submit" class="btn btn-primary" name="signup" value="Sign up">Submit</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-
-  </div>
+@if(session('message'))
+<div align="center" class='alert alert-success'>
+  {{ session('message') }}
 </div>
+@endif
 
-
-
-<br>
-<br>
 <div class="alert alert-warning" align="center">
   <strong>Warning!</strong> Los formatos admitidos son JPG, PNG, GIF
   <p>
@@ -277,6 +130,154 @@
   </div>
 
 </div>
+
+
+<div align="center" class="body">
+  <div  style="width: 780px;height: 850px; background: #B7C2D2; border-radius: 10px">
+
+    <div class="container">
+      <div class="row" align="left">
+        <div class="col-xs-12" id="demoContainer">
+
+          <form action="actualizarPerfil" class="form-horizontal fv-form fv-form-bootstrap">
+
+            <br>
+            <div class="form-group">
+              <label class="col-xs-7">Nombre completo: </label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="nombre" placeholder="Nombre" />
+              </div>
+
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-xs-7">DNI: </label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" id="dni" name="dni" />
+                <span id="dniOK"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-xs-7">Email: </label>
+              <div class="col-xs-8">
+                <input type="email" class="form-control" id="email" name="email" />
+                <span id="emailOK"></span>
+              </div>
+            </div>
+
+          <div class="form-group">
+            <label class="col-xs-7 ">Dirección: </label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control" name="direccion" />
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-xs-7 ">Carrera: </label>
+            <div class="col-xs-8">
+              <select class="form-control" name="carrera">
+                <option>Administración y Dirección de Empresas</option>
+                <option>Marketing</option>
+                <option>Derecho</option>
+                <option>Criminología</option>
+                <option>Gastronomía</option>
+                <option>Business Analytics</option>
+                <option>Educación Infantil</option>
+                <option>Educación Primaria</option>
+                <option>Ciencias de la Actividad Física y del Deporte</option>
+                <option>Medicina</option>
+                <option>Enfermería</option>
+                <option>Fisioterapia</option>
+                <option>Psicología</option>
+                <option>Biomedicina</option>
+                <option>Biotecnología</option>
+                <option>Farmacia</option>
+                <option>Arquitectura</option>
+                <option>Ingeniería Informática</option>
+                <option>Ingeniería Industrial</option>
+                <option>Periodismo</option>
+                <option>Relaciones Internacionales</option>
+                <option>Diseño</option>
+                <option>Publicidad</option>
+                <option>Bellas Artes</option>
+                <option>Creación y Narración de Videojuegos</option>
+                <option>Filosofía, Política y Economía</option>
+                <option>Humanidades</option>
+
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-xs-7 "><span class="glyphicon glyphicon-plus"></span> Opciones: </label>
+            <div class="col-xs-8">
+
+             <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="Linput1">
+              <label class="form-check-label">
+                <input type="text" class="form-control" id="input1" name='dato_opcion1'/>
+              </label>
+              <div class="form-group" id="sinput1">
+                <input  class="col-xs-7 inputLikeLabel" id="Pinput1" disabled="disabled" >                  
+                </input>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control" name='opcion1_valor' />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="Linput2">
+              <label class="form-check-label">
+                <input type="text" class="form-control" id="input2" name='dato_opcion2'/>
+              </label>
+              <div class="form-group" id="sinput2">
+                <input  class="col-xs-7 inputLikeLabel" id="Pinput2" disabled="disabled" ></input>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control" name='opcion2_valor' />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="Linput3">
+              <label class="form-check-label">
+                <input type="text" class="form-control" id="input3" name='dato_opcion3'/>
+              </label>
+              <div class="form-group" id="sinput3">
+                <input  class="col-xs-7 inputLikeLabel" id="Pinput3" disabled="disabled" ></input>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control" name='opcion3_valor' />
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="form-group">
+              <div>
+                <button style="width: 780px; align-content: center" type="submit" class="btn btn-primary" name="signup" value="Sign up">ACTUALIZAR INFORMACIÓN</button>
+              </div>
+            </div>
+          </form>
+          <!--  -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<br><br>
+
+
 
 <!-- FINAL CARRUSEL -->
 
@@ -327,31 +328,31 @@
   }
 
 // COPIAR VALOR DE BOTONES OPCIONES EN LAVELS
-  $('#input1').change(function() {
-    $('#Pinput1').val($(this).val());
-  });
-  $('#input2').change(function() {
-    $('#Pinput2').val($(this).val());
-  });
-  $('#input3').change(function() {
-    $('#Pinput3').val($(this).val());
-  });
+$('#input1').change(function() {
+  $('#Pinput1').val($(this).val());
+});
+$('#input2').change(function() {
+  $('#Pinput2').val($(this).val());
+});
+$('#input3').change(function() {
+  $('#Pinput3').val($(this).val());
+});
 
 // IMPIDE PULSAR ENTER PARA ENVIAR FORMULARIO
-  $(document).on("keypress", "input", function (e) {
-    var code = e.keyCode || e.which;
-    if (code == 13) {
-      e.preventDefault();
-      return false;
-    }
-  });
+$(document).on("keypress", "input", function (e) {
+  var code = e.keyCode || e.which;
+  if (code == 13) {
+    e.preventDefault();
+    return false;
+  }
+});
 
 // AUTOMATA EMAIL VERIFICACION
-  document.getElementById('email').addEventListener('input', function() {
-    campo = event.target;
-    valido = document.getElementById('emailOK');
+document.getElementById('email').addEventListener('input', function() {
+  campo = event.target;
+  valido = document.getElementById('emailOK');
 
-    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+  emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     //Se muestra un texto a modo de ejemplo, luego va a ser un icono
     if (emailRegex.test(campo.value)) {
       valido.innerHTML = "<span style=\"color:green;font-weight:bold\">" + "Email válido" + "</span>"

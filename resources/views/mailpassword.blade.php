@@ -124,7 +124,7 @@
         </div>
         @endif
         <div class="col-12 col-md-6">
-          <form action="send" class="form-horizontal" method="POST" ">
+          <form action="send" class="form-horizontal" method="POST">
            {{ csrf_field() }} 
            <div class="form-group"> <!-- NOMBRE -->
              <label for="Name">Nombre: </label>
