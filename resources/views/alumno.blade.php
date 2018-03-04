@@ -1,3 +1,8 @@
+{{! $logins = DB::table('users')
+->where('users.id','=', Auth::user()->id)
+->select('logins')
+->get() }}
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -122,13 +127,35 @@
 <br><br><br><br><br>
 <div align="center">
   <h1>BIENVENIDO ALUMNO</h1>
-  <h1>TABLÓN DE HECHOS DE {{Auth::user()->name}}</h1>
+  <h1>TABLÓN DE HECHOS DE {{Auth::user()->name}}</h1> 
 </div>
 <!-- FINAL CARRUSEL -->
 
 
+@if (Auth::user()->logins ==1)
 
+  <div class="modal-background"></div>
+  <div class="modal-container">
+    <div align="center" class="modal-header">BIENVENIDO A LA PLATAFORMA SITU 
+      <span class="glyphicon glyphicon-remove modal-close"></span>
+      <!-- <i class="modal-close">x</i> --></div>
+    <div class="modal-info">
+      Este mensaje 
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+<br><br>
+<div align="center">INICIE SUS DATOS DE PERFIL</div>
+   </div>
+    <div class="button-container" align="center">
+      <a href="configPerfil" class="btn btn-primary">ACEPTAR</a>
+    </div>
+  </div>
 
+@endif
 
 <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
 <div id="footer" style="position:absolute" align="center">
@@ -232,3 +259,63 @@
     window.onhashchange=function(){window.location.hash="no-back-button";}
   }
 </script>
+
+
+<!-- MODAL HASTA EL FINAL DEL DOCUMENTO BLADE -->
+<script type="text/javascript">
+  $(".modal-background, .modal-close").on("click", function(){
+  $(".modal-container, .modal-background").hide();
+});
+</script>
+
+<style type="text/css">
+  .modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.modal-container {
+  position: relative;
+  z-index: 1;
+  width: 500px;
+  margin:  auto;
+  background: #fff;
+  border-radius: 10px;
+  font-family: Arial, Sans-serif;
+  font-size: 12px;
+}
+.modal-container .modal-close {
+  float: right;
+  cursor: pointer;
+}
+.modal-container .modal-header {
+  border-radius: 10px 10px 0 0;
+  background: #333;
+  padding: 15px 15px;
+  background: url('/images/fondo_body.jpg')fixed;
+}
+.modal-container .modal-info {
+  padding: 25px 15px;
+  border-bottom: 1px solid #ccc;
+}
+.modal-container .button-container {
+  border-radius: 0 0 10px 10px;
+  background: url('/images/fondo_body.jpg')fixed;
+  padding: 15px;
+  border-top: 1px solid #fff;
+}
+.modal-container .button-container button {
+  display: block;
+  margin: auto;
+  padding: 5px 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+</style>

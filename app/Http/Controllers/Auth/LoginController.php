@@ -35,6 +35,7 @@ class LoginController extends Controller
 
         date_default_timezone_set('Europe/Madrid');
         $date = date('Y-m-d H:i:s');
+        $logins = DB::table('users')->select('logins')->where('name', $user->name)->first()->logins;
 
             // TIEMPO DE REGISTRO DE ADMIN
 
@@ -47,12 +48,15 @@ class LoginController extends Controller
         }
 
         elseif($user->rol=='1'){
-
+            $logins++;
             // TIEMPO DE REGISTRO DE ALUMNO
             DB::table('users')
             ->where('name', $user->name)
             ->update(['tiempolog' => $date ]);
-
+            //CONTADOR DE LOGINS
+            DB::table('users')
+            ->where('name', $user->name)
+            ->update(['logins' => $logins ]);
             //CREAR NUEVO USUARIO AL LOGUEARSE 
             try {
                 DB::table('alumno')->join('users','id','=','user_id')
@@ -61,23 +65,23 @@ class LoginController extends Controller
                 $errorCode = $e->errorInfo[1];
                 if($errorCode == '1062'){
                    return redirect('alumno');
-                }
-            }
+               }
+           }
 
-            return redirect('alumno');
-        }
+           return redirect('alumno');
+       }
 
-        elseif($user->rol=='2'){
+       elseif($user->rol=='2'){
 
             // TIEMPO DE REGISTRO DE PROFESOR
-            DB::table('users')
-            ->where('name', $user->name)
-            ->update(['tiempolog' => $date ]);
+        DB::table('users')
+        ->where('name', $user->name)
+        ->update(['tiempolog' => $date ]);
 
-            return redirect('profesor');
+        return redirect('profesor');
 
-        }
     }
+}
 
 
     /**

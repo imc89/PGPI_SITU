@@ -185,7 +185,7 @@
 </div>
 <div align="center" class="body">
   <div  style="width: 400px;height: 350px; background: #B7C2D2; border-radius: 10px">
-
+<br><br>
     <div align="left">
      <br>
      <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">

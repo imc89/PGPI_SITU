@@ -15,6 +15,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+  <!-- AYUDA EN AUDIO -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
 
@@ -30,6 +34,9 @@
    </a>
    <a  data-toggle="modal" data-target="#myModal">
     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
+  </a>
+  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
+    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
   </a>
   <!-- BOTÓN DE LOGIN -->
 
@@ -59,32 +66,6 @@
   </li>
   @endguest
 </ul>
-<!-- 
-  @guest
-  <a  href="{{ route('login') }}">Login</a>
-  @else
-  <span class="dropdown">
-    <a href="#" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-      {{ Auth::user()->name }} <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <li>
-        <a href="{{ route('logout') }}"
-        onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();">
-        Logout
-      </a>
-
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        {{ csrf_field() }}
-      </form>
-    </li>
-  </ul>
-  @endguest
-
-</ul>
-
-</span> -->
 
 
 <a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
@@ -208,6 +189,35 @@
 </table>
 </div>
 
+<!-- MODAL INFORMACIÓN -->
+<div class="modal-background"></div>
+<div class="modal-container">
+  <div align="center" class="modal-header">BIENVENIDO A LA PLATAFORMA SITU 
+    <!-- CONTROL AUDIO MODAL -->
+    <div class="sound_on">
+      <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down modal-sound">    
+      </span>
+    </div>
+     <div class="sound_off">
+      <span id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off modal-sound"> 
+      </span>
+    </div>
+
+    <span class="glyphicon glyphicon-remove modal-close"></span>
+    
+    <!-- <i class="modal-close">x</i> --></div>
+    <div class="modal-info">
+      Bienvenido a la plataforma SITU, esta plataforma te ayudará a mejorar tu experiencia universitaria. Para usar esta plataforma necesitarás tener datos de registro.
+      Pulsa el botón de Login e inserta tus datos para iniciar sesión.
+      <br><br>
+      <div align="center">INICIE SUS DATOS DE PERFIL</div>
+    </div>
+    <div class="button-container" align="center">
+      <button id="cerrar" class="btn btn-primary">ACEPTAR</button>
+    </div>
+  </div>
+</div>
+
 <!--  BANNER MODAL ABOUT -->
 <div class="modal fade" id="myModal" role="dialog">
   <div class="modal-dialog">
@@ -259,4 +269,119 @@
     window.onhashchange=function(){window.location.hash="no-back-button";}
   }
 </script>
+
+
+
+<!-- MODAL HASTA EL FINAL DEL DOCUMENTO BLADE -->
+<script type="text/javascript">
+  $(".modal-background, .modal-close").on("click", function(){
+    $(".modal-container, .modal-background").hide();
+  });
+  $("#cerrar").on("click", function(){
+    $(".modal-container, .modal-background").hide();
+  });
+</script>
+
+<script type="text/javascript">
+  $("#btn").click(function() {
+   $(".modal-container, .modal-background").show();
+ });
+</script>
+
+<!-- AUDIO MODAL -->
+
+<script type="text/javascript">
+  var phrases = [
+  ' Bienvenido a la plataforma SITU, esta plataforma te ayudará a mejorar tu experiencia universitaria. Para usar esta plataforma necesitarás tener datos de registro. Pulsa el botón de Login e inserta tus datos para iniciar sesión.'
+  ];
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_on').click(function() {
+      var i = Math.round(phrases.length * Math.random()) - 1;
+
+      responsiveVoice.speak(phrases[i], 'Spanish Female');
+    });
+  });
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_off').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+</script>
+
+<style type="text/css">
+.modal-background {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.modal-container {
+  display: none;
+  position: relative;
+  z-index: 1;
+  width: 500px;
+  margin: -300px auto;
+  background: #fff;
+  border-radius: 10px;
+  font-family: Arial, Sans-serif;
+  font-size: 12px;
+}
+
+.modal-container .modal-close {
+  float: right;
+  cursor: pointer;
+}
+
+.modal-container .modal-sound {
+  float: left;
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.sound_on:hover{
+  background-color: #2865A8;
+  color:green;
+}
+.sound_off:hover{
+  color:red;
+}
+.modal-container .modal-header {
+  border-radius: 10px 10px 0 0;
+  background: #333;
+  padding: 15px 15px;
+  background: url('/images/fondo_body.jpg')fixed;
+}
+
+.modal-container .modal-info {
+  padding: 25px 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.modal-container .button-container {
+  border-radius: 0 0 10px 10px;
+  background: url('/images/fondo_body.jpg')fixed;
+  padding: 15px;
+  border-top: 1px solid #fff;
+}
+
+.modal-container .button-container button {
+  display: block;
+  margin: auto;
+  padding: 5px 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+</style>
+
 
