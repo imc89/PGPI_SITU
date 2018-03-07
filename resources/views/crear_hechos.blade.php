@@ -257,6 +257,8 @@
 									</div>
 
 
+
+
 									<div class="form-group" id="contenido" style="display: none ">
 										<label class="col-xs-7">Contenido del hecho: </label>
 										<div class="col-xs-8">
@@ -300,6 +302,28 @@
 											<input type="text" class="form-control" name="nombre" placeholder="Encuentro" />
 										</div>
 									</div>
+
+									<div class="form-group" required>
+										<label class="col-xs-7 "><span class="glyphicon glyphicon-plus"></span> Opciones: </label>
+										<div class="col-xs-8">
+											<div class="radio" style="float:left;">
+												<label>
+													<input type="checkbox" class="form-check-input" name="optradio" id="anexo">
+													Anexo
+												</label>
+											</div>
+										</div>
+									</div>
+
+									<div id="anexon" class="form-group" style="display: none;">
+										<label class="col-xs-7">Documento Anexo: </label>
+										<div class="col-xs-8">
+											<input type="file" name="file">
+											<br>
+											
+										</div>
+									</div>
+									<!-- DEBERÁ APARECER UN INPUT DE TIPO FILE -->
 
 									<div class="form-group" id="proposito" style="display: none" required>
 										<label class="col-xs-7">Propósito del hecho: </label>
@@ -462,6 +486,14 @@
 										$("#encuentro").hide();
 									}
 								});
+							});
+
+							$("#anexo").click(function() {
+								if($(this).is(":checked")) {
+									$("#anexon").show();
+								} else {
+									$("#anexon").hide();
+								}
 							});
 						</script>
 
