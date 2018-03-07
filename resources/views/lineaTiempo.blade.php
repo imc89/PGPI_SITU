@@ -34,7 +34,7 @@
   <a href="#">
     <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
   </a>
-  <a href="#">
+  <a href="crear_hechos">
     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
   </a>
   <a href="lineaTiempo">
@@ -336,6 +336,11 @@ ul#time-line li div{
   border-radius: 30px;  
   position: relative;
   color: #fff;
+}
+ul#time-line li div:hover{
+
+  background: rgba(48, 48, 48, 0.5);
+ 
 }
 ul#time-line li div:after{
   content: '';

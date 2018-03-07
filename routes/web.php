@@ -31,14 +31,16 @@ Route::get('etiquetas', function () {
 
 Route::post('send_etiqueta','EtiquetasadminController@send_etiqueta');
 
-Route::get('crear_etiquetas', function () {
-	return view('crear_etiquetas');
-});
+
 
 Route::group(['middleware' => ['auth']], function() {
 	Route::get('admin', function () {
 		return view('admin');
 	});
+	Route::get('crear_etiquetas', function () {
+		return view('crear_etiquetas');
+	});
+
 	Route::get('alumno', function () {
 		return view('alumno');
 	});
@@ -54,6 +56,10 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('perfilAlumno', function () {
 		return view('perfilAlumno');
+	});
+
+	Route::get('crear_hechos', function () {
+		return view('crear_hechos');
 	});
 
 

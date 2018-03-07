@@ -39,7 +39,7 @@
   <a href="#">
     <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
   </a>
-  <a href="#">
+  <a href="crear_hechos">
     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
   </a>
   <a href="lineaTiempo">

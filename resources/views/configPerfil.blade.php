@@ -34,7 +34,7 @@
   <a href="#">
     <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
   </a>
-  <a href="#">
+  <a href="crear_hechos">
     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
   </a>
   <a href="lineaTiempo">
@@ -169,61 +169,62 @@
               </div>
             </div>
 
-          <div class="form-group">
-            <label class="col-xs-7 ">Dirección: </label>
-            <div class="col-xs-8">
-              <input type="text" class="form-control" name="direccion" />
+            <div class="form-group">
+              <label class="col-xs-7 ">Dirección: </label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="direccion" />
+              </div>
             </div>
-          </div>
 
 
-          <div class="form-group">
-            <label class="col-xs-7 ">Carrera: </label>
-            <div class="col-xs-8">
-              <select class="form-control" name="carrera">
-                <option>Administración y Dirección de Empresas</option>
-                <option>Marketing</option>
-                <option>Derecho</option>
-                <option>Criminología</option>
-                <option>Gastronomía</option>
-                <option>Business Analytics</option>
-                <option>Educación Infantil</option>
-                <option>Educación Primaria</option>
-                <option>Ciencias de la Actividad Física y del Deporte</option>
-                <option>Medicina</option>
-                <option>Enfermería</option>
-                <option>Fisioterapia</option>
-                <option>Psicología</option>
-                <option>Biomedicina</option>
-                <option>Biotecnología</option>
-                <option>Farmacia</option>
-                <option>Arquitectura</option>
-                <option>Ingeniería Informática</option>
-                <option>Ingeniería Industrial</option>
-                <option>Periodismo</option>
-                <option>Relaciones Internacionales</option>
-                <option>Diseño</option>
-                <option>Publicidad</option>
-                <option>Bellas Artes</option>
-                <option>Creación y Narración de Videojuegos</option>
-                <option>Filosofía, Política y Economía</option>
-                <option>Humanidades</option>
+            <div class="form-group">
+              <label class="col-xs-7 ">Carrera: </label>
+              <div class="col-xs-8">
+                <select class="form-control" name="carrera">
+                  <option>-</option>
+                  <option>Administración y Dirección de Empresas</option>
+                  <option>Marketing</option>
+                  <option>Derecho</option>
+                  <option>Criminología</option>
+                  <option>Gastronomía</option>
+                  <option>Business Analytics</option>
+                  <option>Educación Infantil</option>
+                  <option>Educación Primaria</option>
+                  <option>Ciencias de la Actividad Física y del Deporte</option>
+                  <option>Medicina</option>
+                  <option>Enfermería</option>
+                  <option>Fisioterapia</option>
+                  <option>Psicología</option>
+                  <option>Biomedicina</option>
+                  <option>Biotecnología</option>
+                  <option>Farmacia</option>
+                  <option>Arquitectura</option>
+                  <option>Ingeniería Informática</option>
+                  <option>Ingeniería Industrial</option>
+                  <option>Periodismo</option>
+                  <option>Relaciones Internacionales</option>
+                  <option>Diseño</option>
+                  <option>Publicidad</option>
+                  <option>Bellas Artes</option>
+                  <option>Creación y Narración de Videojuegos</option>
+                  <option>Filosofía, Política y Economía</option>
+                  <option>Humanidades</option>
 
-              </select>
+                </select>
+              </div>
             </div>
-          </div>
 
-          <div class="form-group">
-            <label class="col-xs-7 "><span class="glyphicon glyphicon-plus"></span> Opciones: </label>
-            <div class="col-xs-8">
+            <div class="form-group">
+              <label class="col-xs-7 "><span class="glyphicon glyphicon-plus"></span> Opciones: </label>
+              <div class="col-xs-8">
 
-             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="Linput1">
-              <label class="form-check-label">
-                <input type="text" class="form-control" id="input1" name='dato_opcion1'/>
-              </label>
-              <div class="form-group" id="sinput1">
-                <input  class="col-xs-7 inputLikeLabel" id="Pinput1" disabled="disabled" >                  
+               <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="Linput1">
+                <label class="form-check-label">
+                  <input type="text" class="form-control" id="input1" name='dato_opcion1'/>
+                </label>
+                <div class="form-group" id="sinput1">
+                  <input  class="col-xs-7 inputLikeLabel" id="Pinput1" disabled="disabled" >                  
                 </input>
                 <div class="col-xs-8">
                   <input type="text" class="form-control" name='opcion1_valor' />
@@ -266,13 +267,13 @@
             </div>
           </form>
           <!--  -->
-          </div>
         </div>
-
       </div>
-    </div>
 
+    </div>
   </div>
+
+</div>
 </div>
 
 <br><br>
