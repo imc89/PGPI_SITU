@@ -20,12 +20,25 @@ class CreateHechosTable extends Migration
             $table->foreign('alumno_id')->references('id')->on('alumno');
 
 
-            $table->integer('tags_id')->unsigned();
-            $table->foreign('tags_id')->references('id')->on('tags');
+            // $table->integer('tags_id')->unsigned();
+            // $table->foreign('tags_id')->references('id')->on('tags');
 
 
-            $table->integer('keyword_id')->unsigned();
-            $table->foreign('keyword_id')->references('id')->on('keywords');
+            // $table->integer('keyword_id')->unsigned();
+            // $table->foreign('keyword_id')->references('id')->on('keywords');
+
+
+            $table->string('etiqueta');
+            $table->string('titulo');
+            $table->integer('curso')->nullable();
+            $table->date('fecha')->nullable();
+            $table->string('contenido', 5000)->nullable();
+            $table->string('proposito', 5000)->nullable();
+            $table->integer('autorizacion')->nullable();
+            $table->string('video')->nullable();
+            $table->string('encuentro', 5000)->nullable();
+            $table->string('foto')->nullable()->default('default.jpg');
+            $table->string('anexo')->nullable()->default('default.pdf');
 
 
             $table->timestamps();

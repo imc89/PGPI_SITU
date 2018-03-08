@@ -80,7 +80,6 @@
 
 
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
-
 <div class="container">
   <h2>Carousel Example</h2>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -132,7 +131,6 @@
 </div>
 </div>
 
-
 <!-- FINAL CARRUSEL -->
 
 
@@ -140,7 +138,7 @@
 
 
 <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-<div id="footer" style="position: absolute;" align="center">
+<div class="body_bottom" id="footer" style="position: absolute;" align="center">
   <table>
     <tbody>
 

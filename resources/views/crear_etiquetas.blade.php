@@ -124,7 +124,7 @@
            {{ csrf_field() }}
            <div class="form-group"> <!-- NOMBRE -->
              <label for="Name">Nombre: </label>
-             <input type="text" class="form-control" id="name" placeholder="Nombre de la etiqueta" name="nombre" required>
+             <input type="text" class="form-control" id="name" placeholder="Nombre de la etiqueta" name="name" required>
            </div>
 
            <div class="form-group">

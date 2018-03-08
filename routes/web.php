@@ -62,6 +62,8 @@ Route::group(['middleware' => ['auth']], function() {
 		return view('crear_hechos');
 	});
 
+	Route::get('nuevo_hecho', 'HechosController@nuevo_hecho');
+
 
 
 	Route::get('lineaTiempo', function () {

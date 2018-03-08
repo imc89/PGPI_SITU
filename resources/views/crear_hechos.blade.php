@@ -1,3 +1,9 @@
+{{!$logins = DB::table('users')->select('logins')->where('name', Auth::user()->name)->first()->logins }}
+{{! $logins++ }}
+{{! DB::table('users')
+->where('name', Auth::user()->name)
+->update(['logins' => $logins ])}}
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -107,8 +113,6 @@
 
 
 
-
-
 	<div align="center" class="body">
 		<div  style="width: 780px;background: #B7C2D2; border-radius: 10px">
 
@@ -121,7 +125,7 @@
 				<div class="row" align="left">
 					<div class="col-xs-12" id="demoContainer">
 
-						<form action="#" class="form-horizontal fv-form fv-form-bootstrap">
+						<form action="nuevo_hecho" class="form-horizontal fv-form fv-form-bootstrap">
 
 							<br>
 
@@ -130,7 +134,7 @@
 								<label class="col-xs-7">Etiquetas: </label>
 								<div class="col-xs-8" >
 									{{! $etiquetas = DB::table('tags')->get() }}
-									<select id="hecho" class="form-control" name="etiquetas" required>
+									<select id="hecho" class="form-control" name="etiqueta" required>
 										@foreach($etiquetas as $tag)
 										<option> {{ $tag->name }} </option>
 										@endforeach
@@ -141,7 +145,7 @@
 							<div class="form-group">
 								<label class="col-xs-7">Título del hecho: </label>
 								<div class="col-xs-8">
-									<input type="text" class="form-control" name="nombre" placeholder="Nombre" required/>
+									<input type="text" class="form-control" name="titulo" placeholder="Nombre" required/>
 								</div>
 							</div>
 
@@ -160,14 +164,14 @@
 								<div class="col-xs-8">
 									<div class="radio" style="float:left;">
 										<label>
-											<input type="checkbox" class="form-check-input" name="optradio" id="4">
+											<input type="checkbox" class="form-check-input"  id="4">
 											Carrera de 4 años
 										</label>
 									</div>
 
 									<div class="radio" style="float:left;">&nbsp;&nbsp;
 										<label>
-											<input type="checkbox" class="form-check-input" name="optradio" id="5">
+											<input type="checkbox" class="form-check-input"  id="6">
 											Carrera de 6 años
 										</label>
 									</div>
@@ -185,25 +189,25 @@
 									</div>
 									<div class="col-xs-8" id="curso4">
 										<div class="radio">
-											<label><input type="radio" class="form-check-input" name="optradio">
+											<label><input type="radio" class="form-check-input" name="curso" value="1">
 											1º CURSO</label>
 										</div>
 										<div class="radio">
-											<label><input type="radio" class="form-check-input" name="optradio">
+											<label><input type="radio" class="form-check-input" name="curso" value="2">
 											2º CURSO</label>
 										</div>
 										<div class="radio">
-											<label><input type="radio" class="form-check-input" name="optradio" >
+											<label><input type="radio" class="form-check-input" name="curso" value="3">
 											3º CURSO</label>
 										</div>
 										<div class="radio">
-											<label><input type="radio" class="form-check-input" name="optradio" >
+											<label><input type="radio" class="form-check-input" name="curso" value="4">
 											4º CURSO</label>
 										</div>
 									</div>
 									<br><br>
 								</div>
-								<div class="form-group" style='display:none' id="5cursos">
+								<div class="form-group" style='display:none' id="6cursos">
 									<div>
 										<div style="width: 780px;" class="alert alert-warning" align="center" >
 											<strong>Warning!</strong> 
@@ -212,29 +216,29 @@
 											</div>
 											<label >CARRERA DE 6 AÑOS :</label>
 										</div>
-										<div class="col-xs-8" id="curso5">
+										<div class="col-xs-8" id="curso6">
 											<div class="radio">
-												<label><input type="radio"  class="form-check-input" name="optradio">
+												<label><input type="radio"  class="form-check-input" name="curso" value="1">
 												1º CURSO</label>
 											</div>
 											<div class="radio">
-												<label><input type="radio"   class="form-check-input" name="optradio">
+												<label><input type="radio"   class="form-check-input" name="curso" value="2">
 												2º CURSO</label>
 											</div>
 											<div class="radio">
-												<label><input type="radio"  class="form-check-input" name="optradio" >
+												<label><input type="radio"  class="form-check-input" name="curso" value="3">
 												3º CURSO</label>
 											</div>
 											<div class="radio">
-												<label><input type="radio" class="form-check-input" name="optradio" >
+												<label><input type="radio" class="form-check-input" name="curso" value="4">
 												4º CURSO</label>
 											</div>
 											<div class="radio">
-												<label><input type="radio" class="form-check-input" name="optradio" >
+												<label><input type="radio" class="form-check-input" name="curso" value="5">
 												5º CURSO</label>
 											</div>
 											<div class="radio">
-												<label><input type="radio" class="form-check-input" name="optradio" >
+												<label><input type="radio" class="form-check-input" name="curso" value="6">
 												6º CURSO</label>
 											</div>
 										</div>
@@ -262,7 +266,7 @@
 									<div class="form-group" id="contenido" style="display: none ">
 										<label class="col-xs-7">Contenido del hecho: </label>
 										<div class="col-xs-8">
-											<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Contenido del hecho..." style="max-width: 750px;min-width: 750px;min-height: 50px;" ></textarea>
+											<textarea name="contenido" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Contenido del hecho..." style="max-width: 750px;min-width: 750px;min-height: 50px;" ></textarea>
 										</div>
 									</div>
 
@@ -270,7 +274,7 @@
 									<div id="foto" class="form-group" style="display: none;">
 										<label class="col-xs-7">Foto: </label>
 										<div class="col-xs-8">
-											<input type="file" name="file" id="profile-img" accept="image/*">
+											<input type="file" name="foto" id="profile-img" accept="image/*">
 											<br>
 											<div style="border-style: dashed; border-width: 4px;width:158px;">
 												<img src="" id="profile-img-tag" width="150px"  />
@@ -282,7 +286,7 @@
 									<div id="video" class="form-group" style="display: none ;">
 										<label class="col-xs-7">Vídeo: </label>
 										<div class="col-xs-8">
-											<input type="text" class="form-control" id="videos" placeholder="Video URL" />
+											<input type="text" name="video" class="form-control" id="videos" placeholder="Video URL" />
 											<span id="videoOK"></span>
 										</div>
 										<div style="width: 780px;" class="alert alert-warning" align="center" >
@@ -299,7 +303,7 @@
 									<div id="encuentro" class="form-group" style="display: none;">
 										<label class="col-xs-7">Encuentro: </label>
 										<div class="col-xs-8">
-											<input type="text" class="form-control" name="nombre" placeholder="Encuentro" />
+											<input type="text" class="form-control" name="encuentro" placeholder="Encuentro" />
 										</div>
 									</div>
 
@@ -308,7 +312,7 @@
 										<div class="col-xs-8">
 											<div class="radio" style="float:left;">
 												<label>
-													<input type="checkbox" class="form-check-input" name="optradio" id="anexo">
+													<input type="checkbox" class="form-check-input" id="anexo">
 													Anexo
 												</label>
 											</div>
@@ -318,7 +322,7 @@
 									<div id="anexon" class="form-group" style="display: none;">
 										<label class="col-xs-7">Documento Anexo: </label>
 										<div class="col-xs-8">
-											<input type="file" name="file">
+											<input type="file" name="anexo">
 											<br>
 											
 										</div>
@@ -328,7 +332,7 @@
 									<div class="form-group" id="proposito" style="display: none" required>
 										<label class="col-xs-7">Propósito del hecho: </label>
 										<div class="col-xs-8">
-											<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="El propósito de este hecho es..." style="max-width: 750px;min-width: 750px;min-height: 50px;" ></textarea>
+											<textarea name="proposito" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="El propósito de este hecho es..." style="max-width: 750px;min-width: 750px;min-height: 50px;" ></textarea>
 										</div>
 									</div>
 
@@ -336,12 +340,12 @@
 									<!--  -->
 									<!--  -->
 									<!--  -->
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label class="col-xs-7">Keywords: </label>
 										<div class="col-xs-8">
-											<input type="text" class="form-control" name="nombre" placeholder="Keywords (;)" required/>
+											<input type="text" class="form-control" name="" placeholder="Keywords (;)" required/>
 										</div>
-									</div>
+									</div> -->
 
 									<div class="col-xs-8" style="background: #3386E2;color:white;border-radius: 10px; width: 160px; height: 130px; margin-right: 50%;">
 										<label class="col-xs-7">Autorización: </label>
@@ -350,7 +354,7 @@
 
 											<img src="/images/lock.png" id="lock1">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input name="locks" type="radio"  name="optradio" value="proteccion1">
+											<input name="autorizacion" type="radio"  value="1">
 											<label>Nivel 1</label>
 
 										</div>
@@ -358,7 +362,7 @@
 
 											<img src="/images/lock.png" id="lock2">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input name="locks" type="radio"  name="optradio" value="proteccion2">
+											<input name="autorizacion" type="radio" value="2">
 											<label>Nivel 2</label>
 
 										</div>
@@ -366,7 +370,7 @@
 
 											<img src="/images/lock.png" id="lock3">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input name="locks" type="radio"  name="optradio" value="proteccion3">
+											<input name="autorizacion" type="radio"  value="3">
 											<label>Nivel 3</label>
 
 										</div>
@@ -519,19 +523,19 @@
 							$("#4").click(function() {
 								if($(this).is(":checked")) {
 									$("#4cursos").show();
-									$('#5').attr( 'disabled', true); 
+									$('#6').attr( 'disabled', true); 
 								} else {
 									$("#4cursos").hide();
-									$('#5').attr( 'disabled', false); 
+									$('#6').attr( 'disabled', false); 
 								}
 							});
 
-							$("#5").click(function() {
+							$("#6").click(function() {
 								if($(this).is(":checked")) {
-									$("#5cursos").show();
+									$("#6cursos").show();
 									$('#4').attr( 'disabled', true); 
 								} else {
-									$("#5cursos").hide();
+									$("#6cursos").hide();
 									$('#4').attr( 'disabled', false); 
 								}
 							});
@@ -583,7 +587,7 @@
 										<!-- LOCK DE AUTORIZACIÓN -->
 										<script>
 											$(document).ready(function() {
-												$('input[name="locks"]:radio').click(function(){
+												$('input[name="autorizacion"]:radio').click(function(){
 													switch($(this).val()) {
 														case "proteccion1":
 														$("#lock1").attr("src","/images/unlock.png");

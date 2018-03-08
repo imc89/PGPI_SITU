@@ -16,11 +16,11 @@ class EtiquetasadminController extends Controller
         //RECOGER DATO NOMBRE ETIQUETA
         function getEtiqueta() {
             //$request = request();
-            $etiqueta = request('nombre');
+            $etiqueta = request('name');
             return $etiqueta;
         }
 
-        DB::table('tags')->insert(['nombre' => getEtiqueta()]);
+        DB::table('tags')->insert(['name' => getEtiqueta()]);
 
         return redirect()->back()->with('message', '¡Etiqueta Guardada');
 

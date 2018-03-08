@@ -3,6 +3,8 @@
 ->select('logins')
 ->get() }}
 
+{{! $hechos = DB::table('hechos')->get() }}
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -84,32 +86,7 @@
   </li>
   @endguest
 </ul>
-<!-- 
-  @guest
-  <a  href="{{ route('login') }}">Login</a>
-  @else
-  <span class="dropdown">
-    <a href="#" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-      {{ Auth::user()->name }} <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <li>
-        <a href="{{ route('logout') }}"
-        onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();">
-        Logout
-      </a>
 
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        {{ csrf_field() }}
-      </form>
-    </li>
-  </ul>
-  @endguest
-
-</ul>
-
-</span> -->
 
 
 <a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
@@ -124,87 +101,140 @@
 
 
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
-<br><br><br><br><br>
-<div align="center">
-  <h1>BIENVENIDO ALUMNO</h1>
-  <h1>TABLÓN DE HECHOS DE {{Auth::user()->name}}</h1> 
+<div class="body">
+
+  <br><br><br><br><br>
+  <div align="center">
+    <h1>BIENVENIDO ALUMNO</h1>
+    <h1>TABLÓN DE HECHOS DE {{Auth::user()->name}}</h1> 
+  </div>
+
+  <!-- MOSTRAR HECHOS -->
+  <?php $contador=0 ?>
+
+
+  <form action="nuevo_hecho" class="form-horizontal fv-form fv-form-bootstrap">
+
+    <br>
+    <div align="center" >
+      <div  style="width: 500px">
+        <div class="form-group" required><!-- ETIQUETAS -->
+          <label >Filtrar por etiqueta: </label>
+          <div>
+            {{! $etiquetas = DB::table('tags')->get() }}
+            <select id="hecho" class="form-control" name="etiqueta" required>
+              @foreach($etiquetas as $tag)
+              <option> {{ $tag->name }} </option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  @foreach($hechos as $u)
+
+  <div align="center">
+    <div id="hecho_div">
+      <div style="float: left;">
+        <u>HECHO Nº <?php $contador++; echo $contador ?></u>
+      </div>
+      <div style="float: right;">
+        <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
+        <div style="float: right;background: #BAB9BB;border-radius:5px">
+          <button style="border: none;background: transparent;">
+            <span id="borrar" class="glyphicon glyphicon-remove"></span>
+          </button>
+        </div>
+      </div>
+      <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+      <b>Título:</b>  {{ $u->titulo }} <br>
+      <b>Curso:</b>  {{ $u->curso }}º <br>
+      <b>Contenido:</b>  {{ $u->contenido }} <br>
+      <b>Propósito:</b>  {{ $u->proposito }} <br>
+
+
+    </div>
+  </div>
+  <br>
+  @endforeach
 </div>
+</body>
 <!-- FINAL CARRUSEL -->
 
 
 @if (Auth::user()->logins ==1)
-
-  <div class="modal-background"></div>
-  <div class="modal-container">
-    <div align="center" class="modal-header">BIENVENIDO A LA PLATAFORMA SITU 
-      <span class="glyphicon glyphicon-remove modal-close"></span>
-      <!-- <i class="modal-close">x</i> --></div>
+<div class="modal-background">
+<div class="modal-container">
+  <div align="center" class="modal-header">BIENVENIDO A LA PLATAFORMA SITU 
+    <span class="glyphicon glyphicon-remove modal-close"></span>
+    <!-- <i class="modal-close">x</i> --></div>
     <div class="modal-info">
       Este mensaje 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-<br><br>
-<div align="center">INICIE SUS DATOS DE PERFIL</div>
-   </div>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+      <br><br>
+      <div align="center">INICIE SUS DATOS DE PERFIL</div>
+    </div>
     <div class="button-container" align="center">
       <a href="configPerfil" class="btn btn-primary">ACEPTAR</a>
     </div>
   </div>
+</div>
+  @endif
 
-@endif
+  <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
+  <div  id="footer" style="position:absolute" align="center">
+    <table>
+      <tbody>
 
-<!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-<div id="footer" style="position:absolute" align="center">
-  <table>
-    <tbody>
+       <tr> 
+        <td class="foot_izdo">&nbsp;</td> 
+        <td class="foot_cent"> 
+          <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
+            <br> 
+            Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
+          </p> 
 
-     <tr> 
-      <td class="foot_izdo">&nbsp;</td> 
-      <td class="foot_cent"> 
-        <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-          <br> 
-          Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
-        </p> 
+          <!-- REDES SOCIALES -->
+          <div id="social"> 
+            <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
+            </a> 
+            <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
+            </a>
+            <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
+            </a>
+            <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
+            </a> 
+            <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
+            </a>
+            <br><br>
+          </div>
+          <!-- FIN REDES SOCIALES -->
 
-        <!-- REDES SOCIALES -->
-        <div id="social"> 
-          <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
-          </a> 
-          <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
-          </a>
-          <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
-          </a>
-          <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
-          </a> 
-          <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
-          </a>
-          <br><br>
-        </div>
-        <!-- FIN REDES SOCIALES -->
+          <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
+          / Sponsored by the
+          <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
+          and 
+          <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
+          Copyright 2013,
+          <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
+          . All rights reserved. 
+        </td>
+        <td class="foot_dcho">&nbsp;</td> 
+      </tr>
 
-        <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
-        / Sponsored by the
-        <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
-        and 
-        <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
-        Copyright 2013,
-        <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
-        . All rights reserved. 
-      </td>
-      <td class="foot_dcho">&nbsp;</td> 
-    </tr>
-
-  </tbody>
-</table>
+    </tbody>
+  </table>
 </div>
 
 <!--  BANNER MODAL ABOUT -->
@@ -260,26 +290,46 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   }
 </script>
 
+<style type="text/css">
 
+#borrar{
+ color: black; 
+}
+#borrar:hover{
+ color: red; 
+}
+#hecho_div{
+background: #262626; border-radius: 10px; width: 500px;color: white;text-align: left; padding: 10px 10px 10px 10px;
+}
+#hecho_div:hover{
+background: #93A3B2; border-radius: 10px; width: 500px;color: white;text-align: left; padding: 10px 10px 10px 10px;
+box-shadow: 0px 5px 10px #444 inset;
+
+}
+</style>
 <!-- MODAL HASTA EL FINAL DEL DOCUMENTO BLADE -->
 <script type="text/javascript">
   $(".modal-background, .modal-close").on("click", function(){
-  $(".modal-container, .modal-background").hide();
-});
+    $(".modal-container, .modal-background").hide();
+  });
 </script>
 
 <style type="text/css">
-  .modal-background {
+
+.modal-background {
   position: fixed;
-  top: 0;
+  top: 45%;
   left: 0;
   background: rgba(0, 0, 0, 0.7);
   width: 100%;
   height: 100%;
-  z-index: 0;
+  z-index: 1;
 }
 
 .modal-container {
+  box-shadow: 0px 5px 10px #444 inset;
+  border-style: double;
+  border-color:black;
   position: relative;
   z-index: 1;
   width: 500px;

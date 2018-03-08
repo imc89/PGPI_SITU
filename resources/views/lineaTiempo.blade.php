@@ -1,3 +1,11 @@
+{{! $hechos = DB::table('hechos')->ORDERBY('fecha')->get() }}
+
+{{!$logins = DB::table('users')->select('logins')->where('name', Auth::user()->name)->first()->logins }}
+{{! $logins++ }}
+{{! DB::table('users')
+->where('name', Auth::user()->name)
+->update(['logins' => $logins ])}}
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -55,28 +63,28 @@
 
       <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
 
-         <li>
-          <a style="font-weight: bold;" href="perfilAlumno" class="glyphicon glyphicon-user"> Perfil</a>
-        </li>
-
-        <li>
-          <a style="font-weight: bold;" href="configPerfil" class="glyphicon glyphicon-cog"> Configuración</a>
-        </li>
-
-        <li>
-          <a style="font-weight: bold;" href="{{ route('logout') }}" class="glyphicon glyphicon-log-out" 
-          onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();">
-          Logout
-        </a>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          {{ csrf_field() }}
-        </form>
+       <li>
+        <a style="font-weight: bold;" href="perfilAlumno" class="glyphicon glyphicon-user"> Perfil</a>
       </li>
-    </ul>
-  </li>
-  @endguest
+
+      <li>
+        <a style="font-weight: bold;" href="configPerfil" class="glyphicon glyphicon-cog"> Configuración</a>
+      </li>
+
+      <li>
+        <a style="font-weight: bold;" href="{{ route('logout') }}" class="glyphicon glyphicon-log-out" 
+        onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">
+        Logout
+      </a>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+      </form>
+    </li>
+  </ul>
+</li>
+@endguest
 </ul>
 
 
@@ -104,116 +112,23 @@
 
 <div class="body">
   <ul id="time-line">
+
+    @foreach($hechos as $u)
+
     <li>
       <div>
         <p>
-          A FECHA DE : 12-12-18 <br>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          A FECHA DE : {{ $u->fecha }}
+          <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+          <b>Título:</b>  {{ $u->titulo }} <br>
+          <b>Curso:</b>  {{ $u->curso }}º <br>
+          <b>Contenido:</b>  {{ $u->contenido }} <br>
+          <b>Propósito:</b>  {{ $u->proposito }} <br>
         </p>
       </div>
     </li>
-    <li>
-      <div>
-        <p>A FECHA DE : 12-12-18 <br>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </li>
-    <li>
-      <div>
-        <p>A FECHA DE : 12-12-18 <br>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </li>
-    <li>
-      <div>
-        <p>A FECHA DE : 12-12-18 <br>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </li>
-    <li>
-      <div>
-        <p>A FECHA DE : 12-12-18 <br>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </li>
-    <li>
-      <div>
-        <p>A FECHA DE : 12-12-18 <br>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </li>
-    <li>
-      <div>
-        <p>A FECHA DE : 12-12-18 <br>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </li>
-    <li>
-      <div>
-        <p>A FECHA DE : 12-12-18 <br>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </li>
-      <li>
-      <div>
-        <p>A FECHA DE : 12-12-18 <br>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </li>
-    
+    @endforeach
+
   </ul>
 
 </div>
@@ -340,7 +255,7 @@ ul#time-line li div{
 ul#time-line li div:hover{
 
   background: rgba(48, 48, 48, 0.5);
- 
+
 }
 ul#time-line li div:after{
   content: '';

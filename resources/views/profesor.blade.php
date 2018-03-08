@@ -113,7 +113,7 @@
 
 
 <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-<div id="footer" style="position: absolute;" align="center">
+<div class="body_bottom" id="footer" style="position: absolute;" align="center">
   <table>
     <tbody>
 
