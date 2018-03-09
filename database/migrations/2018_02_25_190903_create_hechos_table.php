@@ -37,8 +37,8 @@ class CreateHechosTable extends Migration
             $table->integer('autorizacion')->nullable();
             $table->string('video')->nullable();
             $table->string('encuentro', 5000)->nullable();
-            $table->string('foto')->nullable()->default('default.jpg');
-            $table->string('anexo')->nullable()->default('default.pdf');
+            $table->string('foto')->nullable();
+            $table->string('anexo')->nullable();
 
 
             $table->timestamps();

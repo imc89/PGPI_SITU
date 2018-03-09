@@ -23,19 +23,54 @@ class HechosController extends Controller
 		->join('users','users.id','=','user_id')
 		->get();
 
+
 		foreach($id_alumno as $id){
-			 $id->id;
+			$id->id;
 
 
-		DB::table('hechos')
-		->join('alumno','alumno.id','=','alumno_id')
-		->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "contenido" => $request->contenido , "proposito" => $request->proposito , "autorizacion" => $request->autorizacion]);
+			if($request->hasFile('anexo') && $request->hasFile('foto')){
+				$filename = $request->anexo->getClientOriginalName();
+				$request->file('anexo')->move(public_path("/images/anexos/"), $filename);	
 
-		
+				$foto = $request->file('foto');
+				$filename2 = time() . '.' . $foto->getClientOriginalExtension();
+				Image::make($foto)->save( public_path('/images/fotos/' . $filename2 ) );	
+
+				DB::table('hechos')
+				->join('alumno','alumno.id','=','alumno_id')
+				->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "contenido" => $request->contenido , "video" => $request->video , "anexo" => $filename , "encuentro" => $request->encuentro , "proposito" => $request->proposito , "foto" => $filename2 , "autorizacion" => $request->autorizacion ]);	
+			}
+			elseif($request->hasFile('foto')){
+				$foto = $request->file('foto');
+				$filename = time() . '.' . $foto->getClientOriginalExtension();
+				Image::make($foto)->save( public_path('/images/fotos/' . $filename ) );
+				DB::table('hechos')
+				->join('alumno','alumno.id','=','alumno_id')
+				->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "foto" => $filename , "proposito" => $request->proposito , "autorizacion" => $request->autorizacion]);
+			}
+
+			elseif($request->hasFile('anexo')){
+				$filename = $request->anexo->getClientOriginalName();
+				$request->file('anexo')->move(public_path("/images/anexos/"), $filename);		
+				DB::table('hechos')
+				->join('alumno','alumno.id','=','alumno_id')
+				->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "contenido" => $request->contenido , "video" => $request->video , "anexo" => $filename , "encuentro" => $request->encuentro , "proposito" => $request->proposito , "autorizacion" => $request->autorizacion ]);	
+			}
+
+			else{
+				DB::table('hechos')
+				->join('alumno','alumno.id','=','alumno_id')
+				->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "contenido" => $request->contenido , "video" => $request->video , "encuentro" => $request->encuentro , "proposito" => $request->proposito , "autorizacion" => $request->autorizacion ]);
+
+			}
+
+
+			return redirect()->back()->with('message', 'Hecho creado');
 
 		}
-
-		return redirect()->back()->with('message', '¡Gracias por tu mensaje! Te responderemos tan pronto como nos sea posible.');
-
 	}
+
+
+
+
 }

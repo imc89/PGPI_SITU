@@ -125,7 +125,7 @@
 				<div class="row" align="left">
 					<div class="col-xs-12" id="demoContainer">
 
-						<form action="nuevo_hecho" class="form-horizontal fv-form fv-form-bootstrap">
+						<form  method="POST" enctype="multipart/form-data" action="nuevo_hecho" class="form-horizontal fv-form fv-form-bootstrap" >
 
 							<br>
 
@@ -275,6 +275,7 @@
 										<label class="col-xs-7">Foto: </label>
 										<div class="col-xs-8">
 											<input type="file" name="foto" id="profile-img" accept="image/*">
+											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<br>
 											<div style="border-style: dashed; border-width: 4px;width:158px;">
 												<img src="" id="profile-img-tag" width="150px"  />
@@ -381,11 +382,10 @@
 
 									<div class="form-group">
 										<div>
-											<button style="width: 780px; align-content: center" type="submit" class="btn btn-primary" name="signup" value="Sign up">CREAR NUEVO HECHO</button>
+											<input type="submit" class="btn btn-primary"  value="CREAR NUEVO HECHO" style="width: 780px; align-content: center">
 										</div>
 									</div>
 								</form>
-								<!--  -->
 							</div>
 
 
@@ -547,41 +547,20 @@
 							document.getElementById('videos').addEventListener('input', function() {
 								campo = event.target;
 								valido = document.getElementById('videoOK');
-								emailRegex = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$|^(?:https?:\/\/)?(?:www\.)?dailymotion.com\/(video|hub)+(\/([^_]+))?[^#]*(‪#‎video‬=([^_&]+))?$|^(?:https?:\/\/)?(?:www\.)?vimeo.com\/([0-9]+)$/;
+								videoRegex = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$|^(?:https?:\/\/)?(?:www\.)?dailymotion.com\/(video|hub)+(\/([^_]+))?[^#]*(‪#‎video‬=([^_&]+))?$|^(?:https?:\/\/)?(?:www\.)?vimeo.com\/([0-9]+)$/;
 
+								videoRegex2 = /^http(?:s?):\/\/(?:www\.|web\.|m\.)?facebook\.com\/([A-z0-9\.]+)\/videos(?:\/[0-9A-z].+)?\/(\d+)(?:.+)?$/;
+
+								videoRegex3 = /http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/;
 											    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
-											    if (emailRegex.test(campo.value)) {
+											    if (videoRegex.test(campo.value) || videoRegex2.test(campo.value) || videoRegex3.test(campo.value))  {
 											    	valido.innerHTML = "<span style=\"color:green;font-weight:bold\">" + "Vídeo válido" + "</span>"
 											    } else {
 											    	valido.innerHTML = "<span style=\"color:red;font-weight:bold\">" + "Vídeo inválido" + "</span>"
 											    }
 											});
 
-							document.getElementById('videos').addEventListener('input', function() {
-								campo = event.target;
-								valido = document.getElementById('videoOK');
-								emailRegex = /^http(?:s?):\/\/(?:www\.|web\.|m\.)?facebook\.com\/([A-z0-9\.]+)\/videos(?:\/[0-9A-z].+)?\/(\d+)(?:.+)?$/;
 
-											    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
-											    if (emailRegex.test(campo.value)) {
-											    	valido.innerHTML = "<span style=\"color:green;font-weight:bold\">" + "Vídeo válido" + "</span>"
-											    } else {
-											    	valido.innerHTML = "<span style=\"color:red;font-weight:bold\">" + "Vídeo inválido" + "</span>"
-											    }
-											});
-
-							document.getElementById('videos').addEventListener('input', function() {
-								campo = event.target;
-								valido = document.getElementById('videoOK');
-								emailRegex = /http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/;
-
-											    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
-											    if (emailRegex.test(campo.value)) {
-											    	valido.innerHTML = "<span style=\"color:green;font-weight:bold\">" + "Vídeo válido" + "</span>"
-											    } else {
-											    	valido.innerHTML = "<span style=\"color:red;font-weight:bold\">" + "Vídeo inválido" + "</span>"
-											    }
-											});
 										</script>
 
 										<!-- LOCK DE AUTORIZACIÓN -->

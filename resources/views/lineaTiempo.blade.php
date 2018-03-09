@@ -119,11 +119,33 @@
       <div>
         <p>
           A FECHA DE : {{ $u->fecha }}
+          @if($u->etiqueta !== NULL)
           <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+          @endif
+          @if($u->titulo !== NULL)
           <b>Título:</b>  {{ $u->titulo }} <br>
+          @endif
+          @if($u->curso !== NULL)
           <b>Curso:</b>  {{ $u->curso }}º <br>
+          @endif
+          @if($u->contenido !== NULL)
           <b>Contenido:</b>  {{ $u->contenido }} <br>
+          @endif
+          @if($u->video !== NULL)
+          <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+          @endif
+          @if($u->encuentro !== NULL)
+          <b>Encuentro:</b> {{ $u->encuentro }}  <br>
+          @endif
+          @if($u->foto !== NULL)
+          <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="width: 300px;"/> <br>
+          @endif
+          @if($u->anexo !== NULL)
+          <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+          @endif
+          @if($u->proposito !== NULL)
           <b>Propósito:</b>  {{ $u->proposito }} <br>
+          @endif
         </p>
       </div>
     </li>

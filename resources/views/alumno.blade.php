@@ -147,11 +147,34 @@
           </button>
         </div>
       </div>
+      @if($u->etiqueta !== NULL)
       <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+      @endif
+      @if($u->titulo !== NULL)
       <b>Título:</b>  {{ $u->titulo }} <br>
+      @endif
+      @if($u->curso !== NULL)
       <b>Curso:</b>  {{ $u->curso }}º <br>
+      @endif
+      @if($u->contenido !== NULL)
       <b>Contenido:</b>  {{ $u->contenido }} <br>
+      @endif
+      @if($u->video !== NULL)
+      <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+      @endif
+       @if($u->encuentro !== NULL)
+      <b>Encuentro:</b> {{ $u->encuentro }}  <br>
+      @endif
+      @if($u->foto !== NULL)
+      <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
+      @endif
+      @if($u->anexo !== NULL)
+      <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+      @endif
+      @if($u->proposito !== NULL)
       <b>Propósito:</b>  {{ $u->proposito }} <br>
+      @endif
+
 
 
     </div>
@@ -165,26 +188,26 @@
 
 @if (Auth::user()->logins ==1)
 <div class="modal-background">
-<div class="modal-container">
-  <div align="center" class="modal-header">BIENVENIDO A LA PLATAFORMA SITU 
-    <span class="glyphicon glyphicon-remove modal-close"></span>
-    <!-- <i class="modal-close">x</i> --></div>
-    <div class="modal-info">
-      Este mensaje 
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-      <br><br>
-      <div align="center">INICIE SUS DATOS DE PERFIL</div>
-    </div>
-    <div class="button-container" align="center">
-      <a href="configPerfil" class="btn btn-primary">ACEPTAR</a>
+  <div class="modal-container">
+    <div align="center" class="modal-header">BIENVENIDO A LA PLATAFORMA SITU 
+      <span class="glyphicon glyphicon-remove modal-close"></span>
+      <!-- <i class="modal-close">x</i> --></div>
+      <div class="modal-info">
+        Este mensaje 
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+        <br><br>
+        <div align="center">INICIE SUS DATOS DE PERFIL</div>
+      </div>
+      <div class="button-container" align="center">
+        <a href="configPerfil" class="btn btn-primary">ACEPTAR</a>
+      </div>
     </div>
   </div>
-</div>
   @endif
 
   <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
@@ -299,11 +322,11 @@
  color: red; 
 }
 #hecho_div{
-background: #262626; border-radius: 10px; width: 500px;color: white;text-align: left; padding: 10px 10px 10px 10px;
+  background: #262626; border-radius: 10px; width: 500px;color: white;text-align: left; padding: 10px 10px 10px 10px;
 }
 #hecho_div:hover{
-background: #93A3B2; border-radius: 10px; width: 500px;color: white;text-align: left; padding: 10px 10px 10px 10px;
-box-shadow: 0px 5px 10px #444 inset;
+  background: #93A3B2; border-radius: 10px; width: 500px;color: white;text-align: left; padding: 10px 10px 10px 10px;
+  box-shadow: 0px 5px 10px #444 inset;
 
 }
 </style>
