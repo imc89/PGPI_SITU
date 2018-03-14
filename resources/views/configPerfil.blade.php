@@ -31,6 +31,9 @@
    <a  data-toggle="modal" data-target="#myModal">
     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
   </a>
+  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
+    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+  </a>
   <a href="#">
     <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
   </a>

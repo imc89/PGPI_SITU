@@ -51,7 +51,20 @@ Route::group(['middleware' => ['auth']], function() {
 
 // ALUMNNO
 	Route::get('alumno', function () {
-		return view('alumno');
+// FILTRO
+		$alumno_id = DB::table('alumno')
+		->where('users.id','=', Auth::user()->id)
+		->join('users','users.id','=','user_id')
+		->select('alumno.id') 
+		->get();
+
+		foreach($alumno_id as $aluid)
+			$aluid->id; 
+		$hechos = DB::table('hechos')
+		->where('alumno_id','=', $aluid->id)
+		->get();
+
+		return view('alumno', compact('hechos'));		
 	});
 
 	Route::get('configPerfil', function () {

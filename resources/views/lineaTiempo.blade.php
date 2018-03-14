@@ -1,10 +1,23 @@
-{{! $hechos = DB::table('hechos')->ORDERBY('fecha')->get() }}
-
 {{!$logins = DB::table('users')->select('logins')->where('name', Auth::user()->name)->first()->logins }}
 {{! $logins++ }}
 {{! DB::table('users')
 ->where('name', Auth::user()->name)
 ->update(['logins' => $logins ])}}
+
+{{! $alumno_id = DB::table('alumno')
+->where('users.id','=', Auth::user()->id)
+->join('users','users.id','=','user_id')
+->select('alumno.id')
+->get() }}
+
+@foreach($alumno_id as $aluid)
+{{ $aluid->id }} 
+{{! $hechos = DB::table('hechos')
+->where('alumno_id','=', $aluid->id)
+->get() }}
+@endforeach
+
+
 
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
@@ -38,6 +51,9 @@
    </a>
    <a  data-toggle="modal" data-target="#myModal">
     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
+  </a>
+  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
+    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
   </a>
   <a href="#">
     <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 

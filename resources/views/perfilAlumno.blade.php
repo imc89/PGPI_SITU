@@ -103,6 +103,9 @@
    <a  data-toggle="modal" data-target="#myModal">
     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
   </a>
+  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
+    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+  </a>
   <a href="#">
     <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
   </a>
@@ -184,7 +187,7 @@
   <h1>DATOS DE PERFIL</h1>
 </div>
 <div align="center" class="body">
-  <div  style="width: 400px;height: 350px; background: #B7C2D2; border-radius: 10px">
+  <div  style="width: 400px;height: 310px; background: #B7C2D2; border-radius: 10px;box-shadow: 0px 5px 10px #444 inset;">
     <br><br>
     <div align="left">
      <br>

@@ -31,6 +31,9 @@
    <a  data-toggle="modal" data-target="#myModal">
     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
   </a>
+  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
+    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+  </a>
   <a href="#">
     <span class="glyphicon glyphicon-education" aria-hidden="true"></span> VER CALIFICACIONES 
   </a>
@@ -211,5 +214,5 @@
     window.location.hash="no-back-button";
     window.location.hash="Again-No-back-button" //chrome
     window.onhashchange=function(){window.location.hash="no-back-button";}
-}
+  }
 </script>
