@@ -153,7 +153,7 @@
 
 
   <div class="alert alert-warning">
-    <strong>Warning!</strong> Debido a no utilizar un servidor de correo de pago, el correo es probable que llegue a la carpeta SPAM.
+    <strong>Warning!</strong> Si ves que el correo no llega mira en la carpeta SPAM.
   </div>
 
 

@@ -185,191 +185,216 @@
 </div>
 <div align="center" class="body">
   <div  style="width: 400px;height: 350px; background: #B7C2D2; border-radius: 10px">
-<br><br>
+    <br><br>
     <div align="left">
      <br>
-     <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-      Nombre completo: 
-      <tr>
-        <th scope="row"></th>
-        @foreach($nombre_alumno as $u)
+     <tr>
+      <th scope="row"></th>
+      @foreach($nombre_alumno as $u)
+      @if($u->nombre  !== NULL)
+      <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
+        Nombre completo: 
         <tr>
           <td> {{ $u->nombre }} </td>
+          @endif
           @endforeach
         </tr>
       </label>
 
-      <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-        Apellidos: 
-        <tr>
-          <th scope="row"></th>
-          @foreach($apellidos_alumno as $u)
+
+      <tr>
+        <th scope="row"></th>
+        @foreach($apellidos_alumno as $u)
+        @if($u->apellidos  !== NULL)
+        <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
+          Apellidos: 
           <tr>
             <td> {{ $u->apellidos }} </td>
+            @endif
             @endforeach
           </tr>
         </label>
 
 
-        <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-          DNI: 
-          <tr>
-            <th scope="row"></th>
-            @foreach($dni_alumno as $u)
+
+        <tr>
+          <th scope="row"></th>
+          @foreach($dni_alumno as $u)
+          @if($u->dni  !== NULL)
+          <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
+            Dni: 
             <tr>
               <td> {{ $u->dni }} </td>
+              @endif
               @endforeach
             </tr>
           </label>
 
-          <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-            EMAIL: 
-            <tr>
-              <th scope="row"></th>
-              @foreach($email_alumno as $u)
+
+          <tr>
+            <th scope="row"></th>
+            @foreach($email_alumno as $u)
+            @if($u->email  !== NULL)
+            <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
+              Email: 
               <tr>
                 <td> {{ $u->email }} </td>
+                @endif
                 @endforeach
               </tr>
             </label>
 
-            <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-              DIRECCION: 
-              <tr>
-                <th scope="row"></th>
-                @foreach($direccion_alumno as $u)
+
+            <tr>
+              <th scope="row"></th>
+              @foreach($direccion_alumno as $u)
+              @if($u->direccion  !== NULL)
+              <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
+                Dirección: 
                 <tr>
                   <td> {{ $u->direccion }} </td>
+                  @endif
                   @endforeach
                 </tr>
               </label>
 
 
-              <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                CARRERA: 
-                <tr>
-                  <th scope="row"></th>
-                  @foreach($carrera_alumno as $u)
+
+              <tr>
+                <th scope="row"></th>
+                @foreach($carrera_alumno as $u)
+                @if($u->carrera  !== NULL && $u->carrera !== "-")
+                <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
+                  Carrera: 
                   <tr>
                     <td> {{ $u->carrera }} </td>
+                    @endif
                     @endforeach
                   </tr>
                 </label>
 
+
+                @foreach($dato1_alumno as $u)
+                @if($u->dato_opcion1  !== NULL)
                 <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                  OPCIÓN_1: 
-                  @foreach($dato1_alumno as $u)
-                  <tr>
-                    <td> {{ $u->dato_opcion1 }} </td>
-                    @endforeach
-                  </tr>
+                  {{ $u->dato_opcion1 }}:
+                  @endif
+                  @endforeach
 
                   <th scope="row"></th>
                   @foreach($valor1_alumno as $u)
+                  @if($u->opcion1_valor  !== NULL)
                   <tr>
                     <td> {{ $u->opcion1_valor }} </td>
+                    @endif
                     @endforeach
                   </tr>
                 </label>
 
-                 <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                  OPCIÓN_2: 
-                  @foreach($dato2_alumno as $u)
-                  <tr>
-                    <td> {{ $u->dato_opcion2 }} </td>
-                    @endforeach
-                  </tr>
 
-                  <th scope="row"></th>
-                  @foreach($valor2_alumno as $u)
-                  <tr>
-                    <td> {{ $u->opcion2_valor }} </td>
-                    @endforeach
-                  </tr>
-                </label>
+                @foreach($dato2_alumno as $u)
+                @if($u->dato_opcion2  !== NULL)
+                <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
+                  {{ $u->dato_opcion2 }}:
+                  @endif
+                  @endforeach
+                </tr>
 
-                 <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                  OPCIÓN_3: 
-                  @foreach($dato3_alumno as $u)
-                  <tr>
-                    <td> {{ $u->dato_opcion3 }} </td>
-                    @endforeach
-                  </tr>
-
-                  <th scope="row"></th>
-                  @foreach($valor3_alumno as $u)
-                  <tr>
-                    <td> {{ $u->opcion3_valor }} </td>
-                    @endforeach
-                  </tr>
-                </label>
-
-              </div>
+                <th scope="row"></th>
+                @foreach($valor2_alumno as $u)
+                @if($u->opcion2_valor  !== NULL)
+                <tr>
+                  <td> {{ $u->opcion2_valor }} </td>
+                  @endif
+                  @endforeach
+                </tr>
+              </label>
 
 
+              @foreach($dato3_alumno as $u)
+              @if($u->dato_opcion3  !== NULL)
+              <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
+                {{ $u->dato_opcion3 }}:
+                @endif
+                @endforeach
+              </tr>
+
+              <th scope="row"></th>
+              @foreach($valor3_alumno as $u)
+              @if($u->opcion3_valor  !== NULL)
+              <tr>
+                <td> {{ $u->opcion3_valor }} </td>
+                @endif
+                @endforeach
+              </tr>
+            </label>
+
+          </div>
+
+
+        </div>
+      </div>
+      <!-- FINAL CARRUSEL -->
+
+
+
+      <!--  BANNER MODAL ABOUT -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- CONTENIDO DE ABOUT EN BANNER-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">ABOUT US</h4>
+            </div>
+            <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
             </div>
           </div>
-          <!-- FINAL CARRUSEL -->
+
+        </div>
+      </div>
+      <!-- FIN BANNER MODAL -->
+
+    </body>
+    </html>
 
 
-
-          <!--  BANNER MODAL ABOUT -->
-          <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-              <!-- CONTENIDO DE ABOUT EN BANNER-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">ABOUT US</h4>
-                </div>
-                <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <!-- FIN BANNER MODAL -->
-
-        </body>
-        </html>
-
-
-        <script>
-          function myFunction() {
-            var x = document.getElementById("myTopnav");
-            if (x.className === "topnav") {
-              x.className += " responsive";
-            } else {
-              x.className = "topnav";
-            }
-          }
-        </script>
-
-
-
-        <style type="text/css">
-
-        .body{
-          background: url('/images/fondo_body.jpg')fixed;
-          padding: 0;
-          margin: 0;
-          font-family: arial;
+    <script>
+      function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
         }
+      }
+    </script>
 
 
-        #resaltar div:hover {
-          background: #00a651;
-          color: #ffffff;
-        }
-      </style>
+
+    <style type="text/css">
+
+    .body{
+      background: url('/images/fondo_body.jpg')fixed;
+      padding: 0;
+      margin: 0;
+      font-family: arial;
+    }
+
+
+    #resaltar div:hover {
+      background: #00a651;
+      color: #ffffff;
+    }
+  </style>
 

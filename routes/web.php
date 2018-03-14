@@ -15,32 +15,41 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
-Route::post('send','mailController@send');
 
-Route::get('mailpassword', function () {
-	return view('mailpassword');
-});
-
-Route::get('log_admin_login', function () {
-	return view('log_admin_login');
-});
-
-Route::get('etiquetas', function () {
-	return view('etiquetas');
-});
-
-Route::post('send_etiqueta','EtiquetasadminController@send_etiqueta');
 
 
 
 Route::group(['middleware' => ['auth']], function() {
+// ADMINISTRADOR
 	Route::get('admin', function () {
 		return view('admin');
 	});
+
+	Route::get('log_admin_login', function () {
+		return view('log_admin_login');
+	});
+
+
+	Route::get('etiquetas', function () {
+		return view('etiquetas');
+	});
+
+	Route::post('send_etiqueta','EtiquetasadminController@send_etiqueta');
+
+
+	Route::post('send','mailController@send');
+
+	Route::get('mailpassword', function () {
+		return view('mailpassword');
+	});
+
 	Route::get('crear_etiquetas', function () {
 		return view('crear_etiquetas');
 	});
 
+
+
+// ALUMNNO
 	Route::get('alumno', function () {
 		return view('alumno');
 	});
@@ -62,13 +71,21 @@ Route::group(['middleware' => ['auth']], function() {
 		return view('crear_hechos');
 	});
 
+	Route::get('filtrar_hechos', 'FiltrarhechosController@filtrar_hechos');
+
+
 	Route::post('nuevo_hecho', 'HechosController@nuevo_hecho');
 
 
+	Route::get('mail_invitados', function () {
+		return view('mail_invitados');
+	});
 
 	Route::get('lineaTiempo', function () {
 		return view('lineaTiempo');
 	});
+
+
 
 	Route::get('profesor', function () {
 		return view('profesor');

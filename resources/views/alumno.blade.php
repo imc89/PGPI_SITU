@@ -3,7 +3,21 @@
 ->select('logins')
 ->get() }}
 
-{{! $hechos = DB::table('hechos')->get() }}
+
+{{! $alumno_id = DB::table('alumno')
+->where('users.id','=', Auth::user()->id)
+->join('users','users.id','=','user_id')
+->select('alumno.id')
+->get() }}
+
+@foreach($alumno_id as $aluid)
+{{ $aluid->id }} 
+{{! $hechos = DB::table('hechos')
+->where('alumno_id','=', $aluid->id)
+->get() }}
+@endforeach
+
+
 
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
@@ -38,7 +52,7 @@
    <a  data-toggle="modal" data-target="#myModal">
     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
   </a>
-  <a href="#">
+  <a href="mail_invitados">
     <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
   </a>
   <a href="crear_hechos">
@@ -113,7 +127,7 @@
   <?php $contador=0 ?>
 
 
-  <form action="nuevo_hecho" class="form-horizontal fv-form fv-form-bootstrap">
+  <form action="filtrar_hechos" class="form-horizontal fv-form fv-form-bootstrap">
 
     <br>
     <div align="center" >
@@ -121,12 +135,15 @@
         <div class="form-group" required><!-- ETIQUETAS -->
           <label >Filtrar por etiqueta: </label>
           <div>
-            {{! $etiquetas = DB::table('tags')->get() }}
-            <select id="hecho" class="form-control" name="etiqueta" required>
-              @foreach($etiquetas as $tag)
-              <option> {{ $tag->name }} </option>
-              @endforeach
-            </select>
+            <form action="FilterhechosController.php" method="post">
+              {{! $etiquetas = DB::table('tags')->get() }}
+              <select id="hecho" class="form-control" name="etiqueta" required>
+                @foreach($etiquetas as $tag)
+                <option> {{ $tag->name }} </option>
+                @endforeach
+              </select>
+              <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 530px; align-content: center">        
+            </form>
           </div>
         </div>
       </form>
@@ -162,7 +179,7 @@
       @if($u->video !== NULL)
       <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
       @endif
-       @if($u->encuentro !== NULL)
+      @if($u->encuentro !== NULL)
       <b>Encuentro:</b> {{ $u->encuentro }}  <br>
       @endif
       @if($u->foto !== NULL)
