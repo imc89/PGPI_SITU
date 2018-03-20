@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -22,9 +23,6 @@
 </head>
 
 
-
-<!-- INICIO NAVEGADOR -->
-
 <body onload="deshabilitaRetroceso()">
   <!-- INICIO NAVEGADOR -->
   <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
@@ -37,8 +35,11 @@
   <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
     <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
   </a>
-  <a href="#">
+  <a href="mail_invitados">
     <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
+  </a>
+  <a href="#">
+    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
   </a>
   <a href="crear_hechos">
     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
@@ -94,73 +95,69 @@
 </div> 
 
 
+
+
 <!-- FIN DE NAVEGADOR -->
 <br>
 <br>
 <br>
-<br>
 <div class="container">
- <h1 class="mb-2 text-center">INVITA A AMIGOS A VER TUS HECHOS</h1>
+  <h1 class="mb-2 text-center">KEYWORDS</h1>
 
-       <!--   @if(session('message')== "El usuario ya existe en el sistema")
-         <div class='alert alert-danger'>
-          {{ session('message') }}
-        </div>
-        @elseif(session('message'))
-        <div class='alert alert-success'>
-          {{ session('message') }}
-        </div>
-        @endif -->
-        <div class="col-12 col-md-6">
-          <form action="#" class="form-horizontal" method="POST">
-           {{ csrf_field() }} 
-           <div class="form-group"> <!-- NOMBRE -->
-             <label for="Name">Nombre del invitado: </label>
-             <input type="text" class="form-control" id="name" placeholder="Tu nombre" name="name" required>
-           </div>
+  <tr><a class="btn btn-primary btn-sm" href="crear_keyword">NUEVA KEYWORD</a></tr>
+  <br>
+  <br>
+  <table class="table table-striped table-dark">
+    <?php $contador=0 ?>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre Keyword</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($keywords as $u)
+      <tr>
+        <th scope="row"><?php $contador++; echo $contador ?></th>
+        <td> {{ $u->name }} </td>
 
-           <div class="form-group"><!-- EMAIL -->
-             <label for="email">Email del invitado: </label>
-             <input type="text" class="form-control" id="email" placeholder="john@example.com" name="email" required>
-           </div>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
 
-           <div class="form-group">
-            <button type="submit" class="btn btn-primary" value="Send">ENVIAR</button>
-          </div>
-        </form>
+</div>
+
+
+
+
+
+
+
+<!--  BANNER MODAL ABOUT -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">ABOUT US</h4>
       </div>
-    </div> <!-- /container -->
-
-    
-    <div class="alert alert-warning">
-      <strong>Warning!</strong> Si ves que el correo no llega mira en la carpeta SPAM.
-    </div>
-
-
-
-    <!--  BANNER MODAL ABOUT -->
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- CONTENIDO DE ABOUT EN BANNER-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">ABOUT US</h4>
-          </div>
-          <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
-          </div>
-        </div>
-
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
       </div>
     </div>
+
+  </div>
+</div>
 <!-- FIN BANNER MODAL -->
+

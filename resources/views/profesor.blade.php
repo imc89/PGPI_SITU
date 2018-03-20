@@ -1,3 +1,23 @@
+
+{{! $alumnos = DB::table('users')
+->where('rol','=','1')
+->select('users.name','users.email')
+->get() }}
+
+<!-- BASE DE DATOS TOMAMOS DATOS DE PERFIL -->
+{{! $datos = DB::table('alumno')
+->select('nombre','apellidos','dni')
+->join('users','users.id','=','user_id')
+->get()
+}}
+
+{{! $contar = DB::table('alumno') 
+->select ('nombre')
+->join('users','users.id','=','user_id')
+->count()
+}}
+
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -107,47 +127,130 @@
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
 <br><br><br><br><br>
 <div align="center">
-  <h1>SOY UN PROFESOR</h1>
-</div>
-<!-- FINAL CARRUSEL -->
+  <h1>BIENVENIDO PROFESOR</h1>
+  <h1>TABLÓN DE {{Auth::user()->name}}</h1> 
+  <br>
 
 
-
-
-
-<!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-<div class="body_bottom" id="footer" style="position: absolute;" align="center">
-  <table>
+  
+  <table class="table table-striped table-dark">
+    <?php $contador=0 ?>
+    <?php $contadato=0 ?>
+    <thead>
+      <tr class="bordertable">
+        <th class="bordertable" scope="col">#</th>
+        <th class="bordertable" scope="col">Nombre de Perfil_Alumno</th>
+        <th class="bordertable" scope="col">Apellido de Perfil_Alumno</th>
+        <th class="bordertable" scope="col">DNI de Perfil_Alumno</th>
+        <th class="bordertable" scope="col">Ver Curriculum</th>
+      </tr>
+    </thead>
     <tbody>
 
-     <tr> 
-      <td class="foot_izdo">&nbsp;</td> 
-      <td class="foot_cent"> 
-        <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-          <br> 
-          Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
-        </p> 
 
-        <!-- REDES SOCIALES -->
-        <div id="social"> 
-          <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
-          </a> 
-          <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
-          </a>
-          <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
-          </a>
-          <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
-          </a> 
-          <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
-          </a>
-          <br><br>
-        </div>
-        <!-- FIN REDES SOCIALES -->
+      <b> 
+        <div style="text-align: center;">
+          <span style="text-align: center;padding: 5px 5px 5px 5px; border-radius: 5px;" 
+          class="btn-primary" onmouseover="this.style.background='#6478A7';" onmouseout="this.style.background='#2865A8';">
+          {{ $contar }}
+        </span> 
+      </div>
+      <h4><b>Alumnos registrados</b></h4> </b>
+      <br> <br>
+
+
+
+      <div class="body">
+
+        @foreach ($datos as $a)
+        @if($contar > $contadato)
+        <tr class="bordertable">
+
+          <th class="bordertable" scope="row"><?php $contador++; echo $contador ?></th>
+          @if(!empty($a->nombre))
+          <td class="bordertable"> {{$a->nombre}} </td>
+          @else
+          <td class="bordertable"> DATO NO INTRODUCIDO <p> POR EL ALUMNO </td>
+          @endif
+
+          @if(!empty($a->apellidos))
+          <td class="bordertable"> {{$a->apellidos}} </td>
+          @else
+          <td class="bordertable"> DATO NO INTRODUCIDO <p> POR EL ALUMNO </td>
+          @endif
+
+          @if(!empty($a->dni))
+          <td class="bordertable"> {{$a->dni}} </td>
+          @else
+          <td class="bordertable"> DATO NO INTRODUCIDO <p> POR EL ALUMNO </td>
+          @endif
+
+          <?php $contadato++;  ?>
+          <td class="bordertable"> <button type="button" class="btn btn-primary">IR A CURRICULUM</button></td>
+
+          @else
+          <td class="bordertable"> - </td>
+        </tr>
+        <?php $contadato++;  ?>
+        @endif
+        @endforeach 
+
+     
+
+
+
+
+
+
+
+
+
+    </tbody>
+  </table>
+
+
+
+</div>
+ </div>
+<!-- FINAL CARRUSEL -->
+</body>
+
+
+
+ <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
+  <div  id="footer" style="position:absolute" align="center">
+    <table>
+      <tbody>
+
+       <tr> 
+        <td class="foot_izdo">&nbsp;</td> 
+        <td class="foot_cent"> 
+          <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
+            <br> 
+            Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
+          </p> 
+
+          <!-- REDES SOCIALES -->
+          <div id="social"> 
+            <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
+            </a> 
+            <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
+            </a>
+            <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
+            </a>
+            <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
+            </a> 
+            <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
+            </a>
+            <br><br>
+          </div>
+          <!-- FIN REDES SOCIALES -->
+
 
         <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
         / Sponsored by the
@@ -192,7 +295,6 @@
 </div>
 <!-- FIN BANNER MODAL -->
 
-</body>
 </html>
 
 
@@ -216,3 +318,33 @@
     window.onhashchange=function(){window.location.hash="no-back-button";}
   }
 </script>
+
+<style>
+html{
+    background: url('/images/fondo_body.jpg')fixed;
+
+}
+.body{
+  background: url('/images/fondo_body.jpg')fixed;
+  padding: 0;
+  margin: 0;
+  font-family: arial;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.bordertable td, th {
+  border: 1px solid #9D9DB8;
+  text-align: left;
+  padding: 8px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>

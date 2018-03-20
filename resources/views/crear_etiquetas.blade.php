@@ -109,13 +109,12 @@
 
 
 
-
         <!-- FIN DE NAVEGADOR -->
         <br>
         <br>
         <br>
         <div class="container">
-         <h1 class="mb-2 text-center">Crear Nueva etiqueta</h1>
+         <h1 class="mb-2 text-center">Crear Nueva Etiqueta</h1>
          
          @if(session('message'))
          <div class='alert alert-success'>

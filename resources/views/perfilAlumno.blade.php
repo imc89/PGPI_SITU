@@ -109,6 +109,9 @@
   <a href="#">
     <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
   </a>
+   <a href="#">
+    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
+  </a>
   <a href="crear_hechos">
     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
   </a>

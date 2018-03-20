@@ -38,7 +38,7 @@ class HechosController extends Controller
 
 				DB::table('hechos')
 				->join('alumno','alumno.id','=','alumno_id')
-				->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "contenido" => $request->contenido , "video" => $request->video , "anexo" => $filename , "encuentro" => $request->encuentro , "proposito" => $request->proposito , "foto" => $filename2 , "autorizacion" => $request->autorizacion ]);	
+				->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "keywords" => $request->keywords , "contenido" => $request->contenido , "video" => $request->video , "anexo" => $filename , "encuentro" => $request->encuentro , "proposito" => $request->proposito , "foto" => $filename2 , "autorizacion" => $request->autorizacion ]);	
 			}
 			elseif($request->hasFile('foto')){
 				$foto = $request->file('foto');
@@ -46,7 +46,7 @@ class HechosController extends Controller
 				Image::make($foto)->save( public_path('/images/fotos/' . $filename ) );
 				DB::table('hechos')
 				->join('alumno','alumno.id','=','alumno_id')
-				->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "foto" => $filename , "proposito" => $request->proposito , "autorizacion" => $request->autorizacion]);
+				->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "keywords" => $request->keywords , "foto" => $filename , "proposito" => $request->proposito , "autorizacion" => $request->autorizacion]);
 			}
 
 			elseif($request->hasFile('anexo')){
@@ -54,13 +54,13 @@ class HechosController extends Controller
 				$request->file('anexo')->move(public_path("/images/anexos/"), $filename);		
 				DB::table('hechos')
 				->join('alumno','alumno.id','=','alumno_id')
-				->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "contenido" => $request->contenido , "video" => $request->video , "anexo" => $filename , "encuentro" => $request->encuentro , "proposito" => $request->proposito , "autorizacion" => $request->autorizacion ]);	
+				->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "keywords" => $request->keywords , "contenido" => $request->contenido , "video" => $request->video , "anexo" => $filename , "encuentro" => $request->encuentro , "proposito" => $request->proposito , "autorizacion" => $request->autorizacion ]);	
 			}
 
 			else{
 				DB::table('hechos')
 				->join('alumno','alumno.id','=','alumno_id')
-				->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "contenido" => $request->contenido , "video" => $request->video , "encuentro" => $request->encuentro , "proposito" => $request->proposito , "autorizacion" => $request->autorizacion ]);
+				->insert(['alumno_id' => $id->id , "etiqueta" => $request->etiqueta , "titulo" => $request->titulo , "curso" => $request->curso , "fecha" => $request->fecha , "keywords" => $request->keywords , "contenido" => $request->contenido , "video" => $request->video , "encuentro" => $request->encuentro , "proposito" => $request->proposito , "autorizacion" => $request->autorizacion ]);
 
 			}
 

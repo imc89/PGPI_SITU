@@ -45,6 +45,9 @@
   <a href="mail_invitados">
     <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
   </a>
+  <a href="keywords">
+    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
+  </a>
   <a href="crear_hechos">
     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
   </a>
@@ -117,78 +120,166 @@
   <?php $contador=0 ?>
 
 
-  <form action="filtrar_hechos" class="form-horizontal fv-form fv-form-bootstrap">
+  <!--INICIO FILTROS  -->
+  <div style="text-align: center;">
 
-    <br>
-    <div align="center" >
-      <div  style="width: 500px">
-        <div class="form-group" required><!-- ETIQUETAS -->
-          <label >Filtrar por etiqueta: </label>
-          <div>
-            <form action="FilterhechosController.php" method="post">
-              {{! $etiquetas = DB::table('tags')->get() }}
-              <select id="hecho" class="form-control" name="etiqueta" required>
-                <option> Todos los hechos </option>
-                @foreach($etiquetas as $tag)
-                <option> {{ $tag->name }} </option>
-                @endforeach
-              </select>
-              <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 530px; align-content: center">        
-            </form>
+    <!-- PRIMER FILTRO -->
+    <div style="padding: 10px;margin: 10px;display: inline-block;">
+
+      <form action="filtrar_hechos_etiqueta" class="form-horizontal fv-form fv-form-bootstrap">
+
+        <br>
+        <div align="center" >
+          <div  style="width: 300px">
+            <div class="form-group" required><!-- ETIQUETAS -->
+              <label >Filtrar por etiqueta: </label>
+              <div>
+                <form action="FilterhechosController.php" method="post">
+                  {{! $etiquetas = DB::table('tags')->get() }}
+                  <select id="hecho" class="form-control" name="etiqueta" required>
+                    <option> Todos los hechos </option>
+                    @foreach($etiquetas as $tag)
+                    <option> {{ $tag->name }} </option>
+                    @endforeach
+                  </select>
+                  <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
+                </form>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- SEGUNDO FILTRO -->
+    <div style="padding: 10px;margin: 10px;display: inline-block;">
+
+      <form action="filtrar_hechos_keyword" class="form-horizontal fv-form fv-form-bootstrap">
+
+        <br>
+        <div align="center" >
+          <div  style="width: 300px">
+            <div class="form-group" required><!-- ETIQUETAS -->
+              <label >Filtrar por keywords: </label>
+              <div>
+                <form action="FilterhechosController.php" method="post">
+                  {{! $keywords = DB::table('keywords')->get() }}
+                 <select id="hecho" class="form-control" name="keyword" required>
+                  <option>Cualquier keyword</option>
+                  @foreach($keywords as $tag)
+                  <option> {{ $tag->name }} </option>
+                  @endforeach
+                </select>
+                <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
+              </form>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
-  </div>
-  @foreach($hechos as $u)
-
-  <div align="center">
-    <div id="hecho_div">
-      <div style="float: left;">
-        <u>HECHO Nº <?php $contador++; echo $contador ?></u>
+        </form>
       </div>
-      <div style="float: right;">
-        <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
-        <div style="float: right;background: #BAB9BB;border-radius:5px">
-          <button style="border: none;background: transparent;">
-            <span id="borrar" class="glyphicon glyphicon-remove"></span>
-          </button>
-        </div>
-      </div>
-      @if($u->etiqueta !== NULL)
-      <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
-      @endif
-      @if($u->titulo !== NULL)
-      <b>Título:</b>  {{ $u->titulo }} <br>
-      @endif
-      @if($u->curso !== NULL)
-      <b>Curso:</b>  {{ $u->curso }}º <br>
-      @endif
-      @if($u->contenido !== NULL)
-      <b>Contenido:</b>  {{ $u->contenido }} <br>
-      @endif
-      @if($u->video !== NULL)
-      <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
-      @endif
-      @if($u->encuentro !== NULL)
-      <b>Encuentro:</b> {{ $u->encuentro }}  <br>
-      @endif
-      @if($u->foto !== NULL)
-      <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
-      @endif
-      @if($u->anexo !== NULL)
-      <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
-      @endif
-      @if($u->proposito !== NULL)
-      <b>Propósito:</b>  {{ $u->proposito }} <br>
-      @endif
-
-
-
     </div>
+
+
   </div>
-  <br>
-  @endforeach
+
+  <!-- TERCER FILTRO -->
+  <div style="padding: 10px;margin: 10px;display: inline-block;">
+
+    <form action="filtrar_hechos_titulo" class="form-horizontal fv-form fv-form-bootstrap">
+
+      <br>
+      <div align="center" >
+        <div  style="width: 300px">
+          <div class="form-group" required><!-- ETIQUETAS -->
+            <label >Filtrar por título: </label>
+            <div>
+              <form action="FilterhechosController.php" method="post">
+               <input type="text" class="form-control" name="titulo" required>
+               <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
+             </form>
+           </div>
+         </div>
+       </form>
+     </div>
+   </div>
+
+
+ </div>
+
+ <!--CIERRE DE LOS FILTROS  -->
+</div>
+
+
+
+
+
+
+@foreach($hechos as $u)
+<div align="center">
+  <div id="hecho_div">
+    <div style="float: left;">
+      <u>HECHO Nº <?php $contador++; echo $contador ?></u>
+    </div>
+    <div style="float: right;">
+      <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
+      <div style="float: right;background: #BAB9BB;border-radius:5px">
+        <button style="border: none;background: transparent;">
+          <span id="borrar" class="glyphicon glyphicon-remove"></span>
+        </button>
+      </div>
+    </div>
+    @if($u->etiqueta !== NULL)
+    <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+    @endif
+
+    @if($u->titulo !== NULL)
+    <b>Título:</b>  {{ $u->titulo }} <br>
+    @endif
+
+    @if($u->curso !== NULL)
+    <b>Curso:</b>  {{ $u->curso }}º <br>
+    @endif
+
+    @if($u->contenido !== NULL)
+    <b>Contenido:</b>  {{ $u->contenido }} <br>
+    @endif
+
+    @if($u->video !== NULL)
+    <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+    @endif
+
+    @if($u->encuentro !== NULL)
+    <b>Encuentro:</b> {{ $u->encuentro }}  <br>
+    @endif
+
+    @if($u->foto !== NULL)
+    <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
+    @endif
+
+    @if($u->anexo !== NULL)
+    <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+    @endif
+
+    @if($u->proposito !== NULL)
+    <b>Propósito:</b>  {{ $u->proposito }} <br>
+    @endif
+
+
+    @if($u->keywords !== NULL)
+    {{! $array = explode( ',', $u->keywords )}}
+    <br><b>Keywords:</b> 
+    @foreach ($array as $item) 
+    <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+    @endforeach 
+    <br>
+    @endif
+
+
+  </div>
+</div>
+<br>
+@endforeach
 </div>
 </body>
 <!-- FINAL CARRUSEL -->
@@ -397,6 +488,13 @@
   cursor: pointer;
   text-transform: uppercase;
   font-size: 12px;
+}
+
+select {  text-align-last:center; }
+
+.btn.btn-primary[disabled] {
+    color: white;
+    opacity: 1;
 }
 
 </style>

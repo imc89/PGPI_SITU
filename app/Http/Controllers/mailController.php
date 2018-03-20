@@ -23,8 +23,8 @@ class mailController extends Controller
 
             });
 
-        DB::table('alumno')->join('users','id','=','user_id')
-        ->insert(['user_id' => Auth::user()->id]);
+        // DB::table('alumno')->join('users','id','=','user_id')
+        // ->insert(['user_id' => Auth::user()->id]);
             
             return redirect()->back()->with('message', '¡Gracias por tu mensaje! Te responderemos tan pronto como nos sea posible.');
         }

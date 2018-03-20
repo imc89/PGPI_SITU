@@ -32,6 +32,7 @@ class CreateHechosTable extends Migration
             $table->string('titulo');
             $table->integer('curso')->nullable();
             $table->date('fecha')->nullable();
+            $table->string('keywords')->nullable();
             $table->string('contenido', 5000)->nullable();
             $table->string('proposito', 5000)->nullable();
             $table->integer('autorizacion')->nullable();

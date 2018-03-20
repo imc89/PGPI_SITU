@@ -64,7 +64,20 @@ Route::group(['middleware' => ['auth']], function() {
 		->where('alumno_id','=', $aluid->id)
 		->get();
 
-		return view('alumno', compact('hechos'));		
+		$alumno_id = DB::table('alumno')
+		->where('users.id','=', Auth::user()->id)
+		->join('users','users.id','=','user_id')
+		->select('alumno.id') 
+		->get();
+
+		foreach($alumno_id as $aluid)
+			$aluid->id; 
+		$keywords = DB::table('keywords')
+		->where('alumno_id','=', $aluid->id)
+		->get();
+
+
+		return view('alumno', compact('hechos','keywords'));		
 	});
 
 	Route::get('configPerfil', function () {
@@ -80,11 +93,61 @@ Route::group(['middleware' => ['auth']], function() {
 		return view('perfilAlumno');
 	});
 
-	Route::get('crear_hechos', function () {
-		return view('crear_hechos');
+	Route::get('keywords', function () {
+
+		$alumno_id = DB::table('alumno')
+		->where('users.id','=', Auth::user()->id)
+		->join('users','users.id','=','user_id')
+		->select('alumno.id') 
+		->get();
+
+		foreach($alumno_id as $aluid)
+			$aluid->id; 
+		$keywords = DB::table('keywords')
+		->where('alumno_id','=', $aluid->id)
+		->get();
+
+		return view('keywords', compact('keywords'));
 	});
 
-	Route::get('filtrar_hechos', 'FiltrarhechosController@filtrar_hechos');
+	Route::post('send_keyword','KeywordsController@send_keyword');
+
+	Route::get('crear_keyword', function () {
+		return view('crear_keywords');
+	});
+
+	Route::get('/autocomplete', array('as' => 'autocomplete', 'uses'=>'KeyautocompleteController@autocomplete'));
+
+
+	Route::get('crear_hechos', function () {
+
+		$alumno_id = DB::table('alumno')
+		->where('users.id','=', Auth::user()->id)
+		->join('users','users.id','=','user_id')
+		->select('alumno.id') 
+		->get();
+
+		foreach($alumno_id as $aluid)
+			$aluid->id; 
+		$keywords = DB::table('keywords')
+		->where('alumno_id','=', $aluid->id)
+		->get();
+
+		return view('crear_hechos', compact('keywords'));
+	});
+
+// FILTRAR PARA TABLON 
+
+	Route::get('filtrar_hechos_etiqueta', 'FiltrarhechosController@filtrar_hechos_etiqueta');
+	Route::get('filtrar_hechos_titulo', 'FiltrarhechosController@filtrar_hechos_titulo');
+	Route::get('filtrar_hechos_keyword', 'FiltrarhechosController@filtrar_hechos_keyword');
+
+
+// FILTRAR PARA LINEA TEMPORAL
+
+	Route::get('filtrar_linea_etiqueta', 'FiltrarhechosController@filtrar_linea_etiqueta');
+	Route::get('filtrar_linea_titulo', 'FiltrarhechosController@filtrar_linea_titulo');
+	Route::get('filtrar_linea_keyword', 'FiltrarhechosController@filtrar_linea_keyword');
 
 
 	Route::post('nuevo_hecho', 'HechosController@nuevo_hecho');
@@ -95,7 +158,22 @@ Route::group(['middleware' => ['auth']], function() {
 	});
 
 	Route::get('lineaTiempo', function () {
-		return view('lineaTiempo');
+		// FILTRO
+		$alumno_id = DB::table('alumno')
+		->where('users.id','=', Auth::user()->id)
+		->join('users','users.id','=','user_id')
+		->select('alumno.id') 
+		->get();
+
+		foreach($alumno_id as $aluid)
+			$aluid->id; 
+		$hechos = DB::table('hechos')
+		->where('alumno_id','=', $aluid->id)
+		->ORDERBY('fecha')
+		->get();
+
+		return view('lineaTiempo', compact('hechos'));	
+
 	});
 
 
@@ -103,6 +181,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('profesor', function () {
 		return view('profesor');
 	});
+	
 });
 
 Auth::routes();

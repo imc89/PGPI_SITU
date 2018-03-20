@@ -4,6 +4,9 @@
 ->where('name', Auth::user()->name)
 ->update(['logins' => $logins ])}}
 
+
+
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -23,7 +26,18 @@
 
 	<!-- CSS LINK CON NOMENCLATURA LARAVEL -->
 	<link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
+	
 
+
+	<!--  LINK KEYWORD TAGS BOOTSTRAP JQUERY -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js">
+	</script>
 
 </head>
 
@@ -42,6 +56,9 @@
 		</a>
 		<a href="#">
 			<span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
+		</a> 
+		<a href="keywords">
+			<span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
 		</a>
 		<a href="#">
 			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
@@ -113,9 +130,6 @@
 	</div>
 	@endif
 
-
-
-
 	<div align="center" class="body">
 		<div  style="width: 780px;background: #B7C2D2; border-radius: 10px">
 
@@ -127,8 +141,8 @@
 
 				<div class="row" align="left">
 					<div class="col-xs-12" id="demoContainer">
-
-						<form  method="POST" enctype="multipart/form-data" action="nuevo_hecho" class="form-horizontal fv-form fv-form-bootstrap" >
+						<!-- AÑADIDO id="programmer_form" -->
+						<form  method="POST" id="programmer_form" enctype="multipart/form-data" action="nuevo_hecho" class="form-horizontal fv-form fv-form-bootstrap" >
 
 							<br>
 
@@ -159,6 +173,13 @@
 								</div>
 							</div>
 
+
+							<div class="form-group">
+								<label class="col-xs-7">Añade tus Keywords: </label>
+								<div class="col-xs-8">
+									<input autocomplete="off" type="text" name="keywords" id="keywords" placeholder="Keywords" class="form-control "/>
+								</div>
+							</div>
 
 							<!--  -->
 							<!--  -->
@@ -385,7 +406,7 @@
 
 									<div class="form-group">
 										<div>
-											<input type="submit" class="btn btn-primary"  value="CREAR NUEVO HECHO" style="width: 780px; align-content: center">
+											<input type="submit" name="submit" id="submit" class="btn btn-primary"  value="CREAR NUEVO HECHO" style="width: 780px; align-content: center">
 										</div>
 									</div>
 								</form>
@@ -652,4 +673,53 @@ $(document).on("keypress", "input", function (e) {
 }
 
 </style>
+
+<!-- ESTILO DE  LOS KEYWORDS Y SCRIPT-->
+<style type="text/css">
+
+
+div.token{
+	background:  #4482B5 !important;
+	background:  #4482B5 !important;
+	font-weight: bold !important;
+	color: white !important;}
+
+	.close{
+		margin-right: 0 !important;
+		background:  #4482B5 !important;
+		opacity:1 !important;
+	}
+
+	.close:hover{
+		color:red !important;
+		opacity:1 !important;
+	}
+
+	.ui-menu-divider{
+		height: 20px !important;
+		color: red !important;
+	}
+
+</style>
+
+
+
+<script>
+
+	$(document).ready(function(){
+
+		$('#keywords').tokenfield({
+			autocomplete:{
+				source:'{!!URL::route('autocomplete')!!}',
+				delay:100
+			},
+			showAutocompleteOnFocus: true,
+			allowDuplicates: false,
+		});
+
+	});
+
+
+</script>
+
 

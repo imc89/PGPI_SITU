@@ -4,19 +4,6 @@
 ->where('name', Auth::user()->name)
 ->update(['logins' => $logins ])}}
 
-{{! $alumno_id = DB::table('alumno')
-->where('users.id','=', Auth::user()->id)
-->join('users','users.id','=','user_id')
-->select('alumno.id')
-->get() }}
-
-@foreach($alumno_id as $aluid)
-{{ $aluid->id }} 
-{{! $hechos = DB::table('hechos')
-->where('alumno_id','=', $aluid->id)
-->get() }}
-@endforeach
-
 
 
 <!doctype html>
@@ -57,6 +44,9 @@
   </a>
   <a href="#">
     <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
+  </a>
+   <a href="keywords">
+    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
   </a>
   <a href="crear_hechos">
     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
@@ -114,17 +104,97 @@
 <!-- FIN DE NAVEGADOR -->
 
 
-<!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
-<!-- <div class="container">
-  <div class="line time">
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
-    <p>A FECHA DE : 12-12-18 <br>HOLA MUNDO</p>
+
+
+  <!--INICIO FILTROS  -->
+  <div style="text-align: center;">
+
+    <!-- PRIMER FILTRO -->
+    <div style="padding: 10px;margin: 10px;display: inline-block;">
+
+      <form action="filtrar_linea_etiqueta" class="form-horizontal fv-form fv-form-bootstrap">
+
+        <br>
+        <div align="center" >
+          <div  style="width: 300px">
+            <div class="form-group" required><!-- ETIQUETAS -->
+              <label >Filtrar por etiqueta: </label>
+              <div>
+                <form action="FilterhechosController.php" method="post">
+                  {{! $etiquetas = DB::table('tags')->get() }}
+                  <select id="hecho" class="form-control" name="etiqueta" required>
+                    <option> Todos los hechos </option>
+                    @foreach($etiquetas as $tag)
+                    <option> {{ $tag->name }} </option>
+                    @endforeach
+                  </select>
+                  <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
+                </form>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- SEGUNDO FILTRO -->
+    <div style="padding: 10px;margin: 10px;display: inline-block;">
+
+      <form action="filtrar_linea_keyword" class="form-horizontal fv-form fv-form-bootstrap">
+
+        <br>
+        <div align="center" >
+          <div  style="width: 300px">
+            <div class="form-group" required><!-- ETIQUETAS -->
+              <label >Filtrar por keywords: </label>
+              <div>
+                <form action="FilterhechosController.php" method="post">
+                  {{! $keywords = DB::table('keywords')->get() }}
+                 <select id="hecho" class="form-control" name="keyword" required>
+                  <option>Cualquier keyword</option>
+                  @foreach($keywords as $tag)
+                  <option> {{ $tag->name }} </option>
+                  @endforeach
+                </select>
+                <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
+              </form>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
 
   </div>
-</div> -->
+
+  <!-- TERCER FILTRO -->
+  <div style="padding: 10px;margin: 10px;display: inline-block;">
+
+    <form action="filtrar_linea_titulo" class="form-horizontal fv-form fv-form-bootstrap">
+
+      <br>
+      <div align="center" >
+        <div  style="width: 300px">
+          <div class="form-group" required><!-- ETIQUETAS -->
+            <label >Filtrar por título: </label>
+            <div>
+              <form action="FilterhechosController.php" method="post">
+               <input type="text" class="form-control" name="titulo" required>
+               <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
+             </form>
+           </div>
+         </div>
+       </form>
+     </div>
+   </div>
+
+
+ </div>
+
+ <!--CIERRE DE LOS FILTROS  -->
+</div>
 
 <div class="body">
   <ul id="time-line">
@@ -326,6 +396,9 @@ ul#time-line li:nth-child(2n) div:after{
 ul#time-line li.visibility {
   transform: rotateX(0deg) perspective(360px);
 }
+
+select {  text-align-last:center; }
+
 </style>
 
 <script type="text/javascript">
