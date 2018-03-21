@@ -136,6 +136,10 @@ Route::group(['middleware' => ['auth']], function() {
 		return view('crear_hechos', compact('keywords'));
 	});
 
+
+	Route::get('eliminar_hecho', 'EliminarController@eliminar_hecho');
+	Route::get('eliminar_keyword', 'EliminarController@eliminar_keyword');
+
 // FILTRAR PARA TABLON 
 
 	Route::get('filtrar_hechos_etiqueta', 'FiltrarhechosController@filtrar_hechos_etiqueta');

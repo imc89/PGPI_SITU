@@ -104,27 +104,52 @@
 <div class="container">
   <h1 class="mb-2 text-center">KEYWORDS</h1>
 
+  @if(session('message'))
+  <div align="center" class='alert alert-success'>
+    {{ session('message') }}
+  </div>
+  @endif
+
+
+
   <tr><a class="btn btn-primary btn-sm" href="crear_keyword">NUEVA KEYWORD</a></tr>
   <br>
   <br>
-  <table class="table table-striped table-dark">
+  <table class="table table-striped table-dark" align="center">
     <?php $contador=0 ?>
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nombre Keyword</th>
+        <th scope="col" class="text-center">#</th>
+        <th scope="col" class="text-center">Nombre Keyword</th>
+        <th scope="col" class="text-center">Eliminar Keyword</th>
       </tr>
     </thead>
     <tbody>
       @foreach($keywords as $u)
       <tr>
-        <th scope="row"><?php $contador++; echo $contador ?></th>
-        <td> {{ $u->name }} </td>
+        <th class="text-center" scope="row"><?php $contador++; echo $contador ?></th>
+        <td class="text-center"> {{ $u->name }} </td>
+        <td class="text-center">
 
-      </tr>
-      @endforeach
-    </tbody>
-  </table>
+         <form action="eliminar_keyword">
+           {{! $idkey = $u->id}}
+
+           <form action="EliminarController.php" method="post">
+            <input style="color: black" type="hidden" name="data" value="{{ $idkey }}">
+
+            <button type="submit" style="border: none;background: transparent;">
+              <span id="borrar" class="glyphicon glyphicon-remove"></span>
+            </button>
+          </form>
+
+        </form>
+
+      </td>
+
+    </tr>
+    @endforeach
+  </tbody>
+</table>
 
 </div>
 
@@ -163,8 +188,16 @@
 
 <style type="text/css">
 a:hover span {
-    transform: rotateY(360deg);
-    -webkit-transform: rotateY(360deg);
-    transition-duration: 1.5s;
-    -webkit-transition-duration:1s;
-} </style>
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
+}
+
+#borrar{
+ color: black; 
+}
+#borrar:hover{
+ color: red; 
+}
+</style>

@@ -114,8 +114,8 @@
   <br><br><br><br><br>
   <div align="center">
     <div class="alert alert-warning">
-    <strong>Warning!</strong> Para que tu profesor pueda ver correctamente tu curriculum completa lo mejor posible tus datos de perfil.
-  </div>
+      <strong>Warning!</strong> Para que tu profesor pueda ver correctamente tu curriculum completa lo mejor posible tus datos de perfil.
+    </div>
     <h1>BIENVENIDO ALUMNO</h1>
     <h1>TABLÓN DE HECHOS DE {{Auth::user()->name}}</h1> 
   </div>
@@ -170,52 +170,56 @@
               <div>
                 <form action="FilterhechosController.php" method="post">
                   {{! $keywords = DB::table('keywords')->get() }}
-                 <select id="hecho" class="form-control" name="keyword" required>
-                  <option>Cualquier keyword</option>
-                  @foreach($keywords as $tag)
-                  <option> {{ $tag->name }} </option>
-                  @endforeach
-                </select>
-                <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
-              </form>
+                  <select id="hecho" class="form-control" name="keyword" required>
+                    <option>Cualquier keyword</option>
+                    @foreach($keywords as $tag)
+                    <option> {{ $tag->name }} </option>
+                    @endforeach
+                  </select>
+                  <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
+                </form>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
+
+
     </div>
 
+    <!-- TERCER FILTRO -->
+    <div style="padding: 10px;margin: 10px;display: inline-block;">
 
-  </div>
+      <form action="filtrar_hechos_titulo" class="form-horizontal fv-form fv-form-bootstrap">
 
-  <!-- TERCER FILTRO -->
-  <div style="padding: 10px;margin: 10px;display: inline-block;">
-
-    <form action="filtrar_hechos_titulo" class="form-horizontal fv-form fv-form-bootstrap">
-
-      <br>
-      <div align="center" >
-        <div  style="width: 300px">
-          <div class="form-group" required><!-- ETIQUETAS -->
-            <label >Filtrar por título: </label>
-            <div>
-              <form action="FilterhechosController.php" method="post">
-               <input type="text" class="form-control" name="titulo" required>
-               <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
-             </form>
+        <br>
+        <div align="center" >
+          <div  style="width: 300px">
+            <div class="form-group" required><!-- ETIQUETAS -->
+              <label >Filtrar por título: </label>
+              <div>
+                <form action="FilterhechosController.php" method="post">
+                 <input type="text" class="form-control" name="titulo" required>
+                 <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
+               </form>
+             </div>
            </div>
-         </div>
-       </form>
+         </form>
+       </div>
      </div>
+
+
    </div>
 
-
+   <!--CIERRE DE LOS FILTROS  -->
  </div>
 
- <!--CIERRE DE LOS FILTROS  -->
+
+ @if(session('message'))
+ <div align="center" class='alert alert-success'>
+  {{ session('message') }}
 </div>
-
-
-
+@endif
 
 
 
@@ -227,60 +231,76 @@
     </div>
     <div style="float: right;">
       <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
+
       <div style="float: right;background: #BAB9BB;border-radius:5px">
-        <button style="border: none;background: transparent;">
-          <span id="borrar" class="glyphicon glyphicon-remove"></span>
-        </button>
-      </div>
+
+
+        <form action="eliminar_hecho">
+         {{! $idhecho = $u->id}}
+
+         <form action="EliminarController.php" method="post">
+          <input style="color: black" type="hidden" name="data" value="{{ $idhecho }}">
+
+          <button type="submit" style="border: none;background: transparent;">
+            <span id="borrar" class="glyphicon glyphicon-remove"></span>
+          </button>
+        </form>
+
+      </form>
+
+
     </div>
-    @if($u->etiqueta !== NULL)
-    <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
-    @endif
-
-    @if($u->titulo !== NULL)
-    <b>Título:</b>  {{ $u->titulo }} <br>
-    @endif
-
-    @if($u->curso !== NULL)
-    <b>Curso:</b>  {{ $u->curso }}º <br>
-    @endif
-
-    @if($u->contenido !== NULL)
-    <b>Contenido:</b>  {{ $u->contenido }} <br>
-    @endif
-
-    @if($u->video !== NULL)
-    <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
-    @endif
-
-    @if($u->encuentro !== NULL)
-    <b>Encuentro:</b> {{ $u->encuentro }}  <br>
-    @endif
-
-    @if($u->foto !== NULL)
-    <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
-    @endif
-
-    @if($u->anexo !== NULL)
-    <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
-    @endif
-
-    @if($u->proposito !== NULL)
-    <b>Propósito:</b>  {{ $u->proposito }} <br>
-    @endif
-
-
-    @if($u->keywords !== NULL)
-    {{! $array = explode( ',', $u->keywords )}}
-    <br><b>Keywords:</b> 
-    @foreach ($array as $item) 
-    <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
-    @endforeach 
-    <br>
-    @endif
-
 
   </div>
+
+  @if($u->etiqueta !== NULL)
+  <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+  @endif
+
+  @if($u->titulo !== NULL)
+  <b>Título:</b>  {{ $u->titulo }} <br>
+  @endif
+
+  @if($u->curso !== NULL)
+  <b>Curso:</b>  {{ $u->curso }}º <br>
+  @endif
+
+  @if($u->contenido !== NULL)
+  <b>Contenido:</b>  {{ $u->contenido }} <br>
+  @endif
+
+  @if($u->video !== NULL)
+  <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+  @endif
+
+  @if($u->encuentro !== NULL)
+  <b>Encuentro:</b> {{ $u->encuentro }}  <br>
+  @endif
+
+  @if($u->foto !== NULL)
+  <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
+  @endif
+
+  @if($u->anexo !== NULL)
+  <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+  @endif
+
+  @if($u->proposito !== NULL)
+  <b>Propósito:</b>  {{ $u->proposito }} <br>
+  @endif
+
+
+  @if($u->keywords !== NULL)
+  {{! $array = explode( ',', $u->keywords )}}
+  <br><b>Keywords:</b> 
+  @foreach ($array as $item) 
+  <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+  @endforeach 
+  <br>
+  @endif
+
+
+</div>
 </div>
 <br>
 @endforeach
@@ -495,17 +515,17 @@
 }
 
 a:hover span {
-    transform: rotateY(360deg);
-    -webkit-transform: rotateY(360deg);
-    transition-duration: 1.5s;
-    -webkit-transition-duration:1s;
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
 } 
 
 select {  text-align-last:center; }
 
 .btn.btn-primary[disabled] {
-    color: white;
-    opacity: 1;
+  color: white;
+  opacity: 1;
 }
 
 </style>
