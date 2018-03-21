@@ -32,10 +32,10 @@
    <a href="/" align="center" style="padding: 0 0 0 0 "> 
      <img width="50px" src="{{ asset('images/icono.jpg') }}" >
    </a>
-   <a  data-toggle="modal" data-target="#myModal">
-    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
+   <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+    <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
   </a>
-  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
+  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'" >
     <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
   </a>
   <!-- BOTÓN DE LOGIN -->
@@ -196,7 +196,7 @@
       <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down modal-sound">    
       </span>
     </div>
-     <div class="sound_off">
+    <div class="sound_off">
       <span id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off modal-sound"> 
       </span>
     </div>
@@ -380,6 +380,18 @@
   font-size: 12px;
 }
 
+#card:hover  span {
+    transform: rotateY(360deg);
+    -webkit-transform: rotateY(360deg);
+    transition-duration: 1.5s;
+    -webkit-transition-duration:1s;
+} 
+#btn:hover  span {
+    transform: rotateY(360deg);
+    -webkit-transform: rotateY(360deg);
+    transition-duration: 1.5s;
+    -webkit-transition-duration:1s;
+} 
 </style>
 
 

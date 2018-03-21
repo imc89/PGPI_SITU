@@ -45,7 +45,7 @@
 		<a href="alumno" align="center" style="padding: 0 0 0 0 "> 
 			<img width="50px" src="{{ asset('images/icono.jpg') }}" >
 		</a>
-		<a  data-toggle="modal" data-target="#myModal">
+		<a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
 			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
 		</a>
 		<a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
@@ -698,6 +698,12 @@ div.token{
 		color: red !important;
 	}
 
+	a:hover span {
+		transform: rotateY(360deg);
+		-webkit-transform: rotateY(360deg);
+		transition-duration: 1.5s;
+		-webkit-transition-duration:1s;
+	}  
 </style>
 
 

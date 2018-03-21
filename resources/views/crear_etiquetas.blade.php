@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
 
@@ -28,7 +28,7 @@
  <a href="admin" align="center" style="padding: 0 0 0 0 ">
    <img width="50px" src="{{ asset('images/icono.jpg') }}" >
  </a>
- <a  data-toggle="modal" data-target="#myModal">
+ <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
   <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
 </a>
 <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
@@ -56,9 +56,6 @@
     </a>
 
     <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
-      <li>
-        <a style="font-weight: bold;" href="reset" class="  glyphicon glyphicon-lock"> Password </a>
-      </li>
       <li>
         <a style="font-weight: bold;" class="glyphicon glyphicon-log-out" href="{{ route('logout') }}"
         onclick="event.preventDefault();
@@ -132,7 +129,7 @@
            <div class="form-group">
             <button type="submit" class="btn btn-primary" value="send_etiqueta">ENVIAR</button>
             <a href="etiquetas" class="btn btn-primary">
-              <span class="glyphicon glyphicon-refresh"></span> REFRESCAR ETIQUETAS
+              <span class="fa fa-refresh fa-spin"></span> REFRESCAR ETIQUETAS
             </a>  
           </form>
         </div>
@@ -165,3 +162,13 @@
         </div>
       </div>
       <!-- FIN BANNER MODAL -->
+
+
+      <style type="text/css">
+      a:hover span {
+        transform: rotateY(360deg);
+        -webkit-transform: rotateY(360deg);
+        transition-duration: 1.5s;
+        -webkit-transition-duration:1s;
+      }  
+    </style>

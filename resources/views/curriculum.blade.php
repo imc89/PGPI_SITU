@@ -71,6 +71,11 @@
 {{! $data4 = file_get_contents($pathestudi) }}
 {{! $base4 = 'data:image/' . $type4 . ';base64,' . base64_encode($data4)  }}
 
+{{! $pathecho = public_path().'/images/icons/hecho.png' }}
+{{! $type5 = pathinfo($pathecho, PATHINFO_EXTENSION) }}
+{{! $data5 = file_get_contents($pathecho) }}
+{{! $base5 = 'data:image/' . $type5 . ';base64,' . base64_encode($data5)  }}
+
 
 <div class="column_left" style="background-color:#108AD2;">
 	<div align="center" style="margin-top: 20px">
@@ -145,6 +150,9 @@
 
 
 		@foreach($hechos as $a)
+		<span>				
+			<img src="{{$base5}}" style="vertical-align: middle;width:30px;">		
+		</span>
 		<?php $contador++; echo "#".$contador?>
 
 		@if($a->titulo !== NULL)
