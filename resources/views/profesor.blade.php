@@ -6,7 +6,7 @@
 
 <!-- BASE DE DATOS TOMAMOS DATOS DE PERFIL -->
 {{! $datos = DB::table('alumno')
-->select('nombre','apellidos','dni')
+->select('alumno.id','nombre','apellidos','dni')
 ->join('users','users.id','=','user_id')
 ->get()
 }}
@@ -53,9 +53,6 @@
   </a>
   <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
     <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
-  </a>
-  <a href="#">
-    <span class="glyphicon glyphicon-education" aria-hidden="true"></span> VER CALIFICACIONES 
   </a>
   <!-- BOTÓN DE LOGIN -->
 
@@ -143,6 +140,8 @@
         <th class="bordertable" scope="col">Apellido de Perfil_Alumno</th>
         <th class="bordertable" scope="col">DNI de Perfil_Alumno</th>
         <th class="bordertable" scope="col">Ver Curriculum</th>
+        <th class="bordertable" scope="col">Descargar Curriculum</th>
+
       </tr>
     </thead>
     <tbody>
@@ -168,34 +167,58 @@
 
           <th class="bordertable" scope="row"><?php $contador++; echo $contador ?></th>
           @if(!empty($a->nombre))
-          <td class="bordertable"> {{$a->nombre}} </td>
+          <td class="bordertable"> {{ucfirst($a->nombre)}} </td>
           @else
           <td class="bordertable"> DATO NO INTRODUCIDO <p> POR EL ALUMNO </td>
-          @endif
+            @endif
 
-          @if(!empty($a->apellidos))
-          <td class="bordertable"> {{$a->apellidos}} </td>
-          @else
-          <td class="bordertable"> DATO NO INTRODUCIDO <p> POR EL ALUMNO </td>
-          @endif
+            @if(!empty($a->apellidos))
+            <td class="bordertable"> {{ucfirst($a->apellidos)}} </td>
+            @else
+            <td class="bordertable"> DATO NO INTRODUCIDO <p> POR EL ALUMNO </td>
+              @endif
 
-          @if(!empty($a->dni))
-          <td class="bordertable"> {{$a->dni}} </td>
-          @else
-          <td class="bordertable"> DATO NO INTRODUCIDO <p> POR EL ALUMNO </td>
-          @endif
+              @if(!empty($a->dni))
+              <td class="bordertable"> {{$a->dni}} </td>
+              @else
+              <td class="bordertable"> DATO NO INTRODUCIDO <p> POR EL ALUMNO </td>
+                @endif
 
-          <?php $contadato++;  ?>
-          <td class="bordertable"> <button type="button" class="btn btn-primary">IR A CURRICULUM</button></td>
+                <?php $contadato++;  ?>
+                <td class="bordertable"> 
 
-          @else
-          <td class="bordertable"> - </td>
-        </tr>
-        <?php $contadato++;  ?>
-        @endif
-        @endforeach 
+                  {{! $datopdf = $a->id}}
 
-     
+                  <form action="viewPdf">
+
+                    <form action="PdfController.php" method="post">
+                      <input type="hidden" name="data" value="{{ $datopdf }}">
+                      <input type="submit"  class="btn btn-primary" value="VER CURRICULUM">
+                    </form>
+                  </div>
+                </div>
+              </form>
+            </td>
+
+            <td class="bordertable"> 
+             <form action="downPdf">
+
+              <form action="PdfController.php" method="post">
+                <input type="hidden" name="data" value="{{ $datopdf }}">
+                <input type="submit"  class="btn btn-primary" value="DESCARGAR CURRICULUM">
+              </form>
+            </div>
+          </div>
+        </form>
+        
+      </td>
+
+      @else
+      <td class="bordertable"> - </td>
+    </tr>
+    <?php $contadato++;  ?>
+    @endif
+    @endforeach 
 
 
 
@@ -205,51 +228,53 @@
 
 
 
-    </tbody>
-  </table>
+
+
+  </tbody>
+</table>
 
 
 
 </div>
- </div>
+</div>
 <!-- FINAL CARRUSEL -->
 </body>
 
 
 
- <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-  <div  id="footer" style="position:absolute" align="center">
-    <table>
-      <tbody>
+<!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
+<div  id="footer" style="position:absolute" align="center">
+  <table>
+    <tbody>
 
-       <tr> 
-        <td class="foot_izdo">&nbsp;</td> 
-        <td class="foot_cent"> 
-          <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-            <br> 
-            Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
-          </p> 
+     <tr> 
+      <td class="foot_izdo">&nbsp;</td> 
+      <td class="foot_cent"> 
+        <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
+          <br> 
+          Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
+        </p> 
 
-          <!-- REDES SOCIALES -->
-          <div id="social"> 
-            <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
-            </a> 
-            <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
-            </a>
-            <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
-            </a>
-            <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
-            </a> 
-            <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
-            </a>
-            <br><br>
-          </div>
-          <!-- FIN REDES SOCIALES -->
+        <!-- REDES SOCIALES -->
+        <div id="social"> 
+          <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
+          </a> 
+          <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
+          </a>
+          <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
+          </a>
+          <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
+          </a> 
+          <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
+          </a>
+          <br><br>
+        </div>
+        <!-- FIN REDES SOCIALES -->
 
 
         <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
@@ -321,7 +346,7 @@
 
 <style>
 html{
-    background: url('/images/fondo_body.jpg')fixed;
+  background: url('/images/fondo_body.jpg')fixed;
 
 }
 .body{

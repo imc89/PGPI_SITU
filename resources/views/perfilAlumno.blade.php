@@ -201,7 +201,7 @@
       <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
         Nombre completo: 
         <tr>
-          <td> {{ $u->nombre }} </td>
+          <td> {{ ucfirst($u->nombre) }} </td>
           @endif
           @endforeach
         </tr>
@@ -215,7 +215,7 @@
         <label style="width: 400px" class="col-xs-7" onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
           Apellidos: 
           <tr>
-            <td> {{ $u->apellidos }} </td>
+            <td> {{ ucfirst($u->apellidos) }} </td>
             @endif
             @endforeach
           </tr>

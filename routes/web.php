@@ -180,8 +180,16 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('profesor', function () {
 		return view('profesor');
-	});
-	
+	}); 
+
+	Route::get('viewPdf', 'PdfController@CreatePDF');
+	Route::get('downPdf', 'PdfController@DownloadPDF');
+
+	Route::get('curriculum', function () {
+		return view('curriculum');
+	});		
+
+
 });
 
 Auth::routes();

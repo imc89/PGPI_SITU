@@ -30,9 +30,6 @@
 
 
 	<!--  LINK KEYWORD TAGS BOOTSTRAP JQUERY -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -152,6 +149,7 @@
 								<div class="col-xs-8" >
 									{{! $etiquetas = DB::table('tags')->get() }}
 									<select id="hecho" class="form-control" name="etiqueta" required>
+										<option> - </option>
 										@foreach($etiquetas as $tag)
 										<option> {{ $tag->name }} </option>
 										@endforeach
@@ -169,7 +167,7 @@
 							<div class="form-group" style="width: 780px;">
 								<label class="col-xs-7">Fecha del hecho: </label>
 								<div class="col-xs-8">
-									<input type="date" class="form-control" name="fecha" required>
+									<input type="date" class="form-control" name="fecha" id="fecha" required>
 								</div>
 							</div>
 
@@ -377,7 +375,7 @@
 										<br>
 										<div class="radio">
 
-											<img src="/images/lock.png" id="lock1">
+											<img src="/images/icons/lock.png" id="lock1">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<input name="autorizacion" type="radio"  value="1">
 											<label>Nivel 1</label>
@@ -385,7 +383,7 @@
 										</div>
 										<div class="radio">
 
-											<img src="/images/lock.png" id="lock2">
+											<img src="/images/icons/lock.png" id="lock2">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<input name="autorizacion" type="radio" value="2">
 											<label>Nivel 2</label>
@@ -393,7 +391,7 @@
 										</div>
 										<div class="radio">
 
-											<img src="/images/lock.png" id="lock3">
+											<img src="/images/icons/lock.png" id="lock3">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<input name="autorizacion" type="radio"  value="3">
 											<label>Nivel 3</label>
@@ -592,20 +590,20 @@
 											$(document).ready(function() {
 												$('input[name="autorizacion"]:radio').click(function(){
 													switch($(this).val()) {
-														case "proteccion1":
-														$("#lock1").attr("src","/images/unlock.png");
-														$("#lock2").attr("src","/images/lock.png");
-														$("#lock3").attr("src","/images/lock.png");
+														case "1":
+														$("#lock1").attr("src","/images/icons/unlock.png");
+														$("#lock2").attr("src","/images/icons/lock.png");
+														$("#lock3").attr("src","/images/icons/lock.png");
 														break;
-														case "proteccion2":
-														$("#lock1").attr("src","/images/lock.png");
-														$("#lock2").attr("src","/images/unlock.png");
-														$("#lock3").attr("src","/images/lock.png");
+														case "2":
+														$("#lock1").attr("src","/images/icons/lock.png");
+														$("#lock2").attr("src","/images/icons/unlock.png");
+														$("#lock3").attr("src","/images/icons/lock.png");
 														break;
-														case "proteccion3":
-														$("#lock1").attr("src","/images/lock.png");
-														$("#lock2").attr("src","/images/lock.png");
-														$("#lock3").attr("src","/images/unlock.png");
+														case "3":
+														$("#lock1").attr("src","/images/icons/lock.png");
+														$("#lock2").attr("src","/images/icons/lock.png");
+														$("#lock3").attr("src","/images/icons/unlock.png");
 														break;
 													}
 												});
@@ -719,6 +717,9 @@ div.token{
 
 	});
 
+	
+	if ( $('#fecha')[0].type != 'date' ) $('#fecha').datepicker();
+	
 
 </script>
 

@@ -57,9 +57,6 @@
 
       <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
         <li>
-          <a style="font-weight: bold;" href="#" class="  glyphicon glyphicon-lock"> Password </a>
-        </li>
-        <li>
           <a style="font-weight: bold;" class="glyphicon glyphicon-log-out" href="{{ route('logout') }}"
           onclick="event.preventDefault();
           document.getElementById('logout-form').submit();">

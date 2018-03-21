@@ -1,5 +1,7 @@
 body{
   background: url('/images/fondo_body.jpg')fixed;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 .body{
   background: url('/images/fondo_body.jpg')fixed;

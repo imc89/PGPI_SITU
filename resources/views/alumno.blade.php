@@ -110,8 +110,12 @@
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
 <div class="body">
 
+
   <br><br><br><br><br>
   <div align="center">
+    <div class="alert alert-warning">
+    <strong>Warning!</strong> Para que tu profesor pueda ver correctamente tu curriculum completa lo mejor posible tus datos de perfil.
+  </div>
     <h1>BIENVENIDO ALUMNO</h1>
     <h1>TABLÓN DE HECHOS DE {{Auth::user()->name}}</h1> 
   </div>

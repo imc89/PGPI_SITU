@@ -156,7 +156,7 @@
 
 
   <div class="alert alert-warning">
-    <strong>Warning!</strong> Si ves que el correo no llega mira en la carpeta SPAM.
+    <strong>Warning!</strong> Si el correo no llega mira en la carpeta SPAM.
   </div>
 
 
