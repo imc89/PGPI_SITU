@@ -160,3 +160,12 @@
 </div>
 
 </body>
+
+<style type="text/css">
+  a:hover span {
+    transform: rotateY(360deg);
+    -webkit-transform: rotateY(360deg);
+    transition-duration: 1.5s;
+    -webkit-transition-duration:1s;
+}  
+</style>

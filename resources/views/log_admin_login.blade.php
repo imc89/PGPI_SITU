@@ -18,6 +18,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+  <!-- AYUDA EN AUDIO -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
 
@@ -115,11 +119,43 @@
         <br>
         <br>
         <br>
-        <div class="container">
-          <h1 class="mb-2 text-center">LOG DE LOGINS ALUMNO</h1>
+        <br>
+        <br>
+        <br>
+        <div class="body">
 
-          <br>
-          <br>
+          <div class="container">
+            <h1 class="mb-2 text-center">LOG DE LOGINS ALUMNO</h1>
+
+
+            <table class="table table-striped table-dark">
+              <?php $contador=0 ?>
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Fecha y Hora</th>
+                </tr>
+              </thead>
+              <tbody>
+               @foreach($log_alumno as $u)
+               <tr>
+                <th scope="row"><?php $contador++; echo $contador ?></th>
+                <td>{{ $u->name }}</td>
+                <td> @if($u->tiempolog == "0001-01-01 00:00:00")
+                  NO HA HABIDO CONEXIÓN RECIENTE
+                  @else {{$u->tiempolog }}
+                @endif</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+
+        </div>
+        
+        <br><br>
+        <div class="container">
+          <h1 class="mb-2 text-center">LOG DE LOGINS PROFESOR</h1>
 
           <table class="table table-striped table-dark">
             <?php $contador=0 ?>
@@ -131,41 +167,10 @@
               </tr>
             </thead>
             <tbody>
-             @foreach($log_alumno as $u)
+             @foreach($log_profesor as $u)
              <tr>
               <th scope="row"><?php $contador++; echo $contador ?></th>
               <td>{{ $u->name }}</td>
-              <td> @if($u->tiempolog == "0001-01-01 00:00:00")
-                NO HA HABIDO CONEXIÓN RECIENTE
-                @else {{$u->tiempolog }}
-              @endif</td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
-
-      </div>
-
-      <div class="container">
-        <h1 class="mb-2 text-center">LOG DE LOGINS PROFESOR</h1>
-
-        <br>
-        <br>
-
-        <table class="table table-striped table-dark">
-          <?php $contador=0 ?>
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Fecha y Hora</th>
-            </tr>
-          </thead>
-          <tbody>
-           @foreach($log_profesor as $u)
-           <tr>
-            <th scope="row"><?php $contador++; echo $contador ?></th>
-            <td>{{ $u->name }}</td>
 
 
 
@@ -183,7 +188,95 @@
       </table>
 
     </div>
+  </div>
 
+
+  <!-- MODAL INFORMACIÓN -->
+  <div class="modal-background"></div>
+  <div class="modal-container">
+    <div align="center" class="modal-header">LOG LOGINS
+      <!-- CONTROL AUDIO MODAL -->
+      <div class="sound_on">
+        <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down modal-sound">    
+        </span>
+      </div>
+      <div class="sound_off">
+        <span id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off modal-sound"> 
+        </span>
+      </div>
+
+      <span id="audio_offX"> 
+        <span class="glyphicon glyphicon-remove modal-close"></span>
+      </span>
+
+      <!-- <i class="modal-close">x</i> --></div>
+      <div class="modal-info">
+        Has accedido a la sección de visualización de horas de conexión.
+        <br><br>
+        <ul>
+          <li>
+            <br>
+            -En esta sección podrás ver las últimas horas de conexión tanto de alumnos como de profesores. 
+            <br>
+          </li>
+
+          <li>
+            <br>
+            -En caso de que el usuario aun no se haya registrado aparecerá el mensaje "NO HA HABIDO CONEXIÓN RECIENTE".
+            <br>
+          </li>
+
+          <br><br>
+          <div align="center">
+            Podrás salir de esta sección pulsando el icono de la universidad.
+          </div>
+
+          <br><br>
+
+        </div>
+        <div class="button-container" align="center" id="audio_offA" >
+          <button id="cerrar" class="btn btn-primary" >ACEPTAR</button>
+        </div>
+      </div>
+    </div>
+    <!-- AUDIO MODAL -->
+
+    <script type="text/javascript">
+      var phrases = [
+      'Has accedido a la sección de visualización de horas de conexión.En esta sección podrás ver las últimas horas de conexión tanto de alumnos como de profesores.En caso de que el usuario aun no se haya registrado aparecerá el mensaje,NO HA HABIDO CONEXIÓN RECIENTE.Podrás salir de esta sección pulsando el icono de la universidad.'
+      ];
+
+      jQuery(document).ready(function ($) {  
+        $('#audio_on').click(function() {
+          var i = Math.round(phrases.length * Math.random()) - 1;
+
+          responsiveVoice.speak(phrases[i], 'Spanish Female');
+        });
+      });
+
+      jQuery(document).ready(function ($) {  
+        $('#audio_off').click(function() {
+          var i = 0 ;
+
+          responsiveVoice.speak(phrases[1000], 'Spanish Female');
+        });
+      });
+      jQuery(document).ready(function ($) {  
+        $('#audio_offX').click(function() {
+          var i = 0 ;
+
+          responsiveVoice.speak(phrases[1000], 'Spanish Female');
+        });
+      });
+      jQuery(document).ready(function ($) {  
+        $('#audio_offA').click(function() {
+          var i = 0 ;
+
+          responsiveVoice.speak(phrases[1000], 'Spanish Female');
+        });
+      });
+    </script>
+    <!-- FIN AUDIO MODAL -->
 
 
     <!--  BANNER MODAL ABOUT -->
@@ -214,11 +307,114 @@
     <!-- FIN BANNER MODAL -->
 
 
-<style type="text/css">
-  a:hover span {
-    transform: rotateY(360deg);
-    -webkit-transform: rotateY(360deg);
-    transition-duration: 1.5s;
-    -webkit-transition-duration:1s;
+
+
+    <style type="text/css">
+    .modal-background {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      height: 100%;
+    }
+
+    .modal-container {
+      display: none;
+      position: relative;
+      width: 500px;
+      margin: -20% auto;
+      background: #fff;
+      border-radius: 10px;
+      font-family: Arial, Sans-serif;
+      font-size: 12px;
+    }
+
+
+    .modal-container .modal-close {
+      float: right;
+      cursor: pointer;
+    }
+
+    .modal-container .modal-sound {
+      float: left;
+      cursor: pointer;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    .sound_on:hover{
+      background-color: #2865A8;
+      color:green;
+    }
+    .sound_off:hover{
+      color:red;
+    }
+    .modal-container .modal-header {
+      border-radius: 10px 10px 0 0;
+      background: #333;
+      padding: 15px 15px;
+      background: url('/images/fondo_body.jpg')fixed;
+    }
+
+    .modal-container .modal-info {
+      padding: 25px 15px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .modal-container .button-container {
+      border-radius: 0 0 10px 10px;
+      background: url('/images/fondo_body.jpg')fixed;
+      padding: 15px;
+      border-top: 1px solid #fff;
+    }
+
+    .modal-container .button-container button {
+      display: block;
+      margin: auto;
+      padding: 5px 15px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+
+    #btn:hover  span {
+      transform: rotateY(360deg);
+      -webkit-transform: rotateY(360deg);
+      transition-duration: 1.5s;
+      -webkit-transition-duration:1s;
+    } 
+  </style>
+  <!-- MODAL HASTA EL FINAL DEL DOCUMENTO BLADE -->
+  <script type="text/javascript">
+    $(".modal-background, .modal-close").on("click", function(){
+      $(".modal-container, .modal-background").hide();
+    });
+    $("#cerrar").on("click", function(){
+      $(".modal-container, .modal-background").hide();
+    });
+  </script>
+
+  <script type="text/javascript">
+    $("#btn").click(function() {
+     $(".modal-container, .modal-background").show();
+   });
+ </script>
+
+
+
+ <style type="text/css">
+ a:hover span {
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
 }  
+.body{
+  background: url('/images/fondo_body.jpg')fixed;
+  padding: 0;
+  margin: 0;
+  font-family: arial;
+}
 </style>

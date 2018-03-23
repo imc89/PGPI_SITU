@@ -202,7 +202,7 @@
         @foreach($nombre_alumno as $u)
         @if($u->nombre  !== NULL)
         <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-          Nombre completo: 
+         &nbsp;&nbsp; Nombre completo: 
           <tr>
             <td> {{ ucfirst($u->nombre) }} </td>
             @endif
@@ -215,7 +215,7 @@
           @foreach($apellidos_alumno as $u)
           @if($u->apellidos  !== NULL)
           <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-            Apellidos: 
+          &nbsp;&nbsp;  Apellidos: 
             <tr>
               <td> {{ ucfirst($u->apellidos) }} </td>
               @endif
@@ -228,7 +228,7 @@
             @foreach($dni_alumno as $u)
             @if($u->dni  !== NULL)
             <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-              Dni: 
+            &nbsp;&nbsp;  Dni: 
               <tr>
                 <td> {{ $u->dni }} </td>
                 @endif
@@ -242,7 +242,7 @@
               @foreach($email_alumno as $u)
               @if($u->email  !== NULL)
               <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                Email: 
+              &nbsp;&nbsp;  Email: 
                 <tr>
                   <td> {{ $u->email }} </td>
                   @endif
@@ -256,7 +256,7 @@
                 @foreach($direccion_alumno as $u)
                 @if($u->direccion  !== NULL)
                 <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                  Dirección: 
+                &nbsp;&nbsp;  Dirección: 
                   <tr>
                     <td> {{ $u->direccion }} </td>
                     @endif
@@ -271,7 +271,7 @@
                   @foreach($carrera_alumno as $u)
                   @if($u->carrera  !== NULL && $u->carrera !== "-")
                   <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                    Carrera: 
+                &nbsp;&nbsp;    Carrera: 
                     <tr>
                       <td> {{ $u->carrera }} </td>
                       @endif
@@ -283,7 +283,7 @@
                   @foreach($dato1_alumno as $u)
                   @if($u->dato_opcion1  !== NULL)
                   <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                    {{ $u->dato_opcion1 }}:
+                &nbsp;&nbsp;    {{ $u->dato_opcion1 }}:
                     @endif
                     @endforeach
 
@@ -301,7 +301,7 @@
                   @foreach($dato2_alumno as $u)
                   @if($u->dato_opcion2  !== NULL)
                   <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                    {{ $u->dato_opcion2 }}:
+                &nbsp;&nbsp;    {{ $u->dato_opcion2 }}:
                     @endif
                     @endforeach
                   </tr>
@@ -320,7 +320,7 @@
                 @foreach($dato3_alumno as $u)
                 @if($u->dato_opcion3  !== NULL)
                 <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                  {{ $u->dato_opcion3 }}:
+                &nbsp;&nbsp;  {{ $u->dato_opcion3 }}:
                   @endif
                   @endforeach
                 </tr>
@@ -366,10 +366,23 @@
             <div class="modal-footer">
 
              <div class="btn-group pull-left">
-               <button  style="cursor: not-allowed;" type="button" class="btn btn-default" data-dismiss="modal">ACEPTAR</button>
-             </div>
 
-             <div class="btn-group pull-right">
+               <form action="eliminar_usuario">
+
+                 {{! $iduser = Auth::user()->email }}
+
+                 <form action="EliminarController.php" method="post">
+                  <input style="color: black" type="hidden" name="data" value="{{ $iduser }}">
+
+                 <button  type="submit" class="btn btn-default warning" >ACEPTAR</button>
+                </form>
+
+              </form>
+
+
+            </div>
+
+            <div class="btn-group pull-right">
 
               <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
             </div>
@@ -446,5 +459,8 @@
     transition-duration: 1.5s;
     -webkit-transition-duration:1s;
   } 
+
+  .warning:hover {cursor: url(/cursor_warning/warning.cur),auto;}
+
 </style>
 

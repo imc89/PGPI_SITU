@@ -151,7 +151,20 @@
         <div style="text-align: center;">
           <span style="text-align: center;padding: 5px 5px 5px 5px; border-radius: 5px;" 
           class="btn-primary" onmouseover="this.style.background='#6478A7';" onmouseout="this.style.background='#2865A8';">
-          {{ $contar }}
+
+
+
+          {{!$registros = $contar}}
+          @foreach ($datos as $a)
+          @if($a->nombre == NULL)          
+          {{! $registros--}}
+          @else
+          {{! $contar }}
+          @endif
+          @endforeach
+
+          {{! $contar }}
+          {{$registros}}
         </span> 
       </div>
       <h4><b>Alumnos registrados</b></h4> </b>
@@ -162,6 +175,8 @@
       <div class="body">
 
         @foreach ($datos as $a)
+        @if(!empty($a->nombre))
+
         @if($contar > $contadato)
         <tr class="bordertable">
 
@@ -217,6 +232,9 @@
       <td class="bordertable"> - </td>
     </tr>
     <?php $contadato++;  ?>
+    @endif
+    @else    <?php $contadato--;  ?>
+
     @endif
     @endforeach 
 
@@ -374,9 +392,9 @@ tr:nth-child(even) {
 }
 
 a:hover span {
-    transform: rotateY(360deg);
-    -webkit-transform: rotateY(360deg);
-    transition-duration: 1.5s;
-    -webkit-transition-duration:1s;
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
 } 
 </style>

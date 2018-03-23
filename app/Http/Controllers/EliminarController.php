@@ -35,14 +35,30 @@ class EliminarController extends Controller
 
 	}
 
-
 	public function eliminar_usuario(Request $request)
 	{
 
 
 
+		$elima_user = $request->data . "_Oculto";
+
+		DB::table('users')
+		->where('users.id', '=', Auth::user()->id)
+		->update(['email' => $elima_user]);
 
 
+		
+
+		DB::table('alumno')
+		->where('alumno.user_id', '=', Auth::user()->id)
+		->update(['nombre' => NULL, 'apellidos' => NULL, 'dni' => NULL,'email' => NULL, 'direccion' => NULL, 'carrera' => NULL, 'dato_opcion1' => NULL, 'dato_opcion2' => NULL, 'dato_opcion3' => NULL, 'opcion1_valor' => NULL, 'opcion2_valor' => NULL, 'opcion3_valor' => NULL ]);
+
+
+		Auth::logout();
+		return redirect('/');
 
 	}
+
+
+
 }

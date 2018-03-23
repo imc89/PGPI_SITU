@@ -15,6 +15,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- AYUDA EN AUDIO -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
 
@@ -110,8 +115,10 @@
         <br>
         <br>
         <br>
+        <br>
+        <br>
         <div class="container">
-         <h1 class="mb-2 text-center">Crear Nueva Etiqueta</h1>
+          <h1 class="mb-2 text-center">CREAR NUEVA ETIQUETA</h1>
          
          @if(session('message'))
          <div class='alert alert-success'>
@@ -135,6 +142,9 @@
         </div>
       </div> <!-- /container -->
 
+</div>
+
+     
 
       <!--  BANNER MODAL ABOUT -->
       <div class="modal fade" id="myModal" role="dialog">
@@ -162,6 +172,189 @@
         </div>
       </div>
       <!-- FIN BANNER MODAL -->
+
+ <!-- MODAL INFORMACIÓN -->
+      <div class="modal-background"></div>
+      <div class="modal-container">
+        <div align="center" class="modal-header">CREAR ETIQUETAS
+          <!-- CONTROL AUDIO MODAL -->
+          <div class="sound_on">
+            <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down modal-sound">    
+            </span>
+          </div>
+          <div class="sound_off">
+            <span id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off modal-sound"> 
+            </span>
+          </div>
+
+          <span id="audio_offX"> 
+            <span class="glyphicon glyphicon-remove modal-close"></span>
+          </span>
+
+          <!-- <i class="modal-close">x</i> --></div>
+          <div class="modal-info">
+            Has accedido a la sección de creación de etiquetas.
+            <br><br>
+            <ul>
+              <li>
+                <br>
+                -Para crear una nueva etiqueta basta con insertar el nombre de la etiqueta y pulsar el botón enviar.
+                <br>
+              </li>
+
+              <li>
+                <br>
+                -Para refrescar las etiquetas y ver todas de nuevo puedes pulsar el botón &nbsp; <span class="glyphicon glyphicon-tags"></span>  &nbsp; <b style="font-weight: bold">Etiquetas</b> del menú o pulsar el botón de &nbsp; <span class="fa fa-refresh fa-spin"></span> &nbsp; <b style="font-weight: bold">Refrescar Etiquetas</b>.
+                <br>
+              </li>
+
+              <br><br>
+              <div align="center">
+                Podrás salir de esta sección pulsando el icono de la universidad.
+              </div>
+
+              <br><br>
+
+            </div>
+            <div class="button-container" align="center" id="audio_offA" >
+              <button id="cerrar" class="btn btn-primary" >ACEPTAR</button>
+            </div>
+          </div>
+        </div>
+        <!-- AUDIO MODAL -->
+
+        <script type="text/javascript">
+          var phrases = [
+          'Has accedido a la sección de creación de etiquetas.Para crear una nueva etiqueta basta con insertar el nombre de la etiqueta y pulsar el botón enviar.Para refrescar las etiquetas y ver todas de nuevo puedes pulsar el botón Etiquetas del menú, o pulsar el botón de Refrescar Etiquetas.Podrás salir de esta sección pulsando el icono de la universidad.'
+          ];
+
+          jQuery(document).ready(function ($) {  
+            $('#audio_on').click(function() {
+              var i = Math.round(phrases.length * Math.random()) - 1;
+
+              responsiveVoice.speak(phrases[i], 'Spanish Female');
+            });
+          });
+
+          jQuery(document).ready(function ($) {  
+            $('#audio_off').click(function() {
+              var i = 0 ;
+
+              responsiveVoice.speak(phrases[1000], 'Spanish Female');
+            });
+          });
+          jQuery(document).ready(function ($) {  
+            $('#audio_offX').click(function() {
+              var i = 0 ;
+
+              responsiveVoice.speak(phrases[1000], 'Spanish Female');
+            });
+          });
+          jQuery(document).ready(function ($) {  
+            $('#audio_offA').click(function() {
+              var i = 0 ;
+
+              responsiveVoice.speak(phrases[1000], 'Spanish Female');
+            });
+          });
+        </script>
+        <!-- FIN AUDIO MODAL -->
+
+
+
+        <style type="text/css">
+        .modal-background {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          background: rgba(0, 0, 0, 0.7);
+          width: 100%;
+          height: 100%;
+        }
+
+        .modal-container {
+          display: none;
+          position: relative;
+          width: 500px;
+          margin: 0% auto;
+          background: #fff;
+          border-radius: 10px;
+          font-family: Arial, Sans-serif;
+          font-size: 12px;
+        }
+
+
+        .modal-container .modal-close {
+          float: right;
+          cursor: pointer;
+        }
+
+        .modal-container .modal-sound {
+          float: left;
+          cursor: pointer;
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+        .sound_on:hover{
+          background-color: #2865A8;
+          color:green;
+        }
+        .sound_off:hover{
+          color:red;
+        }
+        .modal-container .modal-header {
+          border-radius: 10px 10px 0 0;
+          background: #333;
+          padding: 15px 15px;
+          background: url('/images/fondo_body.jpg')fixed;
+        }
+
+        .modal-container .modal-info {
+          padding: 25px 15px;
+          border-bottom: 1px solid #ccc;
+        }
+
+        .modal-container .button-container {
+          border-radius: 0 0 10px 10px;
+          background: url('/images/fondo_body.jpg')fixed;
+          padding: 15px;
+          border-top: 1px solid #fff;
+        }
+
+        .modal-container .button-container button {
+          display: block;
+          margin: auto;
+          padding: 5px 15px;
+          cursor: pointer;
+          text-transform: uppercase;
+          font-size: 12px;
+        }
+
+
+        #btn:hover  span {
+          transform: rotateY(360deg);
+          -webkit-transform: rotateY(360deg);
+          transition-duration: 1.5s;
+          -webkit-transition-duration:1s;
+        } 
+      </style>
+      <!-- MODAL HASTA EL FINAL DEL DOCUMENTO BLADE -->
+      <script type="text/javascript">
+        $(".modal-background, .modal-close").on("click", function(){
+          $(".modal-container, .modal-background").hide();
+        });
+        $("#cerrar").on("click", function(){
+          $(".modal-container, .modal-background").hide();
+        });
+      </script>
+
+      <script type="text/javascript">
+        $("#btn").click(function() {
+         $(".modal-container, .modal-background").show();
+       });
+     </script>
+
 
 
       <style type="text/css">

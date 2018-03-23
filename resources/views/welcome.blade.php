@@ -25,51 +25,70 @@
 
 </head>
 
+<!-- composer require barryvdh/laravel-dompdf
+  composer require intervention/image -->
 
-<body onload="deshabilitaRetroceso()">
-  <!-- INICIO NAVEGADOR -->
-  <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-   <a href="/" align="center" style="padding: 0 0 0 0 "> 
-     <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-   </a>
-   <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
-    <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
-  </a>
-  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'" >
-    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
-  </a>
-  <!-- BOTÓN DE LOGIN -->
+  <body onload="deshabilitaRetroceso()">
+    <!-- INICIO NAVEGADOR -->
+    <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
 
-  <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
-    <!-- Authentication Links -->
-    @guest
-    <li><a href="{{ route('login') }}">Login</a></li>
-    @else
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true"> 
-        {{ Auth::user()->name }} <span class="caret"></span>
-      </a>
+     @if (Auth::guard()->check())
 
-      <ul class="dropdown-menu">
-        <li>
-          <a href="{{ route('logout') }}"
-          onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();">
-          Logout
+     <a href="Homeplace" align="center" style="padding: 0 0 0 0 "> 
+       <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+     </a>
+
+     @else
+     <a href="/" align="center" style="padding: 0 0 0 0 "> 
+       <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+     </a>
+     @endif
+     @if (Auth::guard()->check())
+     <a  href="Homeplace" style="cursor: pointer;" id="card">
+      <span class="glyphicon glyphicon-home"  aria-hidden="true"></span> Home
+    </a>
+    @endif
+    <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+      <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
+    </a>
+    <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'" >
+      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+    </a>
+    <a id="recuperar" data-toggle="modal" data-target="#Recuperacion" style="cursor: pointer;">
+      <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Recuperación de la cuenta 
+    </a>
+    <!-- BOTÓN DE LOGIN -->
+
+    <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
+      <!-- Authentication Links -->
+      @guest
+      <li><a href="{{ route('login') }}">Login</a></li>
+      @else
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true"> 
+          {{ Auth::user()->name }} <span class="caret"></span>
         </a>
 
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          {{ csrf_field() }}
-        </form>
-      </li>
-    </ul>
-  </li>
-  @endguest
-</ul>
+        <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
+          <li>
+            <a style="font-weight: bold;" class="glyphicon glyphicon-log-out" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+            Logout
+          </a>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{ csrf_field() }}
+          </form>
+        </li>
+      </ul>
+    </li>
+    @endguest
+  </ul>
 
 
-<a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
-" class="icon" onclick="myFunction()">&#9776;</a>
+  <a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
+  " class="icon" onclick="myFunction()">&#9776;</a>
 
 </div> 
 
@@ -77,14 +96,12 @@
 
 
 <!-- FIN DE NAVEGADOR -->
-
-
+<br>
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
 <div class="container">
-  <h2>Carousel Example</h2>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
-    <ol class="carousel-indicators">
+    <ol class="carousel-indicators" style="display: none">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
@@ -132,8 +149,18 @@
 </div>
 
 <!-- FINAL CARRUSEL -->
+<br><br>
 
 
+@if(session('message')=== '""LA CUENTA A RECUPERAR NO EXISTE O ESTÁ EN USO""')
+<div align="center" class='alert alert-danger'>
+  {{ session('message') }}
+</div>
+@elseif(session('message'))
+<div align="center" class='alert alert-success'>
+  {{ session('message') }}
+</div>
+@endif
 
 
 
@@ -201,20 +228,124 @@
       </span>
     </div>
 
-    <span class="glyphicon glyphicon-remove modal-close"></span>
-    
+    <span id="audio_offX"> 
+      <span class="glyphicon glyphicon-remove modal-close"></span>
+    </span>
+
     <!-- <i class="modal-close">x</i> --></div>
     <div class="modal-info">
       Bienvenido a la plataforma SITU, esta plataforma te ayudará a mejorar tu experiencia universitaria. Para usar esta plataforma necesitarás tener datos de registro.
       Pulsa el botón de Login e inserta tus datos para iniciar sesión.
       <br><br>
-      <div align="center">INICIE SUS DATOS DE PERFIL</div>
+      <ul>
+        <li>
+          -En caso de que ya estés logueado puedes pulsar el icono de la universidad al inicio del menú o pulsar el botón &nbsp; <span class="glyphicon glyphicon-home"></span> &nbsp; <b style="font-weight: bold">Home</b>.
+        </li>
+        <br>
+        <li>
+          -Si te has dado de baja y quieres recuperar tu antigua cuenta pulsa &nbsp; <span class="glyphicon glyphicon-retweet"></span> &nbsp; <b style="font-weight: bold">Recuperación de cuenta</b> e inserta el correo que tenías para hacer Login.
+        </li>
+      </ul>
+      <br><br>
     </div>
-    <div class="button-container" align="center">
-      <button id="cerrar" class="btn btn-primary">ACEPTAR</button>
+    <div class="button-container" align="center" id="audio_offA" >
+      <button id="cerrar" class="btn btn-primary" >ACEPTAR</button>
     </div>
   </div>
 </div>
+<!-- AUDIO MODAL -->
+
+<script type="text/javascript">
+  var phrases = [
+  ' Bienvenido a la plataforma SITU.Esta plataforma te ayudará a mejorar tu experiencia universitaria.Para usar esta plataforma necesitarás tener datos de registro. Pulsa el botón de Login e inserta tus datos para iniciar sesión.En caso de que ya estés Logueado puedes pulsar el icono de la universidad al inicio del menú, o pulsar el botón Home.Si te has dado de baja y quieres recuperar tu antigua cuenta pulsa Recuperación de cuenta,e inserta el correo que tenías para hacer Login.'
+  ];
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_on').click(function() {
+      var i = Math.round(phrases.length * Math.random()) - 1;
+
+      responsiveVoice.speak(phrases[i], 'Spanish Female');
+    });
+  });
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_off').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offX').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offA').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+</script>
+<!-- FIN AUDIO MODAL -->
+
+
+
+
+<!--  BANNER MODAL RECUPERACION -->
+<div class="modal fade" id="Recuperacion" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content" style="background: #2865A8;color: black">
+      <div class="modal-header" style="background: #358CED">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" align="center">RECUPERACIÓN DE CUENTAS</h4>
+      </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70);" align="center">
+        <p>INSERTE EL CORREO ASOCIADO A SU CUENTA PARA RECUPERARLA</p>
+      </div>
+
+      <div style="background: #2865A8">
+        <form action="Recuperacioncuenta" id="recuperarcuenta">
+          <div align="center">
+            <form action="Recuperacioncuenta.php" method="post" id="recuperarcuenta" >
+              <div class="block"><br>
+                <label style="color: white; font-weight: bold;float: left;">email:</label> 
+                <input  class="form-control" type="email" name="data" style="width:500px; margin-bottom:20px; margin-top:20px" autofocus required>
+              </div>
+
+            </form>
+          </div>
+
+        </form>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer" style="background: #358CED;border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px">
+
+  <div class="btn-group pull-left">
+   <button type="submit" class="btn btn-primary" form="recuperarcuenta">RECUPERAR CUENTA</button>
+ </div>
+
+ <div class="btn-group pull-right">
+  <button type="button" class="btn btn-primary" data-dismiss="modal">CERRAR</button>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+<!-- FIN BANNER RECUPERACION -->
+
+
+
 
 <!--  BANNER MODAL ABOUT -->
 <div class="modal fade" id="myModal" role="dialog">
@@ -286,29 +417,7 @@
  });
 </script>
 
-<!-- AUDIO MODAL -->
 
-<script type="text/javascript">
-  var phrases = [
-  ' Bienvenido a la plataforma SITU, esta plataforma te ayudará a mejorar tu experiencia universitaria. Para usar esta plataforma necesitarás tener datos de registro. Pulsa el botón de Login e inserta tus datos para iniciar sesión.'
-  ];
-
-  jQuery(document).ready(function ($) {  
-    $('#audio_on').click(function() {
-      var i = Math.round(phrases.length * Math.random()) - 1;
-
-      responsiveVoice.speak(phrases[i], 'Spanish Female');
-    });
-  });
-
-  jQuery(document).ready(function ($) {  
-    $('#audio_off').click(function() {
-      var i = 0 ;
-
-      responsiveVoice.speak(phrases[1000], 'Spanish Female');
-    });
-  });
-</script>
 
 <style type="text/css">
 .modal-background {
@@ -327,7 +436,7 @@
   position: relative;
   z-index: 1;
   width: 500px;
-  margin: -300px auto;
+  margin: -20% auto;
   background: #fff;
   border-radius: 10px;
   font-family: Arial, Sans-serif;
@@ -381,17 +490,36 @@
 }
 
 #card:hover  span {
-    transform: rotateY(360deg);
-    -webkit-transform: rotateY(360deg);
-    transition-duration: 1.5s;
-    -webkit-transition-duration:1s;
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
 } 
 #btn:hover  span {
-    transform: rotateY(360deg);
-    -webkit-transform: rotateY(360deg);
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
+} 
+#recuperar:hover  span {
+  animation: rotation 1s infinite linear; 
+
+} 
+
+@keyframes rotation {
+  100%{
+    transform:rotate(360deg);
+    -webkit-transform: rotate(360deg);
     transition-duration: 1.5s;
     -webkit-transition-duration:1s;
-} 
+
+  }
+}
+label {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+  }​
 </style>
 
 
