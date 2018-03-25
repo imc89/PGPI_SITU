@@ -31,14 +31,17 @@
    <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
      <img width="50px" src="{{ asset('images/icono.jpg') }}" >
    </a>
-   <a  data-toggle="modal" data-target="#myModal">
+   <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
   </a>
-  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
+  <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
     <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
   </a>
-  <a href="#">
+  <a href="mail_invitados">
     <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
+  </a>
+  <a href="keywords">
+    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
   </a>
   <a href="crear_hechos">
     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
@@ -92,9 +95,9 @@
 " class="icon" onclick="myFunction()">&#9776;</a>
 
 </div> 
-
-
 <!-- FIN DE NAVEGADOR -->
+
+
 <br>
 <br>
 <br>

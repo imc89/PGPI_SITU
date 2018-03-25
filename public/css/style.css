@@ -1,0 +1,119 @@
+#cssmenu {
+  background-color: #3C3C3D;
+  width: auto;
+  vertical-align:middle;
+
+}
+#cssmenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  display: block;
+  zoom: 1;
+  vertical-align:middle;
+}
+
+#cssmenu ul li {
+  text-align: center;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  vertical-align:middle;
+}
+
+#cssmenu.align-right ul li {
+  float: right;
+  vertical-align:middle;
+
+}
+
+#cssmenu.align-center ul {
+  text-align: center;
+  vertical-align:middle;
+}
+
+#cssmenu ul li a {
+  color: #FFFFFF;
+  text-decoration: none;
+  display: block;
+  padding: 0px 25px;
+  font-weight: 700;
+  vertical-align:middle;
+  height: 52px;
+  line-height: 52px;
+  text-align: center;
+}
+
+
+#cssmenu ul li a:hover {
+
+  color: #FFFFFF;
+  border-radius: 5px;
+  height: 52px;
+  line-height: 52px;
+  text-align: center;
+  background-color: #435E80;
+  text-decoration: none;
+  display: block;
+  padding: 0px 25px;
+  font-weight: 700;
+  vertical-align:middle;
+
+
+}
+
+
+
+.login {
+
+  text-align: center;
+  float: right;
+
+}
+
+.dropdown-menu{
+  background-color: rgba(38, 38, 38, 0.6);
+  padding: 0;
+}
+
+.dropdown-menu>a:hover{
+  border-radius: 5px;
+  color: #FFFFFF;
+  background-color: #435E80;
+  align-items: center;
+  text-align: left;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  #cssmenu ul li {
+    float: none;
+    display: block;
+  }
+  #cssmenu ul li a {
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid  #435E80;
+  }
+  #cssmenu ul li.last > a,
+  #cssmenu ul li:last-child > a {
+    border: 0;
+  }
+  #cssmenu ul li a:after {
+    display: none;
+  }
+  #cssmenu ul li a:before {
+    display: none;
+  }
+  .dropdown-menu{
+  background-color: rgba(38, 38, 38, 0.6);
+  padding: 0;
+      width: 100%;
+
+}
+
+}

@@ -21,162 +21,167 @@
 
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
+  <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
 
 
 </head>
 
 
 <body onload="deshabilitaRetroceso()">
+
   <!-- INICIO NAVEGADOR -->
-  <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-   <a href="#" align="center" style="padding: 0 0 0 0 ">
-     <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-   </a>
-   <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer">
-    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-  </a>
-  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
-    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
-  </a>
-  <a href="mailpassword">
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
-  </a>
-  <a href="log_admin_login">
-    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Log Logins
-  </a>
-  <a href="etiquetas">
+
+  <div id='cssmenu' >
+    <ul>
+     <li class='active'>   
+       <a href="#" align="center" style="padding: 0 0 0 0 "> 
+         <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+       </a>
+     </li>
+
+     <li>
+      <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+        <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
+      </a>
+    </li>
+
+    <li>
+      <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
+        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+      </a>
+    </li>
+
+    <li>
+     <a href="mailpassword">
+      <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
+    </a>
+  </li>
+
+  <li>
+    <a href="log_admin_login">
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Log Logins
+    </a>
+  </li>
+
+  <li>
+   <a href="etiquetas">
     <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Etiquetas
   </a>
-  <!-- BOTÓN DE LOGIN -->
+</li>
 
-  <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
-    <!-- Authentication Links -->
-    @guest
-    <li><a href="{{ route('login') }}">Login</a></li>
-    @else
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-        {{ Auth::user()->name }} <span class="caret"></span>
-      </a>
 
-      <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
-        <li>
-          <a style="font-weight: bold;" class="glyphicon glyphicon-log-out" href="{{ route('logout') }}"
-          onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();">
-          Logout
-        </a>
+<li class="login">
 
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          {{ csrf_field() }}
-        </form>
-      </li>
-    </ul>
-  </li>
+  @guest
+  <li><a href="{{ route('login') }}">Login</a></li>
+  @else
+
+
+  <li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true"> 
+      {{ Auth::user()->name }} <span class="caret"></span>
+    </a>
+    <div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
+      <a style="font-weight: bold;" href="{{ route('logout') }}"
+      onclick="event.preventDefault();
+      document.getElementById('logout-form').submit();">
+      <span class="glyphicon glyphicon-log-out"></span> Logout
+    </a>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      {{ csrf_field() }}
+    </form>
+  </div>
+
   @endguest
+</li>
+
+</div>
+
+</li>
+
+
+
+
 </ul>
-
-
-
-<a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
-" class="icon" onclick="myFunction()">&#9776;</a>
-
-</div> 
-
+</div>
 
 <!-- FIN DE NAVEGADOR -->
 
 
-<!-- CUERPO PAGINA -->
-
-<div class="container">
-
-
-
-
-
-
-
-</div>
-
-
-
-
 <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-<div class="body_bottom" id="footer" style="position:absolute" align="center">
-  <table>
-    <tbody>
 
-     <tr> 
-      <td class="foot_izdo">&nbsp;</td> 
-      <td class="foot_cent"> 
-        <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-          <br> 
-          Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
-        </p> 
+<footer class="body_bottom body"  id="footer" >
+<table>
+      <tbody>
 
-        <!-- REDES SOCIALES -->
-        <div id="social"> 
-          <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
-          </a> 
-          <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
-          </a>
-          <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
-          </a>
-          <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
-          </a> 
-          <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
-          </a>
-          <br><br>
-        </div>
-        <!-- FIN REDES SOCIALES -->
+       <tr> 
+        <td class="foot_izdo">&nbsp;</td> 
+        <td class="foot_cent"> 
+          <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
+            <br> 
+            Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
+          </p> 
 
-        <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
-        / Sponsored by the
-        <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
-        and 
-        <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
-        Copyright 2013,
-        <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
-        . All rights reserved. 
-      </td>
-      <td class="foot_dcho">&nbsp;</td> 
-    </tr>
+          <!-- REDES SOCIALES -->
+          <div id="social"> 
+            <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
+            </a> 
+            <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
+            </a>
+            <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
+            </a>
+            <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
+            </a> 
+            <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
+            </a>
+          </div>
+          <!-- FIN REDES SOCIALES -->
 
-  </tbody>
-</table>
+          <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
+          / Sponsored by the
+          <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
+          and 
+          <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
+          Copyright 2013,
+          <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
+          . All rights reserved. 
+
+        </td>
+        <td class="foot_dcho">&nbsp;</td> 
+      </tr>
+
+    </tbody>
+  </table>
 </div>
 
 
+</footer>
 
 <!-- MODAL INFORMACIÓN -->
-<div class="modal-background"></div>
-<div class="modal-container">
-  <div align="center" class="modal-header">ADMINISTRADOR
-    <!-- CONTROL AUDIO MODAL -->
-    <div class="sound_on">
-      <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down modal-sound">    
-      </span>
-    </div>
-    <div class="sound_off">
-      <span id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off modal-sound"> 
-      </span>
-    </div>
+<div class="modal fade" id="AYUDA" role="dialog">
+  <div class="modal-dialog">
 
-    <span id="audio_offX"> 
-      <span class="glyphicon glyphicon-remove modal-close"></span>
-    </span>
-
-    <!-- <i class="modal-close">x</i> --></div>
-    <div class="modal-info">
-      Has accedido a la sección de administrador.
-      <br><br>
-      <ul>
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="audio_offX" type="button" class="close" data-dismiss="modal">&times;</button>
+        <div>
+          <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
+          <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
+        </div>
+        <h4 align="center" class="modal-title">ADMINISTRADOR</h4>
+      </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
+       Has accedido a la sección de administrador.
+       <br><br>
+       <ul>
         <li>
           <br>
           -Para acceder a dar de alta a nuevos usuarios pulsa el botón &nbsp; <span class="glyphicon glyphicon-user"></span> &nbsp; <b style="font-weight: bold">Dar Alta Usuario</b>.  
@@ -201,14 +206,16 @@
       <div align="center">
         Podrás salir del perfil de administrador pulsando en el menú sobre ADMIN y a continuación sobre Logout.
       </div>
-
-      <br><br>
-
     </div>
-    <div class="button-container" align="center" id="audio_offA" >
-      <button id="cerrar" class="btn btn-primary" >ACEPTAR</button>
+
+    <div class="modal-footer">
+      <div align="center">
+        <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+      </div>
     </div>
   </div>
+
+</div>
 </div>
 <!-- AUDIO MODAL -->
 
@@ -304,82 +311,16 @@
 
 
 <style type="text/css">
-.modal-background {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.7);
-  width: 100%;
-  height: 100%;
-}
 
-.modal-container {
-  display: none;
-  position: relative;
-  width: 500px;
-  margin: 10% auto;
-  background: #fff;
-  border-radius: 10px;
-  font-family: Arial, Sans-serif;
-  font-size: 12px;
-}
-
-
-.modal-container .modal-close {
-  float: right;
-  cursor: pointer;
-}
-
-.modal-container .modal-sound {
-  float: left;
-  cursor: pointer;
-  padding-left: 15px;
-  padding-right: 15px;
-}
 .sound_on:hover{
-  background-color: #2865A8;
   color:green;
 }
 .sound_off:hover{
   color:red;
 }
-.modal-container .modal-header {
-  border-radius: 10px 10px 0 0;
-  background: #333;
-  padding: 15px 15px;
-  background: url('/images/fondo_body.jpg')fixed;
-}
-
-.modal-container .modal-info {
-  padding: 25px 15px;
-  border-bottom: 1px solid #ccc;
-}
-
-.modal-container .button-container {
-  border-radius: 0 0 10px 10px;
-  background: url('/images/fondo_body.jpg')fixed;
-  padding: 15px;
-  border-top: 1px solid #fff;
-}
-
-.modal-container .button-container button {
-  display: block;
-  margin: auto;
-  padding: 5px 15px;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
-
-#btn:hover  span {
-  transform: rotateY(360deg);
-  -webkit-transform: rotateY(360deg);
-  transition-duration: 1.5s;
-  -webkit-transition-duration:1s;
 } 
 </style>
+
 <!-- MODAL HASTA EL FINAL DEL DOCUMENTO BLADE -->
 <script type="text/javascript">
   $(".modal-background, .modal-close").on("click", function(){
@@ -403,4 +344,12 @@ a:hover span {
   transition-duration: 1.5s;
   -webkit-transition-duration:1s;
 }  
+
+
+footer {
+ position:absolute;
+ bottom:0;
+ width:100%;
+ height:auto;
+}
 </style>

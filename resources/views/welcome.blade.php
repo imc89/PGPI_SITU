@@ -18,9 +18,18 @@
   <!-- AYUDA EN AUDIO -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+  <!-- ICONOS -->
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="images/icon_screen/ios/a_76.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="images/icon_screen/ios/a_120.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="images/icon_screen/ios/a_152.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="180x180" href="images/icon_screen/ios/a_180.png" />
+
+  <link rel="icon" sizes="192x192" href="images/icon_screen/android/android192.png"  />
+  <link rel="icon" sizes="128x18" href="images/icon_screen/android/android128.png"  />
 
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
+  <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
 
 
 </head>
@@ -30,227 +39,251 @@
 
   <body onload="deshabilitaRetroceso()">
     <!-- INICIO NAVEGADOR -->
-    <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
+    
+    <div id='cssmenu'>
+      <ul>
+       <li class='active'>
+        @if (Auth::guard()->check())
 
-     @if (Auth::guard()->check())
+        <a href="Homeplace" align="center" style="padding: 0 0 0 0 "> 
+         <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+       </a>
 
-     <a href="Homeplace" align="center" style="padding: 0 0 0 0 "> 
-       <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-     </a>
+       @else
+       <a href="welcome" align="center" style="padding: 0 0 0 0 "> 
+         <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+       </a>
+       @endif
+     </li>
 
-     @else
-     <a href="/" align="center" style="padding: 0 0 0 0 "> 
-       <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-     </a>
-     @endif
-     @if (Auth::guard()->check())
-     <a  href="Homeplace" style="cursor: pointer;" id="card">
-      <span class="glyphicon glyphicon-home"  aria-hidden="true"></span> Home
-    </a>
-    @endif
-    <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
-      <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
-    </a>
-    <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'" >
-      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
-    </a>
-    <a id="recuperar" data-toggle="modal" data-target="#Recuperacion" style="cursor: pointer;">
-      <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Recuperación de la cuenta 
-    </a>
-    <!-- BOTÓN DE LOGIN -->
+     <li> 
+      @if (Auth::guard()->check())
+      <a  href="Homeplace" style="cursor: pointer;" id="card">
+        <span class="glyphicon glyphicon-home"  aria-hidden="true"></span> Home
+      </a>
+      @endif
+    </li>
 
-    <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
-      <!-- Authentication Links -->
+    <li>
+      <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+        <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
+      </a>
+    </li>
+
+    <li>
+      <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
+        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+      </a>
+    </li>
+
+    <li>
+      <a id="recuperar" data-toggle="modal" data-target="#Recuperacion" style="cursor: pointer;">
+        <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Recuperación de la cuenta 
+      </a>
+    </li>
+
+
+
+    <li class="login">
+
       @guest
-      <li><a href="{{ route('login') }}">Login</a></li>
+      <a href="{{ route('login') }}">Login</a>
       @else
-      <li class="dropdown">
+
+
+      <li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true"> 
           {{ Auth::user()->name }} <span class="caret"></span>
         </a>
+        <div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
+          <a style="font-weight: bold;"  href="{{ route('logout') }}"
+          onclick="event.preventDefault();
+          document.getElementById('logout-form').submit();">
+          <span class="glyphicon glyphicon-log-out"></span> Logout
+        </a>
 
-        <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
-          <li>
-            <a style="font-weight: bold;" class="glyphicon glyphicon-log-out" href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();">
-            Logout
-          </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          {{ csrf_field() }}
+        </form>
+      </div>
 
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            {{ csrf_field() }}
-          </form>
-        </li>
-      </ul>
+      @endguest
     </li>
-    @endguest
-  </ul>
+
+  </div>
+
+</li>
 
 
-  <a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
-  " class="icon" onclick="myFunction()">&#9776;</a>
 
-</div> 
 
+</ul>
+</div>
 
 
 
 <!-- FIN DE NAVEGADOR -->
-<br>
-<!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
-<div class="container">
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators" style="display: none">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
 
-    <!-- Wrapper for slides -->
-    <div style="margin-top: 7%" class="carousel-inner">
+<div  style="height: 100%;  background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
+  <div>
+    <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
+    <div class="container ">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators" style="display: none">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
 
-      <div align="center" class="item active">
-        <img  src="https://pbs.twimg.com/profile_images/438696546591186944/Vms1aFmW_400x400.png" alt="UFVmadrid" ">
-        <div class="carousel-caption">
+        <!-- Wrapper for slides -->
+        <div style="margin-top: 7%" class="carousel-inner">
+
+          <div align="center" class="item active">
+            <img  src="https://pbs.twimg.com/profile_images/438696546591186944/Vms1aFmW_400x400.png" alt="UFVmadrid" ">
+            <div class="carousel-caption">
+              <h3 style="background: #A7B4C6">UFVmadrid</h3>
+              <p style="background: #A7B4C6">Thank you, UFVmadrid</p>
+            </div>
+          </div>
+
+          <div align="center"class="item">
+           <img  src="https://pbs.twimg.com/profile_images/438696546591186944/Vms1aFmW_400x400.png" alt="UFVmadrid" ">
+           <div class="carousel-caption">
+            <h3 style="background: #A7B4C6">UFVmadrid</h3>
+            <p style="background: #A7B4C6">Thank you, UFVmadrid</p>
+          </div>
+        </div>
+
+        <div align="center"class="item">
+         <img  src="https://pbs.twimg.com/profile_images/438696546591186944/Vms1aFmW_400x400.png" alt="UFVmadrid" ">
+         <div class="carousel-caption">
           <h3 style="background: #A7B4C6">UFVmadrid</h3>
           <p style="background: #A7B4C6">Thank you, UFVmadrid</p>
         </div>
       </div>
 
-      <div align="center"class="item">
-       <img  src="https://pbs.twimg.com/profile_images/438696546591186944/Vms1aFmW_400x400.png" alt="UFVmadrid" ">
-       <div class="carousel-caption">
-        <h3 style="background: #A7B4C6">UFVmadrid</h3>
-        <p style="background: #A7B4C6">Thank you, UFVmadrid</p>
-      </div>
     </div>
-    
-    <div align="center"class="item">
-     <img  src="https://pbs.twimg.com/profile_images/438696546591186944/Vms1aFmW_400x400.png" alt="UFVmadrid" ">
-     <div class="carousel-caption">
-      <h3 style="background: #A7B4C6">UFVmadrid</h3>
-      <p style="background: #A7B4C6">Thank you, UFVmadrid</p>
-    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+
   </div>
 
+  <!-- FINAL CARRUSEL -->
+  <br><br>
+
+
+  @if(session('message')=== '""LA CUENTA A RECUPERAR NO EXISTE O ESTÁ EN USO""')
+  <div align="center" class='alert alert-danger'>
+    {{ session('message') }}
+  </div>
+  @elseif(session('message'))
+  <div align="center" class='alert alert-success'>
+    {{ session('message') }}
+  </div>
+  @endif
+
+
+
+  <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
+  <footer class="body_bottom body" id="footer" style="position: relative;">
+    <table>
+      <tbody>
+
+       <tr> 
+        <td class="foot_izdo">&nbsp;</td> 
+        <td class="foot_cent"> 
+          <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
+            <br> 
+            Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
+          </p> 
+
+          <!-- REDES SOCIALES -->
+          <div id="social"> 
+            <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
+            </a> 
+            <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
+            </a>
+            <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
+            </a>
+            <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
+            </a> 
+            <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
+            </a>
+          </div>
+          <!-- FIN REDES SOCIALES -->
+
+          <div>
+            <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
+            / Sponsored by the
+            <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
+            and 
+            <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
+            Copyright 2013,
+            <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
+            . All rights reserved. 
+          </div>
+
+
+        </td>
+        <td class="foot_dcho">&nbsp;</td> 
+      </tr>
+
+    </tbody>
+  </table>
+</footer>
+
 </div>
-
-<!-- Left and right controls -->
-<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-  <span class="glyphicon glyphicon-chevron-left"></span>
-  <span class="sr-only">Previous</span>
-</a>
-<a class="right carousel-control" href="#myCarousel" data-slide="next">
-  <span class="glyphicon glyphicon-chevron-right"></span>
-  <span class="sr-only">Next</span>
-</a>
-</div>
-</div>
-
-<!-- FINAL CARRUSEL -->
-<br><br>
-
-
-@if(session('message')=== '""LA CUENTA A RECUPERAR NO EXISTE O ESTÁ EN USO""')
-<div align="center" class='alert alert-danger'>
-  {{ session('message') }}
-</div>
-@elseif(session('message'))
-<div align="center" class='alert alert-success'>
-  {{ session('message') }}
-</div>
-@endif
-
-
-
-<!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-<div class="body_bottom" id="footer" style="position: absolute;" align="center">
-  <table>
-    <tbody>
-
-     <tr> 
-      <td class="foot_izdo">&nbsp;</td> 
-      <td class="foot_cent"> 
-        <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-          <br> 
-          Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
-        </p> 
-
-        <!-- REDES SOCIALES -->
-        <div id="social"> 
-          <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
-          </a> 
-          <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
-          </a>
-          <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
-          </a>
-          <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
-          </a> 
-          <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
-          </a>
-          <br><br>
-        </div>
-        <!-- FIN REDES SOCIALES -->
-
-        <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
-        / Sponsored by the
-        <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
-        and 
-        <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
-        Copyright 2013,
-        <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
-        . All rights reserved. 
-      </td>
-      <td class="foot_dcho">&nbsp;</td> 
-    </tr>
-
-  </tbody>
-</table>
-</div>
-
 <!-- MODAL INFORMACIÓN -->
-<div class="modal-background"></div>
-<div class="modal-container">
-  <div align="center" class="modal-header">BIENVENIDO A LA PLATAFORMA SITU 
-    <!-- CONTROL AUDIO MODAL -->
-    <div class="sound_on">
-      <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down modal-sound">    
-      </span>
-    </div>
-    <div class="sound_off">
-      <span id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off modal-sound"> 
-      </span>
+<div class="modal fade" id="AYUDA" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="audio_offX" type="button" class="close" data-dismiss="modal">&times;</button>
+        <div>
+          <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
+          <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
+        </div>
+        <h4 align="center" class="modal-title">BIENVENIDO A LA PLATAFORMA SITU</h4>
+      </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
+        Bienvenido a la plataforma SITU, esta plataforma te ayudará a mejorar tu experiencia universitaria. Para usar esta plataforma necesitarás tener datos de registro.
+        Pulsa el botón de Login e inserta tus datos para iniciar sesión.
+        <br><br>
+        <ul>
+          <li>
+            -En caso de que ya estés logueado puedes pulsar el icono de la universidad al inicio del menú o pulsar el botón &nbsp; <span class="glyphicon glyphicon-home"></span> &nbsp; <b style="font-weight: bold">Home</b>.
+          </li>
+          <br>
+          <li>
+            -Si te has dado de baja y quieres recuperar tu antigua cuenta pulsa &nbsp; <span class="glyphicon glyphicon-retweet"></span> &nbsp; <b style="font-weight: bold">Recuperación de cuenta</b> e inserta el correo que tenías para hacer Login.
+          </li>
+        </ul>
+      </div>
+
+      <div class="modal-footer">
+        <div align="center">
+          <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+        </div>
+      </div>
     </div>
 
-    <span id="audio_offX"> 
-      <span class="glyphicon glyphicon-remove modal-close"></span>
-    </span>
-
-    <!-- <i class="modal-close">x</i> --></div>
-    <div class="modal-info">
-      Bienvenido a la plataforma SITU, esta plataforma te ayudará a mejorar tu experiencia universitaria. Para usar esta plataforma necesitarás tener datos de registro.
-      Pulsa el botón de Login e inserta tus datos para iniciar sesión.
-      <br><br>
-      <ul>
-        <li>
-          -En caso de que ya estés logueado puedes pulsar el icono de la universidad al inicio del menú o pulsar el botón &nbsp; <span class="glyphicon glyphicon-home"></span> &nbsp; <b style="font-weight: bold">Home</b>.
-        </li>
-        <br>
-        <li>
-          -Si te has dado de baja y quieres recuperar tu antigua cuenta pulsa &nbsp; <span class="glyphicon glyphicon-retweet"></span> &nbsp; <b style="font-weight: bold">Recuperación de cuenta</b> e inserta el correo que tenías para hacer Login.
-        </li>
-      </ul>
-      <br><br>
-    </div>
-    <div class="button-container" align="center" id="audio_offA" >
-      <button id="cerrar" class="btn btn-primary" >ACEPTAR</button>
-    </div>
   </div>
 </div>
 <!-- AUDIO MODAL -->
@@ -420,73 +453,13 @@
 
 
 <style type="text/css">
-.modal-background {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.7);
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
 
-.modal-container {
-  display: none;
-  position: relative;
-  z-index: 1;
-  width: 500px;
-  margin: -20% auto;
-  background: #fff;
-  border-radius: 10px;
-  font-family: Arial, Sans-serif;
-  font-size: 12px;
-}
 
-.modal-container .modal-close {
-  float: right;
-  cursor: pointer;
-}
-
-.modal-container .modal-sound {
-  float: left;
-  cursor: pointer;
-  padding-left: 15px;
-  padding-right: 15px;
-}
 .sound_on:hover{
-  background-color: #2865A8;
   color:green;
 }
 .sound_off:hover{
   color:red;
-}
-.modal-container .modal-header {
-  border-radius: 10px 10px 0 0;
-  background: #333;
-  padding: 15px 15px;
-  background: url('/images/fondo_body.jpg')fixed;
-}
-
-.modal-container .modal-info {
-  padding: 25px 15px;
-  border-bottom: 1px solid #ccc;
-}
-
-.modal-container .button-container {
-  border-radius: 0 0 10px 10px;
-  background: url('/images/fondo_body.jpg')fixed;
-  padding: 15px;
-  border-top: 1px solid #fff;
-}
-
-.modal-container .button-container button {
-  display: block;
-  margin: auto;
-  padding: 5px 15px;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-size: 12px;
 }
 
 #card:hover  span {
@@ -521,5 +494,6 @@ label {
   text-align: right;
   }​
 </style>
+
 
 

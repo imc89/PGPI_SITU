@@ -89,6 +89,7 @@
 
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
+  <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
 
 
 </head>
@@ -96,76 +97,108 @@
 
 <body>
   <!-- INICIO NAVEGADOR -->
-  <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-   <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
-     <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-   </a>
-   <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
-    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-  </a>
-  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
-    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
-  </a>
-  <a href="#" id="card">
-    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
-  </a>
-  <a href="#">
-    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
-  </a>
-  <a href="crear_hechos">
-    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
-  </a>
-  <a href="lineaTiempo">
-    <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
-  </a>
-  <!-- BOTÓN DE LOGIN -->
-
-  <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
-    <!-- Authentication Links -->
-    @guest
-    <li><a href="{{ route('login') }}">Login</a></li>
-    @else
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-        <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%">    
-        {{ Auth::user()->name }} <span class="caret"></span>
-      </a>
-
-      <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
-
-        <li>
-          <a style="font-weight: bold;" href="perfilAlumno" class="glyphicon glyphicon-user"> Perfil</a>
-        </li>
-
-        <li>
-          <a style="font-weight: bold;" href="configPerfil" class="glyphicon glyphicon-cog"> Configuración</a>
-        </li>
-
-
-        <li>
-          <a style="font-weight: bold;" href="{{ route('logout') }}" class="glyphicon glyphicon-log-out" 
-          onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();">
-          Logout
+   <div id='cssmenu'>
+    <ul>
+      <li class='active'>   
+        <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
+          <img width="50px" src="{{ asset('images/icono.jpg') }}" >
         </a>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          {{ csrf_field() }}
-        </form>
       </li>
-    </ul>
-  </li>
-  @endguest
+
+      <li>
+        <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+          <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
+        </a>
+      </li>
+
+      <li>
+        <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
+          <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+        </a>
+      </li>
+
+      <li>
+        <a href="mail_invitados">
+          <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
+        </a>
+      </li>
+
+      <li>
+        <a href="keywords">
+          <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
+        </a>
+      </li>
+
+      <li>
+        <a href="crear_hechos">
+          <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
+        </a>
+      </li>
+
+      <li>
+        <a href="lineaTiempo">
+          <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
+        </a>
+      </li>
+
+
+      <li class="login">
+
+        @guest
+        <li><a href="{{ route('login') }}">Login</a></li>
+        @else
+
+
+        <li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+
+   <!--    <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%;" >    
+   --><img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative; border-radius:50%;" >    
+   {{ Auth::user()->name }} <span class="caret"></span>
+ </a>
+
+ <div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
+
+  <a style="font-weight: bold;" href="perfilAlumno" class="link">
+    <span  class="glyphicon glyphicon-user"></span>Perfil
+  </a>
+
+  <a style="font-weight: bold;" href="configPerfil" class=" link">
+    <span  class="glyphicon glyphicon-cog"></span>Configuración
+  </a>
+
+  <a style="font-weight: bold;" href="{{ route('logout') }}"
+  onclick="event.preventDefault();
+  document.getElementById('logout-form').submit();">
+  <span class="glyphicon glyphicon-log-out"></span>Logout
+</a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+  {{ csrf_field() }}
+</form>
+</div>
+
+@endguest
+</li>
+
+</div>
+
+</li>
+
+
+
+
 </ul>
+</div>
+<script type="text/javascript">
 
+  $('li.dropdown').find('a.link').on('click', function() {
+    window.location = $(this).attr('href');
+  });
+</script>
 
-
-<a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
-" class="icon" onclick="myFunction()">&#9776;</a>
-
-</div> 
-
-<br><br><br>
 <!-- FIN DE NAVEGADOR -->
 
 

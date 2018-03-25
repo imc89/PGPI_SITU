@@ -25,134 +25,168 @@
 
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
+  <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
 
 
 </head>
 
 
-<body>
+<body style="background: transparent;">
   <!-- INICIO NAVEGADOR -->
-  <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-   <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
-     <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-   </a>
-   <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
-    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-  </a>
-  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
-    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
-  </a>
-  <a href="#">
-    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
-  </a>
-   <a href="keywords">
-    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
-  </a>
-  <a href="crear_hechos">
-    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
-  </a>
-  <a href="lineaTiempo">
-    <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
-  </a>
-  <!-- BOTÓN DE LOGIN -->
-
-  <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
-    <!-- Authentication Links -->
-    @guest
-    <li><a href="{{ route('login') }}">Login</a></li>
-    @else
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-        <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%">    
-        {{ Auth::user()->name }} <span class="caret"></span>
-      </a>
-
-      <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
-
-       <li>
-        <a style="font-weight: bold;" href="perfilAlumno" class="glyphicon glyphicon-user"> Perfil</a>
+  <div id='cssmenu'>
+    <ul>
+      <li class='active'>   
+        <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
+          <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+        </a>
       </li>
 
       <li>
-        <a style="font-weight: bold;" href="configPerfil" class="glyphicon glyphicon-cog"> Configuración</a>
+        <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+          <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
+        </a>
       </li>
 
       <li>
-        <a style="font-weight: bold;" href="{{ route('logout') }}" class="glyphicon glyphicon-log-out" 
-        onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();">
-        Logout
-      </a>
+        <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
+          <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+        </a>
+      </li>
 
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        {{ csrf_field() }}
-      </form>
-    </li>
-  </ul>
-</li>
+      <li>
+        <a href="mail_invitados">
+          <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
+        </a>
+      </li>
+
+      <li>
+        <a href="keywords">
+          <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
+        </a>
+      </li>
+
+      <li>
+        <a href="crear_hechos">
+          <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
+        </a>
+      </li>
+
+      <li>
+        <a href="lineaTiempo">
+          <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
+        </a>
+      </li>
+
+
+      <li class="login">
+
+        @guest
+        <li><a href="{{ route('login') }}">Login</a></li>
+        @else
+
+
+        <li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+
+   <!--    <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%;" >    
+   --><img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative; border-radius:50%;" >    
+   {{ Auth::user()->name }} <span class="caret"></span>
+ </a>
+
+ <div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
+
+  <a style="font-weight: bold;" href="perfilAlumno" class="link">
+    <span  class="glyphicon glyphicon-user"></span>Perfil
+  </a>
+
+  <a style="font-weight: bold;" href="configPerfil" class=" link">
+    <span  class="glyphicon glyphicon-cog"></span>Configuración
+  </a>
+
+  <a style="font-weight: bold;" href="{{ route('logout') }}"
+  onclick="event.preventDefault();
+  document.getElementById('logout-form').submit();">
+  <span class="glyphicon glyphicon-log-out"></span>Logout
+</a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+  {{ csrf_field() }}
+</form>
+</div>
+
 @endguest
+</li>
+
+</div>
+
+</li>
+
+
+
+
 </ul>
+</div>
+<script type="text/javascript">
 
+  $('li.dropdown').find('a.link').on('click', function() {
+    window.location = $(this).attr('href');
+  });
+</script>
 
-
-<a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
-" class="icon" onclick="myFunction()">&#9776;</a>
-
-</div> 
-
-<br><br><br>
 <!-- FIN DE NAVEGADOR -->
 
 
 
 
-  <!--INICIO FILTROS  -->
-  <div style="text-align: center;">
+<!--INICIO FILTROS  -->
+<div style="text-align: center;">
 
-    <!-- PRIMER FILTRO -->
-    <div style="padding: 10px;margin: 10px;display: inline-block;">
+  <!-- PRIMER FILTRO -->
+  <div style="padding: 10px;margin: 10px;display: inline-block;">
 
-      <form action="filtrar_linea_etiqueta" class="form-horizontal fv-form fv-form-bootstrap">
+    <form action="filtrar_linea_etiqueta" class="form-horizontal fv-form fv-form-bootstrap">
 
-        <br>
-        <div align="center" >
-          <div  style="width: 300px">
-            <div class="form-group" required><!-- ETIQUETAS -->
-              <label >Filtrar por etiqueta: </label>
-              <div>
-                <form action="FilterhechosController.php" method="post">
-                  {{! $etiquetas = DB::table('tags')->get() }}
-                  <select id="hecho" class="form-control" name="etiqueta" required>
-                    <option> Todos los hechos </option>
-                    @foreach($etiquetas as $tag)
-                    <option> {{ $tag->name }} </option>
-                    @endforeach
-                  </select>
-                  <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
-                </form>
-              </div>
+      <br>
+      <div align="center" >
+        <div  style="width: 300px">
+          <div class="form-group" required><!-- ETIQUETAS -->
+            <label >Filtrar por etiqueta: </label>
+            <div>
+              <form action="FilterhechosController.php" method="post">
+                {{! $etiquetas = DB::table('tags')->get() }}
+                <select id="hecho" class="form-control" name="etiqueta" required>
+                  <option> Todos los hechos </option>
+                  @foreach($etiquetas as $tag)
+                  <option> {{ $tag->name }} </option>
+                  @endforeach
+                </select>
+                <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
+              </form>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-
-
     </div>
 
-    <!-- SEGUNDO FILTRO -->
-    <div style="padding: 10px;margin: 10px;display: inline-block;">
 
-      <form action="filtrar_linea_keyword" class="form-horizontal fv-form fv-form-bootstrap">
+  </div>
 
-        <br>
-        <div align="center" >
-          <div  style="width: 300px">
-            <div class="form-group" required><!-- ETIQUETAS -->
-              <label >Filtrar por keywords: </label>
-              <div>
-                <form action="FilterhechosController.php" method="post">
-                  {{! $keywords = DB::table('keywords')->get() }}
-                 <select id="hecho" class="form-control" name="keyword" required>
+  <!-- SEGUNDO FILTRO -->
+  <div style="padding: 10px;margin: 10px;display: inline-block;">
+
+    <form action="filtrar_linea_keyword" class="form-horizontal fv-form fv-form-bootstrap">
+
+      <br>
+      <div align="center" >
+        <div  style="width: 300px">
+          <div class="form-group" required><!-- ETIQUETAS -->
+            <label >Filtrar por keywords: </label>
+            <div>
+              <form action="FilterhechosController.php" method="post">
+                {{! $keywords = DB::table('keywords')->get() }}
+                <select id="hecho" class="form-control" name="keyword" required>
                   <option>Cualquier keyword</option>
                   @foreach($keywords as $tag)
                   <option> {{ $tag->name }} </option>
@@ -196,13 +230,13 @@
  <!--CIERRE DE LOS FILTROS  -->
 </div>
 
-<div class="body">
+<div class="body"  style="height: auto; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ; ">
   <ul id="time-line">
 
     @foreach($hechos as $u)
 
     <li>
-      <div>
+      <div id="hechos" style="word-wrap: break-word;" >
         <p>
           A FECHA DE : {{ $u->fecha }}
           @if($u->etiqueta !== NULL)
@@ -215,7 +249,7 @@
           <b>Curso:</b>  {{ $u->curso }}º <br>
           @endif
           @if($u->contenido !== NULL)
-          <b>Contenido:</b>  {{ $u->contenido }} <br>
+          <b>Contenido:</b> {{ $u->contenido }} <br>
           @endif
           @if($u->video !== NULL)
           <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
@@ -224,7 +258,7 @@
           <b>Encuentro:</b> {{ $u->encuentro }}  <br>
           @endif
           @if($u->foto !== NULL)
-          <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="width: 300px;"/> <br>
+          <b>FOTO:</b> <img id="foto" src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="width: 300px;"/> <br>
           @endif
           @if($u->anexo !== NULL)
           <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
@@ -398,14 +432,92 @@ ul#time-line li.visibility {
 }
 
 a:hover span {
-    transform: rotateY(360deg);
-    -webkit-transform: rotateY(360deg);
-    transition-duration: 1.5s;
-    -webkit-transition-duration:1s;
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
 }  
 
 select {  text-align-last:center; }
 
+
+@media all and (max-width: 780px){
+  #hechos{
+    width:auto !important;
+    word-break:break-all;
+
+  }
+  #foto{
+    width:50% !important;
+    word-break:break-all;
+
+  }
+
+  ul#time-line{
+
+    text-align: center;
+    width: auto !important;
+
+    list-style-type: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+  }
+  ul#time-line:after{
+    position: absolute;
+    height: 100%;
+    width: 5px;
+    border-radius: 20px;
+    margin-left: auto;
+    z-index: -1;
+  }
+  ul#time-line li{
+    width:  90% !important;
+    margin: auto;
+    text-align: center;
+    transition: all cubic-bezier(0.68,0.55,0.265,1.55) .5s;
+    transform: rotateX(90deg);
+  }
+  ul#time-line li:nth-child(2n){
+    width: 90% !important;
+    margin: auto;
+    text-align: center;
+  }
+
+  ul#time-line li div{
+    width:  90% !important;
+    display: inline-block;
+    background: #303030;
+    border-radius: 30px;  
+    position: relative;
+    color: #fff;
+    z-index: 0;
+
+  }
+  ul#time-line li div:hover{
+    background: rgba(48, 48, 48, 0.5);
+    z-index: 0;
+
+  }
+
+  ul#time-line li div:after{
+    content: none;
+
+  }
+  ul#time-line li div:before{
+    content: none;
+  }
+
+  ul#time-line li:nth-child(2n) div:before{
+   text-align: center;
+ }
+ ul#time-line li:nth-child(2n) div:after{
+   text-align: center;
+
+   border-color: transparent transparent transparent #303030;
+ }
+
+} 
 </style>
 
 <script type="text/javascript">

@@ -26,7 +26,8 @@
 
 	<!-- CSS LINK CON NOMENCLATURA LARAVEL -->
 	<link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
-	
+	<link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
+
 
 
 	<!--  LINK KEYWORD TAGS BOOTSTRAP JQUERY -->
@@ -41,85 +42,118 @@
 <!-- NOTA IMPORTANTE-> INSERT .... WHERE USER:NAME == AUTH:USER-->
 <body>
 	<!-- INICIO NAVEGADOR -->
-	<div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-		<a href="alumno" align="center" style="padding: 0 0 0 0 "> 
-			<img width="50px" src="{{ asset('images/icono.jpg') }}" >
-		</a>
-		<a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
-			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-		</a>
-		<a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
-			<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
-		</a>
-		<a href="#">
-			<span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
-		</a> 
-		<a href="keywords">
-			<span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
-		</a>
-		<a href="#">
-			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
-		</a>
-		<a href="lineaTiempo">
-			<span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
-		</a>
-		<!-- BOTÓN DE LOGIN -->
-
-		<ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
-			<!-- Authentication Links -->
-			@guest
-			<li><a href="{{ route('login') }}">Login</a></li>
-			@else
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-					<img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%">    
-					{{ Auth::user()->name }} <span class="caret"></span>
+	<div id='cssmenu'>
+		<ul>
+			<li class='active'>   
+				<a href="alumno" align="center" style="padding: 0 0 0 0 "> 
+					<img width="50px" src="{{ asset('images/icono.jpg') }}" >
 				</a>
+			</li>
 
-				<ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
+			<li>
+				<a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+					<span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
+				</a>
+			</li>
 
-					<li>
-						<a style="font-weight: bold;" href="perfilAlumno" class="glyphicon glyphicon-user"> Perfil</a>
-					</li>
+			<li>
+				<a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
+					<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+				</a>
+			</li>
 
-					<li>
-						<a style="font-weight: bold;" href="configPerfil" class="glyphicon glyphicon-cog"> Configuración</a>
-					</li>
+			<li>
+				<a href="mail_invitados">
+					<span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
+				</a>
+			</li>
+
+			<li>
+				<a href="keywords">
+					<span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
+				</a>
+			</li>
+
+			<li>
+				<a href="crear_hechos">
+					<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
+				</a>
+			</li>
+
+			<li>
+				<a href="lineaTiempo">
+					<span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
+				</a>
+			</li>
 
 
-					<li>
-						<a style="font-weight: bold;" href="{{ route('logout') }}" class="glyphicon glyphicon-log-out" 
-						onclick="event.preventDefault();
-						document.getElementById('logout-form').submit();">
-						Logout
-					</a>
+			<li class="login">
 
-					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-						{{ csrf_field() }}
-					</form>
-				</li>
-			</ul>
-		</li>
-		@endguest
-	</ul>
+				@guest
+				<li><a href="{{ route('login') }}">Login</a></li>
+				@else
 
 
+				<li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-	<a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
-	" class="icon" onclick="myFunction()">&#9776;</a>
 
-</div> 
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
 
-<br><br><br>
+   <!--    <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%;" >    
+   --><img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative; border-radius:50%;" >    
+   {{ Auth::user()->name }} <span class="caret"></span>
+</a>
+
+<div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
+
+	<a style="font-weight: bold;" href="perfilAlumno" class="link">
+		<span  class="glyphicon glyphicon-user"></span>Perfil
+	</a>
+
+	<a style="font-weight: bold;" href="configPerfil" class=" link">
+		<span  class="glyphicon glyphicon-cog"></span>Configuración
+	</a>
+
+	<a style="font-weight: bold;" href="{{ route('logout') }}"
+	onclick="event.preventDefault();
+	document.getElementById('logout-form').submit();">
+	<span class="glyphicon glyphicon-log-out"></span>Logout
+</a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+	{{ csrf_field() }}
+</form>
+</div>
+
+@endguest
+</li>
+
+</div>
+
+</li>
+
+
+
+
+</ul>
+</div>
+<script type="text/javascript">
+
+	$('li.dropdown').find('a.link').on('click', function() {
+		window.location = $(this).attr('href');
+	});
+</script>
+
 <!-- FIN DE NAVEGADOR -->
-
 
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
 
 
 <div class="body">
 
-
+	<br>
+	<br>
+	<br>
 
 	@if(session('message'))
 	<div align="center" class='alert alert-success'>
@@ -128,7 +162,7 @@
 	@endif
 
 	<div align="center" class="body">
-		<div  style="width: 780px;background: #B7C2D2; border-radius: 10px">
+		<div  id="hechos" style="width: 780px;background: #B7C2D2; border-radius: 10px">
 
 			<div align="center">
 				<br><br>
@@ -164,7 +198,7 @@
 								</div>
 							</div>
 
-							<div class="form-group" style="width: 780px;">
+							<div id="hechos" class="form-group" style="width: 780px;">
 								<label class="col-xs-7">Fecha del hecho: </label>
 								<div class="col-xs-8">
 									<input type="date" class="form-control" name="fecha" id="fecha" required>
@@ -191,7 +225,7 @@
 										</label>
 									</div>
 
-									<div class="radio" style="float:left;">&nbsp;&nbsp;
+									<div class="radio" style="float:left;">
 										<label>
 											<input type="checkbox" class="form-check-input"  id="6">
 											Carrera de 6 años
@@ -202,7 +236,7 @@
 
 							<div class="form-group" style='display:none' id="4cursos">
 								<div>
-									<div style="width: 780px;" class="alert alert-warning" align="center" >
+									<div id="hechos" style="width: 780px;" class="alert alert-warning" align="center" >
 										<strong>Warning!</strong> 
 										Si te has confundido de opción no marques curso y deselecciona la casilla de años de carrera.
 										<p>
@@ -312,7 +346,7 @@
 											<input type="text" name="video" class="form-control" id="videos" placeholder="Video URL" />
 											<span id="videoOK"></span>
 										</div>
-										<div style="width: 780px;" class="alert alert-warning" align="center" >
+										<div id="hechos" style="width: 780px;" class="alert alert-warning" align="center" >
 											<strong>Warning!</strong> 
 											Soporta enlaces de Youtube, Vimeo, Dailymotion, Twitter y Facebook.
 										</div>
@@ -375,7 +409,7 @@
 										<br>
 										<div class="radio">
 
-											<img src="/images/icons/lock.png" id="lock1">
+											<img src="{{ asset('images/icons/lock.png')}}");" id="lock1">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<input name="autorizacion" type="radio"  value="1">
 											<label>Nivel 1</label>
@@ -383,7 +417,7 @@
 										</div>
 										<div class="radio">
 
-											<img src="/images/icons/lock.png" id="lock2">
+											<img src="{{ asset('images/icons/lock.png')}}");" id="lock2">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<input name="autorizacion" type="radio" value="2">
 											<label>Nivel 2</label>
@@ -391,7 +425,7 @@
 										</div>
 										<div class="radio">
 
-											<img src="/images/icons/lock.png" id="lock3">
+											<img src="{{ asset('images/icons/lock.png')}}");" id="lock3">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<input name="autorizacion" type="radio"  value="3">
 											<label>Nivel 3</label>
@@ -403,8 +437,8 @@
 
 
 									<div class="form-group">
-										<div>
-											<input type="submit" name="submit" id="submit" class="btn btn-primary"  value="CREAR NUEVO HECHO" style="width: 780px; align-content: center">
+										<div id="bhechos" >
+											<input id="bhechos" type="submit" name="submit" id="submit" class="btn btn-primary"  value="CREAR NUEVO HECHO" style="width: 780px; align-content: center">
 										</div>
 									</div>
 								</form>
@@ -591,19 +625,19 @@
 												$('input[name="autorizacion"]:radio').click(function(){
 													switch($(this).val()) {
 														case "1":
-														$("#lock1").attr("src","/images/icons/unlock.png");
-														$("#lock2").attr("src","/images/icons/lock.png");
-														$("#lock3").attr("src","/images/icons/lock.png");
+														$("#lock1").attr("src","{{ asset('images/icons/unlock.png')}}");
+														$("#lock2").attr("src","{{ asset('images/icons/lock.png') }}");
+														$("#lock3").attr("src","{{ asset('images/icons/lock.png') }}");
 														break;
 														case "2":
-														$("#lock1").attr("src","/images/icons/lock.png");
-														$("#lock2").attr("src","/images/icons/unlock.png");
-														$("#lock3").attr("src","/images/icons/lock.png");
+														$("#lock1").attr("src","{{ asset('images/icons/lock.png') }}");
+														$("#lock2").attr("src","{{ asset('images/icons/unlock.png')}}");
+														$("#lock3").attr("src","{{ asset('images/icons/lock.png') }}");
 														break;
 														case "3":
-														$("#lock1").attr("src","/images/icons/lock.png");
-														$("#lock2").attr("src","/images/icons/lock.png");
-														$("#lock3").attr("src","/images/icons/unlock.png");
+														$("#lock1").attr("src","{{ asset('images/icons/lock.png') }}");
+														$("#lock2").attr("src","{{ asset('images/icons/lock.png') }}");
+														$("#lock3").attr("src","{{ asset('images/icons/unlock.png')}}");
 														break;
 													}
 												});
@@ -704,6 +738,22 @@ div.token{
 		transition-duration: 1.5s;
 		-webkit-transition-duration:1s;
 	}  
+
+	@media all and (max-width: 780px){
+		#hechos{
+			width:auto !important;
+
+		}
+		#bhechos{
+			width:auto !important;
+			text-align: center !important;
+		}
+		#exampleFormControlTextarea1{
+			max-width:auto !important;
+
+			min-width:auto !important;
+		}
+	}
 </style>
 
 

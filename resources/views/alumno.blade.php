@@ -23,95 +23,132 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+  <!-- AYUDA EN AUDIO -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
+  <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
 
 
 </head>
 
 
-<body onload="deshabilitaRetroceso()">
+<body onload="deshabilitaRetroceso()" style="background-color: transparent;">
   <!-- INICIO NAVEGADOR -->
-  <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-   <a href="#" align="center" style="padding: 0 0 0 0 "> 
-     <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-   </a>
-   <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
-    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-  </a>
-  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
-    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
-  </a>
-  <a href="mail_invitados">
-    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
-  </a>
-  <a href="keywords">
-    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
-  </a>
-  <a href="crear_hechos">
-    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
-  </a>
-  <a href="lineaTiempo">
-    <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
-  </a>
-  <!-- BOTÓN DE LOGIN -->
 
-  <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
-    <!-- Authentication Links -->
+  <div id='cssmenu'>
+    <ul>
+     <li class='active'>   
+       <a href="#" align="center" style="padding: 0 0 0 0 "> 
+         <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+       </a>
+     </li>
+
+     <li>
+      <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+        <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
+      </a>
+    </li>
+
+    <li>
+      <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
+        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+      </a>
+    </li>
+
+    <li>
+      <a href="mail_invitados">
+        <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
+      </a>
+    </li>
+
+    <li>
+     <a href="keywords">
+      <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
+    </a>
+  </li>
+
+  <li>
+    <a href="crear_hechos">
+      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
+    </a>
+  </li>
+
+  <li>
+    <a href="lineaTiempo">
+      <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
+    </a>
+  </li>
+
+
+  <li class="login">
+
     @guest
     <li><a href="{{ route('login') }}">Login</a></li>
     @else
-    <li class="dropdown">
+
+
+    <li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-        <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%">    
-        {{ Auth::user()->name }} <span class="caret"></span>
+
+
+       <img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative;  top:10px; border-radius:50%;" >    
+       {{ Auth::user()->name }} <span class="caret"></span>
+     </a>
+
+     <div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
+
+      <a style="font-weight: bold;" href="perfilAlumno" class="link">
+        <span  class="glyphicon glyphicon-user"></span>Perfil
       </a>
 
-      <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
+      <a style="font-weight: bold;" href="configPerfil" class=" link">
+        <span  class="glyphicon glyphicon-cog"></span>Configuración
+      </a>
 
-        <li>
-          <a style="font-weight: bold;" href="perfilAlumno" class="glyphicon glyphicon-user"> Perfil</a>
-        </li>
+      <a style="font-weight: bold;" href="{{ route('logout') }}"
+      onclick="event.preventDefault();
+      document.getElementById('logout-form').submit();">
+      <span class="glyphicon glyphicon-log-out"></span>Logout
+    </a>
 
-        <li>
-          <a style="font-weight: bold;" href="configPerfil" class="glyphicon glyphicon-cog"> Configuración</a>
-        </li>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      {{ csrf_field() }}
+    </form>
+  </div>
 
-
-        <li>
-          <a  style="font-weight: bold;" class="glyphicon glyphicon-log-out" href="{{ route('logout') }}"
-          onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();">
-          Logout
-        </a>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          {{ csrf_field() }}
-        </form>
-      </li>
-    </ul>
-  </li>
   @endguest
+</li>
+
+</div>
+
+</li>
+
+
+
+
 </ul>
+</div>
+<script type="text/javascript">
 
-
-
-<a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
-" class="icon" onclick="myFunction()">&#9776;</a>
-
-</div> 
-
-
+  $('li.dropdown').find('a.link').on('click', function() {
+    window.location = $(this).attr('href');
+  });
+</script>
 
 
 <!-- FIN DE NAVEGADOR -->
 
 
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
-<div class="body">
+<div class="body" id="gradient" style="height: auto; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ; ">
 
 
-  <br><br><br><br><br>
+  <br>
   <div align="center">
     <div class="alert alert-warning">
       <strong>Warning!</strong> Para que tu profesor pueda ver correctamente tu curriculum completa lo mejor posible tus datos de perfil.
@@ -125,7 +162,7 @@
 
 
   <!--INICIO FILTROS  -->
-  <div style="text-align: center;">
+  <div style="text-align: center; word-wrap: break-word;">
 
     <!-- PRIMER FILTRO -->
     <div style="padding: 10px;margin: 10px;display: inline-block;">
@@ -211,101 +248,157 @@
 
    </div>
 
-   <!--CIERRE DE LOS FILTROS  -->
- </div>
 
-
- @if(session('message'))
- <div align="center" class='alert alert-success'>
-  {{ session('message') }}
-</div>
-@endif
+   @if(session('message'))
+   <div align="center" class='alert alert-success'>
+    {{ session('message') }}
+  </div>
+  @endif
 
 
 
-@foreach($hechos as $u)
-<div align="center">
-  <div id="hecho_div">
-    <div style="float: left;">
-      <u>HECHO Nº <?php $contador++; echo $contador ?></u>
-    </div>
-    <div style="float: right;">
-      <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
+  @foreach($hechos as $u)
+  <div align="center">
+    <div id="hecho_div">
+      <div style="float: left;">
+        <u>HECHO Nº <?php $contador++; echo $contador ?></u>
+      </div>
+      <div style="float: right;">
+        <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
 
-      <div style="float: right;background: #BAB9BB;border-radius:5px">
+        <div style="float: right;background: #BAB9BB;border-radius:5px">
 
 
-        <form action="eliminar_hecho">
-         {{! $idhecho = $u->id}}
+          <form action="eliminar_hecho">
+           {{! $idhecho = $u->id}}
 
-         <form action="EliminarController.php" method="post">
-          <input style="color: black" type="hidden" name="data" value="{{ $idhecho }}">
+           <form action="EliminarController.php" method="post">
+            <input style="color: black" type="hidden" name="data" value="{{ $idhecho }}">
 
-          <button type="submit" style="border: none;background: transparent;">
-            <span id="borrar" class="glyphicon glyphicon-remove"></span>
-          </button>
+            <button type="submit" style="border: none;background: transparent;">
+              <span id="borrar" class="glyphicon glyphicon-remove"></span>
+            </button>
+          </form>
+
         </form>
 
-      </form>
 
+      </div>
 
     </div>
 
+    @if($u->etiqueta !== NULL)
+    <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+    @endif
+
+    @if($u->titulo !== NULL)
+    <b>Título:</b>  {{ $u->titulo }} <br>
+    @endif
+
+    @if($u->curso !== NULL)
+    <b>Curso:</b>  {{ $u->curso }}º <br>
+    @endif
+
+    @if($u->contenido !== NULL)
+    <b>Contenido:</b>  {{ $u->contenido }} <br>
+    @endif
+
+    @if($u->video !== NULL)
+    <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+    @endif
+
+    @if($u->encuentro !== NULL)
+    <b>Encuentro:</b> {{ $u->encuentro }}  <br>
+    @endif
+
+    @if($u->foto !== NULL)
+    <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
+    @endif
+
+    @if($u->anexo !== NULL)
+    <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+    @endif
+
+    @if($u->proposito !== NULL)
+    <b>Propósito:</b>  {{ $u->proposito }} <br>
+    @endif
+
+
+    @if($u->keywords !== NULL)
+    {{! $array = explode( ',', $u->keywords )}}
+    <br><b>Keywords:</b> 
+    @foreach ($array as $item) 
+    <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+    @endforeach 
+    <br>
+    @endif
+
+
   </div>
-
-  @if($u->etiqueta !== NULL)
-  <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
-  @endif
-
-  @if($u->titulo !== NULL)
-  <b>Título:</b>  {{ $u->titulo }} <br>
-  @endif
-
-  @if($u->curso !== NULL)
-  <b>Curso:</b>  {{ $u->curso }}º <br>
-  @endif
-
-  @if($u->contenido !== NULL)
-  <b>Contenido:</b>  {{ $u->contenido }} <br>
-  @endif
-
-  @if($u->video !== NULL)
-  <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
-  @endif
-
-  @if($u->encuentro !== NULL)
-  <b>Encuentro:</b> {{ $u->encuentro }}  <br>
-  @endif
-
-  @if($u->foto !== NULL)
-  <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
-  @endif
-
-  @if($u->anexo !== NULL)
-  <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
-  @endif
-
-  @if($u->proposito !== NULL)
-  <b>Propósito:</b>  {{ $u->proposito }} <br>
-  @endif
-
-
-  @if($u->keywords !== NULL)
-  {{! $array = explode( ',', $u->keywords )}}
-  <br><b>Keywords:</b> 
-  @foreach ($array as $item) 
-  <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
-  @endforeach 
-  <br>
-  @endif
-
-
-</div>
 </div>
 <br>
 @endforeach
+
+<!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
+<footer class="body_bottom body" id="footer" style="position: relative;bottom: 0">
+  <table>
+    <tbody>
+
+     <tr> 
+      <td class="foot_izdo">&nbsp;</td> 
+      <td class="foot_cent"> 
+        <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
+          <br> 
+          Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
+        </p> 
+
+        <!-- REDES SOCIALES -->
+        <div id="social"> 
+          <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
+          </a> 
+          <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
+          </a>
+          <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
+          </a>
+          <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
+          </a> 
+          <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
+          </a>
+        </div>
+        <!-- FIN REDES SOCIALES -->
+
+        <div>
+          <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
+          / Sponsored by the
+          <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
+          and 
+          <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
+          Copyright 2013,
+          <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
+          . All rights reserved. 
+        </div>
+
+
+      </td>
+      <td class="foot_dcho">&nbsp;</td> 
+    </tr>
+  </tbody>
+</table>
+</footer>
 </div>
-</body>
+
+</div>
+
+<!--CIERRE DE LOS FILTROS  -->
+</div>
+
+
+
 <!-- FINAL CARRUSEL -->
 
 
@@ -333,82 +426,146 @@
   </div>
   @endif
 
-  <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-  <div  id="footer" style="position:absolute" align="center">
-    <table>
-      <tbody>
 
-       <tr> 
-        <td class="foot_izdo">&nbsp;</td> 
-        <td class="foot_cent"> 
-          <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-            <br> 
-            Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
-          </p> 
+  <!-- MODAL INFORMACIÓN -->
+  <div class="modal fade" id="AYUDA" role="dialog">
+    <div class="modal-dialog">
 
-          <!-- REDES SOCIALES -->
-          <div id="social"> 
-            <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
-            </a> 
-            <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
-            </a>
-            <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
-            </a>
-            <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
-            </a> 
-            <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
-            </a>
-            <br><br>
+      <!-- CONTENIDO DE ABOUT EN BANNER-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button id="audio_offX" type="button" class="close" data-dismiss="modal">&times;</button>
+          <div>
+            <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
+            <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
           </div>
-          <!-- FIN REDES SOCIALES -->
+          <h4 align="center" class="modal-title">ALUMNO</h4>
+        </div>
+        <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
 
-          <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
-          / Sponsored by the
-          <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
-          and 
-          <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
-          Copyright 2013,
-          <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
-          . All rights reserved. 
-        </td>
-        <td class="foot_dcho">&nbsp;</td> 
-      </tr>
+          Has accedido a la sección de alumno.
+          En esta sección se muestran los hechos por orden de creación.
+          <ul>
+            <li>
+              <br>
+              -Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y selecciona &nbsp; <span class="glyphicon glyphicon-cog"></span> &nbsp; <b style="font-weight: bold">Configuración</b>.  
+              <br>
+            </li>
 
-    </tbody>
-  </table>
-</div>
+            <li>
+              <br>
+              -Para acceder a tus datos de perfil donde también podrás dar de baja tu cuenta pulsa tu nombre a la derecha del menú  y selecciona  &nbsp; <span class="glyphicon glyphicon-user"></span> &nbsp; <b style="font-weight: bold">Perfil</b>.  
+              <br>
+            </li>
 
-<!--  BANNER MODAL ABOUT -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
+            <li>
+              <br>
+              -Para acceder al área de invitaciones pulsa el botón &nbsp; <span class="glyphicon glyphicon-bullhorn"></span> &nbsp; <b style="font-weight: bold">Invitar</b>.  
+              <br>
+            </li>
 
-    <!-- CONTENIDO DE ABOUT EN BANNER-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">ABOUT US</h4>
+            <li>
+              <br>
+              -Para gestionar tus keywords de hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-tags"></span> &nbsp; <b style="font-weight: bold">Keywords</b>.  
+              <br>
+            </li>
+
+            <li>
+              <br>
+              -Para crear nuevos hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-list-alt"></span> &nbsp; <b style="font-weight: bold">Hechos</b>.  
+              <br>
+            </li>
+
+            <li>
+              <br>
+              -Para visualizar la línea temporal de  hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-time"></span> &nbsp; <b style="font-weight: bold">Línea Temporal</b>.  
+              <br>
+            </li>
+          </ul>
+
+          <br><br>
+
+          <div align="center">
+            Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobre Logout.
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div align="center">
+            <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+          </div>
+        </div>
       </div>
-      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
-      </div>
+
     </div>
-
   </div>
-</div>
-<!-- FIN BANNER MODAL -->
+  <!-- AUDIO MODAL -->
+
+  <script type="text/javascript">
+    var phrases = [
+    'Has accedido a la sección de alumno.En esta sección se muestran los hechos por orden de creación.Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y seleccionaconfiguración.Para acceder a tus datos de perfil, donde también podrás dar de baja tu cuenta, pulsa tu nombre a la derecha del menú  y selecciona perfil.Para acceder al área de invitaciones pulsa el botón invitar.Para gestionar tuskeywords de hechos pulsa el botón keywords.Para crear nuevos hechos pulsa el botón Hechos.Para visualizar la línea temporal de  hechos pulsa el botón Línea Temporal. Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobreLogout.'
+    ];
+
+    jQuery(document).ready(function ($) {  
+      $('#audio_on').click(function() {
+        var i = Math.round(phrases.length * Math.random()) - 1;
+
+        responsiveVoice.speak(phrases[i], 'Spanish Female');
+      });
+    });
+
+    jQuery(document).ready(function ($) {  
+      $('#audio_off').click(function() {
+        var i = 0 ;
+
+        responsiveVoice.speak(phrases[1000], 'Spanish Female');
+      });
+    });
+    jQuery(document).ready(function ($) {  
+      $('#audio_offX').click(function() {
+        var i = 0 ;
+
+        responsiveVoice.speak(phrases[1000], 'Spanish Female');
+      });
+    });
+    jQuery(document).ready(function ($) {  
+      $('#audio_offA').click(function() {
+        var i = 0 ;
+
+        responsiveVoice.speak(phrases[1000], 'Spanish Female');
+      });
+    });
+  </script>
+  <!-- FIN AUDIO MODAL -->
+
+
+
+  <!--  BANNER MODAL ABOUT -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- CONTENIDO DE ABOUT EN BANNER-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">ABOUT US</h4>
+        </div>
+        <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- FIN BANNER MODAL -->
 
 </body>
 </html>
@@ -452,11 +609,21 @@
   box-shadow: 0px 5px 10px #444 inset;
 
 }
-</style>
+
+@media all and (max-width: 780px){
+  #hecho_div{
+    width:100%;
+    height:auto;
+
+  }
+  #gradient{
+    height: auto !important;
+  }
+}
 <!-- MODAL HASTA EL FINAL DEL DOCUMENTO BLADE -->
 <script type="text/javascript">
-  $(".modal-background, .modal-close").on("click", function(){
-    $(".modal-container, .modal-background").hide();
+$(".modal-background, .modal-close").on("click", function(){
+  $(".modal-container, .modal-background").hide();
   });
 </script>
 
@@ -527,5 +694,14 @@ select {  text-align-last:center; }
   color: white;
   opacity: 1;
 }
+
+.sound_on:hover{
+  color:green;
+}
+.sound_off:hover{
+  color:red;
+}
+
+
 
 </style>

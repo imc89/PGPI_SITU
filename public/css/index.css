@@ -1,8 +1,20 @@
 body{
-  background: url('/images/fondo_body.jpg')fixed;
-    max-width: 100%;
-    overflow-x: hidden;
+  background: url('/images/fondo_body.jpg')fixed ;
+  max-width: 100%;
+  overflow-x: hidden;
 }
+
+body,body:visited { /*for small screens */
+  display:block;
+  background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;
+}
+.body,.body:visited { /*for small screens */
+  display:block;
+  background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;
+}
+
+footer{background: transparent !important}
+
 .body{
   background: url('/images/fondo_body.jpg')fixed;
   height: auto;
@@ -15,105 +27,71 @@ body{
   bottom: 0;
 }
 
-.navbar-header
-{
-	padding-left:0px;
-	width: 50px;
-}
-.navbar_right{
-	right: 0;
-}
 
-.navbar-nav{
-	padding-left: 10px;
-}
-
-.navbar-nav >li:hover{
-	border-radius: 5px;
-	color: #FFFFFF;
-	background-color: #435E80;
-}
-
-.dropdown-menu{
-  background-color: rgba(38, 38, 38, 0.6);
-
-}
-
-.dropdown-menu> li:hover >a:hover{
-	border-radius: 5px;
-	color: #FFFFFF;
-	background-color: #435E80;
-  align-items: center;
-  width: 10%;
-  text-align: left;
-}
-
-
-.navbar li a{
-	max-width: 150px;
-}
 
 /*FOOTER*/
-div#footer {
-	overflow: hidden;
-  height: 120px;
-  position: absolute;
-  width: 100%;
-  margin-bottom: 5px;
-  background: url('/images/fondo_body.jpg')fixed;
-}
-div#footer > table {
-	text-align: center;
-	font-family: 'OptimaRegular';
-	font-weight: bold;
-	font-size: 13px;
-	color: #002e62;
-	border-collapse: collapse;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	height: 110px;
-}
-div#footer .foot_dcho {
-	overflow: hidden;
-	width: 39px;
-	background: url(../images/application/pie_dcha.png) no-repeat 0px 0px;
-}
-div#footer .foot_cent {
-	background: #c6d8e6;
-	border-radius: 8px;
-}
-div#footer .foot_izdo {
-	overflow: hidden;
-	width: 39px;
-	background: url(../images/application/pie_izda.png) no-repeat 0px 0px;
+footer#footer {
+ overflow: hidden;
+ position: absolute;
+ height: auto;
+ bottom:0;
+ width: 100%;
+ margin-bottom: 5px;
+ background: url('/images/fondo_body.jpg')fixed;
 }
 
-div#footer div#social {
-	border-bottom: 1px dotted #002e62;
-	margin-bottom: 1em;
+footer#footer > table {
+ text-align: center;
+ font-family: 'OptimaRegular';
+ font-weight: bold;
+ font-size: 13px;
+ color: #002e62;
+ border-collapse: collapse;
+ margin: 0;
+ padding: 0;
+ width: 100%;
+ height: 110px;
+}
+footer#footer .foot_dcho {
+ overflow: hidden;
+ width: 39px;
+ background: url(../images/application/pie_dcha.png) no-repeat 0px 0px;
+}
+footer#footer .foot_cent {
+ background: #c6d8e6;
+ border-radius: 8px;
+}
+footer#footer .foot_izdo {
+ overflow: hidden;
+ width: 39px;
+ background: url(../images/application/pie_izda.png) no-repeat 0px 0px;
 }
 
-div#footer .foot_datos {
-	padding-bottom: 6px;
-	margin-bottom: 4px;
-	text-align: center;
-	font-family: sans-serif, Arial, Helvetica, Verdana;
+footer#footer div#social {
+ border-bottom: 1px dotted #002e62;
+ margin-bottom: 1em;
 }
-td.foot_cent a {
-	color: #002E62;
-	text-decoration: none;
-	font-weight: normal;
+
+footer#footer .foot_datos {
+ padding-bottom: 6px;
+ margin-bottom: 4px;
+ text-align: center;
+ font-family: sans-serif, Arial, Helvetica, Verdana;
+}
+footer.foot_cent a {
+ color: #002E62;
+ text-decoration: none;
+ font-weight: normal;
 }
 
 /**/
 
 *{
-	margin: 0;
-	padding: 0;
-	outline: none;
-	box-sizing: border-box;
-	font-family: 'Raleway', sans-serif;
+ margin: 0;
+ padding: 0;
+ outline: none;
+ box-sizing: border-box;
+ font-family: 'Raleway', sans-serif;
 }
 
 /*ESTILOS PROPIOS DEL AUTH DE LARAVEL*/

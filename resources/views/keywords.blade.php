@@ -18,138 +18,176 @@
 
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
+  <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
 
 
 </head>
 
 
-<body onload="deshabilitaRetroceso()">
+
+<body  class="body"  id="gradient" style="height: auto; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
   <!-- INICIO NAVEGADOR -->
-  <div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
-   <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
-     <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-   </a>
-   <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
-    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-  </a>
-  <a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
-    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
-  </a>
-  <a href="mail_invitados">
-    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
-  </a>
-  <a href="#">
+  <div id='cssmenu'>
+    <ul>
+     <li class='active'>   
+      <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
+       <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+     </a>
+   </li>
+
+   <li>
+    <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+      <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
+    </a>
+  </li>
+
+  <li>
+    <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
+      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+    </a>
+  </li>
+
+  <li>
+    <a href="mail_invitados">
+      <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
+    </a>
+  </li>
+
+  <li>
+   <a href="keywords">
     <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
   </a>
+</li>
+
+<li>
   <a href="crear_hechos">
     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
   </a>
+</li>
+
+<li>
   <a href="lineaTiempo">
     <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
   </a>
-  <!-- BOTÓN DE LOGIN -->
-
-  <ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
-    <!-- Authentication Links -->
-    @guest
-    <li><a href="{{ route('login') }}">Login</a></li>
-    @else
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-        <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%">    
-        {{ Auth::user()->name }} <span class="caret"></span>
-      </a>
-
-      <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
-
-        <li>
-          <a style="font-weight: bold;" href="perfilAlumno" class="glyphicon glyphicon-user"> Perfil</a>
-        </li>
-
-        <li>
-          <a style="font-weight: bold;" href="configPerfil" class="glyphicon glyphicon-cog"> Configuración</a>
-        </li>
+</li>
 
 
-        <li>
-          <a  style="font-weight: bold;" class="glyphicon glyphicon-log-out" href="{{ route('logout') }}"
-          onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();">
-          Logout
-        </a>
+<li class="login">
 
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          {{ csrf_field() }}
-        </form>
-      </li>
-    </ul>
-  </li>
-  @endguest
+  @guest
+  <li><a href="{{ route('login') }}">Login</a></li>
+  @else
+
+
+  <li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+
+   <!--    <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%;" >    
+   --><img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative; border-radius:50%;" >    
+   {{ Auth::user()->name }} <span class="caret"></span>
+ </a>
+
+ <div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
+
+  <a style="font-weight: bold;" href="perfilAlumno" class="link">
+    <span  class="glyphicon glyphicon-user"></span>Perfil
+  </a>
+
+  <a style="font-weight: bold;" href="configPerfil" class=" link">
+    <span  class="glyphicon glyphicon-cog"></span>Configuración
+  </a>
+
+  <a style="font-weight: bold;" href="{{ route('logout') }}"
+  onclick="event.preventDefault();
+  document.getElementById('logout-form').submit();">
+  <span class="glyphicon glyphicon-log-out"></span>Logout
+</a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+  {{ csrf_field() }}
+</form>
+</div>
+
+@endguest
+</li>
+
+</div>
+
+</li>
+
+
+
+
 </ul>
+</div>
+<script type="text/javascript">
 
-
-
-<a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
-" class="icon" onclick="myFunction()">&#9776;</a>
-
-</div> 
+  $('li.dropdown').find('a.link').on('click', function() {
+    window.location = $(this).attr('href');
+  });
+</script>
 
 
 
 
 <!-- FIN DE NAVEGADOR -->
+
 <br>
 <br>
 <br>
-<div class="container">
-  <h1 class="mb-2 text-center">KEYWORDS</h1>
+<div class="body" style=" background: transparent;">
+  <div class="container">
+    <h1 class="mb-2 text-center">KEYWORDS</h1>
 
-  @if(session('message'))
-  <div align="center" class='alert alert-success'>
-    {{ session('message') }}
-  </div>
-  @endif
+    @if(session('message'))
+    <div align="center" class='alert alert-success'>
+      {{ session('message') }}
+    </div>
+    @endif
 
 
 
-  <tr><a class="btn btn-primary btn-sm" href="crear_keyword">NUEVA KEYWORD</a></tr>
-  <br>
-  <br>
-  <table class="table table-striped table-dark" align="center">
-    <?php $contador=0 ?>
-    <thead>
-      <tr>
-        <th scope="col" class="text-center">#</th>
-        <th scope="col" class="text-center">Nombre Keyword</th>
-        <th scope="col" class="text-center">Eliminar Keyword</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach($keywords as $u)
-      <tr>
-        <th class="text-center" scope="row"><?php $contador++; echo $contador ?></th>
-        <td class="text-center"> {{ $u->name }} </td>
-        <td class="text-center">
 
-         <form action="eliminar_keyword">
-           {{! $idkey = $u->id}}
+    <tr><a class="btn btn-primary btn-sm" href="crear_keyword">NUEVA KEYWORD</a></tr>
+    <br>
+    <br>
+    <table class="table table-striped table-dark" align="center">
+      <?php $contador=0 ?>
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">#</th>
+          <th scope="col" class="text-center">Nombre Keyword</th>
+          <th scope="col" class="text-center">Eliminar Keyword</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($keywords as $u)
+        <tr>
+          <th class="text-center" scope="row"><?php $contador++; echo $contador ?></th>
+          <td class="text-center"> {{ $u->name }} </td>
+          <td class="text-center">
 
-           <form action="EliminarController.php" method="post">
-            <input style="color: black" type="hidden" name="data" value="{{ $idkey }}">
+           <form action="eliminar_keyword">
+             {{! $idkey = $u->id}}
 
-            <button type="submit" style="border: none;background: transparent;">
-              <span id="borrar" class="glyphicon glyphicon-remove"></span>
-            </button>
+             <form action="EliminarController.php" method="post">
+              <input style="color: black" type="hidden" name="data" value="{{ $idkey }}">
+
+              <button type="submit" style="border: none;background: transparent;">
+                <span id="borrar" class="glyphicon glyphicon-remove"></span>
+              </button>
+            </form>
+
           </form>
 
-        </form>
+        </td>
 
-      </td>
-
-    </tr>
-    @endforeach
-  </tbody>
-</table>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
 
 </div>
 
@@ -200,4 +238,10 @@ a:hover span {
 #borrar:hover{
  color: red; 
 }
+
+@media all and (max-width: 780px){
+  #gradient{
+    height:auto !important;
+
+  }
 </style>

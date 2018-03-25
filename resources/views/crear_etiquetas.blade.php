@@ -22,6 +22,7 @@
 
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
+  <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
 
 
 </head>
@@ -29,339 +30,265 @@
 
 
 <!-- INICIO NAVEGADOR -->
-<div class="topnav navbar navbar-inverse  navbar-fixed-top" id="myTopnav">
- <a href="admin" align="center" style="padding: 0 0 0 0 ">
-   <img width="50px" src="{{ asset('images/icono.jpg') }}" >
- </a>
- <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;">
-  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-</a>
-<a id="btn" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'">
-  <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
-</a>
-<a href="mailpassword">
-  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
-</a>
-<a href="log_admin_login">
-  <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Log Logins
-</a>
-<a href="etiquetas">
+<div id='cssmenu' >
+  <ul>
+   <li class='active'>   
+     <a href="admin" align="center" style="padding: 0 0 0 0 "> 
+       <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+     </a>
+   </li>
+
+   <li>
+    <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+      <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
+    </a>
+  </li>
+
+  <li>
+    <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
+      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+    </a>
+  </li>
+
+  <li>
+   <a href="mailpassword">
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Dar Alta Usuario
+  </a>
+</li>
+
+<li>
+  <a href="log_admin_login">
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Log Logins
+  </a>
+</li>
+
+<li>
+ <a href="etiquetas">
   <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Etiquetas
 </a>
-<!-- BOTÓN DE LOGIN -->
+</li>
 
-<ul  class="nav navbar-nav navbar-right" style="margin-right: 1%">
-  <!-- Authentication Links -->
+
+<li class="login">
+
   @guest
   <li><a href="{{ route('login') }}">Login</a></li>
   @else
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+
+
+  <li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true"> 
       {{ Auth::user()->name }} <span class="caret"></span>
     </a>
-
-    <ul class="dropdown-menu" style="border-radius: 10px; text-align: left;">
-      <li>
-        <a style="font-weight: bold;" class="glyphicon glyphicon-log-out" href="{{ route('logout') }}"
-        onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();">
-        Logout
-      </a>
-
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        {{ csrf_field() }}
-      </form>
-    </li>
-  </ul>
-</li>
-@endguest
-</ul>
-<!--
-  @guest
-        <a  href="{{ route('login') }}">Login</a>
-  @else
-    <span class="dropdown">
-      <a href="#" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-        {{ Auth::user()->name }} <span class="caret"></span>
+    <div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
+      <a style="font-weight: bold;" href="{{ route('logout') }}"
+      onclick="event.preventDefault();
+      document.getElementById('logout-form').submit();">
+      <span class="glyphicon glyphicon-log-out"></span> Logout
     </a>
-    <ul class="dropdown-menu">
-      <li>
-        <a href="{{ route('logout') }}"
-        onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();">
-        Logout
-      </a>
 
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        {{ csrf_field() }}
-            </form>
-          </li>
-        </ul>
-        @endguest
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      {{ csrf_field() }}
+    </form>
+  </div>
 
-            </ul>
-
-          </span> -->
-
-
-          <a href="javascript:void(0);" style="font-size:15px; background: #435E80;border-radius: 5px;
-          " class="icon" onclick="myFunction()">&#9776;</a>
-
-        </div>
-
-
-
-        <!-- FIN DE NAVEGADOR -->
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="container">
-          <h1 class="mb-2 text-center">CREAR NUEVA ETIQUETA</h1>
-         
-         @if(session('message'))
-         <div class='alert alert-success'>
-          {{ session('message') }}
-        </div>
-        @endif
-        <div class="col-12 col-md-6">
-          <form action="send_etiqueta" class="form-horizontal" method="POST" ">
-           {{ csrf_field() }}
-           <div class="form-group"> <!-- NOMBRE -->
-             <label for="Name">Nombre: </label>
-             <input type="text" class="form-control" id="name" placeholder="Nombre de la etiqueta" name="name" required>
-           </div>
-
-           <div class="form-group">
-            <button type="submit" class="btn btn-primary" value="send_etiqueta">ENVIAR</button>
-            <a href="etiquetas" class="btn btn-primary">
-              <span class="fa fa-refresh fa-spin"></span> REFRESCAR ETIQUETAS
-            </a>  
-          </form>
-        </div>
-      </div> <!-- /container -->
+  @endguest
+</li>
 
 </div>
 
-     
+</li>
 
-      <!--  BANNER MODAL ABOUT -->
-      <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
 
-          <!-- CONTENIDO DE ABOUT EN BANNER-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">ABOUT US</h4>
-            </div>
-            <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
-            </div>
-          </div>
 
+
+</ul>
+</div>
+
+
+<!-- FIN DE NAVEGADOR -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <h1 class="mb-2 text-center" style="font-weight: bold">CREAR NUEVA ETIQUETA</h1>
+
+  @if(session('message'))
+  <div class='alert alert-success'>
+    {{ session('message') }}
+  </div>
+  @endif
+  <div class="col-12 col-md-6">
+    <form action="send_etiqueta" class="form-horizontal" method="POST" ">
+     {{ csrf_field() }}
+     <div class="form-group"> <!-- NOMBRE -->
+       <label for="Name" style="font-weight: bold">Nombre: </label>
+       <input type="text" class="form-control" id="name" placeholder="Nombre de la etiqueta" name="name" required>
+     </div>
+
+     <div class="form-group">
+      <button type="submit" class="btn btn-primary" value="send_etiqueta">ENVIAR</button>
+      <a href="etiquetas" class="btn btn-primary">
+        <span class="fa fa-refresh fa-spin"></span> REFRESCAR ETIQUETAS
+      </a>  
+    </form>
+  </div>
+</div> <!-- /container -->
+
+</div>
+
+
+
+<!--  BANNER MODAL ABOUT -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">ABOUT US</h4>
+      </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- FIN BANNER MODAL -->
+
+<!-- MODAL INFORMACIÓN -->
+<div class="modal fade" id="AYUDA" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="audio_offX" type="button" class="close" data-dismiss="modal">&times;</button>
+        <div>
+          <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
+          <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
+        </div>
+        <h4 align="center" class="modal-title">CREAR ETIQUETAS</h4>
+      </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
+       Has accedido a la sección de creación de etiquetas.
+       <br><br>
+       <ul>
+        <li>
+          <br>
+          -Para crear una nueva etiqueta basta con insertar el nombre de la etiqueta y pulsar el botón enviar.
+          <br>
+        </li>
+
+        <li>
+          <br>
+          -Para refrescar las etiquetas y ver todas de nuevo puedes pulsar el botón &nbsp; <span class="glyphicon glyphicon-tags"></span>  &nbsp; <b style="font-weight: bold">Etiquetas</b> del menú o pulsar el botón de &nbsp; <span class="fa fa-refresh fa-spin"></span> &nbsp; <b style="font-weight: bold">Refrescar Etiquetas</b>.
+          <br>
+        </li>
+
+        <br><br>
+        <div align="center">
+          Podrás salir de esta sección pulsando el icono de la universidad.
+        </div>
+
+        <br><br>
+      </div>
+
+      <div class="modal-footer">
+        <div align="center">
+          <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
         </div>
       </div>
-      <!-- FIN BANNER MODAL -->
+    </div>
 
- <!-- MODAL INFORMACIÓN -->
-      <div class="modal-background"></div>
-      <div class="modal-container">
-        <div align="center" class="modal-header">CREAR ETIQUETAS
-          <!-- CONTROL AUDIO MODAL -->
-          <div class="sound_on">
-            <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down modal-sound">    
-            </span>
-          </div>
-          <div class="sound_off">
-            <span id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off modal-sound"> 
-            </span>
-          </div>
+  </div>
+</div>
+<!-- AUDIO MODAL -->
 
-          <span id="audio_offX"> 
-            <span class="glyphicon glyphicon-remove modal-close"></span>
-          </span>
+<script type="text/javascript">
+  var phrases = [
+  'Has accedido a la sección de creación de etiquetas.Para crear una nueva etiqueta basta con insertar el nombre de la etiqueta y pulsar el botón enviar.Para refrescar las etiquetas y ver todas de nuevo puedes pulsar el botón Etiquetas del menú, o pulsar el botón de Refrescar Etiquetas.Podrás salir de esta sección pulsando el icono de la universidad.'
+  ];
 
-          <!-- <i class="modal-close">x</i> --></div>
-          <div class="modal-info">
-            Has accedido a la sección de creación de etiquetas.
-            <br><br>
-            <ul>
-              <li>
-                <br>
-                -Para crear una nueva etiqueta basta con insertar el nombre de la etiqueta y pulsar el botón enviar.
-                <br>
-              </li>
+  jQuery(document).ready(function ($) {  
+    $('#audio_on').click(function() {
+      var i = Math.round(phrases.length * Math.random()) - 1;
 
-              <li>
-                <br>
-                -Para refrescar las etiquetas y ver todas de nuevo puedes pulsar el botón &nbsp; <span class="glyphicon glyphicon-tags"></span>  &nbsp; <b style="font-weight: bold">Etiquetas</b> del menú o pulsar el botón de &nbsp; <span class="fa fa-refresh fa-spin"></span> &nbsp; <b style="font-weight: bold">Refrescar Etiquetas</b>.
-                <br>
-              </li>
+      responsiveVoice.speak(phrases[i], 'Spanish Female');
+    });
+  });
 
-              <br><br>
-              <div align="center">
-                Podrás salir de esta sección pulsando el icono de la universidad.
-              </div>
+  jQuery(document).ready(function ($) {  
+    $('#audio_off').click(function() {
+      var i = 0 ;
 
-              <br><br>
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offX').click(function() {
+      var i = 0 ;
 
-            </div>
-            <div class="button-container" align="center" id="audio_offA" >
-              <button id="cerrar" class="btn btn-primary" >ACEPTAR</button>
-            </div>
-          </div>
-        </div>
-        <!-- AUDIO MODAL -->
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offA').click(function() {
+      var i = 0 ;
 
-        <script type="text/javascript">
-          var phrases = [
-          'Has accedido a la sección de creación de etiquetas.Para crear una nueva etiqueta basta con insertar el nombre de la etiqueta y pulsar el botón enviar.Para refrescar las etiquetas y ver todas de nuevo puedes pulsar el botón Etiquetas del menú, o pulsar el botón de Refrescar Etiquetas.Podrás salir de esta sección pulsando el icono de la universidad.'
-          ];
-
-          jQuery(document).ready(function ($) {  
-            $('#audio_on').click(function() {
-              var i = Math.round(phrases.length * Math.random()) - 1;
-
-              responsiveVoice.speak(phrases[i], 'Spanish Female');
-            });
-          });
-
-          jQuery(document).ready(function ($) {  
-            $('#audio_off').click(function() {
-              var i = 0 ;
-
-              responsiveVoice.speak(phrases[1000], 'Spanish Female');
-            });
-          });
-          jQuery(document).ready(function ($) {  
-            $('#audio_offX').click(function() {
-              var i = 0 ;
-
-              responsiveVoice.speak(phrases[1000], 'Spanish Female');
-            });
-          });
-          jQuery(document).ready(function ($) {  
-            $('#audio_offA').click(function() {
-              var i = 0 ;
-
-              responsiveVoice.speak(phrases[1000], 'Spanish Female');
-            });
-          });
-        </script>
-        <!-- FIN AUDIO MODAL -->
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+</script>
+<!-- FIN AUDIO MODAL -->
 
 
 
-        <style type="text/css">
-        .modal-background {
-          display: none;
-          position: fixed;
-          top: 0;
-          left: 0;
-          background: rgba(0, 0, 0, 0.7);
-          width: 100%;
-          height: 100%;
-        }
+<style type="text/css">
 
-        .modal-container {
-          display: none;
-          position: relative;
-          width: 500px;
-          margin: 0% auto;
-          background: #fff;
-          border-radius: 10px;
-          font-family: Arial, Sans-serif;
-          font-size: 12px;
-        }
+.sound_on:hover{
+  color:green;
+}
+.sound_off:hover{
+  color:red;
+}
+</style>
+<!-- MODAL HASTA EL FINAL DEL DOCUMENTO BLADE -->
+<script type="text/javascript">
+  $(".modal-background, .modal-close").on("click", function(){
+    $(".modal-container, .modal-background").hide();
+  });
+  $("#cerrar").on("click", function(){
+    $(".modal-container, .modal-background").hide();
+  });
+</script>
 
-
-        .modal-container .modal-close {
-          float: right;
-          cursor: pointer;
-        }
-
-        .modal-container .modal-sound {
-          float: left;
-          cursor: pointer;
-          padding-left: 15px;
-          padding-right: 15px;
-        }
-        .sound_on:hover{
-          background-color: #2865A8;
-          color:green;
-        }
-        .sound_off:hover{
-          color:red;
-        }
-        .modal-container .modal-header {
-          border-radius: 10px 10px 0 0;
-          background: #333;
-          padding: 15px 15px;
-          background: url('/images/fondo_body.jpg')fixed;
-        }
-
-        .modal-container .modal-info {
-          padding: 25px 15px;
-          border-bottom: 1px solid #ccc;
-        }
-
-        .modal-container .button-container {
-          border-radius: 0 0 10px 10px;
-          background: url('/images/fondo_body.jpg')fixed;
-          padding: 15px;
-          border-top: 1px solid #fff;
-        }
-
-        .modal-container .button-container button {
-          display: block;
-          margin: auto;
-          padding: 5px 15px;
-          cursor: pointer;
-          text-transform: uppercase;
-          font-size: 12px;
-        }
-
-
-        #btn:hover  span {
-          transform: rotateY(360deg);
-          -webkit-transform: rotateY(360deg);
-          transition-duration: 1.5s;
-          -webkit-transition-duration:1s;
-        } 
-      </style>
-      <!-- MODAL HASTA EL FINAL DEL DOCUMENTO BLADE -->
-      <script type="text/javascript">
-        $(".modal-background, .modal-close").on("click", function(){
-          $(".modal-container, .modal-background").hide();
-        });
-        $("#cerrar").on("click", function(){
-          $(".modal-container, .modal-background").hide();
-        });
-      </script>
-
-      <script type="text/javascript">
-        $("#btn").click(function() {
-         $(".modal-container, .modal-background").show();
-       });
-     </script>
+<script type="text/javascript">
+  $("#btn").click(function() {
+   $(".modal-container, .modal-background").show();
+ });
+</script>
 
 
 
-      <style type="text/css">
-      a:hover span {
-        transform: rotateY(360deg);
-        -webkit-transform: rotateY(360deg);
-        transition-duration: 1.5s;
-        -webkit-transition-duration:1s;
-      }  
-    </style>
+<style type="text/css">
+a:hover span {
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
+}  
+</style>
