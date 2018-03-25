@@ -95,7 +95,7 @@
 </head>
 
 
-<body>
+<body style="background: transparent;">
   <!-- INICIO NAVEGADOR -->
    <div id='cssmenu'>
     <ul>
@@ -203,8 +203,9 @@
 
 
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
+<div style="height:100%; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ; ">
 
-<div class="body">
+<div>
   <br><br>
   <div align="center">
     <div class="container">
@@ -223,7 +224,7 @@
   <h1>DATOS DE PERFIL</h1>
 </div>
 
-<div class="body">
+<div class="body" style="background: transparent;">
   <div align="center" >
 
     <div  style="width: 400px;background: #B7C2D2; border-radius: 10px;box-shadow: 0px 5px 10px #444 inset;">
@@ -381,7 +382,7 @@
         </div>
       </div>
       <!-- FINAL CARRUSEL -->
-
+</div>
 
       <!--  BANNER MODAL DELETE ACCOUNT -->
       <div class="modal fade" id="DELETEMODAL" role="dialog">

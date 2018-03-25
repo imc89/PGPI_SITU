@@ -23,9 +23,9 @@
 </head>
 
 <!-- NOTA IMPORTANTE-> INSERT .... WHERE USER:NAME == AUTH:USER-->
-<body>
+<body style="background: transparent;">
   <!-- INICIO NAVEGADOR -->
-   <div id='cssmenu'>
+  <div id='cssmenu'>
     <ul>
       <li class='active'>   
         <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
@@ -133,20 +133,19 @@
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
 
 
-<div class="body">
+<div class="body" id="hechos">
 
  <div style="margin: 0 auto; padding-top: 64px; " align="center">
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-        <img src="/images/avatar/{{ $user->avatar }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
-        <h2>{{ $user->name }}'s Profile</h2>
+        <img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
+        <h2>Perfil : {{ $user->name }}</h2>
         <form enctype="multipart/form-data" action="configPerfil" method="POST">
-          <label>Update Profile Image</label>
-          <input type="file" name="avatar">
+          <input id="botonfile" type="file" name="avatar" accept="image/*" value="">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <br>
-          <input type="submit" class="btn btn-sm btn-primary" value="CAMBIAR IMAGEN DE PERFIL" style="width: 400px">
+          <input id="botonfileinput" type="submit" class="btn btn-sm btn-primary" value="CAMBIAR IMAGEN DE PERFIL" style="width: 400px">
         </form>
       </div>
     </div>
@@ -162,6 +161,10 @@
 </div>
 @endif
 
+
+
+<div align="center" class="body" style="height: auto; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ; ">
+
 <div class="alert alert-warning" align="center">
   <strong>Warning!</strong> Los formatos admitidos son JPG, PNG, GIF
   <p>
@@ -169,19 +172,17 @@
   </div>
 
 </div>
-
-
-<div align="center" class="body">
-  <div  style="width: 780px;height: 850px; background: #B7C2D2; border-radius: 10px">
+<div align="center">
+  <div id="hechos" style="width: 780px;height: 850px; background: #B7C2D2; border-radius: 10px">
 
     <div class="container">
-      <div class="row" align="left">
-        <div class="col-xs-12" id="demoContainer">
+      <div class="row" >
+        <div class="col-xs-12" id="demoContainer" >
 
-          <form action="actualizarPerfil" class="form-horizontal fv-form fv-form-bootstrap">
+          <form action="actualizarPerfil" class="form-horizontal fv-form fv-form-bootstrap" >
 
             <br>
-            <div class="form-group">
+            <div class="form-group" >
               <label class="col-xs-7">Nombre completo: </label>
               <div class="col-xs-8">
                 <input type="text" class="form-control" name="nombre" placeholder="Nombre" />
@@ -263,7 +264,7 @@
                   <input type="text" class="form-control" id="input1" name='dato_opcion1'/>
                 </label>
                 <div class="form-group" id="sinput1">
-                  <input  class="col-xs-7 inputLikeLabel" id="Pinput1" disabled="disabled" >                  
+                  <input  style="font-weight: bold; color: #000000" class="col-xs-7 inputLikeLabel" id="Pinput1" disabled="disabled" >                  
                 </input>
                 <div class="col-xs-8">
                   <input type="text" class="form-control" name='opcion1_valor' />
@@ -277,7 +278,7 @@
                 <input type="text" class="form-control" id="input2" name='dato_opcion2'/>
               </label>
               <div class="form-group" id="sinput2">
-                <input  class="col-xs-7 inputLikeLabel" id="Pinput2" disabled="disabled" ></input>
+                <input  style="font-weight: bold; color: #000000" class="col-xs-7 inputLikeLabel" id="Pinput2" disabled="disabled" ></input>
                 <div class="col-xs-8">
                   <input type="text" class="form-control" name='opcion2_valor' />
                 </div>
@@ -290,7 +291,7 @@
                 <input type="text" class="form-control" id="input3" name='dato_opcion3'/>
               </label>
               <div class="form-group" id="sinput3">
-                <input  class="col-xs-7 inputLikeLabel" id="Pinput3" disabled="disabled" ></input>
+                <input  style="font-weight: bold; color: #000000" class="col-xs-7 inputLikeLabel" id="Pinput3" disabled="disabled" ></input>
                 <div class="col-xs-8">
                   <input type="text" class="form-control" name='opcion3_valor' />
                 </div>
@@ -299,9 +300,9 @@
 
 
 
-            <div class="form-group">
+            <div class="form-group" >
               <div>
-                <button style="width: 780px; align-content: center" type="submit" class="btn btn-primary" name="signup" value="Sign up">ACTUALIZAR INFORMACIÓN</button>
+                <button id="hechos" style="width: 780px" type="submit" class="btn btn-primary" name="signup" value="Sign up">ACTUALIZAR INFORMACIÓN</button>
               </div>
             </div>
           </form>
@@ -476,5 +477,37 @@ a:hover span {
   transition-duration: 1.5s;
   -webkit-transition-duration:1s;
 }  
+
+@media all and (max-width: 780px){
+  #hechos{
+    width:auto !important;
+    text-align: center !important;
+    margin: auto !important;
+
+
+  }
+  #demoContainer{
+   margin-left: 15% !important;
+  }
+
+  #botonfile{
+    color:transparent !important;
+
+  }
+  #botonfileinput{
+    width:auto !important;
+    margin-top: 10%;
+  }
+
+  #bhechos{
+    width:auto !important;
+    text-align: center !important;
+  }
+  #exampleFormControlTextarea1{
+    max-width:auto !important;
+
+    min-width:auto !important;
+  }
+}
 </style>
 
