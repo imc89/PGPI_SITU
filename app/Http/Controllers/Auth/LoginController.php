@@ -64,14 +64,14 @@ class LoginController extends Controller
             } catch(\Illuminate\Database\QueryException $e){
                 $errorCode = $e->errorInfo[1];
                 if($errorCode == '1062'){
-                   return redirect('alumno');
-               }
-           }
+                 return redirect('alumno');
+             }
+         }
 
-           return redirect('alumno');
-       }
+         return redirect('alumno');
+     }
 
-       elseif($user->rol=='2'){
+     elseif($user->rol=='2'){
 
             // TIEMPO DE REGISTRO DE PROFESOR
         DB::table('users')
@@ -81,6 +81,39 @@ class LoginController extends Controller
         return redirect('profesor');
 
     }
+
+    elseif($user->rol=='3'){
+
+
+
+        // TIEMPO DE REGISTRO DE INVITADO
+        DB::table('users')
+        ->where('name', $user->name)
+        ->update(['tiempolog' => $date ]);
+
+        $tiempo_permiso = DB::table('invitado')
+        ->where('invitado.email','=', $request->email)
+        ->select('tiempo_permiso')->get();
+
+        foreach ($tiempo_permiso as $time) {
+
+            if ($date >= $time->tiempo_permiso) {
+
+              DB::table('users')->where('users.email', '=' , $request->email)->delete();
+              DB::table('invitado')->where('invitado.email', '=' , $request->email)->delete();
+
+              Auth::logout();
+              return redirect('welcome');
+          }
+          else{
+
+            return redirect('invitado');
+
+        }
+    }
+}
+
+
 }
 
 

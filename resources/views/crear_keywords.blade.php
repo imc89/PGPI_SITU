@@ -24,9 +24,9 @@
 </head>
 
 
-<body onload="deshabilitaRetroceso()">
+<body onload="deshabilitaRetroceso()" style="background: transparent;">
   <!-- INICIO NAVEGADOR -->
- <div id='cssmenu'>
+  <div id='cssmenu'>
     <ul>
      <li class='active'>   
       <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
@@ -135,7 +135,7 @@
 <br>
 <br>
 <br>
-<div class="container">
+<div class="container" id="gradient" >
  <h1 class="mb-2 text-center">Crear Nueva Keyword</h1>
 
  @if(session('message'))
@@ -148,12 +148,12 @@
    {{ csrf_field() }}
    <div class="form-group"> <!-- NOMBRE -->
      <label for="Name">Nombre: </label>
-     <input type="text" class="form-control" id="name" placeholder="Nombre de la keyword" name="name" required>
+     <input style="font-weight: bold" type="text" class="form-control" id="name" placeholder="Nombre de la keyword" name="name" required>
    </div>
 
    <div class="form-group">
-    <button type="submit" class="btn btn-primary" value="send_keyword">ENVIAR</button>
-    <a href="keywords" class="btn btn-primary">
+    <button style="font-weight: bold" type="submit" class="btn btn-primary" value="send_keyword">ENVIAR</button>
+    <a style="font-weight: bold" href="keywords" class="btn btn-primary">
       <span class="fa fa-refresh fa-spin"></span> REFRESCAR KEYWORDS
     </a>  
   </form>
@@ -189,10 +189,28 @@
 <!-- FIN BANNER MODAL -->
 
 <style type="text/css">
-  a:hover span {
-    transform: rotateY(360deg);
-    -webkit-transform: rotateY(360deg);
-    transition-duration: 1.5s;
-    -webkit-transition-duration:1s;
+a:hover span {
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
 }  
+
+html{
+  height:100%;
+  background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;
+}
+@media all and (max-width: 780px){
+  #hechos{
+    width:auto !important;
+
+  }
+
+  #gradient{
+    height: 100%; 
+    background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;"
+  }
+
+  html{background: transparent;}
+}
 </style>

@@ -1,14 +1,4 @@
-{{! $logins = DB::table('users')
-->where('users.id','=', Auth::user()->id)
-->select('logins')
-->get() }}
 
-{{! $datos = DB::table('alumno')
-->select('alumno.id')
-->where('users.id','=', Auth::user()->id)
-->join('users','users.id','=','user_id')
-->get()
-}}
 
 
 
@@ -41,95 +31,37 @@
 </head>
 
 
-<body onload="deshabilitaRetroceso()" id="gradient" style="height: 100%;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
-  <!-- INICIO NAVEGADOR -->
+<body onload="deshabilitaRetroceso()" id="gradient" style="height: 100%;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;"> 
 
-  <div id='cssmenu'>
-    <ul>
-     <li class='active'>   
-       <a href="#" align="center" style="padding: 0 0 0 0 "> 
-         <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-       </a>
-     </li>
+ <!-- INICIO NAVEGADOR -->
 
-     <li>
-      <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
-        <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
-      </a>
-    </li>
+ <div id='cssmenu'>
+  <ul>
+   <li class='active'>   
+     <a href="#" align="center" style="padding: 0 0 0 0 "> 
+       <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+     </a>
+   </li>
 
-    <li>
-      <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
-        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
-      </a>
-    </li>
-
-    <li>
-      <a href="mail_invitados">
-        <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
-      </a>
-    </li>
-
-    <li>
-     <a href="keywords">
-      <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
+   <li>
+    <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+      <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
     </a>
   </li>
 
   <li>
-    <a href="crear_hechos">
-      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
+    <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
+      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
     </a>
   </li>
 
   <li>
-    <a href="lineaTiempo">
-      <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
-    </a>
-  </li>
+   <spam style="font-weight: bold;">
+     <?php echo strtoupper('soy un invitado con permiso de nivel '. $autorizacion);?>
+   </spam>
+ </li>
 
-  <!-- INICIO CV -->
-
-  <li>
-   @foreach($datos as $a)
-   {{! $datopdf = $a->id}}
-
-
-   <a href="javascript:void()" onclick="document.getElementById('cvform').submit();"">
-     <form action="viewPdf_alumno" class="cvrotate" id="cvform">
-      <form action="PdfController.php" method="post">
-        <input type="hidden" name="data" value="{{ $datopdf }}">
-
-        <span class="glyphicon glyphicon-user" aria-hidden="true" style="color: white"></span>      
-        CV
-
-
-      </form>
-
-    </form>
-
-    @endforeach
-  </a>
-</li>
-<style type="text/css">
-.cvrotate:hover span{
-  transform: rotateY(360deg);
-  -webkit-transform: rotateY(360deg);
-  transition-duration: 1.5s;
-  -webkit-transition-duration:1s;
-}
-.cvrotate:hover{
-  border-radius: 5px;
-  color: #FFFFFF;
-  background-color: #435E80;
-  height: 100%;
-  cursor:pointer;
-}
-</style>
-<!-- FIN CV -->
-
-
-<li class="login">
+ <li class="login">
 
   @guest
   <li><a href="{{ route('login') }}">Login</a></li>
@@ -141,21 +73,10 @@
 
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
 
-
-     <img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative;  top:10px; border-radius:50%;" >    
      {{ Auth::user()->name }} <span class="caret"></span>
    </a>
 
    <div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
-
-    <a style="font-weight: bold;" href="perfilAlumno" class="link">
-      <span  class="glyphicon glyphicon-user"></span>Perfil
-    </a>
-
-    <a style="font-weight: bold;" href="configPerfil" class=" link">
-      <span  class="glyphicon glyphicon-cog"></span>Configuración
-    </a>
-
     <a style="font-weight: bold;" href="{{ route('logout') }}"
     onclick="event.preventDefault();
     document.getElementById('logout-form').submit();">
@@ -191,116 +112,48 @@
 
 
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
-<div class="body"  >
-
-
+<div class="body" style=" background: transparent !important;">
   <br>
   <div align="center">
-    <div style="font-weight: bold" class="alert alert-warning">
-      <strong>Warning!</strong> Para que tu profesor pueda ver correctamente tu curriculum completa lo mejor posible tus datos de perfil.
+    <div class="alert alert-warning" style="font-weight: bold"> 
+      <strong>Warning!</strong> LA INVITACIÓN CADUCARÁ EN 7 DÍAS DESDE QUE SE HIZO EL ENVIO.
     </div>
-    <h1 style="font-weight: bold">BIENVENIDO ALUMNO</h1>
-    <h1 style="font-weight: bold">TABLÓN DE HECHOS DE {{Auth::user()->name}}</h1> 
+    <h1 style="font-weight: bold">BIENVENIDO INVITADO</h1>
+    <h1 style="font-weight: bold">{{Auth::user()->name}}</h1>
+    <br>
+
+    <h1 style="font-weight: bold">
+      @if($autorizacion == 1)
+
+      ESTÁS TENIENDO ACCESO A LOS HECHOS DE
+      @foreach($propietario as $p)
+      {{$p->name}}
+      @endforeach
+      DE NIVEL 1
+
+      @elseif($autorizacion == 2)
+
+      ESTÁS TENIENDO ACCESO A LOS HECHOS DE
+      @foreach($propietario as $p)
+      {{$p->name}}
+      @endforeach
+      DE NIVEL 1 y 2
+
+      @else
+      ESTÁS TENIENDO ACCESO A TODO EL CONTENIDO DE
+      @foreach($propietario as $p)
+      {{$p->name}}
+      @endforeach
+      
+      @endif
+
+    </h1> 
+    <br>
+
   </div>
 
   <!-- MOSTRAR HECHOS -->
   <?php $contador=0 ?>
-
-
-  <!--INICIO FILTROS  -->
-  <div style="text-align: center; word-wrap: break-word;">
-
-    <!-- PRIMER FILTRO -->
-    <div style="padding: 10px;margin: 10px;display: inline-block;">
-
-      <form action="filtrar_hechos_etiqueta" class="form-horizontal fv-form fv-form-bootstrap">
-
-        <br>
-        <div align="center" >
-          <div  style="width: 300px">
-            <div class="form-group" required><!-- ETIQUETAS -->
-              <label style="font-weight: bold" >Filtrar por etiqueta: </label>
-              <div>
-                <form action="FilterhechosController.php" method="post">
-                  {{! $etiquetas = DB::table('tags')->get() }}
-                  <select style="font-weight: bold" id="hecho" class="form-control" name="etiqueta" required>
-                    <option> Todos los hechos </option>
-                    @foreach($etiquetas as $tag)
-                    <option> {{ $tag->name }} </option>
-                    @endforeach
-                  </select>
-                  <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center; font-weight: bold">        
-                </form>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-
-
-    </div>
-
-    <!-- SEGUNDO FILTRO -->
-    <div style="padding: 10px;margin: 10px;display: inline-block;">
-
-      <form action="filtrar_hechos_keyword" class="form-horizontal fv-form fv-form-bootstrap">
-
-        <br>
-        <div align="center" >
-          <div  style="width: 300px">
-            <div class="form-group" required><!-- ETIQUETAS -->
-              <label style="font-weight: bold">Filtrar por keywords: </label>
-              <div>
-                <form action="FilterhechosController.php" method="post">
-                  {{! $keywords = DB::table('keywords')->get() }}
-                  <select style="font-weight: bold" id="hecho" class="form-control" name="keyword" required>
-                    <option>Cualquier keyword</option>
-                    @foreach($keywords as $tag)
-                    <option> {{ $tag->name }} </option>
-                    @endforeach
-                  </select>
-                  <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center; font-weight: bold">        
-                </form>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-
-
-    </div>
-
-    <!-- TERCER FILTRO -->
-    <div style="padding: 10px;margin: 10px;display: inline-block;">
-
-      <form action="filtrar_hechos_titulo" class="form-horizontal fv-form fv-form-bootstrap">
-
-        <br>
-        <div align="center" >
-          <div  style="width: 300px">
-            <div class="form-group" required><!-- ETIQUETAS -->
-              <label style="font-weight: bold" >Filtrar por título: </label>
-              <div>
-                <form action="FilterhechosController.php" method="post">
-                 <input style="font-weight: bold" type="text" class="form-control" name="titulo" required>
-                 <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center; font-weight: bold">        
-               </form>
-             </div>
-           </div>
-         </form>
-       </div>
-     </div>
-
-
-   </div>
-
-
-   @if(session('message'))
-   <div align="center" class='alert alert-success'>
-    {{ session('message') }}
-  </div>
-  @endif
-
 
 
   @foreach($hechos as $u)
@@ -311,135 +164,110 @@
       </div>
       <div style="float: right;">
         <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
-
-        <div style="float: right;background: #BAB9BB;border-radius:5px">
-
-
-          <form action="eliminar_hecho">
-           {{! $idhecho = $u->id}}
-
-           <form action="EliminarController.php" method="post">
-            <input style="color: black" type="hidden" name="data" value="{{ $idhecho }}">
-
-            <button type="submit" style="border: none;background: transparent;">
-              <span id="borrar" class="glyphicon glyphicon-remove"></span>
-            </button>
-          </form>
-
-        </form>
-
-
       </div>
 
+      @if($u->etiqueta !== NULL)
+      <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+      @endif
+
+      @if($u->titulo !== NULL)
+      <b>Título:</b>  {{ $u->titulo }} <br>
+      @endif
+
+      @if($u->curso !== NULL)
+      <b>Curso:</b>  {{ $u->curso }}º <br>
+      @endif
+
+      @if($u->contenido !== NULL)
+      <b>Contenido:</b>  {{ $u->contenido }} <br>
+      @endif
+
+      @if($u->video !== NULL)
+      <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+      @endif
+
+      @if($u->encuentro !== NULL)
+      <b>Encuentro:</b> {{ $u->encuentro }}  <br>
+      @endif
+
+      @if($u->foto !== NULL)
+      <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
+      @endif
+
+      @if($u->anexo !== NULL)
+      <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+      @endif
+
+      @if($u->proposito !== NULL)
+      <b>Propósito:</b>  {{ $u->proposito }} <br>
+      @endif
+
+
+      @if($u->keywords !== NULL)
+      {{! $array = explode( ',', $u->keywords )}}
+      <br><b>Keywords:</b> 
+      @foreach ($array as $item) 
+      <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+      @endforeach 
+      <br>
+      @endif
+
+
     </div>
-
-    @if($u->etiqueta !== NULL)
-    <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
-    @endif
-
-    @if($u->titulo !== NULL)
-    <b>Título:</b>  {{ $u->titulo }} <br>
-    @endif
-
-    @if($u->curso !== NULL)
-    <b>Curso:</b>  {{ $u->curso }}º <br>
-    @endif
-
-    @if($u->contenido !== NULL)
-    <b>Contenido:</b>  {{ $u->contenido }} <br>
-    @endif
-
-    @if($u->video !== NULL)
-    <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
-    @endif
-
-    @if($u->encuentro !== NULL)
-    <b>Encuentro:</b> {{ $u->encuentro }}  <br>
-    @endif
-
-    @if($u->foto !== NULL)
-    <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
-    @endif
-
-    @if($u->anexo !== NULL)
-    <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
-    @endif
-
-    @if($u->proposito !== NULL)
-    <b>Propósito:</b>  {{ $u->proposito }} <br>
-    @endif
-
-
-    @if($u->keywords !== NULL)
-    {{! $array = explode( ',', $u->keywords )}}
-    <br><b>Keywords:</b> 
-    @foreach ($array as $item) 
-    <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
-    @endforeach 
-    <br><br>
-    @endif
-
-    @if($u->autorizacion !== NULL)
-    <b>     <img style="width: 3%" src="{{ asset('images/icons/lockh.png')}}");"></b>  {{ $u->autorizacion }} <br>
-    @endif
-
-
-
+    <br>
   </div>
-</div>
-<br>
-@endforeach
+  @endforeach
 
-<!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-<footer class="body_bottom body" id="footer" style="position: relative;bottom: 0">
-  <table>
-    <tbody>
+  <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
+  <footer class="body_bottom body" id="footer" style="position: relative;bottom: 0">
+    <table>
+      <tbody>
 
-     <tr> 
-      <td class="foot_izdo">&nbsp;</td> 
-      <td class="foot_cent"> 
-        <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-          <br> 
-          Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
-        </p> 
+       <tr> 
+        <td class="foot_izdo">&nbsp;</td> 
+        <td class="foot_cent"> 
+          <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
+            <br> 
+            Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
+          </p> 
 
-        <!-- REDES SOCIALES -->
-        <div id="social"> 
-          <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
-          </a> 
-          <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
-          </a>
-          <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
-          </a>
-          <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
-          </a> 
-          <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-            <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
-          </a>
-        </div>
-        <!-- FIN REDES SOCIALES -->
+          <!-- REDES SOCIALES -->
+          <div id="social"> 
+            <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
+            </a> 
+            <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
+            </a>
+            <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
+            </a>
+            <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
+            </a> 
+            <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
+            </a>
+          </div>
+          <!-- FIN REDES SOCIALES -->
 
-        <div>
-          <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
-          / Sponsored by the
-          <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
-          and 
-          <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
-          Copyright 2013,
-          <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
-          . All rights reserved. 
-        </div>
+          <div>
+            <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
+            / Sponsored by the
+            <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
+            and 
+            <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
+            Copyright 2013,
+            <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
+            . All rights reserved. 
+          </div>
 
 
-      </td>
-      <td class="foot_dcho">&nbsp;</td> 
-    </tr>
-  </tbody>
-</table>
+        </td>
+        <td class="foot_dcho">&nbsp;</td> 
+      </tr>
+    </tbody>
+  </table>
 </footer>
 </div>
 
@@ -457,13 +285,16 @@
 <div class="modal-background">
   <div class="modal-container">
     <div align="center" class="modal-header">BIENVENIDO A LA PLATAFORMA SITU 
-      <i class="modal-close">x</i>
-        
-      </div>
+      <span class="glyphicon glyphicon-remove modal-close"></span>
+      <!-- <i class="modal-close">x</i> --></div>
       <div class="modal-info">
-        Bienvenido a tu nuevo perfil de usuario, te recomendamos que inicies tus datos de perfil, de esta forma podrás la información generada será más precisa, como tu curriculum o los datos que puedas compartir con tu profesor.
-        Esta pantalla solo saldrá en tu primer login.
-        Muchas gracias por confiar en nosotros.
+        Este mensaje 
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
         <br><br>
         <div align="center">INICIE SUS DATOS DE PERFIL</div>
       </div>
@@ -667,12 +498,12 @@
   #gradient{
     height: auto !important;
   }
+
 }
-</style>
 <!-- MODAL HASTA EL FINAL DEL DOCUMENTO BLADE -->
 <script type="text/javascript">
 $(".modal-background, .modal-close").on("click", function(){
-  $(".modal-container , .modal-background").hide();
+  $(".modal-container, .modal-background").hide();
   });
 </script>
 
@@ -680,7 +511,7 @@ $(".modal-background, .modal-close").on("click", function(){
 
 .modal-background {
   position: fixed;
-  top: 190px;
+  top: 45%;
   left: 0;
   background: rgba(0, 0, 0, 0.7);
   width: 100%;
@@ -739,6 +570,11 @@ a:hover span {
 
 select {  text-align-last:center; }
 
+html{
+  height:100%;
+  background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;
+}
+
 .btn.btn-primary[disabled] {
   color: white;
   opacity: 1;
@@ -750,7 +586,5 @@ select {  text-align-last:center; }
 .sound_off:hover{
   color:red;
 }
-
-
 
 </style>

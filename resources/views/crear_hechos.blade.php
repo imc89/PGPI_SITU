@@ -4,6 +4,12 @@
 ->where('name', Auth::user()->name)
 ->update(['logins' => $logins ])}}
 
+{{! $datos = DB::table('alumno')
+->select('alumno.id')
+->where('users.id','=', Auth::user()->id)
+->join('users','users.id','=','user_id')
+->get()
+}}
 
 
 
@@ -87,17 +93,58 @@
 			</li>
 
 
-			<li class="login">
+			<!-- INICIO CV -->
 
-				@guest
-				<li><a href="{{ route('login') }}">Login</a></li>
-				@else
-
-
-				<li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<li>
+				@foreach($datos as $a)
+				{{! $datopdf = $a->id}}
 
 
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+				<a href="javascript:void()" onclick="document.getElementById('cvform').submit();"">
+					<form action="viewPdf_alumno" class="cvrotate" id="cvform">
+						<form action="PdfController.php" method="post">
+							<input type="hidden" name="data" value="{{ $datopdf }}">
+
+							<span class="glyphicon glyphicon-user" aria-hidden="true" style="color: white"></span>      
+							CV
+
+
+						</form>
+
+					</form>
+
+					@endforeach
+				</a>
+			</li>
+			<style type="text/css">
+			.cvrotate:hover span{
+				transform: rotateY(360deg);
+				-webkit-transform: rotateY(360deg);
+				transition-duration: 1.5s;
+				-webkit-transition-duration:1s;
+			}
+			.cvrotate:hover{
+				border-radius: 5px;
+				color: #FFFFFF;
+				background-color: #435E80;
+				height: 100%;
+				cursor:pointer;
+			}
+		</style>
+		<!-- FIN CV -->
+
+
+		<li class="login">
+
+			@guest
+			<li><a href="{{ route('login') }}">Login</a></li>
+			@else
+
+
+			<li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
 
    <!--    <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%;" >    
    --><img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative; border-radius:50%;" >    
@@ -182,7 +229,7 @@
 								<label class="col-xs-7">Etiquetas: </label>
 								<div class="col-xs-8" >
 									{{! $etiquetas = DB::table('tags')->get() }}
-									<select id="hecho" class="form-control" name="etiqueta" required>
+									<select style="font-weight: bold" id="hecho" class="form-control" name="etiqueta" required>
 										<option> - </option>
 										@foreach($etiquetas as $tag)
 										<option> {{ $tag->name }} </option>
@@ -194,22 +241,22 @@
 							<div class="form-group">
 								<label class="col-xs-7">Título del hecho: </label>
 								<div class="col-xs-8">
-									<input type="text" class="form-control" name="titulo" placeholder="Nombre" required/>
+									<input style="font-weight: bold" type="text" class="form-control" name="titulo" placeholder="Nombre" required/>
 								</div>
 							</div>
 
 							<div id="hechos" class="form-group" style="width: 780px;">
 								<label class="col-xs-7">Fecha del hecho: </label>
 								<div class="col-xs-8">
-									<input type="date" class="form-control" name="fecha" id="fecha" required>
+									<input style="font-weight: bold" type="date" class="form-control" name="fecha" id="fecha" required>
 								</div>
 							</div>
 
 
 							<div class="form-group">
 								<label class="col-xs-7">Añade tus Keywords: </label>
-								<div class="col-xs-8">
-									<input autocomplete="off" type="text" name="keywords" id="keywords" placeholder="Keywords" class="form-control "/>
+								<div class="col-xs-8" style="font-weight: bold">
+									<input  autocomplete="off" type="text" name="keywords" id="keywords" placeholder="Keywords" class="form-control "/>
 								</div>
 							</div>
 
@@ -219,14 +266,14 @@
 								<label class="col-xs-7">Años de carrera: </label>
 								<div class="col-xs-8">
 									<div class="radio" style="float:left;">
-										<label>
+										<label style="font-weight: bold">
 											<input type="checkbox" class="form-check-input"  id="4">
 											Carrera de 4 años
 										</label>
 									</div>
 
 									<div class="radio" style="float:left;">
-										<label>
+										<label style="font-weight: bold">
 											<input type="checkbox" class="form-check-input"  id="6">
 											Carrera de 6 años
 										</label>
@@ -307,7 +354,7 @@
 									<div class="form-group" id="recuerdos" style="display: none">
 										<label class="col-xs-7">Tipo de recuerdo: </label>
 										<div class="col-xs-8">
-											<select id="tipo_recuerdo">
+											<select style="font-weight: bold" id="tipo_recuerdo">
 												<option>-</option>
 												<option>Foto</option>
 												<option>Video</option>
@@ -320,9 +367,9 @@
 
 
 									<div class="form-group" id="contenido" style="display: none ">
-										<label class="col-xs-7">Contenido del hecho: </label>
+										<label style="font-weight: bold" class="col-xs-7">Contenido del hecho: </label>
 										<div class="col-xs-8">
-											<textarea name="contenido" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Contenido del hecho..." style="max-width: 750px;min-width: 750px;min-height: 50px;" ></textarea>
+											<textarea  name="contenido" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Contenido del hecho..." style="max-width: 750px;min-width: 750px;min-height: 50px;font-weight: bold" ></textarea>
 										</div>
 									</div>
 
@@ -343,10 +390,10 @@
 									<div id="video" class="form-group" style="display: none ;">
 										<label class="col-xs-7">Vídeo: </label>
 										<div class="col-xs-8">
-											<input type="text" name="video" class="form-control" id="videos" placeholder="Video URL" />
+											<input style="font-weight: bold" type="text" name="video" class="form-control" id="videos" placeholder="Video URL" />
 											<span id="videoOK"></span>
 										</div>
-										<div id="hechos" style="width: 780px;" class="alert alert-warning" align="center" >
+										<div id="hechosw" style="width: 780px;font-weight: bold" class="alert alert-warning" align="center" >
 											<strong>Warning!</strong> 
 											Soporta enlaces de Youtube, Vimeo, Dailymotion, Twitter y Facebook.
 										</div>
@@ -358,9 +405,9 @@
 									https://vimeo.com/258885497 -->
 
 									<div id="encuentro" class="form-group" style="display: none;">
-										<label class="col-xs-7">Encuentro: </label>
+										<label style="font-weight: bold" class="col-xs-7">Encuentro: </label>
 										<div class="col-xs-8">
-											<input type="text" class="form-control" name="encuentro" placeholder="Encuentro" />
+											<input style="font-weight: bold" type="text" class="form-control" name="encuentro" placeholder="Encuentro" />
 										</div>
 									</div>
 
@@ -368,9 +415,9 @@
 										<label class="col-xs-7 "><span class="glyphicon glyphicon-plus"></span> Opciones: </label>
 										<div class="col-xs-8">
 											<div class="radio" style="float:left;">
-												<label>
+												<label style="font-weight: bold">
 													<input type="checkbox" class="form-check-input" id="anexo">
-													Anexo
+													Anexo <span class="glyphicon glyphicon-open-file"/>
 												</label>
 											</div>
 										</div>
@@ -387,9 +434,9 @@
 									<!-- DEBERÁ APARECER UN INPUT DE TIPO FILE -->
 
 									<div class="form-group" id="proposito" style="display: none" required>
-										<label class="col-xs-7">Propósito del hecho: </label>
+										<label style="font-weight: bold" class="col-xs-7">Propósito del hecho: </label>
 										<div class="col-xs-8">
-											<textarea name="proposito" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="El propósito de este hecho es..." style="max-width: 750px;min-width: 750px;min-height: 50px;" ></textarea>
+											<textarea name="proposito" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="El propósito de este hecho es..." style="max-width: 750px;min-width: 750px;min-height: 50px;font-weight: bold" ></textarea>
 										</div>
 									</div>
 
@@ -411,8 +458,8 @@
 
 											<img src="{{ asset('images/icons/lock.png')}}");" id="lock1">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input name="autorizacion" type="radio"  value="1">
-											<label>Nivel 1</label>
+											<input name="autorizacion" type="radio"  value="1" required>
+											<label style="font-weight: bold">Nivel 1</label>
 
 										</div>
 										<div class="radio">
@@ -420,7 +467,7 @@
 											<img src="{{ asset('images/icons/lock.png')}}");" id="lock2">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<input name="autorizacion" type="radio" value="2">
-											<label>Nivel 2</label>
+											<label style="font-weight: bold">Nivel 2</label>
 
 										</div>
 										<div class="radio">
@@ -428,7 +475,7 @@
 											<img src="{{ asset('images/icons/lock.png')}}");" id="lock3">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<input name="autorizacion" type="radio"  value="3">
-											<label>Nivel 3</label>
+											<label style="font-weight: bold">Nivel 3</label>
 
 										</div>
 									</div>
@@ -743,6 +790,10 @@ div.token{
 		#hechos{
 			width:auto !important;
 
+		}
+		#hechosw{
+			width:auto !important;
+			padding-top: 60px !important;
 		}
 		#bhechos{
 			width:auto !important;

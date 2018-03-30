@@ -37,7 +37,8 @@
 <!-- composer require barryvdh/laravel-dompdf
   composer require intervention/image -->
 
-  <body onload="deshabilitaRetroceso()">
+<body onload="deshabilitaRetroceso()" id="gradient" > 
+
     <!-- INICIO NAVEGADOR -->
     
     <div id='cssmenu'>
@@ -125,7 +126,12 @@
 
 <!-- FIN DE NAVEGADOR -->
 
-<div  style="height: 100%;  background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
+<div  style="height: 110%; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
+  <div align="center">
+  <div class="alert alert-info" style="font-weight: bold">
+    <strong>Warning!</strong> REVISA TU CARPETA SPAM EN CASO DE QUE NO LLEGUEN TUS DATOS DE REGISTRO.
+  </div>
+</div>
   <div>
     <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
     <div class="container ">

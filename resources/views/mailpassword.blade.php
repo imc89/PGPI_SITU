@@ -115,7 +115,7 @@
 
   <div class="container" >
    <h1 class="mb-2 text-center" style="font-weight: bold">ENVIO DE PASSWORDS A USUARIOS</h1>
-
+   <br>
    @if(session('message')== "El usuario ya existe en el sistema")
    <div class='alert alert-danger'>
     {{ session('message') }}
@@ -130,7 +130,7 @@
      {{ csrf_field() }} 
      <div class="form-group"> <!-- NOMBRE -->
        <label for="Name" style="font-weight: bold">Nombre: </label>
-       <input type="text" class="form-control" id="name" placeholder="Tu nombre" name="name" required>
+       <input style="font-weight: bold" type="text" class="form-control" id="name" placeholder="Tu nombre" name="name" required>
      </div>
 
      <div class="form-group" required><!-- ROL -->
@@ -143,7 +143,7 @@
 
     <div class="form-group"><!-- EMAIL -->
      <label for="email" style="font-weight: bold">Email: </label>
-     <input type="text" class="form-control" id="email" placeholder="john@example.com" name="email" required>
+     <input style="font-weight: bold" type="text" class="form-control" id="email" placeholder="john@example.com" name="email" required>
    </div>
 
    <div class="form-group">
@@ -155,8 +155,8 @@
 
 
 </div> <!-- /container -->
-<div class="alert alert-warning">
-  <strong>Warning!</strong> Si el correo no llega mira en la carpeta SPAM.
+<div style="font-weight: bold" class="alert alert-warning" align="center">
+  <strong>Warning!</strong> SI NO LLEGA EL CORREO REVISA LA CARPETA SPAM.
 </div>
 </div>
 

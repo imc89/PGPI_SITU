@@ -1,3 +1,16 @@
+{{! $datos = DB::table('alumno')
+->select('alumno.id')
+->where('users.id','=', Auth::user()->id)
+->join('users','users.id','=','user_id')
+->get()
+}}
+
+{{!$logins = DB::table('users')->select('logins')->where('name', Auth::user()->name)->first()->logins }}
+{{! $logins++ }}
+{{! DB::table('users')
+->where('name', Auth::user()->name)
+->update(['logins' => $logins ])}}
+
 
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
@@ -25,7 +38,7 @@
 
 
 
-<body  class="body"  id="gradient" style="height: auto; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
+<body  class="body"  id="gradient" style="height: 100%; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
   <!-- INICIO NAVEGADOR -->
   <div id='cssmenu'>
     <ul>
@@ -70,6 +83,48 @@
     <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
   </a>
 </li>
+
+
+      <!-- INICIO CV -->
+
+      <li>
+        @foreach($datos as $a)
+        {{! $datopdf = $a->id}}
+
+
+        <a href="javascript:void()" onclick="document.getElementById('cvform').submit();"">
+          <form action="viewPdf_alumno" class="cvrotate" id="cvform">
+            <form action="PdfController.php" method="post">
+              <input type="hidden" name="data" value="{{ $datopdf }}">
+
+              <span class="glyphicon glyphicon-user" aria-hidden="true" style="color: white"></span>      
+              CV
+
+
+            </form>
+
+          </form>
+
+          @endforeach
+        </a>
+      </li>
+      <style type="text/css">
+      .cvrotate:hover span{
+        transform: rotateY(360deg);
+        -webkit-transform: rotateY(360deg);
+        transition-duration: 1.5s;
+        -webkit-transition-duration:1s;
+      }
+      .cvrotate:hover{
+        border-radius: 5px;
+        color: #FFFFFF;
+        background-color: #435E80;
+        height: 100%;
+        cursor:pointer;
+      }
+    </style>
+    <!-- FIN CV -->
+
 
 
 <li class="login">
@@ -150,7 +205,7 @@
 
 
 
-    <tr><a class="btn btn-primary btn-sm" href="crear_keyword">NUEVA KEYWORD</a></tr>
+    <tr><a style="font-weight: bold" class="btn btn-primary btn-sm" href="crear_keyword">NUEVA KEYWORD</a></tr>
     <br>
     <br>
     <table class="table table-striped table-dark" align="center">
@@ -166,7 +221,7 @@
         @foreach($keywords as $u)
         <tr>
           <th class="text-center" scope="row"><?php $contador++; echo $contador ?></th>
-          <td class="text-center"> {{ $u->name }} </td>
+          <td style="font-weight: bold; color: black" class="text-center"> {{ $u->name }} </td>
           <td class="text-center">
 
            <form action="eliminar_keyword">

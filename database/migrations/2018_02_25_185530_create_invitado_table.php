@@ -22,11 +22,11 @@ class CreateInvitadoTable extends Migration
             $table->integer('alumno_id')->unsigned();
             $table->foreign('alumno_id')->references('id')->on('alumno');
 
-            $table->dateTime('Tpermiso');
+            $table->dateTime('tiempo_permiso');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('descripcion');
             $table->string('acceso');
+            $table->integer('rol');
             $table->timestamps();
         });
     }

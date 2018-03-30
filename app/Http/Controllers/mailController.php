@@ -29,27 +29,26 @@ class mailController extends Controller
             return redirect()->back()->with('message', '¡Gracias por tu mensaje! Te responderemos tan pronto como nos sea posible.');
         }
 
-	}
+    }
 
 
-public function invitar(Request $request)
+    public function invitar(Request $request)
     {
         if (User::where('email', '=', Input::get('email'))->count() > 0) {
-            return redirect()->back()->with('message', 'El usuario ya existe en el sistema');
+            return redirect()->back()->with('message', 'El usuario ya ha sido invitado al sistema');
         }else {
 
-            Mail::send(['text' => 'mail'], ['name', 'ADMINISTRADOR'], function ($message) use ($request) {
+            Mail::send(['text' => 'mailinvitado'], ['name', $request->name], function ($message) use ($request) {
 
                 $message->from('adsitufv@gmail.com', 'ADMINISTRADOR');
-                $message->to($request->email, $request->name)->subject('SITU');
+                $message->to($request->email, $request->name)->subject('SITU_INVITADO');
 
             });
 
-        DB::table('invitado')->join('users','id','=','user_id')
-        ->insert(['user_id' => Auth::user()->id]);
-            
-            return redirect()->back()->with('message', '¡Gracias por tu mensaje! Te responderemos tan pronto como nos sea posible.');
-        }
 
+            return redirect()->back()->with('message', 'ACABAS DE REALIZAR UNA INVITACIÓN.');
+
+
+        }
     }
 }

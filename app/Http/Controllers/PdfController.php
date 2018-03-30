@@ -26,10 +26,14 @@ class PdfController extends Controller
 		->where('alumno.id','=',$dato)
 		->get();
 
+		foreach ($datospdf as $nom){ 
+			$no=$nom->nombre;	
+			$ape=$nom->apellidos;	
+		}
 
 		$pdf = PDF::loadView('curriculum', compact('datospdf'));
 
-		return $pdf->stream('curriculum.pdf');
+		return $pdf->stream('curriculum_'.  ucfirst($no).'_'. ucfirst($ape) .'.pdf');
 
 
 	}

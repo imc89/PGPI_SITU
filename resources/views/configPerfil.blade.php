@@ -23,7 +23,7 @@
 </head>
 
 <!-- NOTA IMPORTANTE-> INSERT .... WHERE USER:NAME == AUTH:USER-->
-<body style="background: transparent;">
+
   <!-- INICIO NAVEGADOR -->
   <div id='cssmenu'>
     <ul>
@@ -133,7 +133,7 @@
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
 
 
-<div class="body" id="hechos">
+<div class="body" >
 
  <div style="margin: 0 auto; padding-top: 64px; " align="center">
   <div class="container">
@@ -161,159 +161,159 @@
 </div>
 @endif
 
+<body  id="gradient" style="height:100%; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
 
+<div align="center" class="body">
 
-<div align="center" class="body" style="height: auto; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ; ">
-
-<div class="alert alert-warning" align="center">
-  <strong>Warning!</strong> Los formatos admitidos son JPG, PNG, GIF
-  <p>
-    <strong>Warning!</strong> Para que la imagen se vea correctamente esta debe ser cuadrada.
-  </div>
-
-</div>
-<div align="center">
-  <div id="hechos" style="width: 780px;height: 850px; background: #B7C2D2; border-radius: 10px">
-
-    <div class="container">
-      <div class="row" >
-        <div class="col-xs-12" id="demoContainer" >
-
-          <form action="actualizarPerfil" class="form-horizontal fv-form fv-form-bootstrap" >
-
-            <br>
-            <div class="form-group" >
-              <label class="col-xs-7">Nombre completo: </label>
-              <div class="col-xs-8">
-                <input type="text" class="form-control" name="nombre" placeholder="Nombre" />
-              </div>
-
-              <div class="col-xs-8">
-                <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-xs-7">DNI: </label>
-              <div class="col-xs-8">
-                <input type="text" class="form-control" id="dni" name="dni" />
-                <span id="dniOK"></span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-xs-7">Email: </label>
-              <div class="col-xs-8">
-                <input type="email" class="form-control" id="email" name="email" />
-                <span id="emailOK"></span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-xs-7 ">Dirección: </label>
-              <div class="col-xs-8">
-                <input type="text" class="form-control" name="direccion" />
-              </div>
-            </div>
-
-
-            <div class="form-group">
-              <label class="col-xs-7 ">Carrera: </label>
-              <div class="col-xs-8">
-                <select class="form-control" name="carrera">
-                  <option>-</option>
-                  <option>Administración y Dirección de Empresas</option>
-                  <option>Marketing</option>
-                  <option>Derecho</option>
-                  <option>Criminología</option>
-                  <option>Gastronomía</option>
-                  <option>Business Analytics</option>
-                  <option>Educación Infantil</option>
-                  <option>Educación Primaria</option>
-                  <option>Ciencias de la Actividad Física y del Deporte</option>
-                  <option>Medicina</option>
-                  <option>Enfermería</option>
-                  <option>Fisioterapia</option>
-                  <option>Psicología</option>
-                  <option>Biomedicina</option>
-                  <option>Biotecnología</option>
-                  <option>Farmacia</option>
-                  <option>Arquitectura</option>
-                  <option>Ingeniería Informática</option>
-                  <option>Ingeniería Industrial</option>
-                  <option>Periodismo</option>
-                  <option>Relaciones Internacionales</option>
-                  <option>Diseño</option>
-                  <option>Publicidad</option>
-                  <option>Bellas Artes</option>
-                  <option>Creación y Narración de Videojuegos</option>
-                  <option>Filosofía, Política y Economía</option>
-                  <option>Humanidades</option>
-
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-xs-7 "><span class="glyphicon glyphicon-plus"></span> Opciones: </label>
-              <div class="col-xs-8">
-
-               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="Linput1">
-                <label class="form-check-label">
-                  <input type="text" class="form-control" id="input1" name='dato_opcion1'/>
-                </label>
-                <div class="form-group" id="sinput1">
-                  <input  style="font-weight: bold; color: #000000" class="col-xs-7 inputLikeLabel" id="Pinput1" disabled="disabled" >                  
-                </input>
-                <div class="col-xs-8">
-                  <input type="text" class="form-control" name='opcion1_valor' />
-                </div>
-              </div>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="Linput2">
-              <label class="form-check-label">
-                <input type="text" class="form-control" id="input2" name='dato_opcion2'/>
-              </label>
-              <div class="form-group" id="sinput2">
-                <input  style="font-weight: bold; color: #000000" class="col-xs-7 inputLikeLabel" id="Pinput2" disabled="disabled" ></input>
-                <div class="col-xs-8">
-                  <input type="text" class="form-control" name='opcion2_valor' />
-                </div>
-              </div>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="Linput3">
-              <label class="form-check-label">
-                <input type="text" class="form-control" id="input3" name='dato_opcion3'/>
-              </label>
-              <div class="form-group" id="sinput3">
-                <input  style="font-weight: bold; color: #000000" class="col-xs-7 inputLikeLabel" id="Pinput3" disabled="disabled" ></input>
-                <div class="col-xs-8">
-                  <input type="text" class="form-control" name='opcion3_valor' />
-                </div>
-              </div>
-            </div>
-
-
-
-            <div class="form-group" >
-              <div>
-                <button id="hechos" style="width: 780px" type="submit" class="btn btn-primary" name="signup" value="Sign up">ACTUALIZAR INFORMACIÓN</button>
-              </div>
-            </div>
-          </form>
-          <!--  -->
-        </div>
-      </div>
-
+  <div class="alert alert-warning" align="center" style="font-weight: bold">
+    <strong>Warning!</strong> Los formatos admitidos son JPG, PNG, GIF.
+    <p>
+     Si deseas que la imagen se vea correctamente deberá ser cuadrada.
     </div>
-  </div>
 
-</div>
+  </div>
+  <div align="center" >
+    <div id="hechos" style="width: 780px;height: 850px; background: #B7C2D2; border-radius: 10px">
+
+      <div class="container" >
+        <div class="row" >
+          <div class="col-xs-12" id="demoContainer"  >
+
+            <form action="actualizarPerfil" class="form-horizontal fv-form fv-form-bootstrap" >
+
+              <br>
+              <div class="form-group" >
+                <label style="font-weight: bold" class="col-xs-7">Nombre completo: </label>
+                <div class="col-xs-8">
+                  <input style="font-weight: bold" type="text" class="form-control" name="nombre" placeholder="Nombre" />
+                </div>
+
+                <div class="col-xs-8">
+                  <input style="font-weight: bold" type="text" class="form-control" name="apellidos" placeholder="Apellidos" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label style="font-weight: bold" class="col-xs-7">DNI: </label>
+                <div class="col-xs-8">
+                  <input style="font-weight: bold" type="text" class="form-control" id="dni" name="dni" />
+                  <span id="dniOK"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label style="font-weight: bold" class="col-xs-7">Email: </label>
+                <div class="col-xs-8">
+                  <input style="font-weight: bold" type="email" class="form-control" id="email" name="email" />
+                  <span id="emailOK"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label style="font-weight: bold" class="col-xs-7 ">Dirección: </label>
+                <div class="col-xs-8">
+                  <input style="font-weight: bold" type="text" class="form-control" name="direccion" />
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label style="font-weight: bold" class="col-xs-7 ">Carrera: </label>
+                <div class="col-xs-8">
+                  <select style="font-weight: bold" class="form-control" name="carrera">
+                    <option>-</option>
+                    <option>Administración y Dirección de Empresas</option>
+                    <option>Marketing</option>
+                    <option>Derecho</option>
+                    <option>Criminología</option>
+                    <option>Gastronomía</option>
+                    <option>Business Analytics</option>
+                    <option>Educación Infantil</option>
+                    <option>Educación Primaria</option>
+                    <option>Ciencias de la Actividad Física y del Deporte</option>
+                    <option>Medicina</option>
+                    <option>Enfermería</option>
+                    <option>Fisioterapia</option>
+                    <option>Psicología</option>
+                    <option>Biomedicina</option>
+                    <option>Biotecnología</option>
+                    <option>Farmacia</option>
+                    <option>Arquitectura</option>
+                    <option>Ingeniería Informática</option>
+                    <option>Ingeniería Industrial</option>
+                    <option>Periodismo</option>
+                    <option>Relaciones Internacionales</option>
+                    <option>Diseño</option>
+                    <option>Publicidad</option>
+                    <option>Bellas Artes</option>
+                    <option>Creación y Narración de Videojuegos</option>
+                    <option>Filosofía, Política y Economía</option>
+                    <option>Humanidades</option>
+
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-xs-7 "><span class="glyphicon glyphicon-plus"></span> Crear Opciones: </label>
+                <div class="col-xs-8">
+
+                 <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="Linput1">
+                  <label class="form-check-label">
+                    <input type="text" class="form-control" id="input1" name='dato_opcion1'/>
+                  </label>
+                  <div class="form-group" id="sinput1">
+                    <input  style="font-weight: bold; color: #000000" class="col-xs-7 inputLikeLabel" id="Pinput1" disabled="disabled" >                  
+                  </input>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control" name='opcion1_valor' />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="Linput2">
+                <label class="form-check-label">
+                  <input type="text" class="form-control" id="input2" name='dato_opcion2'/>
+                </label>
+                <div class="form-group" id="sinput2">
+                  <input  style="font-weight: bold; color: #000000" class="col-xs-7 inputLikeLabel" id="Pinput2" disabled="disabled" ></input>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control" name='opcion2_valor' />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="Linput3">
+                <label class="form-check-label">
+                  <input type="text" class="form-control" id="input3" name='dato_opcion3'/>
+                </label>
+                <div class="form-group" id="sinput3">
+                  <input  style="font-weight: bold; color: #000000" class="col-xs-7 inputLikeLabel" id="Pinput3" disabled="disabled" ></input>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control" name='opcion3_valor' />
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="form-group" >
+                <div>
+                  <button id="hechos" style="width: 780px;font-weight: bold;" type="submit" class="btn btn-primary" name="signup" value="Sign up">ACTUALIZAR INFORMACIÓN</button>
+                </div>
+              </div>
+            </form>
+            <!--  -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <br><br>
@@ -483,31 +483,38 @@ a:hover span {
     width:auto !important;
     text-align: center !important;
     margin: auto !important;
-
-
   }
+
+  #gradient{
+    width:auto !important;
+    height:auto !important;
+  }
+
   #demoContainer{
    margin-left: 15% !important;
-  }
+   width:auto !important;
 
-  #botonfile{
-    color:transparent !important;
+ }
 
-  }
-  #botonfileinput{
-    width:auto !important;
-    margin-top: 10%;
-  }
+ #botonfile{
+  color:transparent !important;
 
-  #bhechos{
-    width:auto !important;
-    text-align: center !important;
-  }
-  #exampleFormControlTextarea1{
-    max-width:auto !important;
-
-    min-width:auto !important;
-  }
 }
+#botonfileinput{
+  width:auto !important;
+  margin-top: 10%;
+}
+
+#bhechos{
+  width:auto !important;
+  text-align: center !important;
+}
+#exampleFormControlTextarea1{
+  max-width:auto !important;
+
+  min-width:auto !important;
+}
+}
+
 </style>
 

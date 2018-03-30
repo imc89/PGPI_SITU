@@ -4,6 +4,12 @@
 ->where('name', Auth::user()->name)
 ->update(['logins' => $logins ])}}
 
+{{! $datos = DB::table('alumno')
+->select('alumno.id')
+->where('users.id','=', Auth::user()->id)
+->join('users','users.id','=','user_id')
+->get()
+}}
 
 
 <!doctype html>
@@ -31,7 +37,7 @@
 </head>
 
 
-<body style="background: transparent;">
+<body id="gradient">
   <!-- INICIO NAVEGADOR -->
   <div id='cssmenu'>
     <ul>
@@ -76,6 +82,47 @@
           <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
         </a>
       </li>
+
+      <!-- INICIO CV -->
+
+      <li>
+        @foreach($datos as $a)
+        {{! $datopdf = $a->id}}
+
+
+        <a href="javascript:void()" onclick="document.getElementById('cvform').submit();"">
+          <form action="viewPdf_alumno" class="cvrotate" id="cvform">
+            <form action="PdfController.php" method="post">
+              <input type="hidden" name="data" value="{{ $datopdf }}">
+
+              <span class="glyphicon glyphicon-user" aria-hidden="true" style="color: white"></span>      
+              CV
+
+
+            </form>
+
+          </form>
+
+          @endforeach
+        </a>
+      </li>
+      <style type="text/css">
+      .cvrotate:hover span{
+        transform: rotateY(360deg);
+        -webkit-transform: rotateY(360deg);
+        transition-duration: 1.5s;
+        -webkit-transition-duration:1s;
+      }
+      .cvrotate:hover{
+        border-radius: 5px;
+        color: #FFFFFF;
+        background-color: #435E80;
+        height: 100%;
+        cursor:pointer;
+      }
+    </style>
+    <!-- FIN CV -->
+
 
 
       <li class="login">
@@ -141,7 +188,7 @@
 
 
 <!--INICIO FILTROS  -->
-<div style="text-align: center;">
+<div style="text-align: center; background: transparent;">
 
   <!-- PRIMER FILTRO -->
   <div style="padding: 10px;margin: 10px;display: inline-block;">
@@ -152,17 +199,17 @@
       <div align="center" >
         <div  style="width: 300px">
           <div class="form-group" required><!-- ETIQUETAS -->
-            <label >Filtrar por etiqueta: </label>
+            <label style="font-weight: bold">Filtrar por etiqueta: </label>
             <div>
               <form action="FilterhechosController.php" method="post">
                 {{! $etiquetas = DB::table('tags')->get() }}
-                <select id="hecho" class="form-control" name="etiqueta" required>
+                <select style="font-weight: bold" id="hecho" class="form-control" name="etiqueta" required>
                   <option> Todos los hechos </option>
                   @foreach($etiquetas as $tag)
                   <option> {{ $tag->name }} </option>
                   @endforeach
                 </select>
-                <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
+                <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center;font-weight: bold">        
               </form>
             </div>
           </div>
@@ -182,17 +229,17 @@
       <div align="center" >
         <div  style="width: 300px">
           <div class="form-group" required><!-- ETIQUETAS -->
-            <label >Filtrar por keywords: </label>
+            <label style="font-weight: bold">Filtrar por keywords: </label>
             <div>
               <form action="FilterhechosController.php" method="post">
                 {{! $keywords = DB::table('keywords')->get() }}
-                <select id="hecho" class="form-control" name="keyword" required>
+                <select style="font-weight: bold" id="hecho" class="form-control" name="keyword" required>
                   <option>Cualquier keyword</option>
                   @foreach($keywords as $tag)
                   <option> {{ $tag->name }} </option>
                   @endforeach
                 </select>
-                <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
+                <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center;font-weight: bold">        
               </form>
             </div>
           </div>
@@ -212,11 +259,11 @@
       <div align="center" >
         <div  style="width: 300px">
           <div class="form-group" required><!-- ETIQUETAS -->
-            <label >Filtrar por título: </label>
+            <label style="font-weight: bold">Filtrar por título: </label>
             <div>
               <form action="FilterhechosController.php" method="post">
-               <input type="text" class="form-control" name="titulo" required>
-               <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center">        
+               <input style="font-weight: bold" type="text" class="form-control" name="titulo" required>
+               <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center;font-weight: bold">        
              </form>
            </div>
          </div>
@@ -230,7 +277,7 @@
  <!--CIERRE DE LOS FILTROS  -->
 </div>
 
-<div class="body"  style="height: auto; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ; ">
+<div class="body" >
   <ul id="time-line">
 
     @foreach($hechos as $u)
@@ -266,6 +313,20 @@
           @if($u->proposito !== NULL)
           <b>Propósito:</b>  {{ $u->proposito }} <br>
           @endif
+
+          @if($u->keywords !== NULL)
+          {{! $array = explode( ',', $u->keywords )}}
+          <b>Keywords:</b> 
+          @foreach ($array as $item) 
+          <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+          @endforeach 
+          <br>
+          @endif
+
+          @if($u->autorizacion !== NULL)
+          <b>     <img style="width: 3%" src="{{ asset('images/icons/lockh.png')}}");"></b>  {{ $u->autorizacion }} <br>
+          @endif
+
         </p>
       </div>
     </li>
@@ -442,6 +503,16 @@ select {  text-align-last:center; }
 
 
 @media all and (max-width: 780px){
+
+  body{
+    background: transparent!important;
+  }
+
+  #gradient{
+    height: auto !important;
+    background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat !important;
+  }
+
   #hechos{
     width:auto !important;
     word-break:break-all;
@@ -452,6 +523,7 @@ select {  text-align-last:center; }
     word-break:break-all;
 
   }
+
 
   ul#time-line{
 
@@ -497,7 +569,6 @@ select {  text-align-last:center; }
   ul#time-line li div:hover{
     background: rgba(48, 48, 48, 0.5);
     z-index: 0;
-
   }
 
   ul#time-line li div:after{
@@ -518,6 +589,11 @@ select {  text-align-last:center; }
  }
 
 } 
+
+html{
+  height:100%;
+}
+
 </style>
 
 <script type="text/javascript">

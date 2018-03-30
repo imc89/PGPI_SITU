@@ -14,6 +14,7 @@ Tu contraseña es: <?php  save(); ?>
 function getUsuario() {
       $request = request();
       $usuario = request('name', $default = null);
+      $usuario = strtoupper( $usuario);
       return $usuario;
 }
 
@@ -54,7 +55,7 @@ function save(){
 
 
       DB::table('users')->insert(
-        ['name' => getUsuario(),'rol' => getRol(), 'email' => getEmail(), 'password' => bcrypt($passw)]);
+          ['name' => getUsuario(),'rol' => getRol(), 'email' => getEmail(), 'password' => bcrypt($passw)]);
 
 }
 

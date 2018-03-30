@@ -97,7 +97,7 @@
 
 <body style="background: transparent;">
   <!-- INICIO NAVEGADOR -->
-   <div id='cssmenu'>
+  <div id='cssmenu'>
     <ul>
       <li class='active'>   
         <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
@@ -204,40 +204,36 @@
 
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
 <div style="height:100%; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ; ">
-
-<div>
-  <br><br>
-  <div align="center">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:150px; height:150px; border-radius:50%; margin-right:25px;">
-          <h2>Perfil de {{ Auth::user()->name }}</h2>
+<br>
+    <div align="center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+            <img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:150px; height:150px; border-radius:50%; margin-right:25px;">
+            <h2>Perfil de {{ Auth::user()->name }}</h2>
+          </div>
         </div>
       </div>
-    </div>
+
   </div>
 
-</div>
+  <div align="center">
+    <h1>DATOS DE PERFIL</h1>
+  </div>
 
-<div align="center">
-  <h1>DATOS DE PERFIL</h1>
-</div>
+  <div class="body" style="background: transparent;">
+    <div align="center" >
 
-<div class="body" style="background: transparent;">
-  <div align="center" >
-
-    <div  style="width: 400px;background: #B7C2D2; border-radius: 10px;box-shadow: 0px 5px 10px #444 inset;">
-     <br><br>
-     <div align="left">
-      <br>
-      <tr>
-        <th scope="row"></th>
-        @foreach($nombre_alumno as $u)
-        @if($u->nombre  !== NULL)
-        <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-         &nbsp;&nbsp; Nombre completo: 
-          <tr>
+      <div  id="gradient" style="width: 400px;background: #B7C2D2; border-radius: 10px;box-shadow: 0px 5px 10px #444 inset;">
+       <div align="left">
+        <br>
+        <tr>
+          <th scope="row"></th>
+          @foreach($nombre_alumno as $u)
+          @if($u->nombre  !== NULL)
+          <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
+           &nbsp;&nbsp; Nombre completo: 
+           <tr>
             <td> {{ ucfirst($u->nombre) }} </td>
             @endif
             @endforeach
@@ -249,7 +245,7 @@
           @foreach($apellidos_alumno as $u)
           @if($u->apellidos  !== NULL)
           <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-          &nbsp;&nbsp;  Apellidos: 
+            &nbsp;&nbsp;  Apellidos: 
             <tr>
               <td> {{ ucfirst($u->apellidos) }} </td>
               @endif
@@ -262,7 +258,7 @@
             @foreach($dni_alumno as $u)
             @if($u->dni  !== NULL)
             <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-            &nbsp;&nbsp;  Dni: 
+              &nbsp;&nbsp;  Dni: 
               <tr>
                 <td> {{ $u->dni }} </td>
                 @endif
@@ -276,7 +272,7 @@
               @foreach($email_alumno as $u)
               @if($u->email  !== NULL)
               <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-              &nbsp;&nbsp;  Email: 
+                &nbsp;&nbsp;  Email: 
                 <tr>
                   <td> {{ $u->email }} </td>
                   @endif
@@ -290,7 +286,7 @@
                 @foreach($direccion_alumno as $u)
                 @if($u->direccion  !== NULL)
                 <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                &nbsp;&nbsp;  Dirección: 
+                  &nbsp;&nbsp;  Dirección: 
                   <tr>
                     <td> {{ $u->direccion }} </td>
                     @endif
@@ -305,7 +301,7 @@
                   @foreach($carrera_alumno as $u)
                   @if($u->carrera  !== NULL && $u->carrera !== "-")
                   <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                &nbsp;&nbsp;    Carrera: 
+                    &nbsp;&nbsp;    Carrera: 
                     <tr>
                       <td> {{ $u->carrera }} </td>
                       @endif
@@ -317,7 +313,7 @@
                   @foreach($dato1_alumno as $u)
                   @if($u->dato_opcion1  !== NULL)
                   <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                &nbsp;&nbsp;    {{ $u->dato_opcion1 }}:
+                    &nbsp;&nbsp;    {{ $u->dato_opcion1 }}:
                     @endif
                     @endforeach
 
@@ -335,7 +331,7 @@
                   @foreach($dato2_alumno as $u)
                   @if($u->dato_opcion2  !== NULL)
                   <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                &nbsp;&nbsp;    {{ $u->dato_opcion2 }}:
+                    &nbsp;&nbsp;    {{ $u->dato_opcion2 }}:
                     @endif
                     @endforeach
                   </tr>
@@ -354,7 +350,7 @@
                 @foreach($dato3_alumno as $u)
                 @if($u->dato_opcion3  !== NULL)
                 <label style="width: 400px"  onmouseover="style='background:#C3D1EB; border-radius:5px;width: 400px'" onmouseout="style='background:transparent;width: 400px'">
-                &nbsp;&nbsp;  {{ $u->dato_opcion3 }}:
+                  &nbsp;&nbsp;  {{ $u->dato_opcion3 }}:
                   @endif
                   @endforeach
                 </tr>
@@ -372,7 +368,7 @@
 
 
               <br><br>
-              <button data-toggle="modal" data-target="#DELETEMODAL" class="btn btn-primary" style="width: 400px">ELIMINAR PERFIL</button>
+              <button  id="bhechos" data-toggle="modal" data-target="#DELETEMODAL" class="btn btn-primary" style="width: 400px;font-weight: bold">ELIMINAR PERFIL</button>
 
 
 
@@ -382,119 +378,142 @@
         </div>
       </div>
       <!-- FINAL CARRUSEL -->
-</div>
-
-      <!--  BANNER MODAL DELETE ACCOUNT -->
-      <div class="modal fade" id="DELETEMODAL" role="dialog">
-        <div class="modal-dialog">
-
-          <!-- CONTENIDO DE ABOUT EN BANNER-->
-          <div class="modal-content">
-            <div class="modal-header" align="center">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">ELIMINACIÓN DE LA CUENTA DE USUARIO</h4>
-            </div>
-            <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
-              <p><b>¿ESTÁS ACEPTANDO LA ELIMINACIÓN DE LA CUENTA Y TODOS LOS DATOS QUE CONTENGAN?</b></p>
-            </div>
-            <div class="modal-footer">
-
-             <div class="btn-group pull-left">
-
-               <form action="eliminar_usuario">
-
-                 {{! $iduser = Auth::user()->email }}
-
-                 <form action="EliminarController.php" method="post">
-                  <input style="color: black" type="hidden" name="data" value="{{ $iduser }}">
-
-                 <button  type="submit" class="btn btn-default warning" >ACEPTAR</button>
-                </form>
-
-              </form>
-
-
-            </div>
-
-            <div class="btn-group pull-right">
-
-              <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
     </div>
-    <!-- FIN BANNER DELETE ACCOUNT -->
 
-    <!--  BANNER MODAL ABOUT -->
-    <div class="modal fade" id="myModal" role="dialog">
+    <!--  BANNER MODAL DELETE ACCOUNT -->
+    <div class="modal fade" id="DELETEMODAL" role="dialog">
       <div class="modal-dialog">
 
         <!-- CONTENIDO DE ABOUT EN BANNER-->
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" align="center">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">ABOUT US</h4>
+            <h4 class="modal-title">ELIMINACIÓN DE LA CUENTA DE USUARIO</h4>
           </div>
           <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p><b>¿ESTÁS ACEPTANDO LA ELIMINACIÓN DE LA CUENTA Y TODOS LOS DATOS QUE CONTENGAN?</b></p>
           </div>
           <div class="modal-footer">
+
+           <div class="btn-group pull-left">
+
+             <form action="eliminar_usuario">
+
+               {{! $iduser = Auth::user()->email }}
+
+               <form action="EliminarController.php" method="post">
+                <input style="color: black" type="hidden" name="data" value="{{ $iduser }}">
+
+                <button  type="submit" class="btn btn-default warning" >ACEPTAR</button>
+              </form>
+
+            </form>
+
+
+          </div>
+
+          <div class="btn-group pull-right">
+
             <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
           </div>
+
         </div>
-
       </div>
+
     </div>
-    <!-- FIN BANNER MODAL -->
+  </div>
+  <!-- FIN BANNER DELETE ACCOUNT -->
 
-  </body>
-  </html>
+  <!--  BANNER MODAL ABOUT -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- CONTENIDO DE ABOUT EN BANNER-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">ABOUT US</h4>
+        </div>
+        <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- FIN BANNER MODAL -->
+
+</body>
+</html>
 
 
-  <script>
-    function myFunction() {
-      var x = document.getElementById("myTopnav");
-      if (x.className === "topnav") {
-        x.className += " responsive";
-      } else {
-        x.className = "topnav";
-      }
+<script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
     }
-  </script>
+  }
+</script>
 
 
 
-  <style type="text/css">
+<style type="text/css">
 
-  .body{
-    background: url('/images/fondo_body.jpg')fixed;
-    padding: 0;
-    margin: 0;
-    font-family: arial;
+.body{
+  background: url('/images/fondo_body.jpg')fixed;
+  padding: 0;
+  margin: 0;
+  font-family: arial;
+}
+
+
+#resaltar div:hover {
+  background: #00a651;
+  color: #ffffff;
+}
+
+a:hover span {
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
+} 
+
+.warning:hover {cursor: url(/cursor_warning/warning.cur),auto;}
+
+@media all and (max-width: 780px){
+
+  #gradient{
+    width:auto !important;
+    height:auto !important;
   }
 
+  #hechos{
+    width:auto !important;
 
-  #resaltar div:hover {
-    background: #00a651;
-    color: #ffffff;
   }
+  #bhechos{
+    width:100% !important;
+    text-align: center !important;
+  }
+  #exampleFormControlTextarea1{
+    max-width:auto !important;
 
-  a:hover span {
-    transform: rotateY(360deg);
-    -webkit-transform: rotateY(360deg);
-    transition-duration: 1.5s;
-    -webkit-transition-duration:1s;
-  } 
+    min-width:auto !important;
+  }
+}
 
-  .warning:hover {cursor: url(/cursor_warning/warning.cur),auto;}
 
 </style>
 

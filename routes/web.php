@@ -91,6 +91,14 @@ Route::group(['middleware' => ['auth']], function() {
 			return view('alumno', compact('hechos','keywords'));		
 		});
 
+		Route::get('viewPdf_alumno', 'PdfController@CreatePDF');
+
+		Route::get('curriculum', function () {
+			return view('curriculum');
+		});		
+
+		Route::post('invitar','mailController@invitar');
+
 		Route::get('configPerfil', function () {
 			return view('configPerfil');
 		});
@@ -174,7 +182,7 @@ Route::group(['middleware' => ['auth']], function() {
 		Route::get('mail_invitados', function () {
 			return view('mail_invitados');
 		});
-
+		
 		Route::get('lineaTiempo', function () {
 		// FILTRO
 			$alumno_id = DB::table('alumno')
@@ -211,6 +219,56 @@ Route::group(['middleware' => ['auth']], function() {
 		});		
 
 	});	
+
+	Route::group(['middleware' => 'invitado'], function () {
+
+		Route::get('invitado', function () {
+
+			$datos_invitado = DB::table('invitado')
+			->select('alumno_id','acceso','user_id')
+			->where('invitado.email', '=' , Auth::user()->email)
+			->get();
+
+			foreach($datos_invitado as $aluid)
+				$alumno_id = $aluid->alumno_id;
+			$autorizacion = $aluid->acceso;
+
+			$propietario=DB::table('users')
+			->where('users.id', '=', $aluid->user_id)
+			->select('name')
+			->get();
+			
+			$hechos=DB::table('hechos')
+			->where('hechos.alumno_id', '=', $aluid->alumno_id)
+			->get();
+
+			foreach($hechos as $h){
+				if ($aluid->acceso == 1) {
+					$hechos=DB::table('hechos')
+					->where('hechos.alumno_id', '=', $aluid->alumno_id)
+					->where('hechos.autorizacion', '=', 1)
+					->get();
+				}
+				elseif($aluid->acceso == 2){
+					$hechos=DB::table('hechos')
+					->where('hechos.alumno_id', '=', $aluid->alumno_id)
+					->whereBetween('hechos.autorizacion', [1, 2])->get();
+
+				}
+				else{
+					$hechos=DB::table('hechos')
+					->where('hechos.alumno_id', '=', $aluid->alumno_id)
+					->get();
+
+				}
+			}
+
+			return view('invitado', compact('hechos','autorizacion','propietario'));		
+
+		});
+
+	});
+
 });
 
 Auth::routes();
