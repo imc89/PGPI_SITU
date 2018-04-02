@@ -145,58 +145,61 @@
 <div class="column_right" style="background-color:#FFFEFF;">
 
 	<?php $contador = 0?>
+<ul id="time-line">
 
-	<h2 align="center">
+    @foreach($hechos as $u)
 
+    <li>
+      <div id="hechos" style="word-wrap: break-word;" >
+        <p>
+          A FECHA DE : {{ $u->fecha }}
+          @if($u->etiqueta !== NULL)
+          <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+          @endif
+          @if($u->titulo !== NULL)
+          <b>Título:</b>  {{ $u->titulo }} <br>
+          @endif
+          @if($u->curso !== NULL)
+          <b>Curso:</b>  {{ $u->curso }}º <br>
+          @endif
+          @if($u->contenido !== NULL)
+          <b>Contenido:</b> {{ $u->contenido }} <br>
+          @endif
+          @if($u->video !== NULL)
+          <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+          @endif
+          @if($u->encuentro !== NULL)
+          <b>Encuentro:</b> {{ $u->encuentro }}  <br>
+          @endif
+          @if($u->foto !== NULL)
+          <b>FOTO:</b> <img id="foto" src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="width: 300px;"/> <br>
+          @endif
+          @if($u->anexo !== NULL)
+          <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+          @endif
+          @if($u->proposito !== NULL)
+          <b>Propósito:</b>  {{ $u->proposito }} <br>
+          @endif
 
-		@foreach($hechos as $a)
-		<span>				
-			<img src="{{$base5}}" style="vertical-align: middle;width:30px;">		
-		</span>
-		<?php $contador++; echo "#".$contador?>
+          @if($u->keywords !== NULL)
+          {{! $array = explode( ',', $u->keywords )}}
+          <b>Keywords:</b> 
+          @foreach ($array as $item) 
+          <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+          @endforeach 
+          <br>
+          @endif
 
-		@if($a->titulo !== NULL)
-		<span style="color: #108AD2;"> Titulo: </span>
-		{{ $a->titulo }}
-		@endif
+          @if($u->autorizacion !== NULL)
+          <b>     <img style="width: 3%" src="{{ asset('images/icons/lockh.png')}}");"></b>  {{ $u->autorizacion }} <br>
+          @endif
 
-		@if($a->etiqueta !== NULL)
-		<br>
-		<span style="color: #108AD2;"> Tipo de hecho: </span>
-		{{ $a->etiqueta }}
-		@endif
+        </p>
+      </div>
+    </li>
+    @endforeach
 
-		@if($a->curso !== NULL)
-		<br>
-		<span style="color: #108AD2;"> Curso académico: </span>
-		{{ $a->curso }}º
-		@endif
-
-		@if($a->fecha !== NULL)
-		<br>
-		<span style="color: #108AD2;"> A fecha de: </span>
-		{{ $a->fecha }}
-		@endif
-
-		@if($a->contenido !== NULL)
-		<br>
-		<span style="color: #108AD2;"> Descripción: </span>
-		{{ $a->contenido }}
-		@endif
-
-		@if($a->proposito !== NULL)
-		<br>
-		<span style="color: #108AD2;"> Proposito: </span>
-		{{ $a->proposito }}
-		@endif
-
-
-		<hr style="color: #108AD2">
-		@endforeach	
-
-	</h2>
-
-
+  </ul>
 </div>
 
 

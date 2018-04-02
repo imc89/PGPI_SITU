@@ -63,4 +63,30 @@ class PdfController extends Controller
 
 
 	}
+
+	public function LineaPDF(Request $request)
+	{
+
+
+		$dato = $request->data;
+
+		$datospdf = DB::table('alumno')
+		->join('users','users.id','=','user_id')
+		->where('alumno.id','=',$dato)
+		->get();
+
+		
+		$pdf = PDF::loadView('lineaPdf', compact('datospdf'));
+
+
+		foreach ($datospdf as $nom){ 
+			$no=$nom->nombre;	
+			$ape=$nom->apellidos;	
+		}
+
+
+		return $pdf->stream('lineaPdf_'.  ucfirst($no).'_'. ucfirst($ape) .'.pdf');
+
+
+	}
 }

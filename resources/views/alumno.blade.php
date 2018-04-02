@@ -358,7 +358,7 @@
     @endif
 
     @if($u->foto !== NULL)
-    <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
+    <span style="vertical-align: middle;">FOTO:</span> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
     @endif
 
     @if($u->anexo !== NULL)

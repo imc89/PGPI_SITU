@@ -93,8 +93,14 @@ Route::group(['middleware' => ['auth']], function() {
 
 		Route::get('viewPdf_alumno', 'PdfController@CreatePDF');
 
+		Route::get('Pdf_linea', 'PdfController@LineaPDF');
+
 		Route::get('curriculum', function () {
 			return view('curriculum');
+		});	
+
+		Route::get('lineaPdf', function () {
+			return view('lineaPdf');
 		});		
 
 		Route::post('invitar','mailController@invitar');

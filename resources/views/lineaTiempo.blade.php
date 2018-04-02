@@ -125,17 +125,17 @@
 
 
 
-      <li class="login">
+    <li class="login">
 
-        @guest
-        <li><a href="{{ route('login') }}">Login</a></li>
-        @else
-
-
-        <li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      @guest
+      <li><a href="{{ route('login') }}">Login</a></li>
+      @else
 
 
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+      <li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
 
    <!--    <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%;" >    
    --><img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative; border-radius:50%;" >    
@@ -275,6 +275,26 @@
  </div>
 
  <!--CIERRE DE LOS FILTROS  -->
+
+
+ <!-- BOTON GENERAR EN PDF LA LINEA-->
+ @foreach($datos as $a)
+ {{! $datopdf = $a->id}}
+
+
+ <form action="Pdf_linea">
+
+  <form action="PdfController.php" method="post">
+    <input type="hidden" name="data" value="{{ $datopdf }}">
+    <input type="submit"  class="btn btn-primary" value="EXPORTAR A PDF">
+  </form>
+  @endforeach
+
+</form>
+
+<!-- FIN BOTON GENERAR PDF LINEA -->
+
+
 </div>
 
 <div class="body" >
