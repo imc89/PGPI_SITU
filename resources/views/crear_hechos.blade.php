@@ -220,7 +220,7 @@
 				<div class="row" align="left">
 					<div class="col-xs-12" id="demoContainer">
 						<!-- AÑADIDO id="programmer_form" -->
-						<form  method="POST" id="programmer_form" enctype="multipart/form-data" action="nuevo_hecho" class="form-horizontal fv-form fv-form-bootstrap" >
+						<form  method="POST" id="programmer_form" enctype="multipart/form-data" action="nuevo_hecho" class="form-horizontal fv-form fv-form-bootstrap" onsubmit="return validarForm();">
 
 							<br>
 
@@ -230,7 +230,7 @@
 								<div class="col-xs-8" >
 									{{! $etiquetas = DB::table('tags')->get() }}
 									<select style="font-weight: bold" id="hecho" class="form-control" name="etiqueta" required>
-										<option> - </option>
+										<option>-</option>
 										@foreach($etiquetas as $tag)
 										<option> {{ $tag->name }} </option>
 										@endforeach
@@ -485,7 +485,7 @@
 
 									<div class="form-group">
 										<div id="bhechos" >
-											<input id="bhechos" type="submit" name="submit" id="submit" class="btn btn-primary"  value="CREAR NUEVO HECHO" style="width: 780px; align-content: center">
+											<input id="bhechos" type="submit" name="submit" id="submit" class="btn btn-primary"  value="CREAR NUEVO HECHO" style="width: 780px; align-content: center" onClick="return empty()">
 										</div>
 									</div>
 								</form>
@@ -827,7 +827,22 @@ div.token{
 	
 	if ( $('#fecha')[0].type != 'date' ) $('#fecha').datepicker();
 	
-
 </script>
 
 
+<div id="dialog" title="ETIQUETE EL HECHO" style="font-weight: bold; display: none;background: #108AD2;color: white;">
+  <p>Por favor etiquete correctamente el hecho para que pueda ser creado, la etiqueta debe ser distita de "-" .</p>
+</div>
+ 
+<script>
+	function empty() {
+		var x;
+		x = document.getElementById("hecho").value;
+		if (x == "-") {
+			 $( "#dialog" ).dialog();
+			 $( "#dialog" ).style.display = "block";
+			return false;
+		}
+		
+	}
+</script>

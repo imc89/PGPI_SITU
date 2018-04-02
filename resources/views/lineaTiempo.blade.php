@@ -281,16 +281,25 @@
  @foreach($datos as $a)
  {{! $datopdf = $a->id}}
 
-
+ @foreach($hechos as $a)
  <form action="Pdf_linea">
+  @if ( !empty ( $a->etiqueta ) ) 
 
   <form action="PdfController.php" method="post">
     <input type="hidden" name="data" value="{{ $datopdf }}">
     <input type="submit"  class="btn btn-primary" value="EXPORTAR A PDF">
   </form>
+
+  @else
+  <span style="color:red">sfsafads</span>
+  @endif
+  <?php break; ?>
+  @endforeach
+
   @endforeach
 
 </form>
+
 
 <!-- FIN BOTON GENERAR PDF LINEA -->
 
