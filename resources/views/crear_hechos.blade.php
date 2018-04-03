@@ -804,6 +804,12 @@ div.token{
 
 			min-width:auto !important;
 		}
+
+		.myPosition{
+			top:190% !important;
+			width:auto !important;
+		}
+
 	}
 </style>
 
@@ -830,19 +836,49 @@ div.token{
 </script>
 
 
-<div id="dialog" title="ETIQUETE EL HECHO" style="font-weight: bold; display: none;background: #108AD2;color: white;">
-  <p>Por favor etiquete correctamente el hecho para que pueda ser creado, la etiqueta debe ser distita de "-" .</p>
+<div id="dialog" style="display: none">
+	<div id="hechos" class="modal-content">
+		<div id="hechos" class="modal-header">
+
+			<h4 class="modal-title" align="center">ETIQUETA INCORRECTA</h4>
+		</div>
+		<div class="modal-body" id="hechos" style="background-color: rgba(171, 184, 203, 0.70);border-radius: 30px ">
+			<p style="font-weight: bold">Por favor etiquete correctamente el hecho para que pueda ser creado, la etiqueta debe ser distita de "-" .</p>
+		</div>
+	</div>
 </div>
- 
+
+
+
 <script>
 	function empty() {
 		var x;
 		x = document.getElementById("hecho").value;
 		if (x == "-") {
-			 $( "#dialog" ).dialog();
-			 $( "#dialog" ).style.display = "block";
+			$( "#dialog" ).dialog({
+				dialogClass: 'myPosition',
+				resizable: false,
+				height: "auto",
+				width: "auto",
+				modal: true,
+				open: function(event, ui) {
+					$(event.target).parent().css('position', 'absolute');
+					$(event.target).parent().css('top', '80%');
+					$(event.target).parent().focus();
+
+				}
+			});
+			$( "#dialog" ).style.display = "block";
 			return false;
 		}
 		
 	}
 </script>
+<style type="text/css">
+.myPosition {
+	-moz-box-shadow:    inset 0 0 10px #000000;
+	-webkit-box-shadow: inset 0 0 10px #000000;
+	box-shadow:         inset 0 0 10px #000000;
+	border-radius: 10px;
+}
+</style>
