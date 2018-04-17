@@ -203,7 +203,6 @@
 
 
   <div align="center">
-    <div id="hecho_div">
       <h1 style="font-weight: bold">
         VISIÓN DEL HECHO :   
         @if($u->titulo !== NULL)
