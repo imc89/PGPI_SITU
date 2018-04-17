@@ -161,6 +161,8 @@ Route::group(['middleware' => ['auth']], function() {
 			return view('crear_hechos', compact('keywords'));
 		});
 
+		Route::get('vision_hecho', 'VisionhechoController@vision_hecho');
+
 
 		Route::get('eliminar_hecho', 'EliminarController@eliminar_hecho');
 		Route::get('eliminar_keyword', 'EliminarController@eliminar_keyword');

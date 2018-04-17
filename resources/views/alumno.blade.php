@@ -143,7 +143,7 @@
 
 
      <img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative;  top:10px; border-radius:50%;" >    
-     {{ Auth::user()->name }} <span class="caret"></span>
+     {{mb_strtoupper(Auth::user()->name)}} <span class="caret"></span>
    </a>
 
    <div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
@@ -200,7 +200,7 @@
       <strong>Warning!</strong> Para que tu profesor pueda ver correctamente tu curriculum completa lo mejor posible tus datos de perfil.
     </div>
     <h1 style="font-weight: bold">BIENVENIDO ALUMNO</h1>
-    <h1 style="font-weight: bold">TABLÓN DE HECHOS DE {{Auth::user()->name}}</h1> 
+    <h1 style="font-weight: bold">TABLÓN DE HECHOS DE {{mb_strtoupper(Auth::user()->name)}}</h1> 
   </div>
 
   <!-- MOSTRAR HECHOS -->
@@ -312,7 +312,9 @@
       <div style="float: right;">
         <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
 
-        <div style="float: right;background: #BAB9BB;border-radius:5px">
+
+
+        <div style="float: right;background: #BAB9BB;border-radius:5px; margin-left: 10px">
 
 
           <form action="eliminar_hecho">
@@ -331,61 +333,80 @@
 
       </div>
 
+      <div style="float: right;background: #BAB9BB;border-radius:5px;margin-left: 10px">
+
+        <form action="vision_hecho">
+         {{! $idhecho = $u->id}}
+
+         <form action="VisionhechoController.php" method="post">
+          <input style="color: black" type="hidden" name="data" value="{{ $idhecho }}">
+
+          <button type="submit" style="border: none;background: transparent;">
+            <span id="ver" class="glyphicon glyphicon-eye-open"></span>
+          </button>
+        </form>
+
+      </form>
+
+
     </div>
-
-    @if($u->etiqueta !== NULL)
-    <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
-    @endif
-
-    @if($u->titulo !== NULL)
-    <b>Título:</b>  {{ $u->titulo }} <br>
-    @endif
-
-    @if($u->curso !== NULL)
-    <b>Curso:</b>  {{ $u->curso }}º <br>
-    @endif
-
-    @if($u->contenido !== NULL)
-    <b>Contenido:</b>  {{ $u->contenido }} <br>
-    @endif
-
-    @if($u->video !== NULL)
-    <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
-    @endif
-
-    @if($u->encuentro !== NULL)
-    <b>Encuentro:</b> {{ $u->encuentro }}  <br>
-    @endif
-
-    @if($u->foto !== NULL)
-    <span style="vertical-align: middle;">FOTO:</span> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
-    @endif
-
-    @if($u->anexo !== NULL)
-    <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
-    @endif
-
-    @if($u->proposito !== NULL)
-    <b>Propósito:</b>  {{ $u->proposito }} <br>
-    @endif
-
-
-    @if($u->keywords !== NULL)
-    {{! $array = explode( ',', $u->keywords )}}
-    <br><b>Keywords:</b> 
-    @foreach ($array as $item) 
-    <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
-    @endforeach 
-    <br><br>
-    @endif
-
-    @if($u->autorizacion !== NULL)
-    <b>     <img style="width: 3%" src="{{ asset('images/icons/lockh.png')}}");"></b>  {{ $u->autorizacion }} <br>
-    @endif
-
 
 
   </div>
+
+  @if($u->etiqueta !== NULL)
+  <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+  @endif
+
+  @if($u->titulo !== NULL)
+  <b>Título:</b>  {{ $u->titulo }} <br>
+  @endif
+
+  @if($u->curso !== NULL)
+  <b>Curso:</b>  {{ $u->curso }}º <br>
+  @endif
+
+  @if($u->contenido !== NULL)
+  <b>Contenido:</b>  {{ $u->contenido }} <br>
+  @endif
+
+  @if($u->video !== NULL)
+  <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+  @endif
+
+  @if($u->encuentro !== NULL)
+  <b>Encuentro:</b> {{ $u->encuentro }}  <br>
+  @endif
+
+  @if($u->foto !== NULL)
+  <span style="vertical-align: middle;">FOTO:</span> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
+  @endif
+
+  @if($u->anexo !== NULL)
+  <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+  @endif
+
+  @if($u->proposito !== NULL)
+  <b>Propósito:</b>  {{ $u->proposito }} <br>
+  @endif
+
+
+  @if($u->keywords !== NULL)
+  {{! $array = explode( ',', $u->keywords )}}
+  <br><b>Keywords:</b> 
+  @foreach ($array as $item) 
+  <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+  @endforeach 
+  <br><br>
+  @endif
+
+  @if($u->autorizacion !== NULL)
+  <b>     <img style="width: 3%" src="{{ asset('images/icons/lockh.png')}}");"></b>  {{ $u->autorizacion }} <br>
+  @endif
+
+
+
+</div>
 </div>
 <br>
 @endforeach
@@ -458,162 +479,162 @@
   <div class="modal-container">
     <div align="center" class="modal-header">BIENVENIDO A LA PLATAFORMA SITU 
       <i class="modal-close">x</i>
-        
+
+    </div>
+    <div class="modal-info">
+      Bienvenido a tu nuevo perfil de usuario, te recomendamos que inicies tus datos de perfil, de esta forma podrás la información generada será más precisa, como tu curriculum o los datos que puedas compartir con tu profesor.
+      Esta pantalla solo saldrá en tu primer login.
+      Muchas gracias por confiar en nosotros.
+      <br><br>
+      <div align="center">INICIE SUS DATOS DE PERFIL</div>
+    </div>
+    <div class="button-container" align="center">
+      <a href="configPerfil" class="btn btn-primary">ACEPTAR</a>
+    </div>
+  </div>
+</div>
+@endif
+
+
+<!-- MODAL INFORMACIÓN -->
+<div class="modal fade" id="AYUDA" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="audio_offX" type="button" class="close" data-dismiss="modal">&times;</button>
+        <div>
+          <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
+          <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
+        </div>
+        <h4 align="center" class="modal-title">ALUMNO</h4>
       </div>
-      <div class="modal-info">
-        Bienvenido a tu nuevo perfil de usuario, te recomendamos que inicies tus datos de perfil, de esta forma podrás la información generada será más precisa, como tu curriculum o los datos que puedas compartir con tu profesor.
-        Esta pantalla solo saldrá en tu primer login.
-        Muchas gracias por confiar en nosotros.
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
+
+        Has accedido a la sección de alumno.
+        En esta sección se muestran los hechos por orden de creación.
+        <ul>
+          <li>
+            <br>
+            -Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y selecciona &nbsp; <span class="glyphicon glyphicon-cog"></span> &nbsp; <b style="font-weight: bold">Configuración</b>.  
+            <br>
+          </li>
+
+          <li>
+            <br>
+            -Para acceder a tus datos de perfil donde también podrás dar de baja tu cuenta pulsa tu nombre a la derecha del menú  y selecciona  &nbsp; <span class="glyphicon glyphicon-user"></span> &nbsp; <b style="font-weight: bold">Perfil</b>.  
+            <br>
+          </li>
+
+          <li>
+            <br>
+            -Para acceder al área de invitaciones pulsa el botón &nbsp; <span class="glyphicon glyphicon-bullhorn"></span> &nbsp; <b style="font-weight: bold">Invitar</b>.  
+            <br>
+          </li>
+
+          <li>
+            <br>
+            -Para gestionar tus keywords de hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-tags"></span> &nbsp; <b style="font-weight: bold">Keywords</b>.  
+            <br>
+          </li>
+
+          <li>
+            <br>
+            -Para crear nuevos hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-list-alt"></span> &nbsp; <b style="font-weight: bold">Hechos</b>.  
+            <br>
+          </li>
+
+          <li>
+            <br>
+            -Para visualizar la línea temporal de  hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-time"></span> &nbsp; <b style="font-weight: bold">Línea Temporal</b>.  
+            <br>
+          </li>
+        </ul>
+
         <br><br>
-        <div align="center">INICIE SUS DATOS DE PERFIL</div>
+
+        <div align="center">
+          Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobre Logout.
+        </div>
       </div>
-      <div class="button-container" align="center">
-        <a href="configPerfil" class="btn btn-primary">ACEPTAR</a>
+
+      <div class="modal-footer">
+        <div align="center">
+          <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+        </div>
       </div>
     </div>
+
   </div>
-  @endif
+</div>
+<!-- AUDIO MODAL -->
+
+<script type="text/javascript">
+  var phrases = [
+  'Has accedido a la sección de alumno.En esta sección se muestran los hechos por orden de creación.Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y seleccionaconfiguración.Para acceder a tus datos de perfil, donde también podrás dar de baja tu cuenta, pulsa tu nombre a la derecha del menú  y selecciona perfil.Para acceder al área de invitaciones pulsa el botón invitar.Para gestionar tuskeywords de hechos pulsa el botón keywords.Para crear nuevos hechos pulsa el botón Hechos.Para visualizar la línea temporal de  hechos pulsa el botón Línea Temporal. Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobreLogout.'
+  ];
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_on').click(function() {
+      var i = Math.round(phrases.length * Math.random()) - 1;
+
+      responsiveVoice.speak(phrases[i], 'Spanish Female');
+    });
+  });
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_off').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offX').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offA').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+</script>
+<!-- FIN AUDIO MODAL -->
 
 
-  <!-- MODAL INFORMACIÓN -->
-  <div class="modal fade" id="AYUDA" role="dialog">
-    <div class="modal-dialog">
 
-      <!-- CONTENIDO DE ABOUT EN BANNER-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button id="audio_offX" type="button" class="close" data-dismiss="modal">&times;</button>
-          <div>
-            <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
-            <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
-          </div>
-          <h4 align="center" class="modal-title">ALUMNO</h4>
-        </div>
-        <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
+<!--  BANNER MODAL ABOUT -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
 
-          Has accedido a la sección de alumno.
-          En esta sección se muestran los hechos por orden de creación.
-          <ul>
-            <li>
-              <br>
-              -Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y selecciona &nbsp; <span class="glyphicon glyphicon-cog"></span> &nbsp; <b style="font-weight: bold">Configuración</b>.  
-              <br>
-            </li>
-
-            <li>
-              <br>
-              -Para acceder a tus datos de perfil donde también podrás dar de baja tu cuenta pulsa tu nombre a la derecha del menú  y selecciona  &nbsp; <span class="glyphicon glyphicon-user"></span> &nbsp; <b style="font-weight: bold">Perfil</b>.  
-              <br>
-            </li>
-
-            <li>
-              <br>
-              -Para acceder al área de invitaciones pulsa el botón &nbsp; <span class="glyphicon glyphicon-bullhorn"></span> &nbsp; <b style="font-weight: bold">Invitar</b>.  
-              <br>
-            </li>
-
-            <li>
-              <br>
-              -Para gestionar tus keywords de hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-tags"></span> &nbsp; <b style="font-weight: bold">Keywords</b>.  
-              <br>
-            </li>
-
-            <li>
-              <br>
-              -Para crear nuevos hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-list-alt"></span> &nbsp; <b style="font-weight: bold">Hechos</b>.  
-              <br>
-            </li>
-
-            <li>
-              <br>
-              -Para visualizar la línea temporal de  hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-time"></span> &nbsp; <b style="font-weight: bold">Línea Temporal</b>.  
-              <br>
-            </li>
-          </ul>
-
-          <br><br>
-
-          <div align="center">
-            Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobre Logout.
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <div align="center">
-            <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
-          </div>
-        </div>
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">ABOUT US</h4>
       </div>
-
-    </div>
-  </div>
-  <!-- AUDIO MODAL -->
-
-  <script type="text/javascript">
-    var phrases = [
-    'Has accedido a la sección de alumno.En esta sección se muestran los hechos por orden de creación.Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y seleccionaconfiguración.Para acceder a tus datos de perfil, donde también podrás dar de baja tu cuenta, pulsa tu nombre a la derecha del menú  y selecciona perfil.Para acceder al área de invitaciones pulsa el botón invitar.Para gestionar tuskeywords de hechos pulsa el botón keywords.Para crear nuevos hechos pulsa el botón Hechos.Para visualizar la línea temporal de  hechos pulsa el botón Línea Temporal. Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobreLogout.'
-    ];
-
-    jQuery(document).ready(function ($) {  
-      $('#audio_on').click(function() {
-        var i = Math.round(phrases.length * Math.random()) - 1;
-
-        responsiveVoice.speak(phrases[i], 'Spanish Female');
-      });
-    });
-
-    jQuery(document).ready(function ($) {  
-      $('#audio_off').click(function() {
-        var i = 0 ;
-
-        responsiveVoice.speak(phrases[1000], 'Spanish Female');
-      });
-    });
-    jQuery(document).ready(function ($) {  
-      $('#audio_offX').click(function() {
-        var i = 0 ;
-
-        responsiveVoice.speak(phrases[1000], 'Spanish Female');
-      });
-    });
-    jQuery(document).ready(function ($) {  
-      $('#audio_offA').click(function() {
-        var i = 0 ;
-
-        responsiveVoice.speak(phrases[1000], 'Spanish Female');
-      });
-    });
-  </script>
-  <!-- FIN AUDIO MODAL -->
-
-
-
-  <!--  BANNER MODAL ABOUT -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- CONTENIDO DE ABOUT EN BANNER-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">ABOUT US</h4>
-        </div>
-        <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
-        </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
-
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+      </div>
     </div>
+
   </div>
-  <!-- FIN BANNER MODAL -->
+</div>
+<!-- FIN BANNER MODAL -->
 
 </body>
 </html>
@@ -649,6 +670,14 @@
 #borrar:hover{
  color: red; 
 }
+
+#ver{
+ color: black; 
+}
+#ver:hover{
+ color: #3565A3; 
+}
+
 #hecho_div{
   background: #262626; border-radius: 10px; width: 500px;color: white;text-align: left; padding: 10px 10px 10px 10px;
 }
@@ -664,6 +693,14 @@
     height:auto;
 
   }
+
+  #hecho_div:hover{
+    width:100% !important;
+    background: #93A3B2; border-radius: 10px; width: 500px;color: white;text-align: left; padding: 10px 10px 10px 10px;
+    box-shadow: 0px 5px 10px #444 inset;
+
+  }
+
   #gradient{
     height: auto !important;
   }
@@ -671,8 +708,8 @@
 </style>
 <!-- MODAL HASTA EL FINAL DEL DOCUMENTO BLADE -->
 <script type="text/javascript">
-$(".modal-background, .modal-close").on("click", function(){
-  $(".modal-container , .modal-background").hide();
+  $(".modal-background, .modal-close").on("click", function(){
+    $(".modal-container , .modal-background").hide();
   });
 </script>
 
