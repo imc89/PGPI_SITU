@@ -15,6 +15,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+ <!-- AYUDA EN AUDIO -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
@@ -63,7 +67,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label">E-Mail</label>
 
                             <div class="col-md-6">
                                 <input style="font-weight: bold" id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
@@ -94,7 +98,7 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
                                     <label style="font-weight: bold">
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recordarme
                                     </label>
                                 </div>
                             </div>
@@ -107,7 +111,7 @@
                                 </button>
 
                                 <a style="font-weight: bold" class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
+                                    ¿Olvidaste la contraseña?
                                 </a>
                             </div>
                         </div>
@@ -128,3 +132,140 @@
     -webkit-transition-duration:1s;
 }  
 </style>
+
+</li></ul></div>
+<!-- MODAL INFORMACIÓN -->
+<div class="modal fade" id="AYUDA" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="audio_offX" type="button" class="close" data-dismiss="modal">&times;</button>
+        <div>
+          <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
+          <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
+        </div>
+        <h4 align="center" class="modal-title">LOGIN</h4>
+      </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
+       Has accedido al LOGIN.
+       <br><br>
+       <ul>
+        <li>
+          <br>
+          -Para acceder a tu cuenta inserta tu Email y Password.  
+          <br>
+        </li>
+
+        <li>
+          <br>
+          -Para mantener tu cuenta conectada activa la opción "Recordarme".  
+          <br>
+        </li>
+
+         <li>
+          <br>
+          -Para recuperar la password pulsa sobre la opción "¿Olvidaste la contraseña?".  
+          <br>
+        </li>
+
+         <li>
+          <br>
+          -Si tus datos son correctos pulsa LOGIN para continuar.  
+          <br>
+        </li>
+      </ul>
+
+      <br><br>
+
+      <div align="center">
+        Podrás volver a la pantalla de inicio pulsando el icono de la universidad.
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div align="center">
+        <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<!-- AUDIO MODAL -->
+
+<script type="text/javascript">
+  var phrases = [
+  'Has accedido al LOGIN.Para acceder a tu cuenta inserta tu Email y Password.Para mantener tu cuenta conectada activa la opción "Recordarme".Para recuperar la password pulsa sobre la opción,¿Olvidaste la contraseña? Si tus datos son correctos pulsa LOGIN para continuar.Podrás volver a la pantalla de inicio pulsando el icono de la universidad.'
+  ];
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_on').click(function() {
+      var i = Math.round(phrases.length * Math.random()) - 1;
+
+      responsiveVoice.speak(phrases[i], 'Spanish Female');
+    });
+  });
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_off').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offX').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offA').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+</script>
+<!-- FIN AUDIO MODAL -->
+<style type="text/css">
+
+.sound_on:hover{
+  color:green;
+}
+.sound_off:hover{
+  color:red;
+}
+} 
+</style>
+
+
+<!--  BANNER MODAL ABOUT -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">ABOUT US</h4>
+      </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!-- FIN BANNER MODAL -->

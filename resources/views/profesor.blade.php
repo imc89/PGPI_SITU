@@ -35,6 +35,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+  <!-- AYUDA EN AUDIO -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
@@ -104,8 +108,8 @@
 
   <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
   <div align="center" >
-    <h1>BIENVENIDO PROFESOR</h1>
-    <h1>TABLÓN DE {{Auth::user()->name}}</h1> 
+    <h1 style="font-size: 40px">BIENVENIDO PROFESOR</h1>
+    <h1 style="font-size: 30px">TABLÓN DE {{Auth::user()->name}}</h1> 
     <br>
 
 
@@ -146,7 +150,8 @@
           {{$registros}}
         </span> 
       </div>
-      <h4><b>Alumnos registrados</b></h4> </b>
+      <br>
+      <h4 style="font-size: 20px;font-weight: bold">Alumnos registrados</h4> </b>
       <br> <br>
 
 
@@ -412,4 +417,96 @@ a:hover span {
 }
 
 
+</style>
+
+
+<!-- MODAL INFORMACIÓN -->
+<div class="modal fade" id="AYUDA" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="audio_offX" type="button" class="close" data-dismiss="modal">&times;</button>
+        <div>
+          <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
+          <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
+        </div>
+        <h4 align="center" class="modal-title">PROFESOR</h4>
+      </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
+       Has accedido a una cuenta de PROFESOR donde podrás ver los currículums de los alumnos registrados y descargarlos.
+       <br><br>
+       <ul>
+        <li>
+          <br>
+          -En esta pantalla podrás visualizar los alumnos registrados y tendrás la posibilidad de ver sus datos identificativos y descargar o visualizar su currículum.  
+          <br>
+        </li>
+
+      </ul>
+
+      <br><br>
+
+      <div align="center">
+          Podrás salir del perfil de profesor pulsando en el menú sobre tu nombre y a continuación sobre Logout.
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div align="center">
+        <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<!-- AUDIO MODAL -->
+
+<script type="text/javascript">
+  var phrases = [
+  'Has accedido a una cuenta de PROFESOR,donde podrás ver los currículums de los alumnos registrados y descargarlos.En esta pantalla podrás visualizar los alumnos registrados,y tendrás la posibilidad de ver sus datos identificativos y descargar o visualizar su currículum.Podrás salir del perfil de profesor pulsando en el menú sobre tu nombre,y a continuación sobre Logout.'
+  ];
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_on').click(function() {
+      var i = Math.round(phrases.length * Math.random()) - 1;
+
+      responsiveVoice.speak(phrases[i], 'Spanish Female');
+    });
+  });
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_off').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offX').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offA').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+</script>
+<!-- FIN AUDIO MODAL -->
+<style type="text/css">
+
+.sound_on:hover{
+  color:green;
+}
+.sound_off:hover{
+  color:red;
+}
+} 
 </style>

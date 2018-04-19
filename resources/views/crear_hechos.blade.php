@@ -30,10 +30,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+	<!-- AYUDA EN AUDIO -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
 	<!-- CSS LINK CON NOMENCLATURA LARAVEL -->
 	<link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
 	<link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
-
 
 
 	<!--  LINK KEYWORD TAGS BOOTSTRAP JQUERY -->
@@ -42,12 +45,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js">
 	</script>
-
 </head>
 
-<!-- NOTA IMPORTANTE-> INSERT .... WHERE USER:NAME == AUTH:USER-->
-<body>
+
+<body onload="deshabilitaRetroceso()" id="gradient" style="height: 100%;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
 	<!-- INICIO NAVEGADOR -->
+
 	<div id='cssmenu'>
 		<ul>
 			<li class='active'>   
@@ -92,7 +95,6 @@
 				</a>
 			</li>
 
-
 			<!-- INICIO CV -->
 
 			<li>
@@ -105,7 +107,7 @@
 						<form action="PdfController.php" method="post">
 							<input type="hidden" name="data" value="{{ $datopdf }}">
 
-							<span class="glyphicon glyphicon-user" aria-hidden="true" style="color: white"></span>      
+							<span class="glyphicon glyphicon-education" aria-hidden="true" style="color: white"></span>      
 							CV
 
 
@@ -146,36 +148,36 @@
 
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
 
-   <!--    <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%;" >    
-   --><img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative; border-radius:50%;" >    
-   {{ Auth::user()->name }} <span class="caret"></span>
-</a>
 
-<div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
+					<img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative;  top:10px; border-radius:50%;" >    
+					{{mb_strtoupper(Auth::user()->name)}} <span class="caret"></span>
+				</a>
 
-	<a style="font-weight: bold;" href="perfilAlumno" class="link">
-		<span  class="glyphicon glyphicon-user"></span>Perfil
-	</a>
+				<div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
 
-	<a style="font-weight: bold;" href="configPerfil" class=" link">
-		<span  class="glyphicon glyphicon-cog"></span>Configuración
-	</a>
+					<a style="font-weight: bold;" href="perfilAlumno" class="link">
+						<span  class="glyphicon glyphicon-user"></span>Perfil
+					</a>
 
-	<a style="font-weight: bold;" href="{{ route('logout') }}"
-	onclick="event.preventDefault();
-	document.getElementById('logout-form').submit();">
-	<span class="glyphicon glyphicon-log-out"></span>Logout
-</a>
+					<a style="font-weight: bold;" href="configPerfil" class=" link">
+						<span  class="glyphicon glyphicon-cog"></span>Configuración
+					</a>
 
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-	{{ csrf_field() }}
-</form>
-</div>
+					<a style="font-weight: bold;" href="{{ route('logout') }}"
+					onclick="event.preventDefault();
+					document.getElementById('logout-form').submit();">
+					<span class="glyphicon glyphicon-log-out"></span>Logout
+				</a>
 
-@endguest
-</li>
+				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					{{ csrf_field() }}
+				</form>
+			</div>
 
-</div>
+			@endguest
+		</li>
+
+	</div>
 
 </li>
 
@@ -190,6 +192,7 @@
 		window.location = $(this).attr('href');
 	});
 </script>
+
 
 <!-- FIN DE NAVEGADOR -->
 
@@ -451,7 +454,7 @@
 										</div>
 									</div> -->
 
-									<div class="col-xs-8" style="background: #3386E2;color:white;border-radius: 10px; width: 160px; height: 130px; margin-right: 50%;">
+									<div class="col-xs-8" style="background: #3386E2;color:white;border-radius: 10px; width: 160px; height: 135px; margin-right: 50%;">
 										<label class="col-xs-7">Autorización: </label>
 										<br>
 										<div class="radio">
@@ -480,7 +483,8 @@
 										</div>
 									</div>
 									<br><br><br><br>
-									<br><br><br>
+									<br><br><br><br>
+									<br><br>
 
 
 									<div class="form-group">
@@ -881,4 +885,157 @@ div.token{
 	box-shadow:         inset 0 0 10px #000000;
 	border-radius: 10px;
 }
+</style>
+
+<!-- MODAL INFORMACIÓN -->
+<div class="modal fade" id="AYUDA" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- CONTENIDO DE ABOUT EN BANNER-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button id="audio_offX" type="button" class="close" data-dismiss="modal" style="background-color: transparent !important;">&times;</button>
+				<div>
+					<span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
+					<span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
+				</div>
+				<h4 align="center" class="modal-title">CREACIÓN DE HECHOS</h4>
+			</div>
+			<div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
+				Has accedido a CREACIÓN DE HECHOS donde podrás crear diferentes tipos de hecho.
+				<br><br>
+				<ul>
+					<li>
+						<br>
+						-En primer lugar elige el tipo de hecho que vas a insertar a través del campo desplegable ETIQUETA. 
+						<br>
+					</li>
+
+					<li>
+						<br>
+						-En caso de elegir el tipo de hecho RECUERDO notarás que se abrirá la posibilidad de agregar el TIPO DE RECUERDO.(FOTO, VIDEO URL o ENCUENTRO)
+						<br>
+					</li>
+
+					<li>
+						<br>
+						-A continuación deberás elegir un título para tu hecho y la fecha en la que ocurrió.
+						<br>
+					</li>
+
+					<li>
+						<br>
+						-Al hacer click sobre el campo Keywords aparecerán las keywords disponibles, para insertar más de una inserte una letra inicial o haga click fuera del campo y vuelva a pulsarlo para desplegar el listado.
+						<br>
+					</li>
+
+					<li>
+						<br>
+						-Se pueden borrar keywords pulsando sobre la x o borrando con la tecla borrar del teclado.
+						<br>
+					</li>
+
+					<li>
+						<br>
+						-A continuación podrás elegir el año de carrera dependiendo del tipo de carrera que hagas.
+						<br>
+					</li>
+
+					<li>
+						<br>
+						-En caso de ser un hecho de tipo recuerdo la siguiente opción será el tipo de recuerdo, inserta un fichero si es de tipo foto, inserta una url de video si has elegido video o un texto sobre tu encuentro.
+						<br>
+					</li>
+
+
+					<li>
+						<br>
+						-Tienes la posibilidad de agregar ficheros anexos, para ello activa la casilla de Anexo y selecciona el documento que quieras adjuntar.
+						<br>
+					</li>
+
+					<li>
+						<br>
+						-A continuación si lo deseas escribe el propósito de tu hecho. 
+						<br>
+					</li>
+
+					<li>
+						<br>
+						-Para finalizar deberás darle tipo de autorización al hecho pulsando sobre el grado de autorización, siendo el 1 el más restrictivo. 
+						<br>
+					</li>
+
+					<li>
+						<br>
+						-Una vez hayas dado forma a tu hecho pulsa CREAR NUEVO HECHO para crearlo. 
+						<br>
+					</li>
+
+
+				</ul>
+
+				<br><br>
+
+				<div align="center">
+					Podrás volver a la pantalla de inicio pulsando el icono de la universidad.
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<div align="center">
+					<button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- AUDIO MODAL -->
+
+<script type="text/javascript">
+	var phrases = [
+	'Has accedido a CREACIÓN DE HECHOS donde podrás crear diferentes tipos de hecho.En primer lugar elige el tipo de hecho que vas a insertar a través del campo desplegable ETIQUETA.En caso de elegir el tipo de hecho RECUERDO, notarás que se abrirá la posibilidad de agregar el TIPO DE RECUERDO,FOTO, VIDEO URL o ENCUENTRO.A continuación deberás elegir un título para tu hecho y la fecha en la que ocurrió.Al hacer click sobre el campo Keywords,aparecerán las Keywords disponibles,para insertar más de una inserte una letra inicial,o haga click fuera del campo y vuelva a pulsarlo para desplegar el listado.Se pueden borrar keywords pulsando sobre la x o borrando con la tecla borrar del teclado.A continuación podrás elegir el año de carrera dependiendo del tipo de carrera que hagas.En caso de ser un hecho de tipo recuerdo,la siguiente opción será el tipo de recuerdo,inserta un fichero si es de tipo foto,inserta una url de video si has elegido video,o un texto sobre tu encuentro.Tienes la posibilidad de agregar ficheros anexos, para ello activa la casilla de Anexo y selecciona el documento que quieras adjuntar.A continuación si lo deseas escribe el propósito de tu hecho.Para finalizar deberás darle tipo de autorización al hecho pulsando sobre el grado de autorización, siendo el 1 el más restrictivo.Una vez hayas dado forma a tu hecho pulsa CREAR NUEVO HECHO para crearlo.Podrás volver a la pantalla de inicio pulsando el icono de la universidad.'
+	];
+
+	jQuery(document).ready(function ($) {  
+		$('#audio_on').click(function() {
+			var i = Math.round(phrases.length * Math.random()) - 1;
+
+			responsiveVoice.speak(phrases[i], 'Spanish Female');
+		});
+	});
+
+	jQuery(document).ready(function ($) {  
+		$('#audio_off').click(function() {
+			var i = 0 ;
+
+			responsiveVoice.speak(phrases[1000], 'Spanish Female');
+		});
+	});
+	jQuery(document).ready(function ($) {  
+		$('#audio_offX').click(function() {
+			var i = 0 ;
+
+			responsiveVoice.speak(phrases[1000], 'Spanish Female');
+		});
+	});
+	jQuery(document).ready(function ($) {  
+		$('#audio_offA').click(function() {
+			var i = 0 ;
+
+			responsiveVoice.speak(phrases[1000], 'Spanish Female');
+		});
+	});
+</script>
+<!-- FIN AUDIO MODAL -->
+<style type="text/css">
+
+.sound_on:hover{
+	color:green;
+}
+.sound_off:hover{
+	color:red;
+}
+} 
 </style>

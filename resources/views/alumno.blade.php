@@ -100,7 +100,7 @@
       <form action="PdfController.php" method="post">
         <input type="hidden" name="data" value="{{ $datopdf }}">
 
-        <span class="glyphicon glyphicon-user" aria-hidden="true" style="color: white"></span>      
+        <span class="glyphicon glyphicon-education" aria-hidden="true" style="color: white"></span>      
         CV
 
 
@@ -547,12 +547,27 @@
 
           <li>
             <br>
-            -Para visualizar la línea temporal de  hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-time"></span> &nbsp; <b style="font-weight: bold">Línea Temporal</b>.  
+            -Para visualizar la línea temporal de hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-time"></span> &nbsp; <b style="font-weight: bold">Línea Temporal</b>.  
+            <br>
+          </li>
+
+           <li>
+            <br>
+            -Para ver el currículum o imprimirlo pulsa el botón &nbsp; <span class="glyphicon glyphicon-education"></span> &nbsp; <b style="font-weight: bold">CV</b>.  
             <br>
           </li>
         </ul>
 
+
         <br><br>
+        <div>
+          En el caso de que ya existan hechos creados se mostrarán pudiendo filtrarlos por etiqueta, eligiendo una etiqueta en el desplegable de la izquierda y pulsando FILTRAR, por keywords, eligiendo una keyword en el desplegable central y pulsando FILTRAR, o en caso de que recuerdes el título de tu hecho buscando a partir de texto.
+          <br><br>
+          Cada hecho que se muestra posee dos botones, pulsa el ojo <span class="glyphicon glyphicon-eye-open"></span> para visualizar el hecho de forma aislada con sus relacionados o pulsa la cruz <span class="glyphicon glyphicon-remove"></span> para eliminar el hecho.
+        </div>
+
+        <br><br>
+
 
         <div align="center">
           Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobre Logout.
@@ -572,7 +587,7 @@
 
 <script type="text/javascript">
   var phrases = [
-  'Has accedido a la sección de alumno.En esta sección se muestran los hechos por orden de creación.Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y seleccionaconfiguración.Para acceder a tus datos de perfil, donde también podrás dar de baja tu cuenta, pulsa tu nombre a la derecha del menú  y selecciona perfil.Para acceder al área de invitaciones pulsa el botón invitar.Para gestionar tuskeywords de hechos pulsa el botón keywords.Para crear nuevos hechos pulsa el botón Hechos.Para visualizar la línea temporal de  hechos pulsa el botón Línea Temporal. Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobreLogout.'
+  'Has accedido a la sección de alumno.En esta sección se muestran los hechos por orden de creación.Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y selecciona configuración.Para acceder a tus datos de perfil, donde también podrás dar de baja tu cuenta, pulsa tu nombre a la derecha del menú  y selecciona perfil.Para acceder al área de invitaciones pulsa el botón invitar.Para gestionar tuskeywords de hechos pulsa el botón keywords.Para crear nuevos hechos pulsa el botón Hechos.Para visualizar la línea temporal de  hechos pulsa el botón Línea Temporal.Para ver el currículum o imprimirlo pulsa el botón CV.En el caso de que ya existan hechos creados se mostrarán pudiendo filtrarlos por etiqueta, eligiendo una etiqueta en el desplegable de la izquierda y pulsando FILTRAR, por keywords, eligiendo una keyword en el desplegable central y pulsando FILTRAR, o en caso de que recuerdes el título de tu hecho buscando a partir de texto. Cada hecho que se muestra posee dos botones, pulsa el ojo para visualizar el hecho de forma aislada con sus relacionados, o pulsa la cruz para eliminar el hecho. Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobreLogout.'
   ];
 
   jQuery(document).ready(function ($) {  

@@ -11,6 +11,8 @@
 ->where('name', Auth::user()->name)
 ->update(['logins' => $logins ])}}
 
+
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -28,6 +30,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+  <!-- AYUDA EN AUDIO -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
@@ -36,76 +42,75 @@
 </head>
 
 
+<body onload="deshabilitaRetroceso()" id="gradient" style="height: 100%;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
+  <!-- INICIO NAVEGADOR -->
 
-<!-- INICIO NAVEGADOR -->
+  <div id='cssmenu'>
+    <ul>
+     <li class='active'>   
+       <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
+         <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+       </a>
+     </li>
 
-<div id='cssmenu'>
-  <ul>
-   <li class='active'>   
-     <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
-       <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-     </a>
-   </li>
+     <li>
+      <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+        <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
+      </a>
+    </li>
 
-   <li>
-    <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
-      <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
+    <li>
+      <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
+        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+      </a>
+    </li>
+
+    <li>
+      <a href="mail_invitados">
+        <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
+      </a>
+    </li>
+
+    <li>
+     <a href="keywords">
+      <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
     </a>
   </li>
 
   <li>
-    <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
-      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+    <a href="crear_hechos">
+      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
     </a>
   </li>
 
   <li>
-    <a href="mail_invitados">
-      <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
+    <a href="lineaTiempo">
+      <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
     </a>
   </li>
 
+  <!-- INICIO CV -->
+
   <li>
-   <a href="keywords">
-    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
-  </a>
-</li>
-
-<li>
-  <a href="crear_hechos">
-    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
-  </a>
-</li>
-
-<li>
-  <a href="lineaTiempo">
-    <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
-  </a>
-</li>
+   @foreach($datos as $a)
+   {{! $datopdf = $a->id}}
 
 
-<!-- INICIO CV -->
+   <a href="javascript:void()" onclick="document.getElementById('cvform').submit();"">
+     <form action="viewPdf_alumno" class="cvrotate" id="cvform">
+      <form action="PdfController.php" method="post">
+        <input type="hidden" name="data" value="{{ $datopdf }}">
 
-<li>
- @foreach($datos as $a)
- {{! $datopdf = $a->id}}
+        <span class="glyphicon glyphicon-education" aria-hidden="true" style="color: white"></span>      
+        CV
 
 
- <a href="javascript:void()" onclick="document.getElementById('cvform').submit();"">
-   <form action="viewPdf_alumno" class="cvrotate" id="cvform">
-    <form action="PdfController.php" method="post">
-      <input type="hidden" name="data" value="{{ $datopdf }}">
-
-      <span class="glyphicon glyphicon-user" aria-hidden="true" style="color: white"></span>      
-      CV
-
+      </form>
 
     </form>
 
-  </form>
-
-  @endforeach
-</a>
+    @endforeach
+  </a>
 </li>
 <style type="text/css">
 .cvrotate:hover span{
@@ -121,6 +126,13 @@
   height: 100%;
   cursor:pointer;
 }
+a:hover span {
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
+}
+
 </style>
 <!-- FIN CV -->
 
@@ -138,8 +150,8 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
 
 
-     <img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative;  top:0px; border-radius:50%;" >    
-     {{ Auth::user()->name }} <span class="caret"></span>
+     <img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative;  top:10px; border-radius:50%;" >    
+     {{mb_strtoupper(Auth::user()->name)}} <span class="caret"></span>
    </a>
 
    <div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
@@ -182,7 +194,10 @@
   });
 </script>
 
+
 <!-- FIN DE NAVEGADOR -->
+
+
 
 
 <br>
@@ -216,9 +231,10 @@
        <input style="font-weight: bold" type="email" class="form-control" id="email" placeholder="john@example.com" name="email" required>
      </div>
 
-     <div class="col-xs-8" style="background: #3386E2;color:white;border-radius: 10px; width: 160px; height: 130px; margin-right: 50%;">
+     <div class="col-xs-8" style="background: #3386E2;color:white;border-radius: 10px; width: 160px; height: 135px; margin-right: 50%;">
       <label class="col-xs-7">Autorización: </label>
       <br>
+
       <div class="radio">
 
         <img src="{{ asset('images/icons/lock.png')}}");" id="lock1">
@@ -227,6 +243,7 @@
         <label style="font-weight: bold">Nivel 1</label>
 
       </div>
+
       <div class="radio">
 
         <img src="{{ asset('images/icons/lock.png')}}");" id="lock2">
@@ -235,6 +252,7 @@
         <label style="font-weight: bold">Nivel 2</label>
 
       </div>
+
       <div class="radio">
 
         <img src="{{ asset('images/icons/lock.png')}}");" id="lock3">
@@ -325,4 +343,114 @@
     height: auto !important;
   }
 }
+</style>
+
+
+
+<!-- MODAL INFORMACIÓN -->
+<div class="modal fade" id="AYUDA" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="audio_offX" type="button" class="close" data-dismiss="modal">&times;</button>
+        <div>
+          <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
+          <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
+        </div>
+        <h4 align="center" class="modal-title">INVITADOS</h4>
+      </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
+       Has accedido a INVITADOS en donde podrás enviar invitaciones a gente que conozcas a través de su email.
+       <br><br>
+       <ul>
+        <li>
+          <br>
+          -Para enviar una invitación habrá que insertar el nombre del invitado junto con su correo y grado de autorización.
+          <br>
+        </li>
+
+        <li>
+          <br>
+          -Nivel 1 - el invitado solo podrá ver hechos de grado 1.  
+          <br>
+        </li>
+
+        <li>
+          <br>
+          -Nivel 2 - el invitado solo podrá ver hechos de grado 1 y 2.  
+          <br>
+        </li>
+
+        <li>
+          <br>
+          -Nivel 3 - el invitado podrá ver todos los hechos.  
+          <br>
+        </li>
+      </ul>
+
+      <br><br>
+
+      <div align="center">
+        Podrás volver a la pantalla de inicio pulsando el icono de la universidad.
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div align="center">
+        <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<!-- AUDIO MODAL -->
+
+<script type="text/javascript">
+  var phrases = [
+  'Has accedido a INVITADOS,en donde podrás enviar invitaciones a gente que conozcas a través de su email.Para enviar una invitación habrá que insertar el nombre del invitado,junto con su correo y grado de autorización.Nivel 1,el invitado solo podrá ver hechos de grado 1.Nivel 2,el invitado solo podrá ver hechos de grado 1 y 2.Nivel 3,el invitado podrá ver todos los hechos.Podrás volver a la pantalla de inicio pulsando el icono de la universidad.'
+  ];
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_on').click(function() {
+      var i = Math.round(phrases.length * Math.random()) - 1;
+
+      responsiveVoice.speak(phrases[i], 'Spanish Female');
+    });
+  });
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_off').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offX').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offA').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+</script>
+<!-- FIN AUDIO MODAL -->
+<style type="text/css">
+
+.sound_on:hover{
+  color:green;
+}
+.sound_off:hover{
+  color:red;
+}
+} 
 </style>

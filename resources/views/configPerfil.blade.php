@@ -1,3 +1,16 @@
+{{! $datos = DB::table('alumno')
+->select('alumno.id')
+->where('users.id','=', Auth::user()->id)
+->join('users','users.id','=','user_id')
+->get()
+}}
+{{!$logins = DB::table('users')->select('logins')->where('name', Auth::user()->name)->first()->logins }}
+{{! $logins++ }}
+{{! DB::table('users')
+->where('name', Auth::user()->name)
+->update(['logins' => $logins ])}}
+
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -15,6 +28,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+  <!-- AYUDA EN AUDIO -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
   <!-- CSS LINK CON NOMENCLATURA LARAVEL -->
   <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
@@ -22,90 +39,131 @@
 
 </head>
 
-<!-- NOTA IMPORTANTE-> INSERT .... WHERE USER:NAME == AUTH:USER-->
 
+<body onload="deshabilitaRetroceso()" id="gradient" style="height: 100%;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
   <!-- INICIO NAVEGADOR -->
+
   <div id='cssmenu'>
     <ul>
-      <li class='active'>   
-        <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
-          <img width="50px" src="{{ asset('images/icono.jpg') }}" >
-        </a>
-      </li>
+     <li class='active'>   
+       <a href="alumno" align="center" style="padding: 0 0 0 0 "> 
+         <img width="50px" src="{{ asset('images/icono.jpg') }}" >
+       </a>
+     </li>
 
-      <li>
-        <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
-          <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
-        </a>
-      </li>
+     <li>
+      <a  data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="card">
+        <span class="glyphicon glyphicon-info-sign"  aria-hidden="true"></span> About
+      </a>
+    </li>
 
-      <li>
-        <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
-          <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
-        </a>
-      </li>
+    <li>
+      <a data-toggle="modal" data-target="#AYUDA" onmouseover="style='cursor: help;'" onmouseout="style='cursor: default'"  id="card">
+        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda 
+      </a>
+    </li>
 
-      <li>
-        <a href="mail_invitados">
-          <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
-        </a>
-      </li>
+    <li>
+      <a href="mail_invitados">
+        <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> INVITAR 
+      </a>
+    </li>
 
-      <li>
-        <a href="keywords">
-          <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
-        </a>
-      </li>
+    <li>
+     <a href="keywords">
+      <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> KEYWORDS 
+    </a>
+  </li>
 
-      <li>
-        <a href="crear_hechos">
-          <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
-        </a>
-      </li>
+  <li>
+    <a href="crear_hechos">
+      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> HECHOS 
+    </a>
+  </li>
 
-      <li>
-        <a href="lineaTiempo">
-          <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
-        </a>
-      </li>
+  <li>
+    <a href="lineaTiempo">
+      <span class="glyphicon glyphicon-time" aria-hidden="true"></span> LÍNEA TEMPORAL 
+    </a>
+  </li>
 
+  <!-- INICIO CV -->
 
-      <li class="login">
-
-        @guest
-        <li><a href="{{ route('login') }}">Login</a></li>
-        @else
-
-
-        <li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <li>
+   @foreach($datos as $a)
+   {{! $datopdf = $a->id}}
 
 
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+   <a href="javascript:void()" onclick="document.getElementById('cvform').submit();"">
+     <form action="viewPdf_alumno" class="cvrotate" id="cvform">
+      <form action="PdfController.php" method="post">
+        <input type="hidden" name="data" value="{{ $datopdf }}">
 
-   <!--    <img src="/images/avatar/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:-35px; border-radius:50%;" >    
-   --><img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative; border-radius:50%;" >    
-   {{ Auth::user()->name }} <span class="caret"></span>
- </a>
+        <span class="glyphicon glyphicon-education" aria-hidden="true" style="color: white"></span>      
+        CV
 
- <div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
 
-  <a style="font-weight: bold;" href="perfilAlumno" class="link">
-    <span  class="glyphicon glyphicon-user"></span>Perfil
+      </form>
+
+    </form>
+
+    @endforeach
+  </a>
+</li>
+<style type="text/css">
+.cvrotate:hover span{
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
+}
+.cvrotate:hover{
+  border-radius: 5px;
+  color: #FFFFFF;
+  background-color: #435E80;
+  height: 100%;
+  cursor:pointer;
+}
+</style>
+<!-- FIN CV -->
+
+
+<li class="login">
+
+  @guest
+  <li><a href="{{ route('login') }}">Login</a></li>
+  @else
+
+
+  <li class="dropdown show login" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+
+
+     <img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:32px; height:32px; position: relative;  top:10px; border-radius:50%;" >    
+     {{mb_strtoupper(Auth::user()->name)}} <span class="caret"></span>
+   </a>
+
+   <div class="dropdown-menu pull-right " aria-labelledby="dropdownMenuLink" >
+
+    <a style="font-weight: bold;" href="perfilAlumno" class="link">
+      <span  class="glyphicon glyphicon-user"></span>Perfil
+    </a>
+
+    <a style="font-weight: bold;" href="configPerfil" class=" link">
+      <span  class="glyphicon glyphicon-cog"></span>Configuración
+    </a>
+
+    <a style="font-weight: bold;" href="{{ route('logout') }}"
+    onclick="event.preventDefault();
+    document.getElementById('logout-form').submit();">
+    <span class="glyphicon glyphicon-log-out"></span>Logout
   </a>
 
-  <a style="font-weight: bold;" href="configPerfil" class=" link">
-    <span  class="glyphicon glyphicon-cog"></span>Configuración
-  </a>
-
-  <a style="font-weight: bold;" href="{{ route('logout') }}"
-  onclick="event.preventDefault();
-  document.getElementById('logout-form').submit();">
-  <span class="glyphicon glyphicon-log-out"></span>Logout
-</a>
-
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-  {{ csrf_field() }}
-</form>
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    {{ csrf_field() }}
+  </form>
 </div>
 
 @endguest
@@ -127,6 +185,7 @@
   });
 </script>
 
+
 <!-- FIN DE NAVEGADOR -->
 
 
@@ -140,7 +199,7 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
-        <h2>Perfil : {{ $user->name }}</h2>
+        <h2 style="font-size: 40px">Perfil : {{ $user->name }}</h2>
         <form enctype="multipart/form-data" action="configPerfil" method="POST">
           <input id="botonfile" type="file" name="avatar" accept="image/*" value="">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -163,16 +222,16 @@
 
 <body  id="gradient" style="height:100%; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
 
-<div align="center" class="body">
+  <div align="center" class="body">
 
-  <div class="alert alert-warning" align="center" style="font-weight: bold">
-    <strong>Warning!</strong> Los formatos admitidos son JPG, PNG, GIF.
-    <p>
-     Si deseas que la imagen se vea correctamente deberá ser cuadrada.
-    </div>
+    <div class="alert alert-warning" align="center" style="font-weight: bold">
+      <strong>Warning!</strong> Los formatos admitidos son JPG, PNG, GIF.
+      <p>
+       Si deseas que la imagen se vea correctamente deberá ser cuadrada.
+     </div>
 
-  </div>
-  <div align="center" >
+   </div>
+   <div align="center" >
     <div id="hechos" style="width: 780px;height: 850px; background: #B7C2D2; border-radius: 10px">
 
       <div class="container" >
@@ -299,7 +358,7 @@
               </div>
 
 
-
+              <br>
               <div class="form-group" >
                 <div>
                   <button id="hechos" style="width: 780px;font-weight: bold;" type="submit" class="btn btn-primary" name="signup" value="Sign up">ACTUALIZAR INFORMACIÓN</button>
@@ -315,7 +374,7 @@
 
   </div>
 </div>
-
+</form></div></div>
 <br><br>
 
 
@@ -518,3 +577,112 @@ a:hover span {
 
 </style>
 
+
+<!-- MODAL INFORMACIÓN -->
+<div class="modal fade" id="AYUDA" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="audio_offX" type="button" class="close" data-dismiss="modal">&times;</button>
+        <div>
+          <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
+          <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
+        </div>
+        <h4 align="center" class="modal-title">CONFIGURACIÓN DE PERFIL</h4>
+      </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
+       Has accedido a la CONFIGURACIÓN DE PERFIL donde podrás agregar tu foto de perfil y tus datos.
+       <br><br>
+       <ul>
+        <li>
+          <br>
+          -Para cambiar la foto de perfil selecciona una foto y pulsa CAMBIAR IMAGEN DE PERFIL. 
+          <br>
+        </li>
+
+        <li>
+          <br>
+          -Puedes completar los datos de tu perfil agregando 3 campos propios en CREAR OPCIONES. Para ello activa el campo e inserta el nombre del campo y el valor que le quieras dar.
+          <br>
+        </li>
+
+        <li>
+          <br>
+          -Al ser un campo de tipo seleccionable deberás seleccionar la carrera siempre que realices un cambio.
+          <br>
+        </li>
+
+        <li>
+          <br>
+          -Para actualizar la información solo hay que pulsar sobre ACTUALIZAR INFORMACIÓN.
+          <br>
+        </li>
+
+      </ul>
+
+      <br><br>
+
+      <div align="center">
+        Podrás volver a la pantalla de inicio pulsando el icono de la universidad.
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div align="center">
+        <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<!-- AUDIO MODAL -->
+
+<script type="text/javascript">
+  var phrases = [
+  'Has accedido a la CONFIGURACIÓN DE PERFIL donde podrás agregar tu foto de perfil y tus datos.Para cambiar la foto de perfil selecciona una foto y pulsa CAMBIAR IMAGEN DE PERFIL.Puedes completar los datos de tu perfil agregando 3 campos propios en CREAR OPCIONES.Para ello activa el campo e inserta el nombre del campo y el valor que le quieras dar.Al ser un campo de tipo seleccionable deberás seleccionar la carrera siempre que realices un cambio.Para actualizar la información solo hay que pulsar sobre ACTUALIZAR INFORMACIÓN.Podrás volver a la pantalla de inicio pulsando el icono de la universidad.'
+  ];
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_on').click(function() {
+      var i = Math.round(phrases.length * Math.random()) - 1;
+
+      responsiveVoice.speak(phrases[i], 'Spanish Female');
+    });
+  });
+
+  jQuery(document).ready(function ($) {  
+    $('#audio_off').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offX').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offA').click(function() {
+      var i = 0 ;
+
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+</script>
+<!-- FIN AUDIO MODAL -->
+<style type="text/css">
+
+.sound_on:hover{
+  color:green;
+}
+.sound_off:hover{
+  color:red;
+}
+} 
+</style>
