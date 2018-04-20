@@ -152,123 +152,212 @@
 
   </div>
 
-  <!-- MOSTRAR HECHOS -->
-  <?php $contador=0 ?>
+   <!--INICIO FILTROS  -->
+  <div style="text-align: center; word-wrap: break-word;">
 
+    <!-- PRIMER FILTRO -->
+    <div style="padding: 10px;margin: 10px;display: inline-block;">
 
-  @foreach($hechos as $u)
-  <div align="center">
-    <div id="hecho_div">
-      <div style="float: left;">
-        <u>HECHO Nº <?php $contador++; echo $contador ?></u>
+      <form action="filtrar_hinvitado_etiqueta" class="form-horizontal fv-form fv-form-bootstrap">
+
+        <br>
+        <div align="center" >
+          <div  style="width: 300px">
+            <div class="form-group" required><!-- ETIQUETAS -->
+              <label style="font-weight: bold" >Filtrar por etiqueta: </label>
+              <div>
+                <form action="FilterhechosController.php" method="post">
+                  {{! $etiquetas = DB::table('tags')->get() }}
+                  <select style="font-weight: bold" id="hecho" class="form-control" name="etiqueta" required>
+                    <option> Todos los hechos </option>
+                    @foreach($etiquetas as $tag)
+                    <option> {{ $tag->name }} </option>
+                    @endforeach
+                  </select>
+                  <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center; font-weight: bold">        
+                </form>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-      <div style="float: right;">
-        <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
-      </div>
-
-      @if($u->etiqueta !== NULL)
-      <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
-      @endif
-
-      @if($u->titulo !== NULL)
-      <b>Título:</b>  {{ $u->titulo }} <br>
-      @endif
-
-      @if($u->curso !== NULL)
-      <b>Curso:</b>  {{ $u->curso }}º <br>
-      @endif
-
-      @if($u->contenido !== NULL)
-      <b>Contenido:</b>  {{ $u->contenido }} <br>
-      @endif
-
-      @if($u->video !== NULL)
-      <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
-      @endif
-
-      @if($u->encuentro !== NULL)
-      <b>Encuentro:</b> {{ $u->encuentro }}  <br>
-      @endif
-
-      @if($u->foto !== NULL)
-      <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
-      @endif
-
-      @if($u->anexo !== NULL)
-      <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
-      @endif
-
-      @if($u->proposito !== NULL)
-      <b>Propósito:</b>  {{ $u->proposito }} <br>
-      @endif
-
-
-      @if($u->keywords !== NULL)
-      {{! $array = explode( ',', $u->keywords )}}
-      <br><b>Keywords:</b> 
-      @foreach ($array as $item) 
-      <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
-      @endforeach 
-      <br>
-      @endif
 
 
     </div>
-    <br>
-  </div>
-  @endforeach
 
-  <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-  <footer class="body_bottom body" id="footer" style="position: relative;bottom: 0">
-    <table>
-      <tbody>
+    <!-- SEGUNDO FILTRO -->
+    <div style="padding: 10px;margin: 10px;display: inline-block;">
 
-       <tr> 
-        <td class="foot_izdo">&nbsp;</td> 
-        <td class="foot_cent"> 
-          <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-            <br> 
-            Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
-          </p> 
+      <form action="filtrar_hinvitado_keyword" class="form-horizontal fv-form fv-form-bootstrap">
 
-          <!-- REDES SOCIALES -->
-          <div id="social"> 
-            <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
-            </a> 
-            <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
-            </a>
-            <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
-            </a>
-            <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
-            </a> 
-            <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
-            </a>
-          </div>
-          <!-- FIN REDES SOCIALES -->
-
-          <div>
-            <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
-            / Sponsored by the
-            <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
-            and 
-            <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
-            Copyright 2013,
-            <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
-            . All rights reserved. 
-          </div>
+        <br>
+        <div align="center" >
+          <div  style="width: 300px">
+            <div class="form-group" required><!-- ETIQUETAS -->
+              <label style="font-weight: bold">Filtrar por keywords: </label>
+              <div>
+                <form action="FilterhechosController.php" method="post">
+                  {{! $keywords = DB::table('keywords')->get() }}
+                  <select style="font-weight: bold" id="hecho" class="form-control" name="keyword" required>
+                    <option>Cualquier keyword</option>
+                    @foreach($keywords as $tag)
+                    <option> {{ $tag->name }} </option>
+                    @endforeach
+                  </select>
+                  <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center; font-weight: bold">        
+                </form>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
 
 
-        </td>
-        <td class="foot_dcho">&nbsp;</td> 
-      </tr>
-    </tbody>
-  </table>
-</footer>
+    </div>
+
+    <!-- TERCER FILTRO -->
+    <div style="padding: 10px;margin: 10px;display: inline-block;">
+
+      <form action="filtrar_hinvitado_titulo" class="form-horizontal fv-form fv-form-bootstrap">
+
+        <br>
+        <div align="center" >
+          <div  style="width: 300px">
+            <div class="form-group" required><!-- ETIQUETAS -->
+              <label style="font-weight: bold" >Filtrar por título: </label>
+              <div>
+                <form action="FilterhechosController.php" method="post">
+                 <input style="font-weight: bold" type="text" class="form-control" name="titulo" required>
+                 <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center; font-weight: bold">        
+               </form>
+             </div>
+           </div>
+         </form>
+       </div>
+     </div>
+
+
+   </div>
+     <!--FIN FILTROS  -->
+
+
+     <!-- MOSTRAR HECHOS -->
+     <?php $contador=0 ?>
+
+
+     @foreach($hechos as $u)
+     <div align="center">
+      <div id="hecho_div">
+        <div style="float: left;">
+          <u>HECHO Nº <?php $contador++; echo $contador ?></u>
+        </div>
+        <div style="float: right;">
+          <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
+        </div>
+
+        @if($u->etiqueta !== NULL)
+        <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+        @endif
+
+        @if($u->titulo !== NULL)
+        <b>Título:</b>  {{ $u->titulo }} <br>
+        @endif
+
+        @if($u->curso !== NULL)
+        <b>Curso:</b>  {{ $u->curso }}º <br>
+        @endif
+
+        @if($u->contenido !== NULL)
+        <b>Contenido:</b>  {{ $u->contenido }} <br>
+        @endif
+
+        @if($u->video !== NULL)
+        <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+        @endif
+
+        @if($u->encuentro !== NULL)
+        <b>Encuentro:</b> {{ $u->encuentro }}  <br>
+        @endif
+
+        @if($u->foto !== NULL)
+        <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
+        @endif
+
+        @if($u->anexo !== NULL)
+        <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+        @endif
+
+        @if($u->proposito !== NULL)
+        <b>Propósito:</b>  {{ $u->proposito }} <br>
+        @endif
+
+
+        @if($u->keywords !== NULL)
+        {{! $array = explode( ',', $u->keywords )}}
+        <br><b>Keywords:</b> 
+        @foreach ($array as $item) 
+        <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+        @endforeach 
+        <br>
+        @endif
+
+
+      </div>
+      <br>
+    </div>
+    @endforeach
+
+    <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
+    <footer class="body_bottom body" id="footer" style="position: relative;bottom: 0">
+      <table>
+        <tbody>
+
+         <tr> 
+          <td class="foot_izdo">&nbsp;</td> 
+          <td class="foot_cent"> 
+            <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
+              <br> 
+              Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
+            </p> 
+
+            <!-- REDES SOCIALES -->
+            <div id="social"> 
+              <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+                <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
+              </a> 
+              <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+                <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
+              </a>
+              <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+                <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
+              </a>
+              <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
+                <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
+              </a> 
+              <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+                <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
+              </a>
+            </div>
+            <!-- FIN REDES SOCIALES -->
+
+            <div>
+              <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
+              / Sponsored by the
+              <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
+              and 
+              <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
+              Copyright 2013,
+              <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
+              . All rights reserved. 
+            </div>
+
+
+          </td>
+          <td class="foot_dcho">&nbsp;</td> 
+        </tr>
+      </tbody>
+    </table>
+  </footer>
 </div>
 
 </div>

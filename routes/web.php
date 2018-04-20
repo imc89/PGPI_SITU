@@ -228,6 +228,9 @@ Route::group(['middleware' => ['auth']], function() {
 
 	});	
 
+
+// INVITADO
+
 	Route::group(['middleware' => 'invitado'], function () {
 
 		Route::get('invitado', function () {
@@ -274,6 +277,21 @@ Route::group(['middleware' => ['auth']], function() {
 			return view('invitado', compact('hechos','autorizacion','propietario'));		
 
 		});
+
+
+// FILTRAR PARA INVITADO
+
+		Route::get('filtrar_hinvitado_etiqueta', 'FiltrarhechosController@filtrar_hinvitado_etiqueta');
+
+		Route::get('filtrar_hinvitado_titulo', 'FiltrarhechosController@filtrar_hinvitado_titulo');
+
+		Route::get('filtrar_hinvitado_keyword', 'FiltrarhechosController@filtrar_hinvitado_keyword');
+
+
+		
+
+
+
 
 	});
 

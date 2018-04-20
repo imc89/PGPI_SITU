@@ -22,5 +22,8 @@ class PlaceController extends Controller
 			return redirect('profesor');    
 		} 
 
+		if (Auth::user()->rol == 3) {
+			return redirect('invitado');    
+		} 
 	}
 }

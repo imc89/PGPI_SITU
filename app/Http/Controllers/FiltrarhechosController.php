@@ -221,5 +221,114 @@ class FiltrarhechosController extends Controller
 
 	}
 
+// FILTRAR EN INVITADO
+
+	public function filtrar_hinvitado_etiqueta(Request $request){
+
+		$datos_invitado = DB::table('invitado')
+		->select('alumno_id','acceso','user_id')
+		->where('invitado.email', '=' , Auth::user()->email)
+		->get();
+
+
+		foreach($datos_invitado as $aluid)
+			$alumno_id = $aluid->alumno_id;
+		$autorizacion = $aluid->acceso;
+
+
+		$propietario=DB::table('users')
+		->where('users.id', '=', $aluid->user_id)
+		->select('name')
+		->get();
+
+		if ($request->etiqueta == "Todos los hechos") {
+
+			
+			$hechos = DB::table('hechos')
+			->where('alumno_id','=', $alumno_id)
+			->get();
+
+			return view('invitado', compact('hechos','autorizacion','propietario'));		
+
+		}
+		else{
+
+			$hechos = DB::table('hechos')
+			->where('alumno_id','=', $alumno_id)
+			->where('etiqueta','=',$request->etiqueta)
+			->get();
+
+			return view('invitado', compact('hechos','autorizacion','propietario'));		
+		}
+	}
+
+
+	public function filtrar_hinvitado_titulo(Request $request){
+
+		$datos_invitado = DB::table('invitado')
+		->select('alumno_id','acceso','user_id')
+		->where('invitado.email', '=' , Auth::user()->email)
+		->get();
+
+
+		foreach($datos_invitado as $aluid)
+			$alumno_id = $aluid->alumno_id;
+		$autorizacion = $aluid->acceso;
+
+
+		$propietario=DB::table('users')
+		->where('users.id', '=', $aluid->user_id)
+		->select('name')
+		->get();
+		
+
+
+		$hechos = DB::table('hechos')
+		->where('alumno_id','=', $alumno_id)
+		->where('titulo','=',$request->titulo)
+		->get();
+
+		return view('invitado', compact('hechos','autorizacion','propietario'));		
+
+	}
+
+	public function filtrar_hinvitado_keyword(Request $request){
+		$datos_invitado = DB::table('invitado')
+		->select('alumno_id','acceso','user_id')
+		->where('invitado.email', '=' , Auth::user()->email)
+		->get();
+
+
+		foreach($datos_invitado as $aluid)
+			$alumno_id = $aluid->alumno_id;
+		$autorizacion = $aluid->acceso;
+
+
+		$propietario=DB::table('users')
+		->where('users.id', '=', $aluid->user_id)
+		->select('name')
+		->get();
+
+		if ($request->keyword == "Cualquier keyword") {
+			
+			$hechos = DB::table('hechos')
+			->where('alumno_id','=', $alumno_id)
+			->get();
+
+			return view('invitado', compact('hechos','autorizacion','propietario'));		
+
+		}
+		else{
+
+			$hechos = DB::table('hechos')
+			->where('alumno_id','=', $alumno_id)
+			->where ('keywords', 'LIKE', '%'.$request->keyword.'%')
+			->get();
+
+			return view('invitado', compact('hechos','autorizacion','propietario'));		
+		}
+
+	}
+
 
 }
