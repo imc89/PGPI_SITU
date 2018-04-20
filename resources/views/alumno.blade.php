@@ -351,6 +351,24 @@
 
     </div>
 
+     <div style="float: right;background: #BAB9BB;border-radius:5px;margin-left: 10px">
+
+        <form action="vision_hecho">
+         {{! $idhecho = $u->id}}
+
+         <form action="VisionhechoController.php" method="post">
+          <input style="color: black" type="hidden" name="data" value="{{ $idhecho }}">
+
+          <button type="submit" style="border: none;background: transparent;">
+            <span id="ver" class="glyphicon glyphicon-pencil"></span>
+          </button>
+        </form>
+
+      </form>
+
+
+    </div>
+
 
   </div>
 
