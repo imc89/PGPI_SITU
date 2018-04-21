@@ -14,7 +14,7 @@ Tu contraseña es: <?php  save(); ?>
 function getUsuario() {
       $request = request();
       $usuario = request('name', $default = null);
-      $usuario = strtoupper( $usuario);
+      $usuario = mb_strtoupper( $usuario);
       return $usuario;
 }
 

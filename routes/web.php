@@ -162,6 +162,8 @@ Route::group(['middleware' => ['auth']], function() {
 		});
 
 		Route::get('vision_hecho', 'VisionhechoController@vision_hecho');
+		Route::get('modificar_hecho', 'ModificarhechoController@modificar_hecho');
+		Route::post('hecho_modificado', 'ModificarhechoController@hecho_modificado');
 
 
 		Route::get('eliminar_hecho', 'EliminarController@eliminar_hecho');
@@ -213,87 +215,87 @@ Route::group(['middleware' => ['auth']], function() {
 	});
 
 // PROFESOR
-	Route::group(['middleware' => 'profesor'], function () {
+Route::group(['middleware' => 'profesor'], function () {
 
-		Route::get('profesor', function () {
-			return view('profesor');
-		}); 
+	Route::get('profesor', function () {
+		return view('profesor');
+	}); 
 
-		Route::get('viewPdf', 'PdfController@CreatePDF');
-		Route::get('downPdf', 'PdfController@DownloadPDF');
+	Route::get('viewPdf', 'PdfController@CreatePDF');
+	Route::get('downPdf', 'PdfController@DownloadPDF');
 
-		Route::get('curriculum', function () {
-			return view('curriculum');
-		});		
+	Route::get('curriculum', function () {
+		return view('curriculum');
+	});		
 
-	});	
+});	
 
 
 // INVITADO
 
-	Route::group(['middleware' => 'invitado'], function () {
+Route::group(['middleware' => 'invitado'], function () {
 
-		Route::get('invitado', function () {
+	Route::get('invitado', function () {
 
-			$datos_invitado = DB::table('invitado')
-			->select('alumno_id','acceso','user_id')
-			->where('invitado.email', '=' , Auth::user()->email)
-			->get();
+		$datos_invitado = DB::table('invitado')
+		->select('alumno_id','acceso','user_id')
+		->where('invitado.email', '=' , Auth::user()->email)
+		->get();
 
-			foreach($datos_invitado as $aluid)
-				$alumno_id = $aluid->alumno_id;
-			$autorizacion = $aluid->acceso;
+		foreach($datos_invitado as $aluid)
+			$alumno_id = $aluid->alumno_id;
+		$autorizacion = $aluid->acceso;
 
-			$propietario=DB::table('users')
-			->where('users.id', '=', $aluid->user_id)
-			->select('name')
-			->get();
-			
-			$hechos=DB::table('hechos')
-			->where('hechos.alumno_id', '=', $aluid->alumno_id)
-			->get();
+		$propietario=DB::table('users')
+		->where('users.id', '=', $aluid->user_id)
+		->select('name')
+		->get();
 
-			foreach($hechos as $h){
-				if ($aluid->acceso == 1) {
-					$hechos=DB::table('hechos')
-					->where('hechos.alumno_id', '=', $aluid->alumno_id)
-					->where('hechos.autorizacion', '=', 1)
-					->get();
-				}
-				elseif($aluid->acceso == 2){
-					$hechos=DB::table('hechos')
-					->where('hechos.alumno_id', '=', $aluid->alumno_id)
-					->whereBetween('hechos.autorizacion', [1, 2])->get();
+		$hechos=DB::table('hechos')
+		->where('hechos.alumno_id', '=', $aluid->alumno_id)
+		->get();
 
-				}
-				else{
-					$hechos=DB::table('hechos')
-					->where('hechos.alumno_id', '=', $aluid->alumno_id)
-					->get();
-
-				}
+		foreach($hechos as $h){
+			if ($aluid->acceso == 1) {
+				$hechos=DB::table('hechos')
+				->where('hechos.alumno_id', '=', $aluid->alumno_id)
+				->where('hechos.autorizacion', '=', 1)
+				->get();
 			}
+			elseif($aluid->acceso == 2){
+				$hechos=DB::table('hechos')
+				->where('hechos.alumno_id', '=', $aluid->alumno_id)
+				->whereBetween('hechos.autorizacion', [1, 2])->get();
 
-			return view('invitado', compact('hechos','autorizacion','propietario'));		
+			}
+			else{
+				$hechos=DB::table('hechos')
+				->where('hechos.alumno_id', '=', $aluid->alumno_id)
+				->get();
 
-		});
+			}
+		}
+
+		return view('invitado', compact('hechos','autorizacion','propietario'));		
+
+	});
 
 
 // FILTRAR PARA INVITADO
 
-		Route::get('filtrar_hinvitado_etiqueta', 'FiltrarhechosController@filtrar_hinvitado_etiqueta');
+	Route::get('filtrar_hinvitado_etiqueta', 'FiltrarhechosController@filtrar_hinvitado_etiqueta');
 
-		Route::get('filtrar_hinvitado_titulo', 'FiltrarhechosController@filtrar_hinvitado_titulo');
+	Route::get('filtrar_hinvitado_titulo', 'FiltrarhechosController@filtrar_hinvitado_titulo');
 
-		Route::get('filtrar_hinvitado_keyword', 'FiltrarhechosController@filtrar_hinvitado_keyword');
-
-
-		
+	Route::get('filtrar_hinvitado_keyword', 'FiltrarhechosController@filtrar_hinvitado_keyword');
 
 
 
 
-	});
+
+
+
+});
 
 });
 

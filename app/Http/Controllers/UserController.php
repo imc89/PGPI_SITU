@@ -61,7 +61,7 @@ if ($request->direccion != NULL) {
    ->where('users.id','=', Auth::user()->id)
    ->update(['direccion' => $request->direccion]);
 }
-if ($request->carrera != NULL) {
+if ($request->carrera != "-") {
    DB::table('alumno')
    ->join('users','users.id','=','user_id')
    ->where('users.id','=', Auth::user()->id)

@@ -57,7 +57,7 @@
 
   <li>
    <spam style="font-weight: bold;">
-     <?php echo strtoupper('soy un invitado con permiso de nivel '. $autorizacion);?>
+     <?php echo mb_strtoupper('soy un invitado con permiso de nivel '. $autorizacion);?>
    </spam>
  </li>
 

@@ -351,76 +351,81 @@
 
     </div>
 
-     <div style="float: right;background: #BAB9BB;border-radius:5px;margin-left: 10px">
+    <div style="float: right;background: #BAB9BB;border-radius:5px;margin-left: 10px">
 
-        <form action="vision_hecho">
-         {{! $idhecho = $u->id}}
+      <form action="modificar_hecho">
+       {{! $idhecho = $u->id}}
 
-         <form action="VisionhechoController.php" method="post">
-          <input style="color: black" type="hidden" name="data" value="{{ $idhecho }}">
+       <form action="ModificarhechoController.php" method="post">
+        <input style="color: black" type="hidden" name="data" value="{{ $idhecho }}">
 
-          <button type="submit" style="border: none;background: transparent;">
-            <span id="ver" class="glyphicon glyphicon-pencil"></span>
-          </button>
-        </form>
-
+        <button type="submit" style="border: none;background: transparent;">
+          <span id="ver" class="glyphicon glyphicon-pencil"></span>
+        </button>
       </form>
 
-
-    </div>
+    </form>
 
 
   </div>
 
-  @if($u->etiqueta !== NULL)
-  <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
-  @endif
 
-  @if($u->titulo !== NULL)
-  <b>Título:</b>  {{ $u->titulo }} <br>
-  @endif
+</div>
 
-  @if($u->curso !== NULL)
-  <b>Curso:</b>  {{ $u->curso }}º <br>
-  @endif
+@if($u->etiqueta !== NULL)
+<br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+@endif
 
-  @if($u->contenido !== NULL)
-  <b>Contenido:</b>  {{ $u->contenido }} <br>
-  @endif
+@if($u->titulo !== NULL)
+<b>Título:</b>  {{ $u->titulo }} <br>
+@endif
 
-  @if($u->video !== NULL)
-  <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
-  @endif
+@if($u->curso !== NULL)
+<b>Curso:</b>  {{ $u->curso }}º <br>
+@endif
 
-  @if($u->encuentro !== NULL)
-  <b>Encuentro:</b> {{ $u->encuentro }}  <br>
-  @endif
+@if($u->contenido !== NULL)
+<b>Contenido:</b>  {{ $u->contenido }} <br>
+@endif
 
-  @if($u->foto !== NULL)
-  <span style="vertical-align: middle;">FOTO:</span> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
-  @endif
+@if($u->video !== NULL)
+<b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+@endif
 
-  @if($u->anexo !== NULL)
-  <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
-  @endif
+@if($u->encuentro !== NULL)
+<b>Encuentro:</b> {{ $u->encuentro }}  <br>
+@endif
 
-  @if($u->proposito !== NULL)
-  <b>Propósito:</b>  {{ $u->proposito }} <br>
-  @endif
+@if($u->foto !== NULL)
+<span style="vertical-align: middle;">FOTO:</span> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
+@endif
+
+@if($u->anexo !== NULL)
+<b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+@endif
+
+@if($u->proposito !== NULL)
+<b>Propósito:</b>  {{ $u->proposito }} <br>
+@endif
 
 
-  @if($u->keywords !== NULL)
-  {{! $array = explode( ',', $u->keywords )}}
-  <br><b>Keywords:</b> 
-  @foreach ($array as $item) 
-  <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
-  @endforeach 
-  <br><br>
-  @endif
+@if($u->keywords !== NULL)
+{{! $array = explode( ',', $u->keywords )}}
+<br><b>Keywords:</b> 
+@foreach ($array as $item) 
+@if($item !== ' ,')
+@if($item !== NULL)
+<b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+@endif
+@endif
+@endforeach 
+<br><br>
 
-  @if($u->autorizacion !== NULL)
-  <b>     <img style="width: 3%" src="{{ asset('images/icons/lockh.png')}}");"></b>  {{ $u->autorizacion }} <br>
-  @endif
+@endif
+
+@if($u->autorizacion !== NULL)
+<b>     <img style="width: 3%" src="{{ asset('images/icons/lockh.png')}}");"></b>  {{ $u->autorizacion }} <br>
+@endif
 
 
 
@@ -569,7 +574,7 @@
             <br>
           </li>
 
-           <li>
+          <li>
             <br>
             -Para ver el currículum o imprimirlo pulsa el botón &nbsp; <span class="glyphicon glyphicon-education"></span> &nbsp; <b style="font-weight: bold">CV</b>.  
             <br>
