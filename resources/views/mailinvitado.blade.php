@@ -47,7 +47,7 @@ function getTiempo() {
 function getCaduca() {
       date_default_timezone_set('Europe/Madrid');
       $caduca = date('Y-m-d');
-      $caduca = date('Y-m-d',mb_strtoupper($caduca . "+7 days"));
+      $caduca = date('Y-m-d',strtotime($caduca . "+7 days"));
   return $caduca;
 
 }
