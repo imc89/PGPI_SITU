@@ -35,7 +35,7 @@
          <li class='active'>
 
 
-             <a href="/" align="center" style="padding: 0 0 0 0 "> 
+             <a href="/PGPI_SITU/public/" align="center" style="padding: 0 0 0 0 "> 
                <img width="50px" src="{{ asset('images/icono.jpg') }}" >
            </a>
 

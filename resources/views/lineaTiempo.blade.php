@@ -42,7 +42,7 @@
 </head>
 
 
-<body onload="deshabilitaRetroceso()" id="gradient" style="height: 100%;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
+<body onload="deshabilitaRetroceso()" id="gradient" style="background: transparent;">
   <!-- INICIO NAVEGADOR -->
 
   <div id='cssmenu'>
@@ -312,7 +312,7 @@
 
 </div>
 
-<div class="body" >
+<div class="body"  style="width: 100%; min-height: 100%; height: auto !important; top:0; left: 0;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
   <ul id="time-line">
 
     @foreach($hechos as $u)

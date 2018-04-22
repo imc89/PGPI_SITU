@@ -48,7 +48,7 @@
 </head>
 
 
-<body onload="deshabilitaRetroceso()" id="gradient" style="height: 100%;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
+<body onload="deshabilitaRetroceso()" style="background: transparent;">
 	<!-- INICIO NAVEGADOR -->
 
 	<div id='cssmenu'>
@@ -199,7 +199,7 @@
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
 
 
-<div class="body">
+<div class="body"  style="width: 100%; min-height: 100%; height: auto !important; top:0; left: 0;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
 
 	<br>
 	<br>
@@ -211,7 +211,7 @@
 	</div>
 	@endif
 
-	<div align="center" class="body">
+	<div align="center" >
 		<div  id="hechos" style="width: 780px;background: #B7C2D2; border-radius: 10px">
 
 			<div align="center">
@@ -510,7 +510,7 @@
 									<!-- CONTENIDO DE ABOUT EN BANNER-->
 									<div class="modal-content">
 										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<button type="button" class="close" data-dismiss="modal" style="background: transparent !important;">&times;</button>
 											<h4 class="modal-title">ABOUT US</h4>
 										</div>
 										<div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
