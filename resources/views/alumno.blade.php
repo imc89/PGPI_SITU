@@ -412,9 +412,9 @@
 @if($u->keywords !== NULL)
 {{! $array = explode( ',', $u->keywords )}}
 <br><b>Keywords:</b> 
-@foreach ($array as $item) 
+@foreach ( $array as $item) 
 @if($item !== ' ,')
-@if($item !== NULL)
+@if($item != NULL)
 <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
 @endif
 @endif

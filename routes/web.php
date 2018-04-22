@@ -161,6 +161,8 @@ Route::group(['middleware' => ['auth']], function() {
 			return view('crear_hechos', compact('keywords'));
 		});
 
+		Route::get('hechos_relacionados', 'HechosrelacionadosController@hechos_relacionados');
+
 		Route::get('vision_hecho', 'VisionhechoController@vision_hecho');
 		Route::get('modificar_hecho', 'ModificarhechoController@modificar_hecho');
 		Route::post('hecho_modificado', 'ModificarhechoController@hecho_modificado');

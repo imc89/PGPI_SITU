@@ -48,11 +48,17 @@ class ModificarhechoController extends Controller
 			->update(['fecha' => $request->fecha]);
 		}
 
-		DB::table('hechos')
-		->where('hechos.id', '=', $request->id)
-		->where('keywords', '<>', ' ,', 'or')
-		->where('keywords', '==', NULL)
-		->update(['keywords' => $request->keywords]);
+//________________________________________________________
+		
+
+		if ($request->keywords !== NULL) {
+
+			DB::table('hechos')
+			->where('hechos.id', '=', $request->id)
+			->update(['keywords' => $request->keywords]);
+		}
+
+//________________________________________________________
 
 		DB::table('hechos')
 		->where('hechos.id', '=', $request->id)
@@ -100,7 +106,7 @@ class ModificarhechoController extends Controller
 			->update(['encuentro' => $request->encuentro]);
 		}
 
-		return redirect()->back()->with('message', 'HECHO MODIFICADO CON ÉXITO.');
+		return redirect('alumno');
 
 	}
 }

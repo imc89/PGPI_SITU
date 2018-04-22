@@ -347,9 +347,9 @@
 
         <div class="form-group">
           <label class="col-xs-7">Añade tus Keywords: </label>
-          <div class="col-xs-8" style="font-weight: bold">
+          <div class="col-xs-8" style="font-weight: bold" >
             <input  autocomplete="off" type="text" name="keywords" id="keywords" 
-            @foreach ($array as $item) @if($item != NULL) value="@foreach ($array as $item) {{ $item }}, @endforeach "  @else value="" @endif @endforeach
+            @foreach ($array as $item) @if($item != NULL) placeholder="@foreach ($array as $item) {{ $item }},@endforeach "  @else value="" @endif @endforeach
             class="form-control "/>
           </div>
         </div>

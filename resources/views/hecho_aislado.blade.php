@@ -284,264 +284,254 @@
   <!--  -->
 
 
-  @foreach($array as $item)
-  {{! $relaciones = DB::table('hechos')
-  ->where('alumno_id','=', $idrelacion)
-  ->where ('titulo', '<>', $h->titulo)
-  ->where ('keywords', 'LIKE', '%'.$item.'%')
-  ->get()}}
-
-  @foreach($relaciones as $u)
-
-  @if($h->keywords != NULL)
-
   <div align="center">
 
-    <div id="hechos" style="background: #2D2D2E ;border-radius: 5px;width: 600px; height:100%;padding-bottom: 50px">
+
+   @foreach($hechok as $u)
 
 
-      <h1 id="hechos" style="font-weight: bold; background: white">
-        HECHO RELACIONADO_TÍTULO :   
-        @if($u->titulo !== NULL)
-        {{strtoupper($u->titulo) }} 
-      @endif</h1>
-      <br><br>
+   <div align="center">
+
+     <div id="hechos" style="background: #2D2D2E ;border-radius: 5px;width: 600px; height:100%;padding-bottom: 50px">
 
 
-      <div id="hecho_div">
-        <div style="float: right;">
-          <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
+       <h1 id="hechos" style="font-weight: bold; background: white">
+         HECHO RELACIONADO_TÍTULO :   
+         @if($u->titulo !== NULL)
+         {{strtoupper($u->titulo) }} 
+       @endif</h1>
+       <br><br>
+
+
+       <div id="hecho_div">
+         <div style="float: right;">
+           <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
 
 
 
-        </div>
+         </div>
 
-        @if($u->etiqueta !== NULL)
-        <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
-        @endif
+         @if($u->etiqueta !== NULL)
+         <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+         @endif
 
-        @if($u->titulo !== NULL)
-        <b>Título:</b>  {{ $u->titulo }} <br>
-        @endif
+         @if($u->titulo !== NULL)
+         <b>Título:</b>  {{ $u->titulo }} <br>
+         @endif
 
-        @if($u->curso !== NULL)
-        <b>Curso:</b>  {{ $u->curso }}º <br>
-        @endif
+         @if($u->curso !== NULL)
+         <b>Curso:</b>  {{ $u->curso }}º <br>
+         @endif
 
-        @if($u->contenido !== NULL)
-        <b>Contenido:</b>  {{ $u->contenido }} <br>
-        @endif
+         @if($u->contenido !== NULL)
+         <b>Contenido:</b>  {{ $u->contenido }} <br>
+         @endif
 
-        @if($u->video !== NULL)
-        <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
-        @endif
+         @if($u->video !== NULL)
+         <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+         @endif
 
-        @if($u->encuentro !== NULL)
-        <b>Encuentro:</b> {{ $u->encuentro }}  <br>
-        @endif
+         @if($u->encuentro !== NULL)
+         <b>Encuentro:</b> {{ $u->encuentro }}  <br>
+         @endif
 
-        @if($u->foto !== NULL)
-        <span style="vertical-align: middle;">FOTO:</span> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
-        @endif
+         @if($u->foto !== NULL)
+         <span style="vertical-align: middle;">FOTO:</span> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
+         @endif
 
-        @if($u->anexo !== NULL)
-        <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
-        @endif
+         @if($u->anexo !== NULL)
+         <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+         @endif
 
-        @if($u->proposito !== NULL)
-        <b>Propósito:</b>  {{ $u->proposito }} <br>
-        @endif
+         @if($u->proposito !== NULL)
+         <b>Propósito:</b>  {{ $u->proposito }} <br>
+         @endif
 
 
-        @if($u->keywords !== NULL)
-        {{! $array = explode( ',', $u->keywords )}}
-        <br><b>Keywords:</b> 
-        @foreach ($array as $item) 
-        <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
-        @endforeach 
+         @if($u->keywords !== NULL)
+         {{! $array = explode( ',', $u->keywords )}}
+         <br><b>Keywords:</b> 
+         @foreach ($array as $item) 
+         <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+         @endforeach 
+         <br><br>
+         @endif
+
+         @if($u->autorizacion !== NULL)
+         <b>     <img style="width: 3%" src="{{ asset('images/icons/lockh.png')}}");"></b>  {{ $u->autorizacion }} <br>
+         @endif
+
+       </div>
+     </div>
+   </div>
+   <br><br>
+@endforeach
+
+
+
+
+
+   @if (Auth::user()->logins ==1)
+   <div class="modal-background">
+    <div class="modal-container">
+      <div align="center" class="modal-header">BIENVENIDO A LA PLATAFORMA SITU 
+        <i class="modal-close">x</i>
+
+      </div>
+      <div class="modal-info">
+        Bienvenido a tu nuevo perfil de usuario, te recomendamos que inicies tus datos de perfil, de esta forma podrás la información generada será más precisa, como tu curriculum o los datos que puedas compartir con tu profesor.
+        Esta pantalla solo saldrá en tu primer login.
+        Muchas gracias por confiar en nosotros.
         <br><br>
-        @endif
-
-        @if($u->autorizacion !== NULL)
-        <b>     <img style="width: 3%" src="{{ asset('images/icons/lockh.png')}}");"></b>  {{ $u->autorizacion }} <br>
-        @endif
-
-
-
+        <div align="center">INICIE SUS DATOS DE PERFIL</div>
+      </div>
+      <div class="button-container" align="center">
+        <a href="configPerfil" class="btn btn-primary">ACEPTAR</a>
       </div>
     </div>
-    <br>
-    @endif
-    @endforeach
   </div>
-  @endforeach
+  @endif
 
 
-</div>
+  <!-- MODAL INFORMACIÓN -->
+  <div class="modal fade" id="AYUDA" role="dialog">
+    <div class="modal-dialog">
 
-
-
-@if (Auth::user()->logins ==1)
-<div class="modal-background">
-  <div class="modal-container">
-    <div align="center" class="modal-header">BIENVENIDO A LA PLATAFORMA SITU 
-      <i class="modal-close">x</i>
-
-    </div>
-    <div class="modal-info">
-      Bienvenido a tu nuevo perfil de usuario, te recomendamos que inicies tus datos de perfil, de esta forma podrás la información generada será más precisa, como tu curriculum o los datos que puedas compartir con tu profesor.
-      Esta pantalla solo saldrá en tu primer login.
-      Muchas gracias por confiar en nosotros.
-      <br><br>
-      <div align="center">INICIE SUS DATOS DE PERFIL</div>
-    </div>
-    <div class="button-container" align="center">
-      <a href="configPerfil" class="btn btn-primary">ACEPTAR</a>
-    </div>
-  </div>
-</div>
-@endif
-
-
-<!-- MODAL INFORMACIÓN -->
-<div class="modal fade" id="AYUDA" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- CONTENIDO DE ABOUT EN BANNER-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button id="audio_offX" type="button" class="close" data-dismiss="modal">&times;</button>
-        <div>
-          <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
-          <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
+      <!-- CONTENIDO DE ABOUT EN BANNER-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button id="audio_offX" type="button" class="close" data-dismiss="modal">&times;</button>
+          <div>
+            <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
+            <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
+          </div>
+          <h4 align="center" class="modal-title">ALUMNO</h4>
         </div>
-        <h4 align="center" class="modal-title">ALUMNO</h4>
-      </div>
-      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
+        <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
 
-        Has accedido a la sección de alumno.
-        En esta sección se muestran los hechos por orden de creación.
-        <ul>
-          <li>
-            <br>
-            -Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y selecciona &nbsp; <span class="glyphicon glyphicon-cog"></span> &nbsp; <b style="font-weight: bold">Configuración</b>.  
-            <br>
-          </li>
+          Has accedido a la sección de alumno.
+          En esta sección se muestran los hechos por orden de creación.
+          <ul>
+            <li>
+              <br>
+              -Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y selecciona &nbsp; <span class="glyphicon glyphicon-cog"></span> &nbsp; <b style="font-weight: bold">Configuración</b>.  
+              <br>
+            </li>
 
-          <li>
-            <br>
-            -Para acceder a tus datos de perfil donde también podrás dar de baja tu cuenta pulsa tu nombre a la derecha del menú  y selecciona  &nbsp; <span class="glyphicon glyphicon-user"></span> &nbsp; <b style="font-weight: bold">Perfil</b>.  
-            <br>
-          </li>
+            <li>
+              <br>
+              -Para acceder a tus datos de perfil donde también podrás dar de baja tu cuenta pulsa tu nombre a la derecha del menú  y selecciona  &nbsp; <span class="glyphicon glyphicon-user"></span> &nbsp; <b style="font-weight: bold">Perfil</b>.  
+              <br>
+            </li>
 
-          <li>
-            <br>
-            -Para acceder al área de invitaciones pulsa el botón &nbsp; <span class="glyphicon glyphicon-bullhorn"></span> &nbsp; <b style="font-weight: bold">Invitar</b>.  
-            <br>
-          </li>
+            <li>
+              <br>
+              -Para acceder al área de invitaciones pulsa el botón &nbsp; <span class="glyphicon glyphicon-bullhorn"></span> &nbsp; <b style="font-weight: bold">Invitar</b>.  
+              <br>
+            </li>
 
-          <li>
-            <br>
-            -Para gestionar tus keywords de hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-tags"></span> &nbsp; <b style="font-weight: bold">Keywords</b>.  
-            <br>
-          </li>
+            <li>
+              <br>
+              -Para gestionar tus keywords de hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-tags"></span> &nbsp; <b style="font-weight: bold">Keywords</b>.  
+              <br>
+            </li>
 
-          <li>
-            <br>
-            -Para crear nuevos hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-list-alt"></span> &nbsp; <b style="font-weight: bold">Hechos</b>.  
-            <br>
-          </li>
+            <li>
+              <br>
+              -Para crear nuevos hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-list-alt"></span> &nbsp; <b style="font-weight: bold">Hechos</b>.  
+              <br>
+            </li>
 
-          <li>
-            <br>
-            -Para visualizar la línea temporal de  hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-time"></span> &nbsp; <b style="font-weight: bold">Línea Temporal</b>.  
-            <br>
-          </li>
-        </ul>
+            <li>
+              <br>
+              -Para visualizar la línea temporal de  hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-time"></span> &nbsp; <b style="font-weight: bold">Línea Temporal</b>.  
+              <br>
+            </li>
+          </ul>
 
-        <br><br>
+          <br><br>
 
-        <div align="center">
-          Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobre Logout.
+          <div align="center">
+            Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobre Logout.
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div align="center">
+            <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+          </div>
         </div>
       </div>
 
-      <div class="modal-footer">
-        <div align="center">
-          <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+    </div>
+  </div>
+  <!-- AUDIO MODAL -->
+
+  <script type="text/javascript">
+    var phrases = [
+    'Has accedido a la sección de alumno.En esta sección se muestran los hechos por orden de creación.Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y seleccionaconfiguración.Para acceder a tus datos de perfil, donde también podrás dar de baja tu cuenta, pulsa tu nombre a la derecha del menú  y selecciona perfil.Para acceder al área de invitaciones pulsa el botón invitar.Para gestionar tuskeywords de hechos pulsa el botón keywords.Para crear nuevos hechos pulsa el botón Hechos.Para visualizar la línea temporal de  hechos pulsa el botón Línea Temporal. Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobreLogout.'
+    ];
+
+    jQuery(document).ready(function ($) {  
+      $('#audio_on').click(function() {
+        var i = Math.round(phrases.length * Math.random()) - 1;
+
+        responsiveVoice.speak(phrases[i], 'Spanish Female');
+      });
+    });
+
+    jQuery(document).ready(function ($) {  
+      $('#audio_off').click(function() {
+        var i = 0 ;
+
+        responsiveVoice.speak(phrases[1000], 'Spanish Female');
+      });
+    });
+    jQuery(document).ready(function ($) {  
+      $('#audio_offX').click(function() {
+        var i = 0 ;
+
+        responsiveVoice.speak(phrases[1000], 'Spanish Female');
+      });
+    });
+    jQuery(document).ready(function ($) {  
+      $('#audio_offA').click(function() {
+        var i = 0 ;
+
+        responsiveVoice.speak(phrases[1000], 'Spanish Female');
+      });
+    });
+  </script>
+  <!-- FIN AUDIO MODAL -->
+
+
+
+  <!--  BANNER MODAL ABOUT -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- CONTENIDO DE ABOUT EN BANNER-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">ABOUT US</h4>
+        </div>
+        <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
         </div>
       </div>
+
     </div>
-
   </div>
-</div>
-<!-- AUDIO MODAL -->
-
-<script type="text/javascript">
-  var phrases = [
-  'Has accedido a la sección de alumno.En esta sección se muestran los hechos por orden de creación.Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y seleccionaconfiguración.Para acceder a tus datos de perfil, donde también podrás dar de baja tu cuenta, pulsa tu nombre a la derecha del menú  y selecciona perfil.Para acceder al área de invitaciones pulsa el botón invitar.Para gestionar tuskeywords de hechos pulsa el botón keywords.Para crear nuevos hechos pulsa el botón Hechos.Para visualizar la línea temporal de  hechos pulsa el botón Línea Temporal. Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobreLogout.'
-  ];
-
-  jQuery(document).ready(function ($) {  
-    $('#audio_on').click(function() {
-      var i = Math.round(phrases.length * Math.random()) - 1;
-
-      responsiveVoice.speak(phrases[i], 'Spanish Female');
-    });
-  });
-
-  jQuery(document).ready(function ($) {  
-    $('#audio_off').click(function() {
-      var i = 0 ;
-
-      responsiveVoice.speak(phrases[1000], 'Spanish Female');
-    });
-  });
-  jQuery(document).ready(function ($) {  
-    $('#audio_offX').click(function() {
-      var i = 0 ;
-
-      responsiveVoice.speak(phrases[1000], 'Spanish Female');
-    });
-  });
-  jQuery(document).ready(function ($) {  
-    $('#audio_offA').click(function() {
-      var i = 0 ;
-
-      responsiveVoice.speak(phrases[1000], 'Spanish Female');
-    });
-  });
-</script>
-<!-- FIN AUDIO MODAL -->
-
-
-
-<!--  BANNER MODAL ABOUT -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- CONTENIDO DE ABOUT EN BANNER-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">ABOUT US</h4>
-      </div>
-      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-<!-- FIN BANNER MODAL -->
+  <!-- FIN BANNER MODAL -->
 
 </body>
 </html>
