@@ -91,6 +91,11 @@
     </a>
   </li>
 
+  <li>
+    <a href="logs_invitados_alumno">
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> LOGS
+    </a>
+  </li>
   <!-- INICIO CV -->
 
   <li>
@@ -243,7 +248,7 @@
         </td>
 
       </tr>
-    
+
       
       @endforeach
     </tbody>

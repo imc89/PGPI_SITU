@@ -95,6 +95,11 @@
 				</a>
 			</li>
 
+			<li>
+				<a href="logs_invitados_alumno">
+					<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> LOGS
+				</a>
+			</li>
 			<!-- INICIO CV -->
 
 			<li>
@@ -859,25 +864,13 @@ div.token{
 		var x;
 		x = document.getElementById("hecho").value;
 		if (x == "-") {
-			$( "#dialog" ).dialog({
-				dialogClass: 'myPosition',
-				resizable: false,
-				height: "auto",
-				width: "auto",
-				modal: true,
-				open: function(event, ui) {
-					$(event.target).parent().css('position', 'absolute');
-					$(event.target).parent().css('top', '80%');
-					$(event.target).parent().focus();
-
-				}
-			});
-			$( "#dialog" ).style.display = "block";
+			alert("ETIQUETA INCORRECTA : \n"+"Por favor etiquete correctamente el hecho para que pueda ser creado, la etiqueta debe ser distita de '-' .");
 			return false;
-		}
-		
+		};
 	}
 </script>
+
+
 <style type="text/css">
 .myPosition {
 	-moz-box-shadow:    inset 0 0 10px #000000;

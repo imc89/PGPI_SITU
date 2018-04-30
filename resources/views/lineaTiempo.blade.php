@@ -89,6 +89,11 @@
     </a>
   </li>
 
+  <li>
+    <a href="logs_invitados_alumno">
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> LOGS
+    </a>
+  </li>
   <!-- INICIO CV -->
 
   <li>
@@ -238,7 +243,20 @@
             <label style="font-weight: bold">Filtrar por keywords: </label>
             <div>
               <form action="FilterhechosController.php" method="post">
-                {{! $keywords = DB::table('keywords')->get() }}
+                    {{! $alumno_id = DB::table('alumno')
+                  ->where('users.id','=', Auth::user()->id)
+                  ->join('users','users.id','=','user_id')
+                  ->select('alumno.id') 
+                  ->get()}}
+
+
+                  @foreach($alumno_id as $aluid)
+                  {{! $aluid->id }}
+                  {{! $keywords = DB::table('keywords')
+                  ->where('alumno_id','=', $aluid->id)
+                  ->select('name')
+                  ->get() }}
+                  @endforeach
                 <select style="font-weight: bold" id="hecho" class="form-control" name="keyword" required>
                   <option>Cualquier keyword</option>
                   @foreach($keywords as $tag)
@@ -685,7 +703,7 @@ html{
           <br>
         </li>
 
-         <li>
+        <li>
           <br>
           -Los hechos irán apareciendo según bajes a lo largo de la línea. 
           <br>

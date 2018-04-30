@@ -88,6 +88,11 @@
     </a>
   </li>
 
+  <li>
+    <a href="logs_invitados_alumno">
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> LOGS
+    </a>
+  </li>
   <!-- INICIO CV -->
 
   <li>
@@ -252,7 +257,23 @@
               <label style="font-weight: bold">Filtrar por keywords: </label>
               <div>
                 <form action="FilterhechosController.php" method="post">
-                  {{! $keywords = DB::table('keywords')->get() }}
+
+                  {{! $alumno_id = DB::table('alumno')
+                  ->where('users.id','=', Auth::user()->id)
+                  ->join('users','users.id','=','user_id')
+                  ->select('alumno.id') 
+                  ->get()}}
+
+
+                  @foreach($alumno_id as $aluid)
+                  {{! $aluid->id }}
+                  {{! $keywords = DB::table('keywords')
+                  ->where('alumno_id','=', $aluid->id)
+                  ->select('name')
+                  ->get() }}
+                  @endforeach
+
+                
                   <select style="font-weight: bold" id="hecho" class="form-control" name="keyword" required>
                     <option>Cualquier keyword</option>
                     @foreach($keywords as $tag)
@@ -576,6 +597,11 @@
 
           <li>
             <br>
+            -Para visualizar el log de tus invitados &nbsp; <span class="glyphicon glyphicon-calendar"></span> &nbsp; <b style="font-weight: bold">Logs</b>.  
+            <br>
+          </li>
+          <li>
+            <br>
             -Para ver el currículum o imprimirlo pulsa el botón &nbsp; <span class="glyphicon glyphicon-education"></span> &nbsp; <b style="font-weight: bold">CV</b>.  
             <br>
           </li>
@@ -610,7 +636,7 @@
 
 <script type="text/javascript">
   var phrases = [
-  'Has accedido a la sección de alumno.En esta sección se muestran los hechos por orden de creación.Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y selecciona configuración.Para acceder a tus datos de perfil, donde también podrás dar de baja tu cuenta, pulsa tu nombre a la derecha del menú  y selecciona perfil.Para acceder al área de invitaciones pulsa el botón invitar.Para gestionar tuskeywords de hechos pulsa el botón keywords.Para crear nuevos hechos pulsa el botón Hechos.Para visualizar la línea temporal de  hechos pulsa el botón Línea Temporal.Para ver el currículum o imprimirlo pulsa el botón CV.En el caso de que ya existan hechos creados se mostrarán pudiendo filtrarlos por etiqueta, eligiendo una etiqueta en el desplegable de la izquierda y pulsando FILTRAR, por keywords, eligiendo una keyword en el desplegable central y pulsando FILTRAR, o en caso de que recuerdes el título de tu hecho buscando a partir de texto. Cada hecho que se muestra posee dos botones, pulsa el ojo para visualizar el hecho de forma aislada con sus relacionados, o pulsa la cruz para eliminar el hecho. Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobreLogout.'
+  'Has accedido a la sección de alumno.En esta sección se muestran los hechos por orden de creación.Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y selecciona configuración.Para acceder a tus datos de perfil, donde también podrás dar de baja tu cuenta, pulsa tu nombre a la derecha del menú  y selecciona perfil.Para acceder al área de invitaciones pulsa el botón invitar.Para gestionar tuskeywords de hechos pulsa el botón keywords.Para crear nuevos hechos pulsa el botón Hechos.Para visualizar la línea temporal de  hechos pulsa el botón Línea Temporal.Para visualizar el log de invitados pulsa el botón logs.Para ver el currículum o imprimirlo pulsa el botón CV.En el caso de que ya existan hechos creados se mostrarán pudiendo filtrarlos por etiqueta, eligiendo una etiqueta en el desplegable de la izquierda y pulsando FILTRAR, por keywords, eligiendo una keyword en el desplegable central y pulsando FILTRAR, o en caso de que recuerdes el título de tu hecho buscando a partir de texto. Cada hecho que se muestra posee dos botones, pulsa el ojo para visualizar el hecho de forma aislada con sus relacionados, o pulsa la cruz para eliminar el hecho. Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobreLogout.'
   ];
 
   jQuery(document).ready(function ($) {  

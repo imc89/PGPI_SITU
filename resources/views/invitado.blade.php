@@ -55,13 +55,53 @@
     </a>
   </li>
 
-  <li>
-   <spam style="font-weight: bold;">
-     <?php echo mb_strtoupper('soy un invitado con permiso de nivel '. $autorizacion);?>
-   </spam>
- </li>
 
- <li class="login">
+  <li>
+
+    {{! $dato = DB::table('invitado')
+    ->select('invitado.alumno_id')
+    ->where('email','=', Auth::user()->email)
+    ->get() }}
+
+    @foreach($dato as $d)
+    {{! $datos = DB::table('alumno')
+    ->select('alumno.id')
+    ->where('alumno.id','=', $d->alumno_id)
+    ->get() }}
+    @endforeach
+
+    @foreach($datos as $a)
+
+    {{! $datopdf = $a->id}}
+
+
+
+
+    <a href="javascript:void()" onclick="document.getElementById('cvform').submit();"">
+     <form action="viewPdf_alumno" class="cvrotate" id="cvform">
+      <form action="PdfController.php" method="post">
+        <input type="hidden" name="data" value="{{ $datopdf }}">
+
+        <span class="glyphicon glyphicon-education" aria-hidden="true" style="color: white"></span>      
+        CV
+
+
+      </form>
+
+    </form>
+
+    @endforeach
+  </a>
+</li>
+
+
+<li>
+ <spam style="font-weight: bold;">
+   <?php echo mb_strtoupper('soy un invitado con permiso de nivel '. $autorizacion);?>
+ </spam>
+</li>
+
+<li class="login">
 
   @guest
   <li><a href="{{ route('login') }}">Login</a></li>
@@ -152,7 +192,7 @@
 
   </div>
 
-   <!--INICIO FILTROS  -->
+  <!--INICIO FILTROS  -->
   <div style="text-align: center; word-wrap: break-word;">
 
     <!-- PRIMER FILTRO -->
@@ -197,7 +237,23 @@
               <label style="font-weight: bold">Filtrar por keywords: </label>
               <div>
                 <form action="FilterhechosController.php" method="post">
-                  {{! $keywords = DB::table('keywords')->get() }}
+
+                  {{! $alumno_id = DB::table('invitado')
+                  ->where('invitado.email','=', Auth::user()->email)
+                  ->join('users','users.id','=','user_id')
+                  ->select('invitado.alumno_id') 
+                  ->get()}}
+
+
+                  @foreach($alumno_id as $aluid)
+                  {{! $aluid->alumno_id }}
+                  {{! $keywords = DB::table('keywords')
+                  ->where('alumno_id','=', $aluid->alumno_id)
+                  ->select('name')
+                  ->get() }}
+                  @endforeach
+
+                
                   <select style="font-weight: bold" id="hecho" class="form-control" name="keyword" required>
                     <option>Cualquier keyword</option>
                     @foreach($keywords as $tag)
@@ -211,6 +267,7 @@
           </form>
         </div>
       </div>
+
 
 
     </div>
@@ -238,126 +295,126 @@
 
 
    </div>
-     <!--FIN FILTROS  -->
+   <!--FIN FILTROS  -->
 
 
-     <!-- MOSTRAR HECHOS -->
-     <?php $contador=0 ?>
+   <!-- MOSTRAR HECHOS -->
+   <?php $contador=0 ?>
 
 
-     @foreach($hechos as $u)
-     <div align="center">
-      <div id="hecho_div">
-        <div style="float: left;">
-          <u>HECHO Nº <?php $contador++; echo $contador ?></u>
-        </div>
-        <div style="float: right;">
-          <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
-        </div>
-
-        @if($u->etiqueta !== NULL)
-        <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
-        @endif
-
-        @if($u->titulo !== NULL)
-        <b>Título:</b>  {{ $u->titulo }} <br>
-        @endif
-
-        @if($u->curso !== NULL)
-        <b>Curso:</b>  {{ $u->curso }}º <br>
-        @endif
-
-        @if($u->contenido !== NULL)
-        <b>Contenido:</b>  {{ $u->contenido }} <br>
-        @endif
-
-        @if($u->video !== NULL)
-        <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
-        @endif
-
-        @if($u->encuentro !== NULL)
-        <b>Encuentro:</b> {{ $u->encuentro }}  <br>
-        @endif
-
-        @if($u->foto !== NULL)
-        <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
-        @endif
-
-        @if($u->anexo !== NULL)
-        <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
-        @endif
-
-        @if($u->proposito !== NULL)
-        <b>Propósito:</b>  {{ $u->proposito }} <br>
-        @endif
-
-
-        @if($u->keywords !== NULL)
-        {{! $array = explode( ',', $u->keywords )}}
-        <br><b>Keywords:</b> 
-        @foreach ($array as $item) 
-        <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
-        @endforeach 
-        <br>
-        @endif
-
-
+   @foreach($hechos as $u)
+   <div align="center">
+    <div id="hecho_div">
+      <div style="float: left;">
+        <u>HECHO Nº <?php $contador++; echo $contador ?></u>
       </div>
+      <div style="float: right;">
+        <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
+      </div>
+
+      @if($u->etiqueta !== NULL)
+      <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+      @endif
+
+      @if($u->titulo !== NULL)
+      <b>Título:</b>  {{ $u->titulo }} <br>
+      @endif
+
+      @if($u->curso !== NULL)
+      <b>Curso:</b>  {{ $u->curso }}º <br>
+      @endif
+
+      @if($u->contenido !== NULL)
+      <b>Contenido:</b>  {{ $u->contenido }} <br>
+      @endif
+
+      @if($u->video !== NULL)
+      <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+      @endif
+
+      @if($u->encuentro !== NULL)
+      <b>Encuentro:</b> {{ $u->encuentro }}  <br>
+      @endif
+
+      @if($u->foto !== NULL)
+      <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
+      @endif
+
+      @if($u->anexo !== NULL)
+      <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+      @endif
+
+      @if($u->proposito !== NULL)
+      <b>Propósito:</b>  {{ $u->proposito }} <br>
+      @endif
+
+
+      @if($u->keywords !== NULL)
+      {{! $array = explode( ',', $u->keywords )}}
+      <br><b>Keywords:</b> 
+      @foreach ($array as $item) 
+      <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+      @endforeach 
       <br>
+      @endif
+
+
     </div>
-    @endforeach
+    <br>
+  </div>
+  @endforeach
 
-    <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-    <footer class="body_bottom body" id="footer" style="position: relative;bottom: 0">
-      <table>
-        <tbody>
+  <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
+  <footer class="body_bottom body" id="footer" style="position: relative;bottom: 0">
+    <table>
+      <tbody>
 
-         <tr> 
-          <td class="foot_izdo">&nbsp;</td> 
-          <td class="foot_cent"> 
-            <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-              <br> 
-              Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
-            </p> 
+       <tr> 
+        <td class="foot_izdo">&nbsp;</td> 
+        <td class="foot_cent"> 
+          <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
+            <br> 
+            Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
+          </p> 
 
-            <!-- REDES SOCIALES -->
-            <div id="social"> 
-              <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-                <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
-              </a> 
-              <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-                <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
-              </a>
-              <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-                <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
-              </a>
-              <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-                <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
-              </a> 
-              <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-                <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
-              </a>
-            </div>
-            <!-- FIN REDES SOCIALES -->
+          <!-- REDES SOCIALES -->
+          <div id="social"> 
+            <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
+            </a> 
+            <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
+            </a>
+            <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
+            </a>
+            <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
+            </a> 
+            <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+              <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
+            </a>
+          </div>
+          <!-- FIN REDES SOCIALES -->
 
-            <div>
-              <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
-              / Sponsored by the
-              <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
-              and 
-              <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
-              Copyright 2013,
-              <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
-              . All rights reserved. 
-            </div>
+          <div>
+            <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
+            / Sponsored by the
+            <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
+            and 
+            <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
+            Copyright 2013,
+            <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
+            . All rights reserved. 
+          </div>
 
 
-          </td>
-          <td class="foot_dcho">&nbsp;</td> 
-        </tr>
-      </tbody>
-    </table>
-  </footer>
+        </td>
+        <td class="foot_dcho">&nbsp;</td> 
+      </tr>
+    </tbody>
+  </table>
+</footer>
 </div>
 
 </div>
@@ -407,54 +464,31 @@
             <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
             <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
           </div>
-          <h4 align="center" class="modal-title">ALUMNO</h4>
+          <h4 align="center" class="modal-title">INVITADO</h4>
         </div>
         <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
 
-          Has accedido a la sección de alumno.
-          En esta sección se muestran los hechos por orden de creación.
+          Has accedido a la sección de invitado.
+          En esta sección se muestran los hechos de la persona que te ha invitado.
           <ul>
-            <li>
-              <br>
-              -Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y selecciona &nbsp; <span class="glyphicon glyphicon-cog"></span> &nbsp; <b style="font-weight: bold">Configuración</b>.  
-              <br>
-            </li>
+              <li>
+            <br>
+            -En el caso de que ya existan hechos creados se mostrarán pudiendo filtrarlos por etiqueta, eligiendo una etiqueta en el desplegable de la izquierda y pulsando FILTRAR, por keywords, eligiendo una keyword en el desplegable central y pulsando FILTRAR, o en caso de que recuerdes el título del hecho buscando a partir de texto. 
+            <br>
+          </li>
 
             <li>
-              <br>
-              -Para acceder a tus datos de perfil donde también podrás dar de baja tu cuenta pulsa tu nombre a la derecha del menú  y selecciona  &nbsp; <span class="glyphicon glyphicon-user"></span> &nbsp; <b style="font-weight: bold">Perfil</b>.  
-              <br>
-            </li>
+            <br>
+            -Para ver el currículum de la persona que te invitó &nbsp; <span class="glyphicon glyphicon-education"></span> &nbsp; <b style="font-weight: bold">CV</b>.  
+            <br>
+          </li>
 
-            <li>
-              <br>
-              -Para acceder al área de invitaciones pulsa el botón &nbsp; <span class="glyphicon glyphicon-bullhorn"></span> &nbsp; <b style="font-weight: bold">Invitar</b>.  
-              <br>
-            </li>
-
-            <li>
-              <br>
-              -Para gestionar tus keywords de hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-tags"></span> &nbsp; <b style="font-weight: bold">Keywords</b>.  
-              <br>
-            </li>
-
-            <li>
-              <br>
-              -Para crear nuevos hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-list-alt"></span> &nbsp; <b style="font-weight: bold">Hechos</b>.  
-              <br>
-            </li>
-
-            <li>
-              <br>
-              -Para visualizar la línea temporal de  hechos pulsa el botón &nbsp; <span class="glyphicon glyphicon-time"></span> &nbsp; <b style="font-weight: bold">Línea Temporal</b>.  
-              <br>
-            </li>
           </ul>
 
           <br><br>
 
           <div align="center">
-            Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobre Logout.
+             Podrás salir del perfil de invitado pulsando en el menú sobre tu nombre y a continuación sobre Logout.
           </div>
         </div>
 
@@ -471,7 +505,7 @@
 
   <script type="text/javascript">
     var phrases = [
-    'Has accedido a la sección de alumno.En esta sección se muestran los hechos por orden de creación.Para acceder a la configuración de usuario, donde podrás editar tus datos y foto de perfil pulsa tu nombre a la derecha del menú  y seleccionaconfiguración.Para acceder a tus datos de perfil, donde también podrás dar de baja tu cuenta, pulsa tu nombre a la derecha del menú  y selecciona perfil.Para acceder al área de invitaciones pulsa el botón invitar.Para gestionar tuskeywords de hechos pulsa el botón keywords.Para crear nuevos hechos pulsa el botón Hechos.Para visualizar la línea temporal de  hechos pulsa el botón Línea Temporal. Podrás salir del perfil de alumno pulsando en el menú sobre tu nombre y a continuación sobreLogout.'
+    ' Has accedido a la sección de invitado.En esta sección se muestran los hechos de la persona que te ha invitado.En el caso de que ya existan hechos creados se mostrarán pudiendo filtrarlos por etiqueta, eligiendo una etiqueta en el desplegable de la izquierda y pulsando FILTRAR, por keywords, eligiendo una keyword en el desplegable central y pulsando FILTRAR, o en caso de que recuerdes el título del hecho buscando a partir de texto.Para ver el currículum de la persona que te invitó pulsa el botón CV.Podrás salir del perfil de invitado pulsando en el menú sobre tu nombre y a continuación sobre Logout.'
     ];
 
     jQuery(document).ready(function ($) {  

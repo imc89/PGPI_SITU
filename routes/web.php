@@ -161,6 +161,11 @@ Route::group(['middleware' => ['auth']], function() {
 			return view('crear_hechos', compact('keywords'));
 		});
 
+
+		Route::get('logs_invitados_alumno', function () {
+			return view('logs_invitados_alumno');
+		});
+
 		Route::get('hechos_relacionados', 'HechosrelacionadosController@hechos_relacionados');
 
 		Route::get('vision_hecho', 'VisionhechoController@vision_hecho');
@@ -236,6 +241,9 @@ Route::group(['middleware' => 'profesor'], function () {
 // INVITADO
 
 Route::group(['middleware' => 'invitado'], function () {
+
+	Route::get('viewPdf_alumno', 'PdfController@CreatePDF');
+
 
 	Route::get('invitado', function () {
 

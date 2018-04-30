@@ -162,6 +162,11 @@
     </a>
   </li>
 
+  <li>
+    <a href="logs_invitados_alumno">
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> LOGS
+    </a>
+  </li>
   <!-- INICIO CV -->
 
   <li>
@@ -267,16 +272,16 @@
 
 <!-- CARRUSEL DE IMAGENES E INFORMACIÓN (POR PONER ALGO) -->
 <div style="height:100%; background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ; ">
-<br>
-    <div align="center">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-10 col-md-offset-1">
-            <img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:150px; height:150px; border-radius:50%; margin-right:25px;">
-            <h2 style="font-size: 30px">Perfil de {{ Auth::user()->name }}</h2>
-          </div>
+  <br>
+  <div align="center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" style="width:150px; height:150px; border-radius:50%; margin-right:25px;">
+          <h2 style="font-size: 30px">Perfil de {{ Auth::user()->name }}</h2>
         </div>
       </div>
+    </div>
 
   </div>
 

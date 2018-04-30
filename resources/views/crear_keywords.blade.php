@@ -81,6 +81,11 @@
     </a>
   </li>
 
+  <li>
+    <a href="logs_invitados_alumno">
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> LOGS
+    </a>
+  </li>
   <!-- INICIO CV -->
 
   <li>
@@ -282,36 +287,36 @@ html{
       </div>
       <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
         Has accedido a la sección de creación de Keywords.
-       <br><br>
-       <ul>
-        <li>
-          <br>
-          -Para crear una nueva Keyword basta con insertar el nombre de la Keyword y pulsar el botón enviar.
-          <br>
-        </li>
+        <br><br>
+        <ul>
+          <li>
+            <br>
+            -Para crear una nueva Keyword basta con insertar el nombre de la Keyword y pulsar el botón enviar.
+            <br>
+          </li>
 
-        <li>
-          <br>
-         -Para refrescar las Keyword y ver todas de nuevo puedes pulsar el botón &nbsp; <span class="glyphicon glyphicon-tags"></span>  &nbsp; <b style="font-weight: bold">KEYWORDS</b> del menú o pulsar el botón de &nbsp; <span class="fa fa-refresh fa-spin"></span> &nbsp; <b style="font-weight: bold">Refrescar Keywords</b>.  
-          <br>
-        </li>
-      </ul>
+          <li>
+            <br>
+            -Para refrescar las Keyword y ver todas de nuevo puedes pulsar el botón &nbsp; <span class="glyphicon glyphicon-tags"></span>  &nbsp; <b style="font-weight: bold">KEYWORDS</b> del menú o pulsar el botón de &nbsp; <span class="fa fa-refresh fa-spin"></span> &nbsp; <b style="font-weight: bold">Refrescar Keywords</b>.  
+            <br>
+          </li>
+        </ul>
 
-      <br><br>
+        <br><br>
 
-      <div align="center">
-        Podrás volver a la pantalla de inicio pulsando el icono de la universidad.
+        <div align="center">
+          Podrás volver a la pantalla de inicio pulsando el icono de la universidad.
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div align="center">
+          <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+        </div>
       </div>
     </div>
 
-    <div class="modal-footer">
-      <div align="center">
-        <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
-      </div>
-    </div>
   </div>
-
-</div>
 </div>
 <!-- AUDIO MODAL -->
 

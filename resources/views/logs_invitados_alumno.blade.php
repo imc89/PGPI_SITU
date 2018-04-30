@@ -1,3 +1,4 @@
+
 {{! $datos = DB::table('alumno')
 ->select('alumno.id')
 ->where('users.id','=', Auth::user()->id)
@@ -5,11 +6,17 @@
 ->get()
 }}
 
-{{!$logins = DB::table('users')->select('logins')->where('name', Auth::user()->name)->first()->logins }}
-{{! $logins++ }}
-{{! DB::table('users')
-->where('name', Auth::user()->name)
-->update(['logins' => $logins ])}}
+{{! $mail_invitado = DB::table('invitado')
+->select('email')
+->where('invitado.user_id', '=', Auth::user()->id )
+->get()}}
+
+@foreach($mail_invitado as $maili)
+{{! $log_invitado = DB::table('users')
+->select('name','tiempolog')
+->where('users.email', '=', $maili->email )
+->get()}}
+@endforeach
 
 
 
@@ -42,7 +49,7 @@
 </head>
 
 
-<body onload="deshabilitaRetroceso()" id="gradient" style="height: 100%;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
+<body onload="deshabilitaRetroceso()" id="gradient" style="background: transparent;">
   <!-- INICIO NAVEGADOR -->
 
   <div id='cssmenu'>
@@ -131,13 +138,6 @@
   height: 100%;
   cursor:pointer;
 }
-a:hover span {
-  transform: rotateY(360deg);
-  -webkit-transform: rotateY(360deg);
-  transition-duration: 1.5s;
-  -webkit-transition-duration:1s;
-}
-
 </style>
 <!-- FIN CV -->
 
@@ -202,155 +202,58 @@ a:hover span {
 
 <!-- FIN DE NAVEGADOR -->
 
-
-
-
 <br>
 <br>
 <br>
 <br>
-<body  id="gradient" style="height: 100%;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
-  <div class="container" >
-   <h1 class="mb-2 text-center">INVITA A AMIGOS A VER TUS HECHOS</h1>
+<br>
+<br>
+<div class="body" style="width: 100%; min-height: 100%; height: auto !important; top:0; left: 0;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
 
 
-   @if(session('message')== "El usuario ya ha sido invitado al sistema")
-   <div class='alert alert-danger'>
-    {{ session('message') }}
-  </div>
-  @elseif(session('message'))
-  <div class='alert alert-success'>
-    {{ session('message') }}
-  </div>
-  @endif
-  <div class="col-12 col-md-6">
-    <form action="invitar" class="form-horizontal" method="POST">
-     {{ csrf_field() }} 
-     <div class="form-group"> <!-- NOMBRE -->
-       <label for="Name">Nombre del invitado: </label>
-       <input style="font-weight: bold" type="text" class="form-control" id="name" placeholder="Tu nombre" name="name" required>
-     </div>
-
-     <div class="form-group"><!-- EMAIL -->
-       <label for="email">Email del invitado: </label>
-       <input style="font-weight: bold" type="email" class="form-control" id="email" placeholder="john@example.com" name="email" required>
-     </div>
-
-     <div class="col-xs-8" style="background: #3386E2;color:white;border-radius: 10px; width: 160px; height: 135px; margin-right: 50%;">
-      <label class="col-xs-7">Autorización: </label>
-      <br>
-
-      <div class="radio">
-
-        <img src="{{ asset('images/icons/lock.png')}}");" id="lock1">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input name="autorizacion" type="radio"  value="1" required>
-        <label style="font-weight: bold">Nivel 1</label>
-
-      </div>
-
-      <div class="radio">
-
-        <img src="{{ asset('images/icons/lock.png')}}");" id="lock2">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input name="autorizacion" type="radio" value="2">
-        <label style="font-weight: bold">Nivel 2</label>
-
-      </div>
-
-      <div class="radio">
-
-        <img src="{{ asset('images/icons/lock.png')}}");" id="lock3">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input name="autorizacion" type="radio"  value="3">
-        <label style="font-weight: bold">Nivel 3</label>
-
-      </div>
-    </div>
+  <div class="container">
+    <h1 class="mb-2 text-center">LOG DE LOGINS DE TUS INVITADOS</h1>
 
 
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary" value="Send" style="width:100%; margin-top: 9px;font-weight: bold">ENVIAR</button>
-    </div>
-
-  </form>
-</div>
-</div> <!-- /container -->
-
-
-<div style="font-weight: bold" class="alert alert-warning" align="center">
-  <strong>Warning!</strong> SI NO LLEGA EL CORREO REVISA LA CARPETA SPAM.
-</div>
+    <table class="table table-striped table-dark">
+      <?php $contador=0 ?>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Fecha y Hora</th>
+        </tr>
+      </thead>
+      <tbody>
 
 
+        @foreach($mail_invitado as $maili)
 
-<!--  BANNER MODAL ABOUT -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
+        @if($maili->email !== NULL)
+        @foreach($log_invitado as $u)
 
-    <!-- CONTENIDO DE ABOUT EN BANNER-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">ABOUT US</h4>
-      </div>
-      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
-      </div>
-    </div>
+        <tr>
+          <th scope="row"><?php $contador++; echo $contador ?></th>
+          <td>{{ $u->name }}</td>
+          <td> @if($u->tiempolog == "0001-01-01 00:00:00")
+            NO HA HABIDO CONEXIÓN RECIENTE
+            @else {{$u->tiempolog }}
+          @endif</td>
+        </tr>
+        @endforeach
+        
+        @endif
+        @endforeach
+      </tbody>
+    </table>
 
   </div>
+
+  <br><br>
+
 </div>
-<!-- FIN BANNER MODAL -->
 
-
-<!-- LOCK DE AUTORIZACIÓN -->
-<script>
-  $(document).ready(function() {
-    $('input[name="autorizacion"]:radio').click(function(){
-      switch($(this).val()) {
-        case "1":
-        $("#lock1").attr("src","{{ asset('images/icons/unlock.png')}}");
-        $("#lock2").attr("src","{{ asset('images/icons/lock.png') }}");
-        $("#lock3").attr("src","{{ asset('images/icons/lock.png') }}");
-        break;
-        case "2":
-        $("#lock1").attr("src","{{ asset('images/icons/lock.png') }}");
-        $("#lock2").attr("src","{{ asset('images/icons/unlock.png')}}");
-        $("#lock3").attr("src","{{ asset('images/icons/lock.png') }}");
-        break;
-        case "3":
-        $("#lock1").attr("src","{{ asset('images/icons/lock.png') }}");
-        $("#lock2").attr("src","{{ asset('images/icons/lock.png') }}");
-        $("#lock3").attr("src","{{ asset('images/icons/unlock.png')}}");
-        break;
-      }
-    });
-  });
-</script>
-
-<style type="text/css">
-@media all and (max-width: 780px){
-  #hecho_div{
-    width:100%;
-    height:auto;
-
-  }
-  #gradient{
-    height: auto !important;
-  }
-}
-</style>
-
-
+</body>
 
 <!-- MODAL INFORMACIÓN -->
 <div class="modal fade" id="AYUDA" role="dialog">
@@ -364,58 +267,47 @@ a:hover span {
           <span id="audio_on" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-down sound_on">  </span>
           <span  id="audio_off" style="width:15px; height: 15px; font-size: 20px" align="center" class="glyphicon glyphicon-volume-off sound_off"> </span>
         </div>
-        <h4 align="center" class="modal-title">INVITADOS</h4>
+        <h4 align="center" class="modal-title"> LOG LOGINS </h4>
       </div>
       <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
-       Has accedido a INVITADOS en donde podrás enviar invitaciones a gente que conozcas a través de su email.
+       Has accedido a la sección de visualización del log de tus invitados.
        <br><br>
        <ul>
         <li>
           <br>
-          -Para enviar una invitación habrá que insertar el nombre del invitado junto con su correo y grado de autorización.
+          -En esta sección podrás ver las últimas horas de conexión de la gente a la que hayas invitado.
           <br>
         </li>
 
         <li>
           <br>
-          -Nivel 1 - el invitado solo podrá ver hechos de grado 1.  
+          -En caso de que no tengas invitados no podrás ver ningún log.
           <br>
         </li>
 
-        <li>
-          <br>
-          -Nivel 2 - el invitado solo podrá ver hechos de grado 1 y 2.  
-          <br>
-        </li>
+        <br><br>
+        <div align="center">
+          Podrás salir de esta sección pulsando el icono de la universidad.
+        </div>
 
-        <li>
-          <br>
-          -Nivel 3 - el invitado podrá ver todos los hechos.  
-          <br>
-        </li>
-      </ul>
+        <br><br>
 
-      <br><br>
+      </div>
 
-      <div align="center">
-        Podrás volver a la pantalla de inicio pulsando el icono de la universidad.
+      <div class="modal-footer">
+        <div align="center">
+          <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+        </div>
       </div>
     </div>
 
-    <div class="modal-footer">
-      <div align="center">
-        <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
-      </div>
-    </div>
   </div>
-
-</div>
 </div>
 <!-- AUDIO MODAL -->
 
 <script type="text/javascript">
   var phrases = [
-  'Has accedido a INVITADOS,en donde podrás enviar invitaciones a gente que conozcas a través de su email.Para enviar una invitación habrá que insertar el nombre del invitado,junto con su correo y grado de autorización.Nivel 1,el invitado solo podrá ver hechos de grado 1.Nivel 2,el invitado solo podrá ver hechos de grado 1 y 2.Nivel 3,el invitado podrá ver todos los hechos.Podrás volver a la pantalla de inicio pulsando el icono de la universidad.'
+  ' Has accedido a la sección de visualización del log de tus invitados.En esta sección podrás ver las últimas horas de conexión de la gente a la que hayas invitado.En caso de que no tengas invitados no podrás ver ningún log.Podrás salir de esta sección pulsando el icono de la universidad.'
   ];
 
   jQuery(document).ready(function ($) {  
@@ -449,6 +341,38 @@ a:hover span {
   });
 </script>
 <!-- FIN AUDIO MODAL -->
+
+
+<!--  BANNER MODAL ABOUT -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">ABOUT US</h4>
+      </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- FIN BANNER MODAL -->
+
+
+
+
 <style type="text/css">
 
 .sound_on:hover{
@@ -457,5 +381,37 @@ a:hover span {
 .sound_off:hover{
   color:red;
 }
-} 
+</style>
+
+<!-- MODAL HASTA EL FINAL DEL DOCUMENTO BLADE -->
+<script type="text/javascript">
+  $(".modal-background, .modal-close").on("click", function(){
+    $(".modal-container, .modal-background").hide();
+  });
+  $("#cerrar").on("click", function(){
+    $(".modal-container, .modal-background").hide();
+  });
+</script>
+
+<script type="text/javascript">
+  $("#btn").click(function() {
+   $(".modal-container, .modal-background").show();
+ });
+</script>
+
+
+
+<style type="text/css">
+a:hover span {
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+  transition-duration: 1.5s;
+  -webkit-transition-duration:1s;
+}  
+.body{
+  background: url('/images/fondo_body.jpg')fixed;
+  padding: 0;
+  margin: 0;
+  font-family: arial;
+}
 </style>
