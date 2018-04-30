@@ -242,8 +242,8 @@ Route::group(['middleware' => 'profesor'], function () {
 
 Route::group(['middleware' => 'invitado'], function () {
 
-	Route::get('viewPdf_alumno', 'PdfController@CreatePDF');
 
+	Route::get('viewPdf_alumno_invitado', 'PdfController@CreatePDF');
 
 	Route::get('invitado', function () {
 

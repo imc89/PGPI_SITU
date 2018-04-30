@@ -145,61 +145,70 @@
 <div class="column_right" style="background-color:#FFFEFF;">
 
 	<?php $contador = 0?>
-<ul id="time-line">
+	<ul id="time-line">
 
-    @foreach($hechos as $u)
+		@foreach($hechos as $u)
 
-    <li>
-      <div id="hechos" style="word-wrap: break-word;" >
-        <p>
-          A FECHA DE : {{ $u->fecha }}
-          @if($u->etiqueta !== NULL)
-          <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
-          @endif
-          @if($u->titulo !== NULL)
-          <b>Título:</b>  {{ $u->titulo }} <br>
-          @endif
-          @if($u->curso !== NULL)
-          <b>Curso:</b>  {{ $u->curso }}º <br>
-          @endif
-          @if($u->contenido !== NULL)
-          <b>Contenido:</b> {{ $u->contenido }} <br>
-          @endif
-          @if($u->video !== NULL)
-          <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
-          @endif
-          @if($u->encuentro !== NULL)
-          <b>Encuentro:</b> {{ $u->encuentro }}  <br>
-          @endif
-          @if($u->foto !== NULL)
-          <b>FOTO:</b> <img id="foto" src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="width: 300px;"/> <br>
-          @endif
-          @if($u->anexo !== NULL)
-          <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
-          @endif
-          @if($u->proposito !== NULL)
-          <b>Propósito:</b>  {{ $u->proposito }} <br>
-          @endif
+		
+		<div id="hechos" style="word-wrap: break-word;background: red background: #93A3B2; border-radius: 10px; width: 500px;color: white;text-align: left; padding: 10px 10px 10px 10px;box-shadow: 0px 5px 10px #444 inset;" align="center"  >
+			<p>
+				A FECHA DE : {{ $u->fecha }}
+				@if($u->etiqueta !== NULL)
+				<br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+				@endif
 
-          @if($u->keywords !== NULL)
-          {{! $array = explode( ',', $u->keywords )}}
-          <b>Keywords:</b> 
-          @foreach ($array as $item) 
-          <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
-          @endforeach 
-          <br>
-          @endif
+				@if($u->titulo !== NULL)
+				<b>Título:</b>  {{ $u->titulo }} <br>
+				@endif
 
-          @if($u->autorizacion !== NULL)
-          <b>     <img style="width: 3%" src="{{ asset('images/icons/lockh.png')}}");"></b>  {{ $u->autorizacion }} <br>
-          @endif
+				@if($u->curso !== NULL)
+				<b>Curso:</b>  {{ $u->curso }}º <br>
+				@endif
 
-        </p>
-      </div>
-    </li>
-    @endforeach
+				@if($u->contenido !== NULL)
+				<b>Contenido:</b> {{ $u->contenido }} <br>
+				@endif
 
-  </ul>
+
+				@if($u->video !== NULL)
+				<b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+				@endif
+
+
+				@if($u->encuentro !== NULL)
+				<b>Encuentro:</b> {{ $u->encuentro }}  <br>
+				@endif
+
+
+				@if($u->foto !== NULL)
+				<b>FOTO:</b> <img id="foto" src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="width: 300px;"/> <br>
+				@endif
+				@if($u->anexo !== NULL)
+				<b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+				@endif
+				@if($u->proposito !== NULL)
+				<b>Propósito:</b>  {{ $u->proposito }} <br>
+				@endif
+
+				@if($u->keywords !== NULL)
+				{{! $array = explode( ',', $u->keywords )}}
+				<b>Keywords:</b> 
+				@foreach ($array as $item) 
+				<b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+				@endforeach 
+				<br>
+				@endif
+
+				@if($u->autorizacion !== NULL)
+				<b>Autorización:</b>  {{ $u->autorizacion }} <br>
+				@endif
+
+			</p>
+		</div>
+
+		@endforeach
+
+	</ul>
 </div>
 
 
