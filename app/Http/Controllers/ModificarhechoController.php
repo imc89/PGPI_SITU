@@ -26,15 +26,28 @@ class ModificarhechoController extends Controller
 			->update(['titulo' => $request->titulo]);
 		}
 
-		if ($request->etiqueta != "-") {
-			if ($request->etiqueta != "Recuerdos") {
-				if ($request->etiqueta == "Recuerdos") {
-					DB::table('hechos')
-					->where('hechos.id', '=', $request->id)
-					->update(['etiqueta' => $request->etiqueta]);
+		
+		if ($request->etiqueta != "-" &&  $request->etiqueta != "Recuerdos") 
+		{
+			
+				$isrecuerdo = DB::table('hechos')
+				->where('hechos.id', '=', $request->id)
+				->select('etiqueta')
+				->get();
+
+				if($isrecuerdo != 'Recuerdos'){
+
+				DB::table('hechos')
+				->where('hechos.id', '=', $request->id)
+				->update(['etiqueta' => $request->etiqueta]);
+
 				}
-			}
+				
+
+			
 		}
+
+
 
 		if ($request->curso != NULL) {
 			DB::table('hechos')
