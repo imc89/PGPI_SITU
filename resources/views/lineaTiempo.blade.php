@@ -315,7 +315,7 @@
   </form>
 
   @else
-  <span style="color:red">sfsafads</span>
+  <span style="color:red">error</span>
   @endif
   <?php break; ?>
   @endforeach

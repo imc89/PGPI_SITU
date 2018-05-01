@@ -39,14 +39,19 @@
 
 @endforeach
 <!--  -->
-
 {{!
-	$hechos = DB::table('hechos')
+	$hechoskey = DB::table('hechos')
 	->where('alumno_id','=', $idalu)
-	->where ('keywords', 'LIKE', 'CV')
 	->join('alumno','alumno.id','=','hechos.alumno_id')
+	->select('*')
 	->get()
 }}
+
+
+
+
+
+
 
 
 <!--  -->
@@ -147,51 +152,67 @@
 	<?php $contador = 0?>
 	<ul id="time-line">
 
-		@foreach($hechos as $u)
+
+
+		@foreach($hechoskey as $k)
+
+		{{! $array = explode( ',', $k->keywords )}}
+
+		@foreach($array as $ar)
+
+
+
+		@if( $ar === 'CV')
+
+	
+
+
+		
+		
 
 		
 		<div id="hechos" style="word-wrap: break-word;background: red background: #93A3B2; border-radius: 10px; width: 500px;color: white;text-align: left; padding: 10px 10px 10px 10px;box-shadow: 0px 5px 10px #444 inset;" align="center"  >
 			<p>
-				A FECHA DE : {{ $u->fecha }}
-				@if($u->etiqueta !== NULL)
-				<br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+				A FECHA DE : {{ $k->fecha }}
+				@if($k->etiqueta !== NULL)
+				<br><b>Tipo:</b> {{ $k->etiqueta }} <br>
 				@endif
 
-				@if($u->titulo !== NULL)
-				<b>Título:</b>  {{ $u->titulo }} <br>
+				@if($k->titulo !== NULL)
+				<b>Título:</b>  {{ $k->titulo }} <br>
 				@endif
 
-				@if($u->curso !== NULL)
-				<b>Curso:</b>  {{ $u->curso }}º <br>
+				@if($k->curso !== NULL)
+				<b>Curso:</b>  {{ $k->curso }}º <br>
 				@endif
 
-				@if($u->contenido !== NULL)
-				<b>Contenido:</b> {{ $u->contenido }} <br>
-				@endif
-
-
-				@if($u->video !== NULL)
-				<b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+				@if($k->contenido !== NULL)
+				<b>Contenido:</b> {{ $k->contenido }} <br>
 				@endif
 
 
-				@if($u->encuentro !== NULL)
-				<b>Encuentro:</b> {{ $u->encuentro }}  <br>
+				@if($k->video !== NULL)
+				<b>URL Video:</b> <b><a href="{{ URL::asset($k->video) }}"  target="_blank"> {{ $k->video }} </a></b> <br>
 				@endif
 
 
-				@if($u->foto !== NULL)
-				<b>FOTO:</b> <img id="foto" src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="width: 300px;"/> <br>
-				@endif
-				@if($u->anexo !== NULL)
-				<b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
-				@endif
-				@if($u->proposito !== NULL)
-				<b>Propósito:</b>  {{ $u->proposito }} <br>
+				@if($k->encuentro !== NULL)
+				<b>Encuentro:</b> {{ $k->encuentro }}  <br>
 				@endif
 
-				@if($u->keywords !== NULL)
-				{{! $array = explode( ',', $u->keywords )}}
+
+				@if($k->foto !== NULL)
+				<b>FOTO:</b> <img id="foto" src="{{ URL::asset('/images/fotos/'.$k->foto) }}" style="width: 300px;"/> <br>
+				@endif
+				@if($k->anexo !== NULL)
+				<b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$k->anexo) }}"  target="_blank"> {{ $k->anexo }} </a></b> <br>
+				@endif
+				@if($k->proposito !== NULL)
+				<b>Propósito:</b>  {{ $k->proposito }} <br>
+				@endif
+
+				@if($k->keywords !== NULL)
+				{{! $array = explode( ',', $k->keywords )}}
 				<b>Keywords:</b> 
 				@foreach ($array as $item) 
 				<b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
@@ -199,13 +220,16 @@
 				<br>
 				@endif
 
-				@if($u->autorizacion !== NULL)
-				<b>Autorización:</b>  {{ $u->autorizacion }} <br>
+				@if($k->autorizacion !== NULL)
+				<b>Autorización:</b>  {{ $k->autorizacion }} <br>
 				@endif
 
 			</p>
 		</div>
+		<br>
+		@endif
 
+		@endforeach
 		@endforeach
 
 	</ul>

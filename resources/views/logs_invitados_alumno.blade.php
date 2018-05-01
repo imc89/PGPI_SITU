@@ -206,52 +206,73 @@
 <div class="body" style="width: 100%; min-height: 100%; height: auto !important; top:0; left: 0;background: linear-gradient(to bottom, rgba(246,246,246,1) 0%, rgba(255,255,255,1) 0%, rgba(89,112,146,1) 100%)center center no-repeat ;">
 
 
-  <div class="container">
-    <h1 class="mb-2 text-center">LOG DE LOGINS DE TUS INVITADOS</h1>
+
+  <!-- BOTON GENERAR EN PDF LA LINEA-->
+
+  <!-- BOTON GENERAR EN PDF-->
+  <div align="center"> 
+    {{! $datopdf = Auth::user()->id}}
+
+   <form action="viewPdf_log">
+
+    <form action="PdfController.php" method="post">
+      <input type="hidden" name="data" value="{{ $datopdf }}">
+      <input type="submit"  class="btn btn-primary" value="EXPORTAR A PDF">
+    </form>
 
 
-    <table class="table table-striped table-dark">
-      <?php $contador=0 ?>
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Fecha y Hora</th>
-        </tr>
-      </thead>
-      <tbody>
+
+  </form>
+</div>
+<br><br>
+<!-- FIN BOTON GENERAR PDF -->
+
+<div class="container">
+  <h1 class="mb-2 text-center">LOG DE LOGINS DE TUS INVITADOS</h1>
 
 
-        @foreach($mail_invitado as $maili)
+  <table class="table table-striped table-dark">
+    <?php $contador=0 ?>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Fecha y Hora</th>
+      </tr>
+    </thead>
+    <tbody>
 
-        @if($maili->email !== NULL)
 
-        {{! $log_invitado = DB::table('users')
-        ->select('name','tiempolog')
-        ->where('users.email', '=', $maili->email )
-        ->get() }}
+      @foreach($mail_invitado as $maili)
 
-        @foreach($log_invitado as $u)
+      @if($maili->email !== NULL)
 
-        <tr>
-          <th scope="row"><?php $contador++; echo $contador ?></th>
-          <td>{{ $u->name }}</td>
-          <td> @if($u->tiempolog == "0001-01-01 00:00:00")
-            NO HA HABIDO CONEXIÓN RECIENTE
-            @else 
-            {{$u->tiempolog }}
-          @endif</td>
-        </tr>
-        @endforeach
-        
-        @endif
-        @endforeach
-      </tbody>
-    </table>
+      {{! $log_invitado = DB::table('users')
+      ->select('name','tiempolog')
+      ->where('users.email', '=', $maili->email )
+      ->get() }}
 
-  </div>
+      @foreach($log_invitado as $u)
 
-  <br><br>
+      <tr>
+        <th scope="row"><?php $contador++; echo $contador ?></th>
+        <td>{{ $u->name }}</td>
+        <td> @if($u->tiempolog == "0001-01-01 00:00:00")
+          NO HA HABIDO CONEXIÓN RECIENTE
+          @else 
+          {{$u->tiempolog }}
+        @endif</td>
+      </tr>
+      @endforeach
+
+      @endif
+      @endforeach
+    </tbody>
+  </table>
+
+</div>
+
+<br><br>
 
 </div>
 
@@ -271,11 +292,6 @@
         </div>
         <h4 align="center" class="modal-title"> LOG LOGINS </h4>
       </div>
-
-
-      <!-- BOTON GENERAR EN PDF LA LINEA-->
-
-    
 
       <!-- FIN BOTON GENERAR PDF LINEA -->
 

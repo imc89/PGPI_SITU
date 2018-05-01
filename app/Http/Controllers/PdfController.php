@@ -37,6 +37,38 @@ class PdfController extends Controller
 
 
 	}
+// 
+	public function CreatePDFlog(Request $request)
+	{
+
+
+		$dato = $request->data;
+
+		$mail_invitado = DB::table('invitado')
+		->select('email')
+		->where('invitado.user_id', '=', $dato )
+		->get();
+
+		foreach($mail_invitado as $maili){
+
+			if($maili->email !== NULL){
+
+				$datospdf = DB::table('users')
+			->select('name','tiempolog')
+			->where('users.email', '=', $maili->email )
+			->get();
+			}
+		}
+		
+
+		$pdf = PDF::loadView('pdf_log_invitado', compact('datospdf'));
+
+		return $pdf->stream('pdf_log_invitado_'.'.pdf');
+
+
+	}
+// 
+
 
 	public function DownloadPDF(Request $request)
 	{

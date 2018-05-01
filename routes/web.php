@@ -95,6 +95,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 		Route::get('Pdf_linea', 'PdfController@LineaPDF');
 
+		Route::get('viewPdf_log', 'PdfController@CreatePDFlog');
+
 		Route::get('curriculum', function () {
 			return view('curriculum');
 		});	
