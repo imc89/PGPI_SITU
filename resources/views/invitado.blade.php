@@ -126,211 +126,241 @@
     <div class="alert alert-warning" style="font-weight: bold"> 
       <strong>Warning!</strong> LA INVITACIÓN CADUCARÁ EN 7 DÍAS DESDE QUE SE HIZO EL ENVIO.
     </div>
-    <h1 style="font-weight: bold">BIENVENIDO INVITADO</h1>
-    <h1 style="font-weight: bold">{{Auth::user()->name}}</h1>
-    <br>
-    <h1 style="font-weight: bold">
-      @if($autorizacion == 1)
-      ESTÁS TENIENDO ACCESO A LOS HECHOS DE
-      @foreach($propietario as $p)
-      {{$p->name}}
-      @endforeach
-      DE NIVEL 1
-      @elseif($autorizacion == 2)
-      ESTÁS TENIENDO ACCESO A LOS HECHOS DE
-      @foreach($propietario as $p)
-      {{$p->name}}
-      @endforeach
-      DE NIVEL 1 y 2
-      @else
-      ESTÁS TENIENDO ACCESO A TODO EL CONTENIDO DE
-      @foreach($propietario as $p)
-      {{$p->name}}
-      @endforeach
-      
-      @endif
-    </h1> 
-    <br>
-  </div>
-  <!--INICIO FILTROS  -->
-  <div style="text-align: center; word-wrap: break-word;">
-    <!-- PRIMER FILTRO -->
-    <div style="padding: 10px;margin: 10px;display: inline-block;">
-      <form action="filtrar_hinvitado_etiqueta" class="form-horizontal fv-form fv-form-bootstrap">
-        <br>
-        <div align="center" >
-          <div  style="width: 300px">
-            <div class="form-group" required><!-- ETIQUETAS -->
-              <label style="font-weight: bold" >Filtrar por etiqueta: </label>
-              <div>
-                <form action="FilterhechosController.php" method="post">
-                  {{! $etiquetas = DB::table('tags')->get() }}
-                  <select style="font-weight: bold" id="hecho" class="form-control" name="etiqueta" required>
-                    <option> Todos los hechos </option>
-                    @foreach($etiquetas as $tag)
-                    <option> {{ $tag->name }} </option>
-                    @endforeach
-                  </select>
-                  <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center; font-weight: bold">        
-                </form>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- SEGUNDO FILTRO -->
-    <div style="padding: 10px;margin: 10px;display: inline-block;">
-      <form action="filtrar_hinvitado_keyword" class="form-horizontal fv-form fv-form-bootstrap">
-        <br>
-        <div align="center" >
-          <div  style="width: 300px">
-            <div class="form-group" required><!-- ETIQUETAS -->
-              <label style="font-weight: bold">Filtrar por keywords: </label>
-              <div>
-                <form action="FilterhechosController.php" method="post">
-                  {{! $alumno_id = DB::table('invitado')
-                  ->where('invitado.email','=', Auth::user()->email)
-                  ->join('users','users.id','=','user_id')
-                  ->select('invitado.alumno_id') 
-                  ->get()}}
-                  @foreach($alumno_id as $aluid)
-                  {{! $aluid->alumno_id }}
-                  {{! $keywords = DB::table('keywords')
-                  ->where('alumno_id','=', $aluid->alumno_id)
-                  ->select('name')
-                  ->get() }}
+
+    <div class="alert alert-warning" style="font-weight: bold"> 
+     <strong>ATENCIÓN</strong> La información a la que estás accediendo está protegida y no se permitirá su divulgación o uso incorrecto, haciendose usted responsable del acceso a dicha información.
+     <br><br>
+     <button type="button" class="btn btn-info close" data-dismiss="alert" 
+     style="background: #808DA4;border-radius: 5px; padding: 5px 5px 5px 5px"> ACEPTAR </button>
+   </div>
+   <style>
+   .close {
+     float: none !important;
+     font-size: 21px;
+     font-weight: bold;
+     line-height: 1;
+     color: black;
+     text-shadow: 0 1px 0 #fff;
+     filter: alpha(opacity=0);
+     opacity: 1;
+   }
+   .close:hover,
+   .close:focus {
+    background: #BBCDDD !important;
+    border-radius: 5px !important; 
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    filter: alpha(opacity=50);
+    opacity: 1;
+  }
+</style>
+
+<h1 style="font-weight: bold">BIENVENIDO INVITADO</h1>
+<h1 style="font-weight: bold">{{Auth::user()->name}}</h1>
+<br>
+<h1 style="font-weight: bold">
+  @if($autorizacion == 1)
+  ESTÁS TENIENDO ACCESO A LOS HECHOS DE
+  @foreach($propietario as $p)
+  {{$p->name}}
+  @endforeach
+  DE NIVEL 1
+  @elseif($autorizacion == 2)
+  ESTÁS TENIENDO ACCESO A LOS HECHOS DE
+  @foreach($propietario as $p)
+  {{$p->name}}
+  @endforeach
+  DE NIVEL 1 y 2
+  @else
+  ESTÁS TENIENDO ACCESO A TODO EL CONTENIDO DE
+  @foreach($propietario as $p)
+  {{$p->name}}
+  @endforeach
+
+  @endif
+</h1> 
+<br>
+</div>
+<!--INICIO FILTROS  -->
+<div style="text-align: center; word-wrap: break-word;">
+  <!-- PRIMER FILTRO -->
+  <div style="padding: 10px;margin: 10px;display: inline-block;">
+    <form action="filtrar_hinvitado_etiqueta" class="form-horizontal fv-form fv-form-bootstrap">
+      <br>
+      <div align="center" >
+        <div  style="width: 300px">
+          <div class="form-group" required><!-- ETIQUETAS -->
+            <label style="font-weight: bold" >Filtrar por etiqueta: </label>
+            <div>
+              <form action="FilterhechosController.php" method="post">
+                {{! $etiquetas = DB::table('tags')->get() }}
+                <select style="font-weight: bold" id="hecho" class="form-control" name="etiqueta" required>
+                  <option> Todos los hechos </option>
+                  @foreach($etiquetas as $tag)
+                  <option> {{ $tag->name }} </option>
                   @endforeach
-                
-                  <select style="font-weight: bold" id="hecho" class="form-control" name="keyword" required>
-                    <option>Cualquier keyword</option>
-                    @foreach($keywords as $tag)
-                    <option> {{ $tag->name }} </option>
-                    @endforeach
-                  </select>
-                  <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center; font-weight: bold">        
-                </form>
-              </div>
+                </select>
+                <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center; font-weight: bold">        
+              </form>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
-    <!-- TERCER FILTRO -->
-    <div style="padding: 10px;margin: 10px;display: inline-block;">
-      <form action="filtrar_hinvitado_titulo" class="form-horizontal fv-form fv-form-bootstrap">
-        <br>
-        <div align="center" >
-          <div  style="width: 300px">
-            <div class="form-group" required><!-- ETIQUETAS -->
-              <label style="font-weight: bold" >Filtrar por título: </label>
-              <div>
-                <form action="FilterhechosController.php" method="post">
-                 <input style="font-weight: bold" type="text" class="form-control" name="titulo" required>
-                 <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center; font-weight: bold">        
-               </form>
-             </div>
+  </div>
+  <!-- SEGUNDO FILTRO -->
+  <div style="padding: 10px;margin: 10px;display: inline-block;">
+    <form action="filtrar_hinvitado_keyword" class="form-horizontal fv-form fv-form-bootstrap">
+      <br>
+      <div align="center" >
+        <div  style="width: 300px">
+          <div class="form-group" required><!-- ETIQUETAS -->
+            <label style="font-weight: bold">Filtrar por keywords: </label>
+            <div>
+              <form action="FilterhechosController.php" method="post">
+                {{! $alumno_id = DB::table('invitado')
+                ->where('invitado.email','=', Auth::user()->email)
+                ->join('users','users.id','=','user_id')
+                ->select('invitado.alumno_id') 
+                ->get()}}
+                @foreach($alumno_id as $aluid)
+                {{! $aluid->alumno_id }}
+                {{! $keywords = DB::table('keywords')
+                ->where('alumno_id','=', $aluid->alumno_id)
+                ->select('name')
+                ->get() }}
+                @endforeach
+
+                <select style="font-weight: bold" id="hecho" class="form-control" name="keyword" required>
+                  <option>Cualquier keyword</option>
+                  @foreach($keywords as $tag)
+                  <option> {{ $tag->name }} </option>
+                  @endforeach
+                </select>
+                <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center; font-weight: bold">        
+              </form>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- TERCER FILTRO -->
+  <div style="padding: 10px;margin: 10px;display: inline-block;">
+    <form action="filtrar_hinvitado_titulo" class="form-horizontal fv-form fv-form-bootstrap">
+      <br>
+      <div align="center" >
+        <div  style="width: 300px">
+          <div class="form-group" required><!-- ETIQUETAS -->
+            <label style="font-weight: bold" >Filtrar por título: </label>
+            <div>
+              <form action="FilterhechosController.php" method="post">
+               <input style="font-weight: bold" type="text" class="form-control" name="titulo" required>
+               <input type="submit" class="btn btn-primary"  value="FILTRAR" style="width: 330px; align-content: center; font-weight: bold">        
+             </form>
            </div>
-         </form>
-       </div>
+         </div>
+       </form>
      </div>
    </div>
-   <!--FIN FILTROS  -->
-   <!-- MOSTRAR HECHOS -->
-   <?php $contador=0 ?>
-   @foreach($hechos as $u)
-   <div align="center">
-    <div id="hecho_div">
-      <div style="float: left;">
-        <u>HECHO Nº <?php $contador++; echo $contador ?></u>
-      </div>
-      <div style="float: right;">
-        <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
-      </div>
-      @if($u->etiqueta !== NULL)
-      <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
-      @endif
-      @if($u->titulo !== NULL)
-      <b>Título:</b>  {{ $u->titulo }} <br>
-      @endif
-      @if($u->curso !== NULL)
-      <b>Curso:</b>  {{ $u->curso }}º <br>
-      @endif
-      @if($u->contenido !== NULL)
-      <b>Contenido:</b>  {{ $u->contenido }} <br>
-      @endif
-      @if($u->video !== NULL)
-      <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
-      @endif
-      @if($u->encuentro !== NULL)
-      <b>Encuentro:</b> {{ $u->encuentro }}  <br>
-      @endif
-      @if($u->foto !== NULL)
-      <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
-      @endif
-      @if($u->anexo !== NULL)
-      <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
-      @endif
-      @if($u->proposito !== NULL)
-      <b>Propósito:</b>  {{ $u->proposito }} <br>
-      @endif
-      @if($u->keywords !== NULL)
-      {{! $array = explode( ',', $u->keywords )}}
-      <br><b>Keywords:</b> 
-      @foreach ($array as $item) 
-      <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
-      @endforeach 
-      <br>
-      @endif
+ </div>
+ <!--FIN FILTROS  -->
+ <!-- MOSTRAR HECHOS -->
+ <?php $contador=0 ?>
+ @foreach($hechos as $u)
+ <div align="center">
+  <div id="hecho_div">
+    <div style="float: left;">
+      <u>HECHO Nº <?php $contador++; echo $contador ?></u>
     </div>
+    <div style="float: right;">
+      <b>Fecha:</b>  {{ $u->fecha }}&nbsp;&nbsp;&nbsp;
+    </div>
+    @if($u->etiqueta !== NULL)
+    <br><b>Tipo:</b> {{ $u->etiqueta }} <br>
+    @endif
+    @if($u->titulo !== NULL)
+    <b>Título:</b>  {{ $u->titulo }} <br>
+    @endif
+    @if($u->curso !== NULL)
+    <b>Curso:</b>  {{ $u->curso }}º <br>
+    @endif
+    @if($u->contenido !== NULL)
+    <b>Contenido:</b>  {{ $u->contenido }} <br>
+    @endif
+    @if($u->video !== NULL)
+    <b>URL Video:</b> <b><a href="{{ URL::asset($u->video) }}"  target="_blank"> {{ $u->video }} </a></b> <br>
+    @endif
+    @if($u->encuentro !== NULL)
+    <b>Encuentro:</b> {{ $u->encuentro }}  <br>
+    @endif
+    @if($u->foto !== NULL)
+    <b>FOTO:</b> <img src="{{ URL::asset('/images/fotos/'.$u->foto) }}" style="max-width: 250px;min-width:250px"/> <br>
+    @endif
+    @if($u->anexo !== NULL)
+    <b>Documento Anexo:</b> <b><a href="{{ URL::asset('/images/anexos/'.$u->anexo) }}"  target="_blank"> {{ $u->anexo }} </a></b> <br>
+    @endif
+    @if($u->proposito !== NULL)
+    <b>Propósito:</b>  {{ $u->proposito }} <br>
+    @endif
+    @if($u->keywords !== NULL)
+    {{! $array = explode( ',', $u->keywords )}}
+    <br><b>Keywords:</b> 
+    @foreach ($array as $item) 
+    <b><button class="btn btn-primary" disabled style="border-radius: 3px ;cursor: default ; padding: 2px 2px 2px 2px">{{$item}}</button></b>
+    @endforeach 
     <br>
+    @endif
   </div>
-  @endforeach
-  <!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
-  <footer class="body_bottom body" id="footer" style="position: relative;bottom: 0">
-    <table>
-      <tbody>
-       <tr> 
-        <td class="foot_izdo">&nbsp;</td> 
-        <td class="foot_cent"> 
-          <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
-            <br> 
-            Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
-          </p> 
-          <!-- REDES SOCIALES -->
-          <div id="social"> 
-            <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
-            </a> 
-            <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
-            </a>
-            <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
-            </a>
-            <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
-            </a> 
-            <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
-              <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
-            </a>
-          </div>
-          <!-- FIN REDES SOCIALES -->
-          <div>
-            <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
-            / Sponsored by the
-            <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
-            and 
-            <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
-            Copyright 2013,
-            <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
-            . All rights reserved. 
-          </div>
-        </td>
-        <td class="foot_dcho">&nbsp;</td> 
-      </tr>
-    </tbody>
-  </table>
+  <br>
+</div>
+@endforeach
+<!-- FOOTER CON INFORMACIÓN Y REDES SOCIALES (COPIADO DE LA PÁGINA WEB DE LA UFV) -->
+<footer class="body_bottom body" id="footer" style="position: relative;bottom: 0">
+  <table>
+    <tbody>
+     <tr> 
+      <td class="foot_izdo">&nbsp;</td> 
+      <td class="foot_cent"> 
+        <p class="foot_datos"> Universidad Francisco de Vitoria • Ctra. Pozuelo-Majadahonda Km. 1.800 • 28223 Pozuelo de Alarcón (Madrid, España)
+          <br> 
+          Teléfono: (+34) 91.351.03.03 • Fax: (+34) 91.351.17.16 
+        </p> 
+        <!-- REDES SOCIALES -->
+        <div id="social"> 
+          <a href="https://www.facebook.com/UFVmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_facebook_20.png" alt="Facebook">
+          </a> 
+          <a href="https://twitter.com/#!/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_twitter_20.png" alt="Twitter">
+          </a>
+          <a href="https://www.youtube.com/user/ufvmadrid" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_youtube_20.png" alt="Youtube">
+          </a>
+          <a href="https://www.linkedin.com/school/1205600/" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_linkedin_20.png" alt="Linkedin">
+          </a> 
+          <a href="https://www.instagram.com/ufvmadrid/" class="enlace_social" target="_blank" rel="nofollow">
+            <img src="images/social/enl_soc_instagram_20.png" alt="Instagram">
+          </a>
+        </div>
+        <!-- FIN REDES SOCIALES -->
+        <div>
+          <a href="http://www.ufv.es/aviso-legal">Política de Privacidad</a> 
+          / Sponsored by the
+          <a href="http://legionariesofchrist.org/" rel="nofollow">Legionaries of Christ</a> 
+          and 
+          <a href="http://regnumchristi.es/" rel="nofollow">Regnum Christi</a> 
+          Copyright 2013,
+          <a href="http://legionariesofchrist.org/" rel="nofollow">Legion of Christ</a>
+          . All rights reserved. 
+        </div>
+      </td>
+      <td class="foot_dcho">&nbsp;</td> 
+    </tr>
+  </tbody>
+</table>
 </footer>
 </div>
 </div>
@@ -377,85 +407,85 @@
           Has accedido a la sección de invitado.
           En esta sección se muestran los hechos de la persona que te ha invitado.
           <ul>
-              <li>
-            <br>
-            -En el caso de que ya existan hechos creados se mostrarán pudiendo filtrarlos por etiqueta, eligiendo una etiqueta en el desplegable de la izquierda y pulsando FILTRAR, por keywords, eligiendo una keyword en el desplegable central y pulsando FILTRAR, o en caso de que recuerdes el título del hecho buscando a partir de texto. 
-            <br>
-          </li>
             <li>
-            <br>
-            -Para ver el currículum de la persona que te invitó &nbsp; <span class="glyphicon glyphicon-education"></span> &nbsp; <b style="font-weight: bold">CV</b>.  
-            <br>
-          </li>
+              <br>
+              -En el caso de que ya existan hechos creados se mostrarán pudiendo filtrarlos por etiqueta, eligiendo una etiqueta en el desplegable de la izquierda y pulsando FILTRAR, por keywords, eligiendo una keyword en el desplegable central y pulsando FILTRAR, o en caso de que recuerdes el título del hecho buscando a partir de texto. 
+              <br>
+            </li>
+            <li>
+              <br>
+              -Para ver el currículum de la persona que te invitó &nbsp; <span class="glyphicon glyphicon-education"></span> &nbsp; <b style="font-weight: bold">CV</b>.  
+              <br>
+            </li>
           </ul>
           <br><br>
           <div align="center">
-             Podrás salir del perfil de invitado pulsando en el menú sobre tu nombre y a continuación sobre Logout.
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div align="center">
-            <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- AUDIO MODAL -->
-  <script type="text/javascript">
-    var phrases = [
-    ' Has accedido a la sección de invitado.En esta sección se muestran los hechos de la persona que te ha invitado.En el caso de que ya existan hechos creados se mostrarán pudiendo filtrarlos por etiqueta, eligiendo una etiqueta en el desplegable de la izquierda y pulsando FILTRAR, por keywords, eligiendo una keyword en el desplegable central y pulsando FILTRAR, o en caso de que recuerdes el título del hecho buscando a partir de texto.Para ver el currículum de la persona que te invitó pulsa el botón CV.Podrás salir del perfil de invitado pulsando en el menú sobre tu nombre y a continuación sobre Logout.'
-    ];
-    jQuery(document).ready(function ($) {  
-      $('#audio_on').click(function() {
-        var i = Math.round(phrases.length * Math.random()) - 1;
-        responsiveVoice.speak(phrases[i], 'Spanish Female');
-      });
-    });
-    jQuery(document).ready(function ($) {  
-      $('#audio_off').click(function() {
-        var i = 0 ;
-        responsiveVoice.speak(phrases[1000], 'Spanish Female');
-      });
-    });
-    jQuery(document).ready(function ($) {  
-      $('#audio_offX').click(function() {
-        var i = 0 ;
-        responsiveVoice.speak(phrases[1000], 'Spanish Female');
-      });
-    });
-    jQuery(document).ready(function ($) {  
-      $('#audio_offA').click(function() {
-        var i = 0 ;
-        responsiveVoice.speak(phrases[1000], 'Spanish Female');
-      });
-    });
-  </script>
-  <!-- FIN AUDIO MODAL -->
-  <!--  BANNER MODAL ABOUT -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <!-- CONTENIDO DE ABOUT EN BANNER-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">ABOUT US</h4>
-        </div>
-        <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+           Podrás salir del perfil de invitado pulsando en el menú sobre tu nombre y a continuación sobre Logout.
+         </div>
+       </div>
+       <div class="modal-footer">
+        <div align="center">
+          <button id="audio_offA" type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
         </div>
       </div>
     </div>
   </div>
-  <!-- FIN BANNER MODAL -->
+</div>
+<!-- AUDIO MODAL -->
+<script type="text/javascript">
+  var phrases = [
+  ' Has accedido a la sección de invitado.En esta sección se muestran los hechos de la persona que te ha invitado.En el caso de que ya existan hechos creados se mostrarán pudiendo filtrarlos por etiqueta, eligiendo una etiqueta en el desplegable de la izquierda y pulsando FILTRAR, por keywords, eligiendo una keyword en el desplegable central y pulsando FILTRAR, o en caso de que recuerdes el título del hecho buscando a partir de texto.Para ver el currículum de la persona que te invitó pulsa el botón CV.Podrás salir del perfil de invitado pulsando en el menú sobre tu nombre y a continuación sobre Logout.'
+  ];
+  jQuery(document).ready(function ($) {  
+    $('#audio_on').click(function() {
+      var i = Math.round(phrases.length * Math.random()) - 1;
+      responsiveVoice.speak(phrases[i], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_off').click(function() {
+      var i = 0 ;
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offX').click(function() {
+      var i = 0 ;
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+  jQuery(document).ready(function ($) {  
+    $('#audio_offA').click(function() {
+      var i = 0 ;
+      responsiveVoice.speak(phrases[1000], 'Spanish Female');
+    });
+  });
+</script>
+<!-- FIN AUDIO MODAL -->
+<!--  BANNER MODAL ABOUT -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- CONTENIDO DE ABOUT EN BANNER-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">ABOUT US</h4>
+      </div>
+      <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)  ">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN BANNER MODAL -->
 </body>
 </html>
 <script>

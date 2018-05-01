@@ -11,12 +11,7 @@
 ->where('invitado.user_id', '=', Auth::user()->id )
 ->get()}}
 
-@foreach($mail_invitado as $maili)
-{{! $log_invitado = DB::table('users')
-->select('name','tiempolog')
-->where('users.email', '=', $maili->email )
-->get()}}
-@endforeach
+
 
 
 
@@ -230,6 +225,12 @@
         @foreach($mail_invitado as $maili)
 
         @if($maili->email !== NULL)
+
+        {{! $log_invitado = DB::table('users')
+        ->select('name','tiempolog')
+        ->where('users.email', '=', $maili->email )
+        ->get() }}
+
         @foreach($log_invitado as $u)
 
         <tr>
@@ -237,7 +238,8 @@
           <td>{{ $u->name }}</td>
           <td> @if($u->tiempolog == "0001-01-01 00:00:00")
             NO HA HABIDO CONEXIÓN RECIENTE
-            @else {{$u->tiempolog }}
+            @else 
+            {{$u->tiempolog }}
           @endif</td>
         </tr>
         @endforeach
@@ -269,6 +271,16 @@
         </div>
         <h4 align="center" class="modal-title"> LOG LOGINS </h4>
       </div>
+
+
+      <!-- BOTON GENERAR EN PDF LA LINEA-->
+
+    
+
+      <!-- FIN BOTON GENERAR PDF LINEA -->
+
+
+
       <div class="modal-body" style="background-color: rgba(171, 184, 203, 0.70)">
        Has accedido a la sección de visualización del log de tus invitados.
        <br><br>
